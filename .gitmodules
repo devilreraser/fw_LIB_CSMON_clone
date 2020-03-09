@@ -10,3 +10,6 @@
 [submodule "02_Libraries/HexMonitor"]
 	path = 02_Libraries/HexMonitor
 	url = //192.168.1.102/repo_git/fw_LIB_HexMonitor.git
+[submodule "02_Libraries/TestControl"]
+	path = 02_Libraries/TestControl
+	url = //192.168.1.102/repo_git/fw_LIB_TestControl.git

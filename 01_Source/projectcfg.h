@@ -23,7 +23,12 @@
 
 #define PROJECTCFG_FCY_HZ                       200000000.0 	/* Instruction cycle frequency (Hz) for DSPIC and SYSCLK for C2000 */
 
+#ifndef _USE_CONTROL
 #define USE_CONTROL             0
+#else
+#define USE_CONTROL             1
+#endif
+
 
 #define USE_CSMON               1
 
