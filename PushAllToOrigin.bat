@@ -34,6 +34,13 @@ git commit -a -m "%_CommitString%"
 git push --progress "origin" master:master
 cd ..\..
 echo.
+echo TestControl:
+echo.
+cd 02_Libraries\TestControl
+git commit -a -m "%_CommitString%"
+git push --progress "origin" master:master
+cd ..\..
+echo.
 echo Process Project:
 echo.
 git commit -a -m "%_CommitString%"

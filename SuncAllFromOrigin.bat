@@ -31,6 +31,13 @@ git fetch --all
 git pull
 cd ..\..
 echo.
+echo TestControl:
+echo.
+cd 02_Libraries\TestControl
+git fetch --all
+git pull
+cd ..\..
+echo.
 echo Process Project:
 echo.
 git fetch --all

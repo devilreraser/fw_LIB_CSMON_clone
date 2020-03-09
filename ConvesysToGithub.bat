@@ -42,6 +42,15 @@ git commit -a -m "%_CommitString%"
 git.exe push --progress "origin" master:master
 cd ..\..
 echo.
+echo Process TestControl:
+cd 02_Libraries\TestControl
+git.exe fetch --all -v --progress
+git.exe pull --progress -v --no-rebase "origin"
+git.exe merge --allow-unrelated-histories remotes/convesys/master < ..\..\ConvesysToGithub.in
+git commit -a -m "%_CommitString%"
+git.exe push --progress "origin" master:master
+cd ..\..
+echo.
 echo Process Project:
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
