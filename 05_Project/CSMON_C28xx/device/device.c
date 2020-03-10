@@ -95,8 +95,23 @@ void Device_init(void)
     //
     // Make sure the LSPCLK divider is set to the default (divide by 4)
     //
-    //SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_2);
+#if DEVICE_LSPCLK_DIVIDER == 1
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_1);
+#elif  DEVICE_LSPCLK_DIVIDER == 2
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_2);
+#elif  DEVICE_LSPCLK_DIVIDER == 4
     SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_4);
+#elif  DEVICE_LSPCLK_DIVIDER == 6
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_6);
+#elif  DEVICE_LSPCLK_DIVIDER == 8
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_8);
+#elif  DEVICE_LSPCLK_DIVIDER == 10
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_10);
+#elif  DEVICE_LSPCLK_DIVIDER == 12
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_12);
+#elif  DEVICE_LSPCLK_DIVIDER == 14
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_14);
+#endif
 
     //
     // These asserts will check that the #defines for the clock rates in
