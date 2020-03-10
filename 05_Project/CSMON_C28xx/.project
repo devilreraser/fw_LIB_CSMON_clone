@@ -326,11 +326,6 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>HexMonitor/01_Source/TI/C2000</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>HexMonitor/01_Source/TI/hmdrv.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/HexMonitor/01_Source/TI/hmdrv.c</locationURI>
@@ -574,11 +569,6 @@
 			<name>Peripheral/01_Source/TI/uart_drv.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TI/uart_drv.h</locationURI>
-		</link>
-		<link>
-			<name>HexMonitor/01_Source/TI/C2000/hmcfg.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/HexMonitor/01_Source/TI/C2000/hmcfg.h</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
