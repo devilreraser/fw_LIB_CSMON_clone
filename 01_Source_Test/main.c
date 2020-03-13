@@ -87,6 +87,12 @@ void main(void)
     //
     eResponseCode_CSMON_eInit = CSMON_eInit();
     // Check CSMON Response Code if needed
+    if (eResponseCode_CSMON_eInit != CSMON_RESPONSE_CODE_OK)
+    {
+        /* If enters here - Fix Peripheral Frequency for Better Performance and Stability (DEVICE_LSPCLK_FREQ) */
+        ASSERT(CSMON_u32GetBaudError_PPM() >= CSMON_u32PercentToPPM(3.0));
+    }
+
 
     //
     // Reset the watchdog counter
