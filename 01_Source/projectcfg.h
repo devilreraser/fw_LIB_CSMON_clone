@@ -32,7 +32,6 @@
 
 #define USE_CSMON               1
 
-
 #define PROJECTCFG_TIMER_MAIN_USEC          50.0
 
 #define PROJECTCFG_RW_NON_VOLATILE_MEMORY_SIZE_EEPROM_KB    0

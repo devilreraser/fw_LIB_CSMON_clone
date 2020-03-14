@@ -36,10 +36,25 @@
 /* *****************************************************************************
  * Type Definitions
  **************************************************************************** */
+typedef struct
+{
+    uint_least8_t u8Seconds;
+    uint_least8_t u8Minutes;
+    uint_least8_t u8Hours;
+    uint_least8_t u8WeekDays;
+    uint_least8_t u8Day;
+    uint_least8_t u8Month;
+    uint_least8_t u8Year;
+    uint_least8_t u8Reserved;
+}MAIN_sDateTime_t;
 
 /* *****************************************************************************
  * Function-Like Macros
  **************************************************************************** */
+MAIN_sDateTime_t MAIN_sDateTime =
+{
+   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+};
 
 /* *****************************************************************************
  * Variables Definitions
@@ -65,6 +80,50 @@ void ControlProcess(void);
 /* *****************************************************************************
  * Functions
  **************************************************************************** */
+
+/* *****************************************************************************
+ * CSMON_vSetDateTime - Set RTC Value - called from CSMON library
+ **************************************************************************** */
+void CSMON_vSetDateTime (
+        uint_least8_t u8BCDSeconds,
+        uint_least8_t u8BCDMinutes,
+        uint_least8_t u8BCDHours,
+        uint_least8_t u8BCDWeekdays,
+        uint_least8_t u8BCDDay,
+        uint_least8_t u8BCDMonth,
+        uint_least8_t u8BCDYear)
+{
+    MAIN_sDateTime.u8Seconds    = u8BCDSeconds;
+    MAIN_sDateTime.u8Minutes    = u8BCDMinutes;
+    MAIN_sDateTime.u8Hours      = u8BCDHours;
+    MAIN_sDateTime.u8WeekDays   = u8BCDWeekdays;
+    MAIN_sDateTime.u8Day        = u8BCDDay;
+    MAIN_sDateTime.u8Month      = u8BCDMonth;
+    MAIN_sDateTime.u8Year       = u8BCDYear;
+}
+
+/* *****************************************************************************
+ * CSMON_vGetDateTime - Get RTC Value - called from CSMON library
+ **************************************************************************** */
+void CSMON_vGetDateTime (
+        uint_least8_t* pu8BCDSeconds,
+        uint_least8_t* pu8BCDMinutes,
+        uint_least8_t* pu8BCDHours,
+        uint_least8_t* pu8BCDWeekdays,
+        uint_least8_t* pu8BCDDay,
+        uint_least8_t* pu8BCDMonth,
+        uint_least8_t* pu8BCDYear)
+{
+        *pu8BCDSeconds  = MAIN_sDateTime.u8Seconds;
+        *pu8BCDMinutes  = MAIN_sDateTime.u8Minutes;
+        *pu8BCDHours    = MAIN_sDateTime.u8Hours;
+        *pu8BCDWeekdays = MAIN_sDateTime.u8WeekDays;
+        *pu8BCDDay      = MAIN_sDateTime.u8Day;
+        *pu8BCDMonth    = MAIN_sDateTime.u8Month;
+        *pu8BCDYear     = MAIN_sDateTime.u8Year;
+}
+
+
 
 /* *****************************************************************************
  * ControlProcess
@@ -165,4 +224,6 @@ void main(void)
     }
 
 }
+
+
 
