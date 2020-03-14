@@ -66,6 +66,11 @@
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
+			<name>DebugNoControl/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
 			<name>HexMonitor/.git</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/HexMonitor/.git</locationURI>
