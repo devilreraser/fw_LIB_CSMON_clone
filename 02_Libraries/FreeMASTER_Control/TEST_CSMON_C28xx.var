@@ -221,9 +221,9 @@ MODBUSREG_u16HoldRegUsedCount                                                   
 MODBUSREG_u16HoldRegListCount                                                              0x0001AF3E     2    
 MODBUSREG_u16HoldRegNameCount                                                              0x0001AF40     2    
 HMMODBUS_u32RegisterAddressTableInRam                                                      0x0001AC48     0    
-MODBUSREG_sInputRegisterAddressTableInRam                                                  0x0001B250     12   
-HMMODBUS_u32CoilAddressTableInRam                                                          0x0001B238     12   
-MODBUSREG_sInputCoilAddressTableInRam                                                      0x0001B244     12   
+MODBUSREG_sInputRegisterAddressTableInRam                                                  0x0001B250     0    
+HMMODBUS_u32CoilAddressTableInRam                                                          0x0001B238     0    
+MODBUSREG_sInputCoilAddressTableInRam                                                      0x0001B244     0    
 MODBUSREG_asFileTable                                                                      0x00018600     0    
 MODBUSREG_asQueueTable                                                                     0x00019940     64   
 MODBUSREG_au8ServerIDData                                                                  0x0001B100     32   
