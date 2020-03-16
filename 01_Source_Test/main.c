@@ -24,6 +24,7 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+#define PARAMETER_COUNT         10
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -48,6 +49,20 @@ typedef struct
     uint_least8_t u8Reserved;
 }MAIN_sDateTime_t;
 
+typedef struct
+{
+    uint16_t u16ParameterIndexID;
+    uint32_t u32RealAddress;
+    uint16_t u16ParamAttributes;
+    char* pu8Name[16];
+    char* pu8Unit[8];
+    uint32_t u32Max;
+    uint32_t u32Min;
+    uint32_t u32Def;
+    float Norm;
+
+}MAIN_sParameterList_t;
+
 /* *****************************************************************************
  * Function-Like Macros
  **************************************************************************** */
@@ -60,6 +75,7 @@ MAIN_sDateTime_t MAIN_sDateTime =
  * Variables Definitions
  **************************************************************************** */
 bool bDummyStatusDeviceRunning = false;
+bool bDummyRequestDeviceRunning = false;
 
  int16_t u16DummyCurrentPhaseA = (0 << 14);
  int16_t u16DummyCurrentPhaseB = (1 << 14);
@@ -71,6 +87,21 @@ bool bDummyStatusDeviceRunning = false;
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetServerOnStatus = CSMON_RESPONSE_CODE_OK;
+
+/* Dummy Parameter List */
+const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
+{
+/* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
+
+ {      1000            ,  (uint32_t)&u16DummyCurrentPhaseA   ,      0x0002           , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1001            ,  (uint32_t)&u16DummyCurrentPhaseB   ,      0x0002           , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1002            ,  (uint32_t)&u16DummyCurrentPhaseC   ,      0x0002           , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1003            ,  (uint32_t)&u16DummyVoltageDCLink   ,      0x0002           , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)13500   ,     (uint32_t)(5000)  ,    (uint32_t)(800)    ,    0.1 },
+ {      1004            ,  (uint32_t)&u16DummyIncrementLoop   ,      0x0002           , {"IncLoopTst"}    ,    {"A(0.5V)"},    (uint32_t)1024   ,    (uint32_t)(-1024)  ,    (uint32_t)(256)    ,    0.1 },
+ {      1005            ,(uint32_t)&bDummyRequestDeviceRunning,      0x0001           , {"RunRequest"}    ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
+ {      1006            , (uint32_t)&bDummyStatusDeviceRunning,      0x0001           , {"RunStatus"}     ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
+
+};
 
 /* *****************************************************************************
  * Prototype of functions definitions
@@ -131,18 +162,49 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
     //
-    // Test For Data Consistency
+    // Test For Data Consistency and Control Emulation
     //
-    u16DummyCurrentPhaseA += u16DummyIncrementLoop;
-    u16DummyCurrentPhaseB += u16DummyIncrementLoop;
-    u16DummyCurrentPhaseC += u16DummyIncrementLoop;
-    u16DummyVoltageDCLink +=(u16DummyIncrementLoop>>1);
+    if (bDummyRequestDeviceRunning)
+    {
+        bDummyStatusDeviceRunning = 1;
+        u16DummyCurrentPhaseA += u16DummyIncrementLoop;
+        u16DummyCurrentPhaseB += u16DummyIncrementLoop;
+        u16DummyCurrentPhaseC += u16DummyIncrementLoop;
+        u16DummyVoltageDCLink +=(u16DummyIncrementLoop>>1);
+    }
+    else
+    {
+        bDummyStatusDeviceRunning = 0;
+        u16DummyCurrentPhaseA = 0;
+        u16DummyCurrentPhaseB = 0;
+        u16DummyCurrentPhaseC = 0;
+        u16DummyVoltageDCLink = 0;
+    }
 
     //
     // Process Passed Flag Set - Need to be called from Processes with higher priority level in order CSMON to be able to get meaning-full (consistent) data
     ASSERT(CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY) != CSMON_RESPONSE_CODE_OK);
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
+}
 
+void ParameterInitialization(void)
+{
+    uint16_t u16Index;
+
+    for (u16Index = 0; u16Index < PARAMETER_COUNT; u16Index++)
+    {
+        ASSERT(
+            CSMON_eSetParameter (
+                asParameterList.u16ParameterIndexID,
+                asParameterList.u32RealAddress,
+                asParameterList.u16ParamAttributes,
+                asParameterList.pu8Name,
+                asParameterList.pu8Unit,
+                asParameterList.u32Max,
+                asParameterList.u32Min,
+                asParameterList.u32Def,
+                asParameterList.Norm) != CSMON_RESPONSE_CODE_OK);
+    }
 }
 
 
@@ -179,6 +241,11 @@ void main(void)
         /* If enters here - Fix Peripheral Frequency for Better Performance and Stability (DEVICE_LSPCLK_FREQ) */
         ASSERT(CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS) >= CSMON_u32PercentToPPM(3.0));
     }
+
+    //
+    // CSMON Parameter Initialization
+    //
+    ParameterInitialization();
 
     //
     // Register Function Call In CSMON Timer Period ISR (default Timer Period is 50 usec)
