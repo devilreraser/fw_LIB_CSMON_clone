@@ -104,7 +104,6 @@ HMMODBUS_pu8ReadDeviceIDUserReserve2                                            
 HMMODBUS_u8ReadDeviceIDUserReserve0Length                                                  0x0001A54C     2    
 HMMODBUS_u8ReadDeviceIDUserReserve1Length                                                  0x0001A54E     2    
 HMMODBUS_u8ReadDeviceIDUserReserve2Length                                                  0x0001A550     2    
-u32DeviceSYSCLKFreq                                                                        0x0001AF90     4    
 pCSMON_u32FileParameterListSize                                                            0x0001A624     4    
 pCSMON_u32FileParameterDefinitionsFromAccessLevelSize                                      0x0001A62C     4    
 u32ModbusTimeoutBuffer                                                                     0x00019000     0    
@@ -169,6 +168,7 @@ pcm_pRxBuff                                                                     
 pcm_nRxCheckSum                                                                            0x000198EE     2    
 pcm_pCommBuffer                                                                            0x0001A900     0    
 u8UartIndex                                                                                0x000198F0     2    
+u32DeviceSYSCLKFreq                                                                        0x0001AF90     4    
 pcm_bNextAddrIsEx                                                                          0x0001AF80     2    
 u32DeviceLSPCLKFreq                                                                        0x0001AF84     4    
 u32DeviceLSPCLKFreqRoundAndMinErrorBaud                                                    0x0001AF88     4    
@@ -423,7 +423,7 @@ cpuTimer0IntCount                                                               
 cpuTimer1IntCount                                                                          0x0001AF62     2    
 cpuTimer2IntCount                                                                          0x0001AF64     2    
 pfCSMONFunction                                                                            0x0001AF78     4    
-u16FreeRunTimePrescaler                                                                    0x0001AF6E     2    
+TMR_u16FreeRunTimerPrescaller                                                              0x0001AF6E     2    
 bUseSCIA_On_USB                                                                            0x0001ADB0     2    
 Example_Result                                                                             0x0001B0D4     4    
 Example_PassCount                                                                          0x0001B0D8     4    

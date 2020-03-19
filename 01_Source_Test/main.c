@@ -231,6 +231,23 @@ void main(void)
     Interrupt_initModule();
     Interrupt_initVectorTable();
 
+
+
+    #ifdef _CSMON_FREE_RUN_TIMER_EXTERNAL           /* defined in Project Configuration Build Settings */
+    //
+    // CPUTimer1 Initialization as Free-Run Mode with Maximum Period
+    #define CPUTIMER1_PRESCALLER_VALUE      ((DEVICE_SYSCLK_FREQ /   1000000)-1)    /* Timer Tick 1.0 microseconds */
+    //#define CPUTIMER1_PRESCALLER_VALUE      ((DEVICE_SYSCLK_FREQ / 200000000)-1)    /* Timer Tick 5.0 nanoseconds */
+    //
+    CPUTimer_setPeriod(CPUTIMER1_BASE, 0xFFFFFFFF);
+    CPUTimer_setPreScaler(CPUTIMER1_BASE, CPUTIMER1_PRESCALLER_VALUE);
+    CPUTimer_stopTimer(CPUTIMER1_BASE);
+    CPUTimer_reloadTimerCounter(CPUTIMER1_BASE);
+    CPUTimer_enableInterrupt(CPUTIMER1_BASE);
+    CPUTimer_startTimer(CPUTIMER1_BASE);
+    #endif
+
+
     //
     // CSMON Initialization
     //
