@@ -77,11 +77,11 @@ MAIN_sDateTime_t MAIN_sDateTime =
 bool bDummyStatusDeviceRunning = false;
 bool bDummyRequestDeviceRunning = false;
 
- int16_t u16DummyCurrentPhaseA = (0 << 14);
- int16_t u16DummyCurrentPhaseB = (1 << 14);
- int16_t u16DummyCurrentPhaseC = (2 << 14);
- int16_t u16DummyVoltageDCLink = (0 << 14);
- int16_t u16DummyIncrementLoop = (1 << 8);
+ int16_t s16DummyCurrentPhaseA = (0 << 14);
+ int16_t s16DummyCurrentPhaseB = (1 << 14);
+ int16_t s16DummyCurrentPhaseC = (2 << 14);
+ int16_t s16DummyVoltageDCLink = (0 << 14);
+ int16_t s16DummyIncrementLoop = (1 << 8);
 
 
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
@@ -93,11 +93,11 @@ const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
 
- {      1000            ,  (uint32_t)&u16DummyCurrentPhaseA   ,      0x0002           , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1001            ,  (uint32_t)&u16DummyCurrentPhaseB   ,      0x0002           , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1002            ,  (uint32_t)&u16DummyCurrentPhaseC   ,      0x0002           , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1003            ,  (uint32_t)&u16DummyVoltageDCLink   ,      0x0002           , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)13500   ,     (uint32_t)(5000)  ,    (uint32_t)(800)    ,    0.1 },
- {      1004            ,  (uint32_t)&u16DummyIncrementLoop   ,      0x0002           , {"IncLoopTst"}    ,    {"A(0.5V)"},    (uint32_t)1024   ,    (uint32_t)(-1024)  ,    (uint32_t)(256)    ,    0.1 },
+ {      1000            ,  (uint32_t)&s16DummyCurrentPhaseA   ,      0x0002           , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1001            ,  (uint32_t)&s16DummyCurrentPhaseB   ,      0x0002           , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1002            ,  (uint32_t)&s16DummyCurrentPhaseC   ,      0x0002           , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1003            ,  (uint32_t)&s16DummyVoltageDCLink   ,      0x0002           , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)13500   ,     (uint32_t)(5000)  ,    (uint32_t)(800)    ,    0.1 },
+ {      1004            ,  (uint32_t)&s16DummyIncrementLoop   ,      0x0002           , {"IncLoopTst"}    ,    {"A(0.5V)"},    (uint32_t)1024   ,    (uint32_t)(-1024)  ,    (uint32_t)(256)    ,    0.1 },
  {      1005            ,(uint32_t)&bDummyRequestDeviceRunning,      0x0001           , {"RunRequest"}    ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
  {      1006            , (uint32_t)&bDummyStatusDeviceRunning,      0x0001           , {"RunStatus"}     ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
 
@@ -167,18 +167,18 @@ void ControlProcess(void)
     if (bDummyRequestDeviceRunning)
     {
         bDummyStatusDeviceRunning = 1;
-        u16DummyCurrentPhaseA += u16DummyIncrementLoop;
-        u16DummyCurrentPhaseB += u16DummyIncrementLoop;
-        u16DummyCurrentPhaseC += u16DummyIncrementLoop;
-        u16DummyVoltageDCLink +=(u16DummyIncrementLoop>>1);
+        s16DummyCurrentPhaseA += s16DummyIncrementLoop;
+        s16DummyCurrentPhaseB += s16DummyIncrementLoop;
+        s16DummyCurrentPhaseC += s16DummyIncrementLoop;
+        s16DummyVoltageDCLink +=(s16DummyIncrementLoop>>1);
     }
     else
     {
         bDummyStatusDeviceRunning = 0;
-        u16DummyCurrentPhaseA = 0;
-        u16DummyCurrentPhaseB = 0;
-        u16DummyCurrentPhaseC = 0;
-        u16DummyVoltageDCLink = 0;
+        s16DummyCurrentPhaseA = 0;
+        s16DummyCurrentPhaseB = 0;
+        s16DummyCurrentPhaseC = 0;
+        s16DummyVoltageDCLink = 0;
     }
 
     //
