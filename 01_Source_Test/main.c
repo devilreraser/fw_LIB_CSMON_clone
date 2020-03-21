@@ -20,6 +20,7 @@
 #include "device.h"
 
 #include "csmon.h"
+#include "parameter.h"
 
 /* *****************************************************************************
  * Configuration Definitions
@@ -93,13 +94,13 @@ const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
 
- {      1000            ,  (uint32_t)&s16DummyCurrentPhaseA   ,      0x0002           , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1001            ,  (uint32_t)&s16DummyCurrentPhaseB   ,      0x0002           , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1002            ,  (uint32_t)&s16DummyCurrentPhaseC   ,      0x0002           , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1003            ,  (uint32_t)&s16DummyVoltageDCLink   ,      0x0002           , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)13500   ,     (uint32_t)(5000)  ,    (uint32_t)(800)    ,    0.1 },
- {      1004            ,  (uint32_t)&s16DummyIncrementLoop   ,      0x0002           , {"IncLoopTst"}    ,    {"A(0.5V)"},    (uint32_t)1024   ,    (uint32_t)(-1024)  ,    (uint32_t)(256)    ,    0.1 },
- {      1005            ,(uint32_t)&bDummyRequestDeviceRunning,      0x0001           , {"RunRequest"}    ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
- {      1006            , (uint32_t)&bDummyStatusDeviceRunning,      0x0001           , {"RunStatus"}     ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
+ {      1000            ,  (uint32_t)&s16DummyCurrentPhaseA   ,      PAR_TYPE_SINT16  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1001            ,  (uint32_t)&s16DummyCurrentPhaseB   ,      PAR_TYPE_SINT16  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1002            ,  (uint32_t)&s16DummyCurrentPhaseC   ,      PAR_TYPE_SINT16  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
+ {      1003            ,  (uint32_t)&s16DummyVoltageDCLink   ,      PAR_TYPE_SINT16  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)13500   ,     (uint32_t)(5000)  ,    (uint32_t)(800)    ,    0.1 },
+ {      1004            ,  (uint32_t)&s16DummyIncrementLoop   ,      PAR_TYPE_SINT16  , {"IncLoopTst"}    ,    {"A(0.5V)"},    (uint32_t)1024   ,    (uint32_t)(-1024)  ,    (uint32_t)(256)    ,    0.1 },
+ {      1005            ,(uint32_t)&bDummyRequestDeviceRunning,      PAR_TYPE_UINT08  , {"RunRequest"}    ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
+ {      1006            , (uint32_t)&bDummyStatusDeviceRunning,      PAR_TYPE_UINT08  , {"RunStatus"}     ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
 
 };
 
