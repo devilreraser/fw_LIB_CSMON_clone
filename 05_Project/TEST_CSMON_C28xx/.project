@@ -46,6 +46,16 @@
 			<location>C:/ti/c2000/C2000Ware_2_00_00_02/driverlib/f2837xd/driverlib/ccs/Debug/driverlib.lib</location>
 		</link>
 		<link>
+			<name>01_Source_Test/emif_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/emif_drv/emif_drv.c</locationURI>
+		</link>
+		<link>
+			<name>01_Source_Test/emif_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/emif_drv/emif_drv.h</locationURI>
+		</link>
+		<link>
 			<name>01_Source_Test/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/main.c</locationURI>
