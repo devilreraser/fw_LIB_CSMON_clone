@@ -321,6 +321,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/modbusreg_t.h</locationURI>
 		</link>
 		<link>
+			<name>ModbusAddress/01_Source/parameter.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/parameter.h</locationURI>
+		</link>
+		<link>
 			<name>ModbusAddress/01_Source/template.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/template.c</locationURI>
