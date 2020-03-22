@@ -182,7 +182,17 @@ void ControlProcess(void)
     //
     if (bDummyReqstDevRunning)
     {
-        bDummyStatsDevRunning = 1;
+        if (bDummyStatsDevRunning == false)
+        {
+            bDummyStatsDevRunning = true;
+
+            //
+            // CSMON Internal Recorders Start with Already Setup Configuration
+            //
+            CSMON_vSetStartRecorderParameterMask(CSMON_RECORDERS_012);
+        }
+
+
         s16DummyCurrentPhaseA += s16DummyIncrementLoop;
         s16DummyCurrentPhaseB += s16DummyIncrementLoop;
         s16DummyCurrentPhaseC += s16DummyIncrementLoop;
@@ -190,12 +200,24 @@ void ControlProcess(void)
     }
     else
     {
-        bDummyStatsDevRunning = 0;
+        if (bDummyStatsDevRunning == true)
+        {
+            bDummyStatsDevRunning = false;
+
+            //
+            // CSMON Internal Recorders Stop (Trigger)
+            //
+            CSMON_vSetStopRecorderParameterMask(CSMON_RECORDERS_012);
+        }
+
         s16DummyCurrentPhaseA = 0;
         s16DummyCurrentPhaseB = 0;
         s16DummyCurrentPhaseC = 0;
         s16DummyVoltageDCLink = 0;
     }
+
+
+
 
     //
     // Process Passed Flag Set - Need to be called from Processes with higher priority level in order CSMON to be able to get meaning-full (consistent) data
@@ -285,10 +307,17 @@ void main(void)
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
 
+
     //
     // CSMON Parameter Initialization
     //
     ParameterInitialization();
+
+    //
+    // CSMON Internal Recorders Setup with Already Made Configuration
+    //
+    CSMON_vSetSetupRecorderParameterMask(CSMON_RECORDERS_012);
+
 
     //
     // Register Function Call In CSMON Timer Period ISR (default Timer Period is 50 usec)
