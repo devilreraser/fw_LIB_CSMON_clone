@@ -77,8 +77,8 @@ MAIN_sDateTime_t MAIN_sDateTime =
 /* *****************************************************************************
  * Variables Definitions
  **************************************************************************** */
-bool bDummyStatusDeviceRunning = false;
-bool bDummyRequestDeviceRunning = false;
+    bool bDummyStatsDevRunning = false;
+    bool bDummyReqstDevRunning = false;
 
  int16_t s16DummyCurrentPhaseA = (0 << 14);
  int16_t s16DummyCurrentPhaseB = (1 << 14);
@@ -98,16 +98,26 @@ uint32_t u32GetBaudError_PPM = 0;
 volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
-
- {      1000            ,  (uint32_t)&s16DummyCurrentPhaseA   ,      PAR(_SINT16,_RO)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1001            ,  (uint32_t)&s16DummyCurrentPhaseB   ,      PAR(_SINT16,_RO)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1002            ,  (uint32_t)&s16DummyCurrentPhaseC   ,      PAR(_SINT16,_RO)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)10000   ,   (uint32_t)(-10000)  ,      (uint32_t)(0)    ,    0.1 },
- {      1003            ,  (uint32_t)&s16DummyVoltageDCLink   ,      PAR(_SINT16,_RW)  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)13500   ,     (uint32_t)(5000)  ,    (uint32_t)(800)    ,    0.1 },
- {      1004            ,  (uint32_t)&s16DummyIncrementLoop   ,      PAR(_SINT16,_WO)  , {"IncLoopTst"}    ,    {"A(0.5V)"},    (uint32_t)1024   ,    (uint32_t)(-1024)  ,    (uint32_t)(256)    ,    0.1 },
- {      1005            ,(uint32_t)&bDummyRequestDeviceRunning,      PAR(_UINT08,_WO)  , {"RunRequest"}    ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
- {      1006            , (uint32_t)&bDummyStatusDeviceRunning,      PAR(_UINT08,_NA)  , {"RunStatus"}     ,    {"boolean"},    (uint32_t)true   ,    (uint32_t)false    ,    (uint32_t)false    ,      1 },
-
+/*                                                                   Type Access Pass                                                                                                                    */
+ {        20            ,  (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {        21            ,  (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {        22            ,  (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {        23            ,  (uint32_t)&s16DummyVoltageDCLink   ,  PAR(_SINT16,_RW,_RD)  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)(13500)  ,   (uint32_t)(  5000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {         8            ,  (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   (uint32_t)( 1024)  ,   (uint32_t)( -1024)  ,    (uint32_t)(256)    ,   0.1 },
+ {         9            ,  (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* Parameter ID 9 Write Request From PC */
+ {         9            ,  (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
+#if 0
+ {      1000            ,  (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {      1001            ,  (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {      1002            ,  (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {      1003            ,  (uint32_t)&s16DummyVoltageDCLink   ,  PAR(_SINT16,_RW,_RD)  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)(13500)  ,   (uint32_t)(  5000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {      1004            ,  (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   (uint32_t)( 1024)  ,   (uint32_t)( -1024)  ,    (uint32_t)(256)    ,   0.1 },
+ {      1005            ,  (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_RW,_WR)  , {"RunRequest"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 },
+ {      1006            ,  (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"RunStatus"}     ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 },
+#endif
 };
+
+
 
 /* *****************************************************************************
  * Prototype of functions definitions
@@ -170,9 +180,9 @@ void ControlProcess(void)
     //
     // Test For Data Consistency and Control Emulation
     //
-    if (bDummyRequestDeviceRunning)
+    if (bDummyReqstDevRunning)
     {
-        bDummyStatusDeviceRunning = 1;
+        bDummyStatsDevRunning = 1;
         s16DummyCurrentPhaseA += s16DummyIncrementLoop;
         s16DummyCurrentPhaseB += s16DummyIncrementLoop;
         s16DummyCurrentPhaseC += s16DummyIncrementLoop;
@@ -180,7 +190,7 @@ void ControlProcess(void)
     }
     else
     {
-        bDummyStatusDeviceRunning = 0;
+        bDummyStatsDevRunning = 0;
         s16DummyCurrentPhaseA = 0;
         s16DummyCurrentPhaseB = 0;
         s16DummyCurrentPhaseC = 0;
@@ -321,7 +331,7 @@ void main(void)
         //
         // Device Running Control Indication - Set on Enter/Exit Run Mode
         //
-        eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatusDeviceRunning);
+        eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
     }
