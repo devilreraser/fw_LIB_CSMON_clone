@@ -14,14 +14,8 @@ set Module4Path=02_Libraries/Peripheral
 set Module5Name=fw_LIB_TestControl.git
 set Module5Path=02_Libraries/TestControl
 
-<<<<<<< HEAD
-rem project process
 git remote remove convesys 
 git remote add convesys %Origin2Path%%ProjectName%
-=======
-git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%ProjectName%
->>>>>>> remotes/convesys/master
 git remote set-url --push convesys %Origin1Path%%ProjectName%
 
 echo.
@@ -30,7 +24,7 @@ echo.
 git submodule add  --force -- "%Origin1Path%%Module1Name%" "%Module1Path%"
 cd %Module1Path%
 git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%Module1Name%
+git remote add convesys %Origin2Path%%Module1Name%
 git remote set-url --push convesys %Origin1Path%%Module1Name%
 cd ..\..
 
@@ -40,7 +34,7 @@ echo.
 git submodule add  --force -- "%Origin1Path%%Module2Name%" "%Module2Path%"
 cd %Module2Path%
 git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%Module2Name%
+git remote add convesys %Origin2Path%%Module2Name%
 git remote set-url --push convesys %Origin1Path%%Module2Name%
 cd ..\..
 
@@ -50,7 +44,7 @@ echo.
 git submodule add  --force -- "%Origin1Path%%Module3Name%" "%Module3Path%"
 cd %Module3Path%
 git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%Module3Name%
+git remote add convesys %Origin2Path%%Module3Name%
 git remote set-url --push convesys %Origin1Path%%Module3Name%
 cd ..\..
 
@@ -60,7 +54,7 @@ echo.
 git submodule add  --force -- "%Origin1Path%%Module4Name%" "%Module4Path%"
 cd %Module4Path%
 git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%Module4Name%
+git remote add convesys %Origin2Path%%Module4Name%
 git remote set-url --push convesys %Origin1Path%%Module4Name%
 cd ..\..
 
@@ -70,7 +64,7 @@ echo.
 git submodule add  --force -- "%Origin1Path%%Module5Name%" "%Module5Path%"
 cd %Module5Path%
 git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%Module5Name%
+git remote add convesys %Origin2Path%%Module5Name%
 git remote set-url --push convesys %Origin1Path%%Module5Name%
 cd ..\..
 
