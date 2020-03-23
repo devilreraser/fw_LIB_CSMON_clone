@@ -1,4 +1,5 @@
 @echo off
+set CommitString=Initial Modules Fix
 set Origin1Path=https://github.com/devilreraser/
 set Origin2Path=//192.168.1.102/repo_git/
 set ProjectName=fw_LIB_CSMON.git
@@ -60,5 +61,9 @@ cd %Module5Path%
 git remote add convesys %Origin2Path%%Module5Name%
 git remote set-url --push convesys %Origin1Path%%Module5Name%
 cd ..\..
+
+echo.
+git commit -a -m "%CommitString%"
+git.exe push --progress "origin" master:master
 
 pause
