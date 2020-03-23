@@ -1,7 +1,7 @@
 @echo off
 echo.
-SET /P _CommitString= Please enter Commit Message:
-IF [%_CommitString%]==[] SET _CommitString=Merged Convesys
+SET /P _CommitString=Please enter Commit Message:
+IF "%_CommitString%"=="" SET _CommitString=Merged Convesys
 echo Commit Message: "%_CommitString%"
 echo.
 echo Process Submodules:
