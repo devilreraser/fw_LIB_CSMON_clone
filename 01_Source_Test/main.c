@@ -117,7 +117,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
 #endif
 };
 
-Recorder Configure from Here
+
 
 /* *****************************************************************************
  * Prototype of functions definitions
