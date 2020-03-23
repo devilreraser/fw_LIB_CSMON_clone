@@ -120,7 +120,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
 
 
 /* *****************************************************************************
- * Prototype of functions definitions
+ * Prototypes of functions definitions
  **************************************************************************** */
 void ControlProcess(void);
 
