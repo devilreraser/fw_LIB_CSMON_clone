@@ -4,4 +4,9 @@
 \CSMON_C28xx\Release\
 \CSMON_C28xx\Debug\
 \CSMON_C28xx\DebugNoControl\
-
+\04_Output_Files\DebugNoControl\
+\04_Output_Files\Debug\
+\TEST_CSMON_C28xx.var
+\TEST_CSMON_C28xx.adr
+\TEST_CSMON_C28xx.map
+.git
