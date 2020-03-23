@@ -1,15 +1,15 @@
 [submodule "02_Libraries/ModbusAddress"]
 	path = 02_Libraries/ModbusAddress
-	url = //192.168.1.102/repo_git/uw_LIB_ModbusAddress.git
+	url = https://github.com/devilreraser/uw_LIB_ModbusAddress.git
 [submodule "02_Libraries/Peripheral"]
 	path = 02_Libraries/Peripheral
-	url = //192.168.1.102/repo_git/fw_LIB_Peripheral.git
+	url = https://github.com/devilreraser/fw_LIB_Peripheral.git
 [submodule "02_Libraries/MathAndControl"]
 	path = 02_Libraries/MathAndControl
-	url = //192.168.1.102/repo_git/fw_LIB_MathAndControl.git
+	url = https://github.com/devilreraser/fw_LIB_MathAndControl.git
 [submodule "02_Libraries/HexMonitor"]
 	path = 02_Libraries/HexMonitor
-	url = //192.168.1.102/repo_git/fw_LIB_HexMonitor.git
+	url = https://github.com/devilreraser/fw_LIB_HexMonitor.git
 [submodule "02_Libraries/TestControl"]
 	path = 02_Libraries/TestControl
-	url = //192.168.1.102/repo_git/fw_LIB_TestControl.git
+	url = https://github.com/devilreraser/fw_LIB_TestControl.git
