@@ -1,0 +1,7 @@
+\TEST_CSMON_C28xx\ReleaseRecorders\
+\TEST_CSMON_C28xx\Release\
+\CSMON_C28xx\ReleaseRecorders\
+\CSMON_C28xx\Release\
+\CSMON_C28xx\Debug\
+\CSMON_C28xx\DebugNoControl\
+
