@@ -14,8 +14,9 @@ set Module4Path=02_Libraries/Peripheral
 set Module5Name=fw_LIB_TestControl.git
 set Module5Path=02_Libraries/TestControl
 
+rem project process
 git remote remove convesys 
-git remote add convesys --mirror=fetch %Origin2Path%%ProjectName%
+git remote add convesys %Origin2Path%%ProjectName%
 git remote set-url --push convesys %Origin1Path%%ProjectName%
 
 echo.
