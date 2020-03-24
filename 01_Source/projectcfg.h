@@ -21,6 +21,7 @@
  * Configuration Definitions
  **************************************************************************** */
 
+
 #define PROJECTCFG_FCY_HZ                       200000000.0 	/* Instruction cycle frequency (Hz) for DSPIC and SYSCLK for C2000 */
 
 #ifndef _USE_CONTROL
@@ -84,9 +85,18 @@
 
 #if defined CPU1
 
+#ifdef _CSMON_USES_SCIA
+#if _CSMON_USES_SCIA == 1
+#define PROJECTCFG_HMLIB_HEXMON_UART_MODULE     UART_A
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_A
+#else
 #define PROJECTCFG_HMLIB_HEXMON_UART_MODULE     UART_B
 #define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
-
+#endif
+#else
+#define PROJECTCFG_HMLIB_HEXMON_UART_MODULE     UART_B
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
+#endif
 
 #elif defined CPU2
 
@@ -103,8 +113,18 @@
 
 
 #if PROJECTCFG_HMLIB_HEXMON_UART_MODULE == PROJECTCFG_HMLIB_MODBUS_UART_MODULE
+#ifdef _CSMON_FORCE_EVEN_PARITY
+#if _CSMON_FORCE_EVEN_PARITY
+#define PROJECTCFG_UART_PARITY_HEXMON           SCI_CONFIG_PAR_EVEN
+#define PROJECTCFG_UART_PARITY_MODBUS           SCI_CONFIG_PAR_EVEN
+#else
 #define PROJECTCFG_UART_PARITY_HEXMON           SCI_CONFIG_PAR_NONE
 #define PROJECTCFG_UART_PARITY_MODBUS           SCI_CONFIG_PAR_NONE
+#endif
+#else
+#define PROJECTCFG_UART_PARITY_HEXMON           SCI_CONFIG_PAR_NONE
+#define PROJECTCFG_UART_PARITY_MODBUS           SCI_CONFIG_PAR_NONE
+#endif
 #else
 #define PROJECTCFG_UART_PARITY_HEXMON           SCI_CONFIG_PAR_NONE
 #define PROJECTCFG_UART_PARITY_MODBUS           SCI_CONFIG_PAR_EVEN
