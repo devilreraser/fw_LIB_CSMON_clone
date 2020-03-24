@@ -55,6 +55,8 @@ echo Process Project:
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
 git.exe merge --no-commit --no-ff --allow-unrelated-histories remotes/convesys/master < ConvesysToGithub.in
+git reset HEAD .gitattributes
+git checkout -- .gitattributes
 git reset HEAD .gitmodules
 git checkout -- .gitmodules
 git commit -a -m "%_CommitString%"
