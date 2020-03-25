@@ -19,7 +19,10 @@
 
 #include "device.h"
 
-#include "emif_drv.h"
+#include "emif_driver.h"
+#include "sci_driver.h"
+#include "uart_driver.h"
+#include "fpga_sci_driver.h"
 
 #include "csmon.h"
 #include "parameter.h"
@@ -45,7 +48,7 @@ typedef struct
     uint_least8_t u8Seconds;
     uint_least8_t u8Minutes;
     uint_least8_t u8Hours;
-    uint_least8_t u8WeekDays;
+    uint_least8_t u8Weekdays;
     uint_least8_t u8Day;
     uint_least8_t u8Month;
     uint_least8_t u8Year;
@@ -69,14 +72,25 @@ typedef struct
 /* *****************************************************************************
  * Function-Like Macros
  **************************************************************************** */
-MAIN_sDateTime_t MAIN_sDateTime =
-{
-   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
-};
+#define STRING_CONCAT_BASE(_a_, _b_) _a_##_b_
+#define STRING_CONCAT(_a_, _b_) STRING_CONCAT_BASE(_a_, _b_)
+#define GPIO_PIN_MODE(_pin_, _mode_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_, _mode_)))
+#define GPIO_PIN_MODE_GPIO(_pin_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_GPIO, _pin_)))
 
 /* *****************************************************************************
  * Variables Definitions
  **************************************************************************** */
+MAIN_sDateTime_t MAIN_sDateTimeGet =
+{
+   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+};
+MAIN_sDateTime_t MAIN_sDateTimeSet =
+{
+   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+};
+
+    bool MAIN_bDateTimeSet = false;
+
     bool bDummyStatsDevRunning = false;
     bool bDummyReqstDevRunning = false;
 
@@ -140,13 +154,14 @@ void CSMON_vSetDateTime (
         uint_least8_t u8BCDMonth,
         uint_least8_t u8BCDYear)
 {
-    MAIN_sDateTime.u8Seconds    = u8BCDSeconds;
-    MAIN_sDateTime.u8Minutes    = u8BCDMinutes;
-    MAIN_sDateTime.u8Hours      = u8BCDHours;
-    MAIN_sDateTime.u8WeekDays   = u8BCDWeekdays;
-    MAIN_sDateTime.u8Day        = u8BCDDay;
-    MAIN_sDateTime.u8Month      = u8BCDMonth;
-    MAIN_sDateTime.u8Year       = u8BCDYear;
+    MAIN_sDateTimeSet.u8Seconds    = u8BCDSeconds;
+    MAIN_sDateTimeSet.u8Minutes    = u8BCDMinutes;
+    MAIN_sDateTimeSet.u8Hours      = u8BCDHours;
+    MAIN_sDateTimeSet.u8Weekdays   = u8BCDWeekdays;
+    MAIN_sDateTimeSet.u8Day        = u8BCDDay;
+    MAIN_sDateTimeSet.u8Month      = u8BCDMonth;
+    MAIN_sDateTimeSet.u8Year       = u8BCDYear;
+    MAIN_bDateTimeSet = true;
 }
 
 /* *****************************************************************************
@@ -161,13 +176,13 @@ void CSMON_vGetDateTime (
         uint_least8_t* pu8BCDMonth,
         uint_least8_t* pu8BCDYear)
 {
-        *pu8BCDSeconds  = MAIN_sDateTime.u8Seconds;
-        *pu8BCDMinutes  = MAIN_sDateTime.u8Minutes;
-        *pu8BCDHours    = MAIN_sDateTime.u8Hours;
-        *pu8BCDWeekdays = MAIN_sDateTime.u8WeekDays;
-        *pu8BCDDay      = MAIN_sDateTime.u8Day;
-        *pu8BCDMonth    = MAIN_sDateTime.u8Month;
-        *pu8BCDYear     = MAIN_sDateTime.u8Year;
+        *pu8BCDSeconds  = MAIN_sDateTimeGet.u8Seconds;
+        *pu8BCDMinutes  = MAIN_sDateTimeGet.u8Minutes;
+        *pu8BCDHours    = MAIN_sDateTimeGet.u8Hours;
+        *pu8BCDWeekdays = MAIN_sDateTimeGet.u8Weekdays;
+        *pu8BCDDay      = MAIN_sDateTimeGet.u8Day;
+        *pu8BCDMonth    = MAIN_sDateTimeGet.u8Month;
+        *pu8BCDYear     = MAIN_sDateTimeGet.u8Year;
 }
 
 
@@ -253,13 +268,16 @@ void ParameterInitialization(void)
  **************************************************************************** */
 void main(void)
 {
+    uint16_t u16FreeRunningTimerTicksPerMicroSecond;
+    uint16_t u16FreeRunningTimerPrescaller;
+
     //
     // Configure PLL, disable WD, enable peripheral clocks.
     //
     Device_init();
 
     //
-    // Disable pin locks and enable internal pullups.
+    // Disable pin locks and enable internal PullUps.
     //
     Device_initGPIO();
 
@@ -267,7 +285,7 @@ void main(void)
     //
     // EMIF
     //
-    EMIF_vInit();
+    EMIF_DRV_vInit();
 
 
     //
@@ -293,6 +311,56 @@ void main(void)
     CPUTimer_enableInterrupt(CPUTIMER1_BASE);
     CPUTimer_startTimer(CPUTIMER1_BASE);
     #endif
+
+    //
+    //  Calculate Free Running Timer Ticks Per microsecond
+    //
+    u16FreeRunningTimerPrescaller = (HWREGH(CPUTIMER1_BASE + CPUTIMER_O_TPRH) << 8U) + (HWREGH(CPUTIMER1_BASE + CPUTIMER_O_TPR) & CPUTIMER_TPR_TDDR_M);
+    u16FreeRunningTimerTicksPerMicroSecond = ((DEVICE_SYSCLK_FREQ / 1000000) / (u16FreeRunningTimerPrescaller+1));
+    if (u16FreeRunningTimerTicksPerMicroSecond == 0)
+    {
+        u16FreeRunningTimerTicksPerMicroSecond = 1;
+    }
+
+
+    //
+    //  FPGA SCI Communication
+    //
+    #define SCIRXDC_PIN         139     /* MIX With FLT4_PIN */
+    #define SCITXDC_PIN         140     /* MIX With FLT5_PIN */
+    //
+    // SCIRXDC_PIN is the SCI Rx pin.
+    //
+    GPIO_setPinConfig(GPIO_PIN_MODE(SCIRXDC_PIN, SCIRXDC));
+    GPIO_setDirectionMode(SCIRXDC_PIN, GPIO_DIR_MODE_IN);
+    GPIO_setPadConfig(SCIRXDC_PIN, GPIO_PIN_TYPE_STD);
+    GPIO_setQualificationMode(SCIRXDC_PIN, GPIO_QUAL_ASYNC);
+    GPIO_setMasterCore(SCIRXDC_PIN, GPIO_CORE_CPU1);
+    //
+    // SCITXDC_PIN is the SCI Tx pin.
+    //
+    GPIO_setPinConfig(GPIO_PIN_MODE(SCITXDC_PIN, SCITXDC));
+    GPIO_setDirectionMode(SCITXDC_PIN, GPIO_DIR_MODE_OUT);
+    GPIO_setPadConfig(SCITXDC_PIN, GPIO_PIN_TYPE_STD);
+    GPIO_setQualificationMode(SCITXDC_PIN, GPIO_QUAL_ASYNC);
+    GPIO_setMasterCore(SCITXDC_PIN, GPIO_CORE_CPU1);
+    //
+    //  SCIC Init and FPGA_SCI_DRV Init
+    //
+    Interrupt_register(INT_SCIC_RX, &SCIC_DRV_RXFIFOISR);
+    Interrupt_register(INT_SCIC_TX, &SCIC_DRV_TXFIFOISR);
+    SCI_DRV_vInitFIFO(
+            SCI_DRV_u32GetBaseFromModuleIndex(FPGA_SCI_DRV_UART_MODULE), FPGA_SCI_DRV_UART_BAUD,
+            (SCI_CONFIG_WLEN_8 | FPGA_SCI_DRV_UART_STOP_BITS | FPGA_SCI_DRV_UART_PARITY | FPGA_SCI_DRV_UART_ADDRESS_MODE));
+    SCI_disableInterrupt(SCI_DRV_u32GetBaseFromModuleIndex(FPGA_SCI_DRV_UART_MODULE), SCI_INT_TXFF);
+    UART_DRV_vInit((UART_DRV_eModule_t)FPGA_SCI_DRV_UART_MODULE);
+    FPGA_SCI_DRV_vSetupFreeTimerTicksPerMicroSecond(u16FreeRunningTimerTicksPerMicroSecond);
+    Interrupt_enable(INT_SCIC_RX);
+    Interrupt_enable(INT_SCIC_TX);
+
+
+
+
 
 
     //
@@ -328,17 +396,17 @@ void main(void)
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
 
     //
-    // Reset the watchdog counter
+    // Reset the WatchDog counter
     //
     SysCtl_serviceWatchdog();
 
     //
-    // Enable the watchdog
+    // Enable the WatchDog
     //
     SysCtl_enableWatchdog();
 
     //
-    // Enable Global Interrupt (INTM) and realtime interrupt (DBGM)
+    // Enable Global Interrupt (INTM) and RealTime interrupt (DBGM)
     //
     EINT;
     ERTM;
@@ -346,7 +414,7 @@ void main(void)
     for (;;)
     {
         //
-        // Reset the watchdog counter
+        // Reset the WatchDog counter
         //
         SysCtl_serviceWatchdog();
 
@@ -363,6 +431,43 @@ void main(void)
         eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
+
+
+        //
+        // RTC Process To From FPGA
+        //
+        if (MAIN_bDateTimeSet)
+        {
+            FPGA_SCI_DRV_vSetDateTime (
+                    MAIN_sDateTimeSet.u8Seconds,
+                    MAIN_sDateTimeSet.u8Minutes,
+                    MAIN_sDateTimeSet.u8Hours,
+                    MAIN_sDateTimeSet.u8Weekdays,
+                    MAIN_sDateTimeSet.u8Day,
+                    MAIN_sDateTimeSet.u8Month,
+                    MAIN_sDateTimeSet.u8Year);
+            FPGA_SCI_DRV_vClockSetup();
+            MAIN_bDateTimeSet = false;
+        }
+
+        FPGA_SCI_DRV_vGetDateTime (
+                &MAIN_sDateTimeGet.u8Seconds,
+                &MAIN_sDateTimeGet.u8Minutes,
+                &MAIN_sDateTimeGet.u8Hours,
+                &MAIN_sDateTimeGet.u8Weekdays,
+                &MAIN_sDateTimeGet.u8Day,
+                &MAIN_sDateTimeGet.u8Month,
+                &MAIN_sDateTimeGet.u8Year);
+
+
+        //
+        // FPGA Communication Process
+        //
+        SCI_DRV_vErrorResetProcess(SCI_DRV_u32GetBaseFromModuleIndex((SCI_DRV_eModule_t)FPGA_SCI_DRV_UART_MODULE));
+        FPGA_SCI_DRV_vProcessUartRx();
+        FPGA_SCI_DRV_vProcess();
+
+
     }
 
 }

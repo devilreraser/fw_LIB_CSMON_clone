@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * File:   emif_drv.c
+ * File:   emif_driver.c
  * Author: Dimitar Lilov
  *
  * Created on 2020 01 02 20:51
@@ -14,7 +14,7 @@
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
-#include "emif_drv.h"
+#include "emif_driver.h"
 #include "device.h"
 
 /* *****************************************************************************
@@ -87,9 +87,9 @@ void setupEMIF1PinmuxAsync32BitBoardSCC(uint16_t u16UseA19AsBA1);
 
 
 //
-// EMIF_vInit
+// EMIF_DRV_vInit
 //
-void EMIF_vInit(void)
+void EMIF_DRV_vInit(void)
 {
     //EMIF_AsyncTimingParams tparam;
     //
