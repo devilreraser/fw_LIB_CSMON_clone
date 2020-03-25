@@ -169,6 +169,8 @@ pcm_bNextAddrIsEx                                                               
 u32DeviceLSPCLKFreq                                                                        0x0001F2EC     4    
 u32DeviceLSPCLKFreqRoundAndMinErrorBaud                                                    0x0001F2F0     4    
 HMDRV_u32SCIErrorPPM                                                                       0x0001F2F4     4    
+arr                                                                                        0x00000000     8    
+arr2                                                                                       0x00019030     4    
 u32FreeRunTimerSysClkMHz                                                                   0x00019024     4    
 u32FreeRunTimerSysClkDiv                                                                   0x00019028     4    
 sScopeConfigParam                                                                          0x0001F300     252  
@@ -209,8 +211,6 @@ CSMON_au8FileScopeConfigurationElementsSizeTable                                
 CSMON_au8FileParameterListElementsSizeTablePart1                                           0x0001F9BC     10   
 CSMON_au8FileParameterListElementsSizeTablePart2                                           0x0001F8FC     4    
 CSMON_au8FileParameterListElementsSizeTablePart3                                           0x0001F97C     4    
-arr                                                                                        0x00000000     8    
-arr2                                                                                       0x00019030     4    
 CSMON_u16FileParameterFillCount                                                            0x00019018     2    
 CSMON_u16FileParameterUsedCount                                                            0x0001901A     2    
 CSMON_u16FileParameterListCount                                                            0x0001901C     2    
@@ -529,6 +529,10 @@ pcm_wFlags.nAll                                                                 
 pcm_wFlags.sFlg                                                                            0x0001B2E4     2    
 pcm_wFlagsRxTx.nAll                                                                        0x0001B2E6     2    
 pcm_wFlagsRxTx.sFlg                                                                        0x0001B2E6     2    
+arr.i32                                                                                    0x00000000     4    
+arr.s                                                                                      0x00000000     4    
+arr2.i32                                                                                   0x00019030     4    
+arr2.s                                                                                     0x00019030     4    
 sScopeConfigParam.nCountVariables                                                          0x0001F300     2    
 sScopeConfigParam.u16Reserved                                                              0x0001F302     2    
 sScopeConfigParam.nVariableIDScope                                                         0x0001F304     80   
@@ -556,10 +560,6 @@ CSMON_sFileParameterCount.u32RWNVMemorySize_kB                                  
 CSMON_sFileParameterAccessList.u16ParameterIndex                                           0x00019100     0    
 CSMON_asFileParameterDefinitionsFromAccessLevel.eDefaultReadFunctionCode                   0x00015000     2    
 CSMON_asFileParameterDefinitionsFromAccessLevel.eDefaultWriteFunctionCode                  0x00015002     2    
-arr.i32                                                                                    0x00000000     4    
-arr.s                                                                                      0x00000000     4    
-arr2.i32                                                                                   0x00019030     4    
-arr2.s                                                                                     0x00019030     4    
 MODBUSREG_u32RegisterAddressTableInRam.u32RealAddress                                      0x0001C000     4    
 MODBUSREG_u32RegisterAddressTableInRam.u32PointerToProcessFunction                         0x0001C004     4    
 MODBUSREG_u32RegisterAddressTableInRam.uFlags                                              0x0001C008     2    
@@ -662,6 +662,10 @@ pcm_wFlags.sFlg.bRxMsgLengthNext                                                
 pcm_wFlagsRxTx.sFlg.bTxActive                                                              0x0001B2E6     2    
 pcm_wFlagsRxTx.sFlg.bTxWaitTC                                                              0x0001B2E6     2    
 pcm_wFlagsRxTx.sFlg.bTxDelay                                                               0x0001B2E6     2    
+arr.s.a                                                                                    0x00000000     2    
+arr.s.b                                                                                    0x00000002     2    
+arr2.s.a                                                                                   0x00019030     2    
+arr2.s.b                                                                                   0x00019032     2    
 sRecConfigParam.sSampleFormat.nSampleRateHz                                                0x0001BC80     4    
 sRecConfigParam.sSampleFormat.nSampleCountMax                                              0x0001BC84     4    
 sRecConfigParam.sSampleFormat.nPreTriggerSampleCount                                       0x0001BC88     4    
@@ -675,10 +679,6 @@ sRecConfigParam.sTrigerConfig.u16Reserved                                       
 sRecConfigParam.sTrigerConfig.nVariableIDTrigger                                           0x0001BCF0     4    
 sRecConfigParam.sTrigerConfig.nPreTriggerSamples                                           0x0001BCF4     4    
 sRecConfigParam.sTrigerConfig.sTriggerThreshold                                            0x0001BCF8     8    
-arr.s.a                                                                                    0x00000000     2    
-arr.s.b                                                                                    0x00000002     2    
-arr2.s.a                                                                                   0x00019030     2    
-arr2.s.b                                                                                   0x00019032     2    
 MODBUSREG_u32RegisterAddressTableInRam.uFlags.u16Register                                  0x0001C008     2    
 MODBUSREG_u32RegisterAddressTableInRam.uFlags.sFlags                                       0x0001C008     2    
 MODBUSREG_sInputRegisterAddressTableInRam.uFlags.u16Register                               0x0001F978     2    

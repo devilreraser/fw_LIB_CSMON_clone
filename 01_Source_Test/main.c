@@ -189,7 +189,7 @@ void ControlProcess(void)
             //
             // CSMON Internal Recorders Start with Already Setup Configuration
             //
-            CSMON_vSetStartRecorderParameterMask(CSMON_RECORDERS_012);
+            CSMON_vSetStartRecorderParameterMask(CSMON_MASK_RECORDERS_012);
         }
 
 
@@ -207,7 +207,7 @@ void ControlProcess(void)
             //
             // CSMON Internal Recorders Stop (Trigger)
             //
-            CSMON_vSetStopRecorderParameterMask(CSMON_RECORDERS_012);
+            CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDERS_012);
         }
 
         s16DummyCurrentPhaseA = 0;
@@ -316,7 +316,7 @@ void main(void)
     //
     // CSMON Internal Recorders Setup with Already Made Configuration
     //
-    CSMON_vSetSetupRecorderParameterMask(CSMON_RECORDERS_012);
+    CSMON_vSetSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
 
 
     //
