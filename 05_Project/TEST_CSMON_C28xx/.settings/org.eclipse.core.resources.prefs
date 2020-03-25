@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//Release/01_Source_Test/peripheral_driver/subdir_rules.mk=UTF-8
+encoding//Release/01_Source_Test/peripheral_driver/subdir_vars.mk=UTF-8
 encoding//Release/01_Source_Test/subdir_rules.mk=UTF-8
 encoding//Release/01_Source_Test/subdir_vars.mk=UTF-8
 encoding//Release/C2000Ware_Device/subdir_rules.mk=UTF-8
@@ -16,6 +18,8 @@ encoding//Release/objects.mk=UTF-8
 encoding//Release/sources.mk=UTF-8
 encoding//Release/subdir_rules.mk=UTF-8
 encoding//Release/subdir_vars.mk=UTF-8
+encoding//ReleaseRecorders/01_Source_Test/peripheral_driver/subdir_rules.mk=UTF-8
+encoding//ReleaseRecorders/01_Source_Test/peripheral_driver/subdir_vars.mk=UTF-8
 encoding//ReleaseRecorders/01_Source_Test/subdir_rules.mk=UTF-8
 encoding//ReleaseRecorders/01_Source_Test/subdir_vars.mk=UTF-8
 encoding//ReleaseRecorders/C2000Ware_Device/subdir_rules.mk=UTF-8

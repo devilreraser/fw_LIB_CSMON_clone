@@ -44,11 +44,11 @@ PAGE 1 : /* Data Memory */
 
    RAMGS0      : origin = 0x00C000, length = 0x001000
    RAMGS1      : origin = 0x00D000, length = 0x001000
-   RAMGS2      : origin = 0x00E000, length = 0x002000
+   RAMGS2      : origin = 0x00E000, length = 0x004000
 /* RAMGS2      : origin = 0x00E000, length = 0x001000
-   RAMGS3      : origin = 0x00F000, length = 0x001000 */
+   RAMGS3      : origin = 0x00F000, length = 0x001000
    RAMGS4      : origin = 0x010000, length = 0x001000
-   RAMGS5      : origin = 0x011000, length = 0x001000
+   RAMGS5      : origin = 0x011000, length = 0x001000 */
    RAMGS6      : origin = 0x012000, length = 0x001000
    RAMGS7      : origin = 0x013000, length = 0x001000
    RAMGS8      : origin = 0x014000, length = 0x001000

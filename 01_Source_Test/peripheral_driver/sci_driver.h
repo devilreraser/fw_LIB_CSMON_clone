@@ -1,8 +1,8 @@
 /* *****************************************************************************
- * File:   emif_drv.h
+ * File:   sci_driver.h
  * Author: Dimitar Lilov
  *
- * Created on 2020 01 02 20:51
+ * Created on 2019 11 23 12:59
  * 
  * Description: ...
  * 
@@ -15,52 +15,17 @@ extern "C"
 
 /* Guard condition file contents not included more than once */  
 /* #pragma once */
-#ifndef EMIF_DRV_H
-#define	EMIF_DRV_H
+#ifndef SCI_DRV_H
+#define	SCI_DRV_H
 
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
+#include <stdint.h>
     
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
-//#define RES150_10KOHM_AND_R546_0OHM
-
-#define USE_16_BIT_MRAM             1
-
-#if USE_16_BIT_MRAM
-/*
- * In this mode : 2MB memory Size
- *
- *              16-bit write is ok
- *              16-bit read is ok
- *
- *              32 bit read is ok
- *
- *              32 bit write writes only the high word
- *
- */
-
-#define EMIF_ASYNC_DATA_WIDTH   EMIF_ASYNC_DATA_WIDTH_16
-#define USE_A19_AS_BA1          1
-#else
-/*
- * In this mode : 4MB memory Size
- *
- *              16-bit write -> writes one and the same word to high and low address
-                16-bit read is ok
- *
- *              32 bit read is ok
- *
- *              32 bit write is ok
- *
- */
-
-#define EMIF_ASYNC_DATA_WIDTH   EMIF_ASYNC_DATA_WIDTH_32
-#define USE_A19_AS_BA1          0
-#endif
-
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -69,6 +34,16 @@ extern "C"
 /* *****************************************************************************
  * Enumeration Definitions
  **************************************************************************** */
+typedef enum
+{
+    SCI_DRV_A,
+    SCI_DRV_B,
+    SCI_DRV_C,
+    SCI_DRV_D,
+    SCI_DRV_COUNT
+}SCI_DRV_eModule_t;
+
+
 
 /* *****************************************************************************
  * Type Definitions
@@ -85,10 +60,19 @@ extern "C"
 /* *****************************************************************************
  * Function Prototypes
  **************************************************************************** */
-void EMIF_vInit(void);
-
- 
-#endif	/* EMIF_DRV_H */
+__interrupt void SCIA_DRV_TXFIFOISR(void);
+__interrupt void SCIA_DRV_RXFIFOISR(void);
+__interrupt void SCIB_DRV_TXFIFOISR(void);
+__interrupt void SCIB_DRV_RXFIFOISR(void);
+__interrupt void SCIC_DRV_TXFIFOISR(void);
+__interrupt void SCIC_DRV_RXFIFOISR(void);
+__interrupt void SCID_DRV_TXFIFOISR(void);
+__interrupt void SCID_DRV_RXFIFOISR(void);
+void SCI_DRV_vErrorResetProcess(uint32_t base);
+void SCI_DRV_vInitFIFO(uint32_t base, uint32_t baud, uint32_t config);
+SCI_DRV_eModule_t SCI_DRV_eGetModuleIndexFromBase(uint32_t base);
+uint32_t SCI_DRV_u32GetBaseFromModuleIndex(SCI_DRV_eModule_t index);
+#endif	/* SCI_DRV_H */
 
 
 #ifdef __cplusplus
