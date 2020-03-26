@@ -30,7 +30,8 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
-#define PARAMETER_COUNT         10
+#define PARAMETER_COUNT_MAX         10
+#define PARAMETER_ID_START_1000     0       /* Small and Big Numbers for ID (0 or 1) */
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -72,10 +73,14 @@ typedef struct
 /* *****************************************************************************
  * Function-Like Macros
  **************************************************************************** */
+#ifndef STRING_CONCAT
 #define STRING_CONCAT_BASE(_a_, _b_) _a_##_b_
 #define STRING_CONCAT(_a_, _b_) STRING_CONCAT_BASE(_a_, _b_)
+#endif
+#ifndef GPIO_PIN_MODE
 #define GPIO_PIN_MODE(_pin_, _mode_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_, _mode_)))
 #define GPIO_PIN_MODE_GPIO(_pin_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_GPIO, _pin_)))
+#endif
 
 /* *****************************************************************************
  * Variables Definitions
@@ -105,30 +110,46 @@ CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetServerOnStatus = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetParameter = CSMON_RESPONSE_CODE_OK;
+CSMON_eResponseCode_t eResponseCode_CSMON_eSetRecorder = CSMON_RESPONSE_CODE_OK;
+CSMON_eResponseCode_t eResponseCode_CSMON_eSetScope = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_RESPONSE_CODE_OK;
 uint32_t u32GetBaudError_PPM = 0;
 
+
+
+
 /* Dummy Parameter List */
-volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
+
+#if PARAMETER_ID_START_1000 == 0
+#define PARAM_ID_CURRENT_PHASEA       20
+#define PARAM_ID_CURRENT_PHASEB       21
+#define PARAM_ID_CURRENT_PHASEC       22
+#define PARAM_ID_VOLTAGE_DCLINK       23
+#define PARAM_ID_INCREMENT_LOOP        8
+#define PARAM_ID_REQRUNNINGMODE        9    /* ID 9 Write Request From PC */
+#define PARAM_ID_STARUNNINGMODE        9    /* ID 9 Read  Request From PC (can be with Different Real Address) */
+#else
+#define PARAM_ID_CURRENT_PHASEA     1000
+#define PARAM_ID_CURRENT_PHASEB     1001
+#define PARAM_ID_CURRENT_PHASEC     1002
+#define PARAM_ID_VOLTAGE_DCLINK     1003
+#define PARAM_ID_INCREMENT_LOOP     1004
+#define PARAM_ID_REQRUNNINGMODE     1005
+#define PARAM_ID_STARUNNINGMODE     1006
+#endif
+
+
+volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
 /*                                                                   Type Access Pass                                                                                                                    */
- {        20            ,  (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
- {        21            ,  (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
- {        22            ,  (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
- {        23            ,  (uint32_t)&s16DummyVoltageDCLink   ,  PAR(_SINT16,_RW,_RD)  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)(13500)  ,   (uint32_t)(  5000)  ,    (uint32_t)(  0)    ,   0.1 },
- {         8            ,  (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   (uint32_t)( 1024)  ,   (uint32_t)( -1024)  ,    (uint32_t)(256)    ,   0.1 },
- {         9            ,  (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* Parameter ID 9 Write Request From PC */
- {         9            ,  (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
-#if 0
- {      1000            ,  (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
- {      1001            ,  (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
- {      1002            ,  (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
- {      1003            ,  (uint32_t)&s16DummyVoltageDCLink   ,  PAR(_SINT16,_RW,_RD)  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)(13500)  ,   (uint32_t)(  5000)  ,    (uint32_t)(  0)    ,   0.1 },
- {      1004            ,  (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   (uint32_t)( 1024)  ,   (uint32_t)( -1024)  ,    (uint32_t)(256)    ,   0.1 },
- {      1005            ,  (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_RW,_WR)  , {"RunRequest"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 },
- {      1006            ,  (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"RunStatus"}     ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 },
-#endif
+ {PARAM_ID_CURRENT_PHASEA, (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {PARAM_ID_CURRENT_PHASEB, (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {PARAM_ID_CURRENT_PHASEC, (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {PARAM_ID_VOLTAGE_DCLINK, (uint32_t)&s16DummyVoltageDCLink   ,  PAR(_SINT16,_RW,_RD)  , {"VoltageBus"}    ,    {"V"}      ,   (uint32_t)(13500)  ,   (uint32_t)(  5000)  ,    (uint32_t)(  0)    ,   0.1 },
+ {PARAM_ID_INCREMENT_LOOP, (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   (uint32_t)( 1024)  ,   (uint32_t)( -1024)  ,    (uint32_t)(256)    ,   0.1 },
+ {PARAM_ID_REQRUNNINGMODE, (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* If Parameter ID 9 Write Request From PC */
+ {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
 };
 
 
@@ -137,6 +158,9 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT] =
  * Prototypes of functions definitions
  **************************************************************************** */
 void ControlProcess(void);
+void ParameterInitialization(void);
+void RecordersInitialization(void);
+void ScopesInitialization(void);
 
 /* *****************************************************************************
  * Functions
@@ -241,11 +265,14 @@ void ControlProcess(void)
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
 }
 
+/* *****************************************************************************
+ * ParameterInitialization
+ **************************************************************************** */
 void ParameterInitialization(void)
 {
     uint16_t u16Index;
 
-    for (u16Index = 0; u16Index < PARAMETER_COUNT; u16Index++)
+    for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
     {
         eResponseCode_CSMON_eSetParameter =
             CSMON_eSetParameter (
@@ -261,6 +288,138 @@ void ParameterInitialization(void)
         ASSERT(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK);
     }
 }
+
+/* *****************************************************************************
+ * RecordersInitialization
+ **************************************************************************** */
+void RecordersInitialization(void)
+{
+    /* Recorder 0 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_0);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_1);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_2);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
+            CSMON_RECORDER_0, CSMON_COUNT_PARAMETERS_4);
+
+    /* Recorder 1 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_0);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_1);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_2);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_1, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
+            CSMON_RECORDER_1, CSMON_COUNT_PARAMETERS_4);
+
+    /* Recorder 2 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_2, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_0);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_2, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_1);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_2, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_2);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_2, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
+            CSMON_RECORDER_2, CSMON_COUNT_PARAMETERS_4);
+
+
+    /* Trigger Recorder 0 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_0,
+            PARAM_ID_STARUNNINGMODE,
+            (uint32_t)true,
+            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
+
+    /* Trigger Recorder 1 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_1,
+            PARAM_ID_STARUNNINGMODE,
+            (uint32_t)true,
+            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
+
+    /* Trigger Recorder 2 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_2,
+            (uint16_t)0,
+            (uint32_t)0,
+            (uint16_t)CSMON_TRIGGER_MODE_NONE);
+
+
+    /* Recorder 0 Configuration */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
+            CSMON_RECORDER_0,
+            5900,   /* PreTriggerSampleCount */
+            6000,   /* TotalSampleCount */
+            20000); /* Sample Frequency in Hz */
+
+    /* Recorder 1 Configuration */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
+            CSMON_RECORDER_1,
+            5900,   /* PreTriggerSampleCount */
+            6000,   /* TotalSampleCount */
+            20000); /* Sample Frequency in Hz */
+
+    /* Recorder 2 Configuration */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
+            CSMON_RECORDER_2,
+            5900,   /* PreTriggerSampleCount */
+            6000,   /* TotalSampleCount */
+            20000); /* Sample Frequency in Hz */
+
+}
+
+/* *****************************************************************************
+ * ScopesInitialization
+ **************************************************************************** */
+void ScopesInitialization(void)
+{
+    /* Scope 0 */
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_SCOPE_1);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_SCOPE_2);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_0, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
+            CSMON_SCOPE_0, CSMON_COUNT_PARAMETERS_4);
+
+    /* Scope 1 */
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_SCOPE_1);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_SCOPE_2);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_1, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
+            CSMON_SCOPE_1, CSMON_COUNT_PARAMETERS_4);
+
+    /* Scope 2 */
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_SCOPE_1);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_SCOPE_2);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
+            CSMON_SCOPE_2, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
+    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
+            CSMON_SCOPE_2, CSMON_COUNT_PARAMETERS_4);
+
+}
+
+
 
 
 /* *****************************************************************************
@@ -377,9 +536,12 @@ void main(void)
 
 
     //
-    // CSMON Parameter Initialization
+    // CSMON Parameter, Recorder, Scope Test Initialization
     //
     ParameterInitialization();
+    RecordersInitialization();
+    ScopesInitialization();
+
 
     //
     // CSMON Internal Recorders Setup with Already Made Configuration
