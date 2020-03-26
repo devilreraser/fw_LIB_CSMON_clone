@@ -581,6 +581,16 @@
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/MathAndControl/01_Source/template.h</locationURI>
 		</link>
 		<link>
+			<name>ModbusAddress/01_Source/Hash.c</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/repo_github/Hash/Hash.c</locationURI>
+		</link>
+		<link>
+			<name>ModbusAddress/01_Source/Hash.h</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/repo_github/Hash/Hash.h</locationURI>
+		</link>
+		<link>
 			<name>ModbusAddress/01_Source/csmon.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/csmon.c</locationURI>
