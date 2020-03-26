@@ -358,21 +358,21 @@ void RecordersInitialization(void)
             CSMON_RECORDER_0,
             5900,   /* PreTriggerSampleCount */
             6000,   /* TotalSampleCount */
-            20000); /* Sample Frequency in Hz */
+            20000.0); /* Sample Frequency in Hz */
 
     /* Recorder 1 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_1,
             5900,   /* PreTriggerSampleCount */
             6000,   /* TotalSampleCount */
-            20000); /* Sample Frequency in Hz */
+            20000.0); /* Sample Frequency in Hz */
 
     /* Recorder 2 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_2,
             5900,   /* PreTriggerSampleCount */
             6000,   /* TotalSampleCount */
-            20000); /* Sample Frequency in Hz */
+            20000.0); /* Sample Frequency in Hz */
 
 }
 
