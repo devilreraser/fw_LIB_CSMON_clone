@@ -33,11 +33,8 @@ extern "C"
 #define FPGA_SCI_DRV_UART_MODULE            SCI_DRV_C
 #define FPGA_SCI_DRV_UART_BAUD              115200
 #define FPGA_SCI_DRV_UART_PARITY            SCI_CONFIG_PAR_EVEN
-//#define FPGA_SCI_DRV_UART_PARITY            SCI_CONFIG_PAR_NONE
-//#define FPGA_SCI_DRV_UART_STOP_BITS         SCI_CONFIG_STOP_ONE
 #define FPGA_SCI_DRV_UART_STOP_BITS         SCI_CONFIG_STOP_TWO
 #define FPGA_SCI_DRV_UART_ADDRESS_MODE      SCI_CCR_ADDRIDLE_MODE       /* 0 to disable address mode */
-//#define FPGA_SCI_DRV_UART_ADDRESS_MODE      0       /* 0 to disable address mode */
 
 
 /* *****************************************************************************
