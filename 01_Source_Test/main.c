@@ -33,6 +33,23 @@
 #define PARAMETER_COUNT_MAX         10
 #define PARAMETER_ID_START_1000     0       /* Small and Big Numbers for ID (0 or 1) */
 
+
+/* Some Pinout */
+#ifdef _LAUNCHXL_F28379D
+#define STAT_LED_G_PIN      28      /* N/A */
+#define STAT_LED_A_B_PIN    31      /* D10 Blue */
+#define STAT_LED_R_PIN      34      /* D9 */
+#else
+#define STAT_LED_G_PIN      28
+#define STAT_LED_A_B_PIN    30      /* Amber */
+#define STAT_LED_R_PIN      32
+#endif
+
+#define STAT_LED_ENABLE 0
+#define STAT_LED_DISABLE   (!STAT_LED_ENABLE)
+
+#define CLK_EN_FPGA_PIN     33
+
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
@@ -80,6 +97,22 @@ typedef struct
 #ifndef GPIO_PIN_MODE
 #define GPIO_PIN_MODE(_pin_, _mode_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_, _mode_)))
 #define GPIO_PIN_MODE_GPIO(_pin_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_GPIO, _pin_)))
+#endif
+#ifndef IO_DRV_H
+#define GPIO_setPinConfigInput(_pin_) \
+        GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(_pin_));\
+        GPIO_setDirectionMode(_pin_, GPIO_DIR_MODE_IN);\
+        GPIO_setPadConfig(_pin_, GPIO_PIN_TYPE_STD);\
+        GPIO_setQualificationMode(_pin_, GPIO_QUAL_6SAMPLE);\
+        GPIO_setMasterCore(_pin_, GPIO_CORE_CPU1)
+
+#define GPIO_setPinConfigOutput(_pin_) \
+        GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(_pin_));\
+        GPIO_setDirectionMode(_pin_, GPIO_DIR_MODE_OUT);\
+        GPIO_setPadConfig(_pin_, GPIO_PIN_TYPE_STD);\
+        GPIO_setQualificationMode(_pin_, GPIO_QUAL_ASYNC);\
+        GPIO_writePin(_pin_, 0);\
+        GPIO_setMasterCore(_pin_, GPIO_CORE_CPU1)
 #endif
 
 /* *****************************************************************************
@@ -454,6 +487,29 @@ void main(void)
     //
     Interrupt_initModule();
     Interrupt_initVectorTable();
+
+
+
+    //
+    // LEDs
+    //
+    // STAT_LED_G_PIN is the LED STATUS pin.
+    GPIO_setPinConfigOutput(STAT_LED_G_PIN);
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
+    // STAT_LED_A_B_PIN is the LED STATUS pin.
+    //
+    GPIO_setPinConfigOutput(STAT_LED_A_B_PIN);
+    GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE);
+    // STAT_LED_R_PIN is the LED STATUS pin.
+    GPIO_setPinConfigOutput(STAT_LED_R_PIN);
+    GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE);
+
+    //
+    // CLK_EN_FPGA_PIN is the FPGA Clock Enable pin. - generally not needed - there is pull-up
+    //
+    GPIO_setPinConfigOutput(CLK_EN_FPGA_PIN);
+    GPIO_writePin(CLK_EN_FPGA_PIN, 1);
+
 
 
 
