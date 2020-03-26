@@ -583,12 +583,12 @@
 		<link>
 			<name>ModbusAddress/01_Source/Hash.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/repo_github/Hash/Hash.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/Hash.c</locationURI>
 		</link>
 		<link>
 			<name>ModbusAddress/01_Source/Hash.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/repo_github/Hash/Hash.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/Hash.h</locationURI>
 		</link>
 		<link>
 			<name>ModbusAddress/01_Source/csmon.c</name>
