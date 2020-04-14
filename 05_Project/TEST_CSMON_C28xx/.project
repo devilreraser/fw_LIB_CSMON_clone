@@ -41,6 +41,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>CSMON_TestUsage</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>01_Source_Test/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/main.c</locationURI>
@@ -81,9 +86,9 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/csmon.h</name>
+			<name>CSMON_TestUsage/parameter.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/csmon.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/parameter.h</locationURI>
 		</link>
 		<link>
 			<name>Release/TEST_CSMON_C28xx.out</name>
@@ -436,9 +441,19 @@
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/CSMON_C28xx.lib</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/Release/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/csmon.h</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseRecorders/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ReleaseRecorders/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseRecorders/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/.ccsproject</name>
