@@ -1248,11 +1248,19 @@ void main(void)
         SysCtl_serviceWatchdog();
 
         //
+        // Artificial Delay
+        //
+        DEVICE_DELAY_US(1140);
+
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
+        //
         // CSMON Process In Main Loop
         //
         eResponseCode_CSMON_eProcess = CSMON_eProcess();
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
+
 
         //
         // Device Running Control Indication - Set on Enter/Exit Run Mode
