@@ -46,6 +46,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>01_Source_Test/datetime.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/datetime.h</locationURI>
+		</link>
+		<link>
 			<name>01_Source_Test/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/main.c</locationURI>
