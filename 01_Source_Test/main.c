@@ -26,6 +26,8 @@
 
 #include "csmon.h"
 #include "parameter.h"
+#include "datetime.h"
+
 
 /* *****************************************************************************
  * Configuration Definitions
@@ -61,6 +63,14 @@
 /* *****************************************************************************
  * Type Definitions
  **************************************************************************** */
+#ifndef uWord32_t
+typedef union
+{
+    uint32_t u32Register;
+    uint16_t au16Word[2];
+} uWord32_t;
+#endif
+
 typedef struct
 {
     uint_least8_t u8Seconds;
@@ -120,11 +130,11 @@ typedef struct
  **************************************************************************** */
 MAIN_sDateTime_t MAIN_sDateTimeGet =
 {
-   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+    0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
 };
 MAIN_sDateTime_t MAIN_sDateTimeSet =
 {
-   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+    0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
 };
 
     bool MAIN_bDateTimeSet = false;
@@ -150,6 +160,23 @@ CSMON_eResponseCode_t eResponseCode_CSMON_eSetRecorder = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetScope = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_RESPONSE_CODE_OK;
 uint32_t u32GetBaudError_PPM = 0;
+
+
+
+
+/* Parameter Table Version, DateTime, Checksum */
+#define PARAM_TABLE_VERSION                 (uint32_t)0
+#define PARAM_TABLE_DATETIME                (uint32_t)DATETIME_BUILD
+
+
+#define EMIF_AUX_PARAM_TABLE_VER_ADDRESS    0x00120004      /* This address here I put only for the example. You should use your memory space address */
+#define EMIF_AUX_BUILD_DATE_TIME_ADDRESS    0x00120006      /* This address here I put only for the example. You should use your memory space address */
+#define EMIF_AUX_BACKUP_CHECKSUM_ADDRESS    0x00120008      /* This address here I put only for the example. You should use your memory space address */
+
+volatile uint16_t* EMIF_AUX_pu16ParamVerBackupInEmif = (uint16_t*)(EMIF_AUX_PARAM_TABLE_VER_ADDRESS);
+volatile uint16_t* EMIF_AUX_pu16DateTimeBackupInEmif = (uint16_t*)(EMIF_AUX_BUILD_DATE_TIME_ADDRESS);
+volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACKUP_CHECKSUM_ADDRESS);
+
 
 
 
@@ -901,6 +928,7 @@ void ControlProcess(void)
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
 }
 
+
 /* *****************************************************************************
  * ParameterInitialization
  **************************************************************************** */
@@ -908,23 +936,57 @@ void ParameterInitialization(void)
 {
     uint16_t u16Index;
 
-    for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
-    {
-        GPIO_writePin(STAT_LED_G_PIN, (u16Index & 1) );     /* Green LED (the closest to the MCU Led) */
+    uint32_t u32CheckSum;
 
-        eResponseCode_CSMON_eSetParameter =
-            CSMON_eSetParameter (
-                asParameterList[u16Index].u16ParameterIndexID,
-                asParameterList[u16Index].u32RealAddress,
-                asParameterList[u16Index].u16ParamAttributes,
-(uint_least8_t*)&asParameterList[u16Index].au8Name,
-(uint_least8_t*)&asParameterList[u16Index].au8Unit,
-                asParameterList[u16Index].u32Max,
-                asParameterList[u16Index].u32Min,
-                asParameterList[u16Index].u32Def,
-                asParameterList[u16Index].Norm);
-        ASSERT(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK);
+    uWord32_t uParamVerBackup;
+    uWord32_t uDateTimeBackup;
+    uWord32_t uCheckSumBackup;
+
+    /* Note: with current EMIF board configuration 32Bit Writes Are not working - need use 16-bit writes */
+    uParamVerBackup.au16Word[0] = EMIF_AUX_pu16ParamVerBackupInEmif[0];              /* Get Stored In MRAM TableVer Backup */
+    uParamVerBackup.au16Word[1] = EMIF_AUX_pu16ParamVerBackupInEmif[1];              /* Get Stored In MRAM TableVer Backup */
+    uDateTimeBackup.au16Word[0] = EMIF_AUX_pu16DateTimeBackupInEmif[0];              /* Get Stored In MRAM DateTime Backup */
+    uDateTimeBackup.au16Word[1] = EMIF_AUX_pu16DateTimeBackupInEmif[1];              /* Get Stored In MRAM DateTime Backup */
+    uCheckSumBackup.au16Word[0] = EMIF_AUX_pu16CheckSumBackupInEmif[0];              /* Get Stored In MRAM CheckSum Backup */
+    uCheckSumBackup.au16Word[1] = EMIF_AUX_pu16CheckSumBackupInEmif[1];              /* Get Stored In MRAM CheckSum Backup */
+
+    u32CheckSum = CSMON_u32GetParameterCheckSum();                        /* Get Checksum From CSMON */
+
+    if ( (uParamVerBackup.u32Register != PARAM_TABLE_VERSION) || (uDateTimeBackup.u32Register != PARAM_TABLE_DATETIME) || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
+    {
+        /* Add Parameters */
+        for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
+        {
+            GPIO_writePin(STAT_LED_G_PIN, (u16Index & 1) );     /* Green LED (the closest to the MCU Led) */
+
+            eResponseCode_CSMON_eSetParameter =
+                CSMON_eSetParameter (
+                    asParameterList[u16Index].u16ParameterIndexID,
+                    asParameterList[u16Index].u32RealAddress,
+                    asParameterList[u16Index].u16ParamAttributes,
+   (uint_least8_t*)&asParameterList[u16Index].au8Name,
+   (uint_least8_t*)&asParameterList[u16Index].au8Unit,
+                    asParameterList[u16Index].u32Max,
+                    asParameterList[u16Index].u32Min,
+                    asParameterList[u16Index].u32Def,
+                    asParameterList[u16Index].Norm);
+            ASSERT(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK);
+        }
+
+        /* Backup ParamVer */
+        uParamVerBackup.u32Register = PARAM_TABLE_VERSION;
+        EMIF_AUX_pu16ParamVerBackupInEmif[0] = uParamVerBackup.au16Word[0];
+        EMIF_AUX_pu16ParamVerBackupInEmif[1] = uParamVerBackup.au16Word[1];
+        /* Backup DateTime */
+        uDateTimeBackup.u32Register = PARAM_TABLE_DATETIME;
+        EMIF_AUX_pu16DateTimeBackupInEmif[0] = uDateTimeBackup.au16Word[0];
+        EMIF_AUX_pu16DateTimeBackupInEmif[1] = uDateTimeBackup.au16Word[1];
+        /* Backup Checksum */
+        uCheckSumBackup.u32Register = CSMON_u32GetParameterCheckSum();
+        EMIF_AUX_pu16CheckSumBackupInEmif[0] = uCheckSumBackup.au16Word[0];
+        EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
     }
+
 
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);         /* Green LED (the closest to the MCU Led) */
 
@@ -1062,6 +1124,7 @@ void ScopesInitialization(void)
             CSMON_SCOPE_2, CSMON_COUNT_PARAMETERS_4);
 
 }
+
 
 
 
