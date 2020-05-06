@@ -25,10 +25,26 @@ extern "C"
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+#define USE_32_BIT_MRAM_WITH_16_BIT_WRITES      0       /* with priority - not working */
 #define USE_16_BIT_MRAM                         1
 
 
-#if USE_16_BIT_MRAM
+#if USE_32_BIT_MRAM_WITH_16_BIT_WRITES
+/*
+ * In this mode : 2MB memory Size
+ *
+ *              16-bit write -> writes one and the same word to high and low address
+ *              16-bit read is ok
+ *
+ *              32 bit read is ok
+ *
+ *              32 bit write writes only the low word
+ *
+ */
+
+#define EMIF_ASYNC_DATA_WIDTH   EMIF_ASYNC_DATA_WIDTH_32
+#define USE_A19_AS_BA1          1
+#elif USE_16_BIT_MRAM
 /*
  * In this mode : 2MB memory Size
  *
