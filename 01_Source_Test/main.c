@@ -15,6 +15,7 @@
  * Header Includes
  **************************************************************************** */
 #include <stdbool.h>
+
 #include "main.h"
 
 #include "device.h"
