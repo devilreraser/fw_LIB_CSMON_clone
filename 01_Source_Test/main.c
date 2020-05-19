@@ -207,6 +207,17 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
 /*                                                                   Type Access Pass                                                                                                                    */
+
+
+#if 1
+
+ {1000                   , (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhA"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+// {1001                   , (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhB"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+// {1002                   , (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhC"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+
+
+#else
+
  {PARAM_ID_CURRENT_PHASEA, (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhA"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
  {PARAM_ID_CURRENT_PHASEB, (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhB"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
  {PARAM_ID_CURRENT_PHASEC, (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_SINT16,_RW,_RD)  , {"CurrentPhC"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
@@ -814,6 +825,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {1597                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1597"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
  {1598                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1598"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
  {1599                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1599"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
+#endif
 };
 
 
@@ -937,6 +949,8 @@ void ParameterInitialization(void)
 {
     uint16_t u16Index;
 
+    uint32_t u32ParamVer;
+    uint32_t u32DateTime;
     uint32_t u32CheckSum;
 
     uWord32_t uParamVerBackup;
@@ -951,10 +965,18 @@ void ParameterInitialization(void)
     uCheckSumBackup.au16Word[0] = EMIF_AUX_pu16CheckSumBackupInEmif[0];              /* Get Stored In MRAM CheckSum Backup */
     uCheckSumBackup.au16Word[1] = EMIF_AUX_pu16CheckSumBackupInEmif[1];              /* Get Stored In MRAM CheckSum Backup */
 
+    u32ParamVer = PARAM_TABLE_VERSION;
+    u32DateTime = PARAM_TABLE_DATETIME;
     u32CheckSum = CSMON_u32GetParameterCheckSum();                        /* Get Checksum From CSMON */
 
-    if ( (uParamVerBackup.u32Register != PARAM_TABLE_VERSION) || (uDateTimeBackup.u32Register != PARAM_TABLE_DATETIME) || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
+
+    if ( (uParamVerBackup.u32Register != u32ParamVer)
+      || (uDateTimeBackup.u32Register != u32DateTime)
+      || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
     {
+        /* Invalid Table - Reset Parameter Table */
+        CSMON_eResetParameterTable();                                   /* Reset Internal Used Parameters Count */
+
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
@@ -975,11 +997,11 @@ void ParameterInitialization(void)
         }
 
         /* Backup ParamVer */
-        uParamVerBackup.u32Register = PARAM_TABLE_VERSION;
+        uParamVerBackup.u32Register = u32ParamVer;
         EMIF_AUX_pu16ParamVerBackupInEmif[0] = uParamVerBackup.au16Word[0];
         EMIF_AUX_pu16ParamVerBackupInEmif[1] = uParamVerBackup.au16Word[1];
         /* Backup DateTime */
-        uDateTimeBackup.u32Register = PARAM_TABLE_DATETIME;
+        uDateTimeBackup.u32Register = u32DateTime;
         EMIF_AUX_pu16DateTimeBackupInEmif[0] = uDateTimeBackup.au16Word[0];
         EMIF_AUX_pu16DateTimeBackupInEmif[1] = uDateTimeBackup.au16Word[1];
         /* Backup Checksum */
