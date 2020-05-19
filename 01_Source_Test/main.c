@@ -211,7 +211,9 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #if 1
 
- {0                      , (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_SINT16,_RO,_NO)  , {"CurrentPhA"}    ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+ {1000                   , (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhA"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+// {1001                   , (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhB"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+// {1002                   , (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhC"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
 
 
 #else
@@ -947,6 +949,8 @@ void ParameterInitialization(void)
 {
     uint16_t u16Index;
 
+    uint32_t u32ParamVer;
+    uint32_t u32DateTime;
     uint32_t u32CheckSum;
 
     uWord32_t uParamVerBackup;
@@ -961,10 +965,18 @@ void ParameterInitialization(void)
     uCheckSumBackup.au16Word[0] = EMIF_AUX_pu16CheckSumBackupInEmif[0];              /* Get Stored In MRAM CheckSum Backup */
     uCheckSumBackup.au16Word[1] = EMIF_AUX_pu16CheckSumBackupInEmif[1];              /* Get Stored In MRAM CheckSum Backup */
 
+    u32ParamVer = PARAM_TABLE_VERSION;
+    u32DateTime = PARAM_TABLE_DATETIME;
     u32CheckSum = CSMON_u32GetParameterCheckSum();                        /* Get Checksum From CSMON */
 
-    if ( (uParamVerBackup.u32Register != PARAM_TABLE_VERSION) || (uDateTimeBackup.u32Register != PARAM_TABLE_DATETIME) || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
+
+    if ( (uParamVerBackup.u32Register != u32ParamVer)
+      || (uDateTimeBackup.u32Register != u32DateTime)
+      || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
     {
+        /* Invalid Table - Reset Parameter Table */
+        CSMON_eResetParameterTable();                                   /* Reset Internal Used Parameters Count */
+
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
@@ -985,11 +997,11 @@ void ParameterInitialization(void)
         }
 
         /* Backup ParamVer */
-        uParamVerBackup.u32Register = PARAM_TABLE_VERSION;
+        uParamVerBackup.u32Register = u32ParamVer;
         EMIF_AUX_pu16ParamVerBackupInEmif[0] = uParamVerBackup.au16Word[0];
         EMIF_AUX_pu16ParamVerBackupInEmif[1] = uParamVerBackup.au16Word[1];
         /* Backup DateTime */
-        uDateTimeBackup.u32Register = PARAM_TABLE_DATETIME;
+        uDateTimeBackup.u32Register = u32DateTime;
         EMIF_AUX_pu16DateTimeBackupInEmif[0] = uDateTimeBackup.au16Word[0];
         EMIF_AUX_pu16DateTimeBackupInEmif[1] = uDateTimeBackup.au16Word[1];
         /* Backup Checksum */
