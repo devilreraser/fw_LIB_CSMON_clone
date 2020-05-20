@@ -275,9 +275,40 @@ CSMON_eResponseCode_t CSMON_eSetParameter (
         float Norm);
 
 
+/* *****************************************************************************
+ * CSMON_eApplyParameterChanges
+ *
+ * Hint:
+ *  Call This After Used (one or several times) CSMON_eSetParameter()
+ *
+ * Description:
+ *  Internal Library Runtime Initialization
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eApplyParameterChanges (void);
 
 
+/* *****************************************************************************
+ * CSMON_eResetParameterTable
+ *
+ * Hint:
+ *  Call This When detected Invalid Parameter Table
+ *
+ * Description:
+ *  Internal Library Used Parameter Count Reset
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eResetParameterTable (void);
 
+
+/* *****************************************************************************
+ * CSMON_u32GetParameterCheckSum
+ *
+ * Description:
+ *  Calculates and returns CheckSum of the Parameter Table
+ *
+ **************************************************************************** */
+uint32_t CSMON_u32GetParameterCheckSum (void);
 
 
 /* *****************************************************************************
