@@ -8,7 +8,7 @@ echo.
 echo Process Project:
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --no-commit --no-ff --allow-unrelated-histories remotes/convesys/master < ConvesysToGithub.in
+git.exe merge --no-commit --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ConvesysToGithub.in
 git reset HEAD .gitattributes
 git checkout -- .gitattributes
 git reset HEAD .gitmodules

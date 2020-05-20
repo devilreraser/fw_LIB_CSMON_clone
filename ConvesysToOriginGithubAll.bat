@@ -11,7 +11,7 @@ echo Process HexMonitor:
 cd 02_Libraries\HexMonitor
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --allow-unrelated-histories remotes/convesys/master < ..\..\ConvesysToGithub.in
+git.exe merge --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git.exe push --progress "origin" master:master
 cd ..\..
@@ -20,7 +20,7 @@ echo Process MathAndControl:
 cd 02_Libraries\MathAndControl
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --allow-unrelated-histories remotes/convesys/master < ..\..\ConvesysToGithub.in
+git.exe merge --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git.exe push --progress "origin" master:master
 cd ..\..
@@ -29,7 +29,7 @@ echo Process ModbusAddress:
 cd 02_Libraries\ModbusAddress
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --allow-unrelated-histories remotes/convesys/master < ..\..\ConvesysToGithub.in
+git.exe merge --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git.exe push --progress "origin" master:master
 cd ..\..
@@ -38,7 +38,7 @@ echo Process Peripheral:
 cd 02_Libraries\Peripheral
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --allow-unrelated-histories remotes/convesys/master < ..\..\ConvesysToGithub.in
+git.exe merge --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git.exe push --progress "origin" master:master
 cd ..\..
@@ -47,7 +47,7 @@ echo Process TestControl:
 cd 02_Libraries\TestControl
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --allow-unrelated-histories remotes/convesys/master < ..\..\ConvesysToGithub.in
+git.exe merge --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git.exe push --progress "origin" master:master
 cd ..\..
@@ -55,7 +55,7 @@ echo.
 echo Process Project:
 git.exe fetch --all -v --progress
 git.exe pull --progress -v --no-rebase "origin"
-git.exe merge --no-commit --no-ff --allow-unrelated-histories remotes/convesys/master < ConvesysToGithub.in
+git.exe merge --no-commit --allow-unrelated-histories -s recursive -Xtheirs remotes/convesys/master < ConvesysToGithub.in
 git reset HEAD .gitattributes
 git checkout -- .gitattributes
 git reset HEAD .gitmodules

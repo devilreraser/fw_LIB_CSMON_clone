@@ -6,9 +6,10 @@ echo Commit Message: "%_CommitString%"
 echo.
 echo Process Project:
 git.exe fetch --all -v --progress
-git checkout -B master --track convesys/master
+git.exe checkout -f -B master remotes/convesys/master --
+git pull
 git checkout remotes/github/master
-git merge --no-commit --no-ff --allow-unrelated-histories master < ConvesysToGithub.in
+git merge --no-commit --allow-unrelated-histories -s recursive -Xtheirs master < ConvesysToGithub.in
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes
 git reset HEAD .gitmodules
@@ -17,7 +18,7 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git checkout -B master --track origin/master
+git.exe checkout -f -B master remotes/convesys/master --
 echo Completed!
 echo Press Enter to Exit
 pause >nul
