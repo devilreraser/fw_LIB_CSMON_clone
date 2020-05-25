@@ -1,6 +1,6 @@
 @echo off
 echo.
-SET /P _CommitString=Please enter Commit Message:
+SET /P _CommitString= Please enter Commit Message:
 IF "%_CommitString%"=="" SET _CommitString=Empty Message
 echo Commit Message: "%_CommitString%"
 echo.
