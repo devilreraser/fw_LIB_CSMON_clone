@@ -6,6 +6,10 @@ echo Commit Message: "%_CommitString%"
 echo.
 echo Process Project:
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -18,7 +22,8 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 echo Completed!
 echo Press Enter to Exit
 pause >nul
