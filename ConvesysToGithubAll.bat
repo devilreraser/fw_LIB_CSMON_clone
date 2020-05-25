@@ -17,7 +17,7 @@ git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
-git merge --allow-unrelated-histories -s recursive -Xtheirs master < ConvesysToGithub.in
+git merge --allow-unrelated-histories -s recursive -Xtheirs master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
@@ -36,7 +36,7 @@ git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
-git merge --allow-unrelated-histories -s recursive -Xtheirs master < ConvesysToGithub.in
+git merge --allow-unrelated-histories -s recursive -Xtheirs master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
@@ -55,7 +55,7 @@ git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
-git merge --allow-unrelated-histories -s recursive -Xtheirs master < ConvesysToGithub.in
+git merge --allow-unrelated-histories -s recursive -Xtheirs master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
@@ -74,7 +74,7 @@ git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
-git merge --allow-unrelated-histories -s recursive -Xtheirs master < ConvesysToGithub.in
+git merge --allow-unrelated-histories -s recursive -Xtheirs master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
@@ -93,7 +93,7 @@ git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
-git merge --allow-unrelated-histories -s recursive -Xtheirs master < ConvesysToGithub.in
+git merge --allow-unrelated-histories -s recursive -Xtheirs master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
