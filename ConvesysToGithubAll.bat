@@ -10,6 +10,10 @@ echo.
 echo Process HexMonitor:
 cd 02_Libraries\HexMonitor
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -18,12 +22,17 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 cd ..\..
 echo.
 echo Process MathAndControl:
 cd 02_Libraries\MathAndControl
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -32,12 +41,17 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 cd ..\..
 echo.
 echo Process ModbusAddress:
 cd 02_Libraries\ModbusAddress
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -46,12 +60,17 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 cd ..\..
 echo.
 echo Process Peripheral:
 cd 02_Libraries\Peripheral
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -60,12 +79,17 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 cd ..\..
 echo.
 echo Process TestControl:
 cd 02_Libraries\TestControl
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -74,11 +98,16 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 cd ..\..
 echo.
 echo Process Project:
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master origin/master --
+git pull
+git.exe checkout -f -B master remotes/github/master --
+git pull
 git.exe checkout -f -B master remotes/convesys/master --
 git pull
 git checkout remotes/github/master
@@ -91,7 +120,8 @@ git commit -a -m "%_CommitString%"
 git switch -C master
 git push github master
 git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
+git.exe checkout -f -B master origin/master --
+git pull
 echo Completed!
 echo Press Enter to Exit
 pause >nul
