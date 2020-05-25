@@ -13,6 +13,11 @@ echo Process Project:
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
+IF %ERRORLEVEL% == 0 goto CommitProject
+IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
+echo Please Resolve Merge Conflicts In PROJECT And Press Enter To Continue
+pause >nul
+:CommitProject
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes
 git reset HEAD .gitmodules
