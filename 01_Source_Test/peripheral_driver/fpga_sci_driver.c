@@ -14,6 +14,8 @@
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
+#include <stdint.h>
+//#include "hw_types.h"   /* uint8_t  defined here but not always */
 #include "device.h"
 #include "fpga_sci_driver.h"
 #include "uart_driver.h"
@@ -132,13 +134,13 @@ uint_least8_t FPGA_SCI_DRV_Clock_Get_Last_Days     = 0x01;
 uint_least8_t FPGA_SCI_DRV_Clock_Get_Last_Month    = 0x01;
 uint_least8_t FPGA_SCI_DRV_Clock_Get_Last_Year     = 0x01;
 
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Seconds  = 0x55;
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Minutes  = 0x57;
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Hours    = 0x19;
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Days     = 0x13;
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Weekdays = 0x04;
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Month    = 0x02;
-uint_least8_t FPGA_SCI_DRV_Clock_Set_Year     = 0x20;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Seconds  = 0x00;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Minutes  = 0x00;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Hours    = 0x00;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Weekdays = 0x01;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Days     = 0x01;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Month    = 0x01;
+uint_least8_t FPGA_SCI_DRV_Clock_Set_Year     = 0x01;
 
 
 
@@ -272,6 +274,7 @@ uint32_t FPGA_SCI_DRV_nMessagesCounter[CMD_CNT] =
 };
 
 bool FPGA_SCI_DRV_bDataUpdate;
+bool FPGA_SCI_DRV_bRTCGet = 0;
 
 bool FPGA_SCI_DRV_bUpdateNonLastExecuting;
 bool FPGA_SCI_DRV_bUpdateLastExecuting;
@@ -305,6 +308,10 @@ void FPGA_SCI_DRV_vSetupFreeTimerTicksPerMicroSecond(uint16_t u16Input)
     FPGA_SCI_DRV_u32RxTimeout = u32uSecToTimerTicks(FPGA_SCI_DRV_u32RxTimeout_us);
 }
 
+bool FPGA_SCI_DRV_bGetRTCGet(void)
+{
+    return FPGA_SCI_DRV_bRTCGet;
+}
 
 
 void FPGA_SCI_DRV_vProcessUartRxTimeout(void)
@@ -391,8 +398,10 @@ void FPGA_SCI_DRV_vProcessUartRx(void)
                 {
                     FPGA_SCI_DRV_eRxState = RX_IDLE;        /* if not here disconnection is by timeout */
                 }
+                break;
             default:
                 FPGA_SCI_DRV_eRxState = RX_IDLE;
+                break;
         }
 
    }
@@ -505,13 +514,26 @@ void FPGA_SCI_DRV_vErrorMasksSetup(void)
 }
 
 
-
-
-void FPGA_SCI_DRV_vClockSetup(void)
+bool FPGA_SCI_DRV_vClockSetup(void)
 {
-    /* priority on RTC request */
-    FPGA_SCI_DRV_nTxCommandReq = CMD_RTC;
+    bool bResult = false;
+
+    if (FPGA_SCI_DRV_nTxCommandReq == 0xFF)
+    {
+        /* priority on RTC request */
+        FPGA_SCI_DRV_nTxCommandReq = CMD_RTC;
+        bResult = true;
+    }
+
+    return bResult;
 }
+
+
+//void FPGA_SCI_DRV_vClockSetup(void)
+//{
+//    /* priority on RTC request */
+//    FPGA_SCI_DRV_nTxCommandReq = CMD_RTC;
+//}
 
 
 
@@ -561,6 +583,7 @@ void FPGA_SCI_DRV_vProcess(void)
                 FPGA_SCI_DRV_Clock_Get_Month       = FPGA_SCI_DRV_au8RxBuffer[index++];
                 FPGA_SCI_DRV_Clock_Get_Year        = FPGA_SCI_DRV_au8RxBuffer[index++];
                 FPGA_SCI_DRV_bUpdateNonLastExecuting = 0;
+                FPGA_SCI_DRV_bRTCGet = 1;
                 FPGA_SCI_DRV_bDataUpdate = 1;
 
                 FPGA_SCI_DRV_bUpdateLastExecuting = 1;

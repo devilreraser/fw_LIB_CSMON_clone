@@ -166,8 +166,9 @@ typedef struct
 
 void FPGA_SCI_DRV_vSetupFreeTimerTicksPerMicroSecond(uint16_t u16Input);
 
+bool FPGA_SCI_DRV_bGetRTCGet(void);
 void FPGA_SCI_DRV_vErrorMasksSetup(void);
-void FPGA_SCI_DRV_vClockSetup(void);
+bool FPGA_SCI_DRV_vClockSetup(void);
 void FPGA_SCI_DRV_vProcess(void);
 void FPGA_SCI_DRV_vUartOverflowDetection(void);
 void FPGA_SCI_DRV_vProcessUartTx(uint_least8_t u8Index);
