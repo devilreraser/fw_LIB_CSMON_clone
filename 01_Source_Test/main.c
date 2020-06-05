@@ -135,7 +135,15 @@ MAIN_sDateTime_t MAIN_sDateTimeGet =
 };
 MAIN_sDateTime_t MAIN_sDateTimeSet =
 {
-    0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+    BUILD_RTC_SEC,
+    BUILD_RTC_MIN,
+    BUILD_RTC_HOUR,
+    0x00,
+    BUILD_RTC_DAY,
+    BUILD_RTC_MONTH,
+    BUILD_RTC_YEAR,
+    0x00,
+    /* 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 2001-01-01-Mon-00:00:00 */
 };
 
     bool MAIN_bDateTimeSet = false;

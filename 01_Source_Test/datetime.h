@@ -21,6 +21,7 @@ extern "C"
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
+#include <stdint.h>
     
 /* *****************************************************************************
  * Configuration Definitions
@@ -32,6 +33,9 @@ extern "C"
 
 // Example of __DATE__ string: "Jul 27 2012"
 //                              01234567890
+    
+    
+    
 
 #define BUILD_YEAR_CH0 (uint32_t)(__DATE__[ 7])
 #define BUILD_YEAR_CH1 (uint32_t)(__DATE__[ 8])
@@ -109,6 +113,14 @@ extern "C"
 #define BUILD_YEAR_NM1  ((uint32_t)BUILD_YEAR_CH1 - 0x30)
 #define BUILD_YEAR_NM2  ((uint32_t)BUILD_YEAR_CH2 - 0x30)
 #define BUILD_YEAR_NM3  ((uint32_t)BUILD_YEAR_CH3 - 0x30)
+
+#define BUILD_RTC_SEC   (uint_least8_t)( (BUILD_SEC_NM0 * 16)  + (BUILD_SEC_NM1) )
+#define BUILD_RTC_MIN   (uint_least8_t)( (BUILD_MIN_NM0 * 16)  + (BUILD_MIN_NM1) )
+#define BUILD_RTC_HOUR  (uint_least8_t)( (BUILD_HOUR_NM0 * 16) + (BUILD_HOUR_NM1) )
+
+#define BUILD_RTC_DAY   ( (BUILD_DAY_NM0 * 16)  + (BUILD_DAY_NM1) )
+#define BUILD_RTC_MONTH ( (BUILD_MONTH_NM0 * 16)  + (BUILD_MONTH_NM1) )
+#define BUILD_RTC_YEAR  ( (BUILD_YEAR_NM2 * 16) + (BUILD_YEAR_NM3) )
 
 #define BUILD_SEC       ( (BUILD_SEC_NM0 * 10)  + (BUILD_SEC_NM1) )
 #define BUILD_MIN       ( (BUILD_MIN_NM0 * 10)  + (BUILD_MIN_NM1) )

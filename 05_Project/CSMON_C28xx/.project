@@ -916,6 +916,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TI/dac_drv.h</locationURI>
 		</link>
 		<link>
+			<name>Peripheral/01_Source/TI/datetime.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TI/datetime.h</locationURI>
+		</link>
+		<link>
 			<name>Peripheral/01_Source/TI/emif_asram_32bit.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TI/emif_asram_32bit.c</locationURI>
