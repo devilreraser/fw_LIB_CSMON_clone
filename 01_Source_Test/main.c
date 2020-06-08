@@ -135,7 +135,15 @@ MAIN_sDateTime_t MAIN_sDateTimeGet =
 };
 MAIN_sDateTime_t MAIN_sDateTimeSet =
 {
-    0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
+    BUILD_RTC_SEC,
+    BUILD_RTC_MIN,
+    BUILD_RTC_HOUR,
+    0x00,
+    BUILD_RTC_DAY,
+    BUILD_RTC_MONTH,
+    BUILD_RTC_YEAR,
+    0x00,
+    /* 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 2001-01-01-Mon-00:00:00 */
 };
 
     bool MAIN_bDateTimeSet = false;
@@ -209,7 +217,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 /*                                                                   Type Access Pass                                                                                                                    */
 
 
-#if 1
+#if 0
 
  {1000                   , (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhA"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
 // {1001                   , (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhB"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
