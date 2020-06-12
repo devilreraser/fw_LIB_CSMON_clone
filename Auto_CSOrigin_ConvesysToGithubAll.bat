@@ -72,8 +72,15 @@ git.exe checkout -f -B master remotes/github/master --
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
 IF %ERRORLEVEL% == 0 goto CommitProject
 IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
-echo Please Resolve Merge Conflicts In PROJECT And Press Enter To Continue
+echo Auto Resolve Merge Conflicts In PROJECT With Convesys Master:
 pause >nul
+FOR /F %%F IN ('git diff --name-only --diff-filter=U') DO echo "%%F"
+@echo on
+pause >nul
+FOR /F %%F IN ('git diff --name-only --diff-filter=U') DO git checkout convesys/master -- "%%F"
+git status
+pause >nul
+@echo off
 :CommitProject
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes
