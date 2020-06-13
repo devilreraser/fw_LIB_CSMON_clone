@@ -195,9 +195,10 @@ uint32_t u32GetBaudError_PPM = 0;
 #define PARAM_TABLE_DATETIME                (uint32_t)DATETIME_BUILD
 
 
-#define EMIF_AUX_PARAM_TABLE_VER_ADDRESS    0x00120004      /* This address here I put only for the example. You should use your memory space address */
-#define EMIF_AUX_BUILD_DATE_TIME_ADDRESS    0x00120006      /* This address here I put only for the example. You should use your memory space address */
-#define EMIF_AUX_BACKUP_CHECKSUM_ADDRESS    0x00120008      /* This address here I put only for the example. You should use your memory space address */
+#define EMIF_AUX_PARAM_TABLE_VER_ADDRESS    0x00120006      /* This address here I put only for the example. You should use your memory space address */
+#define EMIF_AUX_BUILD_DATE_TIME_ADDRESS    0x00120008      /* This address here I put only for the example. You should use your memory space address */
+#define EMIF_AUX_BACKUP_CHECKSUM_ADDRESS    0x0012000A      /* This address here I put only for the example. You should use your memory space address */
+
 
 volatile uint16_t* EMIF_AUX_pu16ParamVerBackupInEmif = (uint16_t*)(EMIF_AUX_PARAM_TABLE_VER_ADDRESS);
 volatile uint16_t* EMIF_AUX_pu16DateTimeBackupInEmif = (uint16_t*)(EMIF_AUX_BUILD_DATE_TIME_ADDRESS);
