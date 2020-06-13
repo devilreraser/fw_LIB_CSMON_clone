@@ -31,6 +31,10 @@ extern "C"
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
+#define CSMON_LIBRARY_VERSION_HI    0
+#define CSMON_LIBRARY_VERSION_LO    0
+
+#define CSMON_LIBRARY_VERSION       (uint16_t)(((uint16_t)((uint_least8_t)(CSMON_LIBRARY_VERSION_HI & 0x00FF)) << 8) | ((uint_least8_t)(CSMON_LIBRARY_VERSION_LO & 0x00FF)))
 
 /* *****************************************************************************
  * Enumeration Definitions
@@ -414,6 +418,12 @@ void CSMON_vSetStartRecorderParameterMask (CSMON_eRecorderParameterMask_t eMask)
 void CSMON_vSetStopRecorderParameterMask (CSMON_eRecorderParameterMask_t eMask);
 
 /* *****************************************************************************
+ * CSMON_u32GetModbusMessageCounterRegisterRealAddress
+ **************************************************************************** */
+uint32_t CSMON_u32GetModbusMessageCounterRegisterRealAddress(void);
+
+
+/* *****************************************************************************
  * CSMON_vRecorderParamSetupProcess
  **************************************************************************** */
 void CSMON_vRecorderParamSetupProcess(void);
@@ -423,6 +433,17 @@ void CSMON_vRecorderParamSetupProcess(void);
  **************************************************************************** */
 void CSMON_vRecorderParamStartStopProcess(void);
 
+
+/* *****************************************************************************
+ * CSMON_eSetFirmwareApplicationVersion
+ *
+ * Input:
+ *      uint16_t u16Version       - Firmware Application Version
+ *                                  High Byte Is Major Version
+ *                                  Low Byte Is Minor Version
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetFirmwareApplicationVersion (uint16_t u16Version);
 
 
 /* *****************************************************************************

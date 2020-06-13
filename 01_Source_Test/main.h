@@ -29,6 +29,11 @@ extern "C"
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
+#define TEST_CSMON_APPLICATION_VERSION_HI    1
+#define TEST_CSMON_APPLICATION_VERSION_LO    0
+
+#define TEST_CSMON_APPLICATION_VERSION       (uint16_t)(((uint16_t)((uint_least8_t)(TEST_CSMON_APPLICATION_VERSION_HI & 0x00FF)) << 8) | ((uint_least8_t)(TEST_CSMON_APPLICATION_VERSION_LO & 0x00FF)))
+
 
 /* *****************************************************************************
  * Enumeration Definitions
