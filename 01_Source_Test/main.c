@@ -1286,14 +1286,14 @@ void ParameterInitialization(void)
         uCheckSumBackup.u32Register = CSMON_u32GetParameterCheckSum();
         EMIF_AUX_pu16CheckSumBackupInEmif[0] = uCheckSumBackup.au16Word[0];
         EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
+
+
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);         /* Green LED (the closest to the MCU Led) */
+        CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);        /* Green LED (the closest to the MCU Led) */
     }
 
 
-    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);         /* Green LED (the closest to the MCU Led) */
-
-    CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
-
-    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);        /* Green LED (the closest to the MCU Led) */
 }
 
 /* *****************************************************************************
