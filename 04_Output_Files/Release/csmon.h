@@ -445,6 +445,18 @@ void CSMON_vRecorderParamStartStopProcess(void);
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetFirmwareApplicationVersion (uint16_t u16Version);
 
+/* *****************************************************************************
+ * CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
+ *
+ * Input:
+ *      bool bAutoServiceWatchDog
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop (bool bAutoServiceWatchDog);
+
+
+
+
 
 /* *****************************************************************************
  * External Function Prototypes - need to be implemented externally
