@@ -1472,6 +1472,7 @@ void main(void)
     // STAT_LED_G_PIN is the LED STATUS pin.
     GPIO_setPinConfigOutput(STAT_LED_G_PIN);
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
     // STAT_LED_A_B_PIN is the LED STATUS pin.
     //
     GPIO_setPinConfigOutput(STAT_LED_A_B_PIN);
@@ -1554,8 +1555,9 @@ void main(void)
 
 
 
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
     //
-    // CSMON Initialization
+    // CSMON Initialization -> ~ 4.5ms
     //
     eResponseCode_CSMON_eInit = CSMON_eInit();
     // Check CSMON Response Code if needed
@@ -1565,6 +1567,7 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
 
 
     //
@@ -1600,8 +1603,17 @@ void main(void)
     SysCtl_serviceWatchdog();
 
     //
+    // Set the WatchDogPrescaler
+    //
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_1);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_2);        /*  2 * 512 * 256 @ 10Mhz -> ~ 26ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_64);       /* 64 * 512 * 256 @ 10Mhz -> ~832ms */
+
+
+    //
     // Enable the WatchDog
     //
+    SysCtl_serviceWatchdog();
     SysCtl_enableWatchdog();
 
     //
@@ -1620,7 +1632,7 @@ void main(void)
         //
         // Artificial Delay
         //
-        DEVICE_DELAY_US(1140);
+        //DEVICE_DELAY_US(1140);
 
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
         //
