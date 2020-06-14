@@ -33,6 +33,9 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+
+#define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
+
 #define PARAMETER_COUNT_MAX        (819 + 1)/* Parameter 9 was independent RD and WR */
 #define PARAMETER_ID_START_1000     0       /* Small and Big Numbers for ID (0 or 1) */
 
@@ -1472,6 +1475,7 @@ void main(void)
     // STAT_LED_G_PIN is the LED STATUS pin.
     GPIO_setPinConfigOutput(STAT_LED_G_PIN);
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
     // STAT_LED_A_B_PIN is the LED STATUS pin.
     //
     GPIO_setPinConfigOutput(STAT_LED_A_B_PIN);
@@ -1554,8 +1558,9 @@ void main(void)
 
 
 
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
     //
-    // CSMON Initialization
+    // CSMON Initialization -> ~ 2.25ms
     //
     eResponseCode_CSMON_eInit = CSMON_eInit();
     // Check CSMON Response Code if needed
@@ -1565,6 +1570,7 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
 
 
     //
@@ -1599,10 +1605,44 @@ void main(void)
     //
     SysCtl_serviceWatchdog();
 
+
+
+    //
+    // Set the WatchDogPrescaler - Default SYSCTL_WD_PRESCALE_1
+    //
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_1);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_2);        /*  2 * 512 * 256 @ 10Mhz -> ~ 26ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_4);        /*  4 * 512 * 256 @ 10Mhz -> ~ 52ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_8);        /*  8 * 512 * 256 @ 10Mhz -> ~104ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_16);       /* 16 * 512 * 256 @ 10Mhz -> ~208ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_32);       /* 32 * 512 * 256 @ 10Mhz -> ~416ms */
+    //SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_64);       /* 64 * 512 * 256 @ 10Mhz -> ~832ms */
+
+    #if CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP == 0
+
+    SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_8);        /*  8 * 512 * 256 @ 10Mhz -> ~104ms */
+    //
+    // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
+    //
+    //(void)CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop(false);  /* Not Needed - Default false */
+
+    #else
+
+    SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_1);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
+    //
+    // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
+    //
+    (void)CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop(true);
+
+    #endif
+
+
     //
     // Enable the WatchDog
     //
+    SysCtl_serviceWatchdog();
     SysCtl_enableWatchdog();
+
 
     //
     // Enable Global Interrupt (INTM) and RealTime interrupt (DBGM)
@@ -1620,11 +1660,11 @@ void main(void)
         //
         // Artificial Delay
         //
-        DEVICE_DELAY_US(1140);
+        //DEVICE_DELAY_US(1140);
 
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
         //
-        // CSMON Process In Main Loop
+        // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
         //
         eResponseCode_CSMON_eProcess = CSMON_eProcess();
         // Check CSMON Response Code if needed
