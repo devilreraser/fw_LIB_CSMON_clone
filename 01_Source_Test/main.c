@@ -48,8 +48,8 @@
 
 
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
 
 
 
@@ -63,13 +63,13 @@
 #define STAT_LED_A_B_PIN    31      /* D10 Blue */
 #define STAT_LED_R_PIN      34      /* D9 */
 #else
-#define STAT_LED_G_PIN      28
-#define STAT_LED_A_B_PIN    30      /* Amber */
-#define STAT_LED_R_PIN      32
+#define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */
+#define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
+#define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
 #endif
 
-#define STAT_LED_ENABLE 0
-#define STAT_LED_DISABLE   (!STAT_LED_ENABLE)
+#define STAT_LED_ENABLE_LEVEL_LOW 0
+#define STAT_LED_DISABLE_LVL_HIGH   (!STAT_LED_ENABLE_LEVEL_LOW)
 
 #define CLK_EN_FPGA_PIN     33
 
@@ -198,9 +198,17 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
  uint16_t u16TestData8 = 8;
  uint16_t u16TestData9 = 9;
 
- uint16_t u16DelayCtrlLoop_usec = 0;   /* Control loop Period 50usec - to be checked */
- uint16_t u16DelayMainLoop_usec = 0;
+ uint16_t u16WatchdogPrescaler = 0;
+ uint16_t u16WatchdogPrescalerOld = 0;
 
+uint16_t u16DelayCtrlLoop_100nsec = 0;   /* Control loop Period 50usec - to be checked */
+uint16_t u16DelayCtrlLoopOld_100nsec = 0;
+
+uint16_t u16DelayMainLoop_usec = 0;
+uint16_t u16DelayMainLoopOld_usec = 0;
+
+uint32_t u32DelayCtrlLoop_Ticks = 1;
+uint32_t u32DelayMainLoop_Ticks = 1;
 
 
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
@@ -210,6 +218,7 @@ CSMON_eResponseCode_t eResponseCode_CSMON_eSetParameter = CSMON_RESPONSE_CODE_OK
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetRecorder = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetScope = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_RESPONSE_CODE_OK;
+CSMON_eResponseCode_t eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_RESPONSE_CODE_OK;
 uint32_t u32GetBaudError_PPM = 0;
 
 
@@ -303,7 +312,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #else
 
- {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.1 },
  {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
 
  {PARAM_ID_RD_WR_SCALETST, (uint32_t)&s16ScaleDataTst         ,  PAR(_SINT16,_RW,_NO)  , {"RDWR_Scale"}    ,    {"\n"}     ,   (uint32_t)(  300)  ,   (uint32_t)(  -100)  ,    (uint32_t)(200)    ,   2.5 },
@@ -1132,7 +1141,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 
- {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.1 },
  {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
 
  {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
@@ -1180,7 +1189,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
 
- {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.1 },
  {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
 
  {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
@@ -1298,6 +1307,7 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
 
+    GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
 
 
     //
@@ -1339,19 +1349,22 @@ void ControlProcess(void)
         s16DummyVoltageDCLink = 0;
     }
 
+
     //
     // Artificial Delay Control Loop
     //
-    DEVICE_DELAY_US(u16DelayCtrlLoop_usec);
-
+    SysCtl_delay(u32DelayCtrlLoop_Ticks);
 
 
 
     //
     // Process Passed Flag Set - Need to be called from Processes with higher priority level in order CSMON to be able to get meaning-full (consistent) data
-    eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY);
-    ASSERT(eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister != CSMON_RESPONSE_CODE_OK);
+    eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY);
+    ASSERT(eResponseCode_CSMON_eSetFlagProcessPassed != CSMON_RESPONSE_CODE_OK);
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
+
+
+    GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);    /* Red LED (closest to the Debug Header) */
 }
 
 
@@ -1395,7 +1408,7 @@ void ParameterInitialization(void)
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
-            GPIO_writePin(STAT_LED_G_PIN, (u16Index & 1) );     /* Green LED (the closest to the MCU Led) */
+            GPIO_writePin(STAT_LED_A_B_PIN, (u16Index & 1) );     /* Amber LED (middle Led) */
 
             u32ParamRealAddress = asParameterList[u16Index].u32RealAddress;
 
@@ -1433,9 +1446,9 @@ void ParameterInitialization(void)
         EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
 
 
-        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);         /* Green LED (the closest to the MCU Led) */
+        GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);         /* Amber LED (middle Led) */
         CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
-        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);        /* Green LED (the closest to the MCU Led) */
+        GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
     }
 
 
@@ -1613,17 +1626,23 @@ void main(void)
     //
     // LEDs
     //
-    // STAT_LED_G_PIN is the LED STATUS pin.
+
+    // STAT_LED_G_PIN is the LED STATUS pin. - Init and Main Loop CSMON CPU Load -> Green LED (closest to the MCU Led)
     GPIO_setPinConfigOutput(STAT_LED_G_PIN);
-    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
-    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
-    // STAT_LED_A_B_PIN is the LED STATUS pin.
-    //
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW);
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH);
+
+    // STAT_LED_A_B_PIN is the LED STATUS pin. - Parameter Initialize -> Amber LED (middle Led)
     GPIO_setPinConfigOutput(STAT_LED_A_B_PIN);
-    GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE);
-    // STAT_LED_R_PIN is the LED STATUS pin.
+    GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);
+    GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);
+
+    // STAT_LED_R_PIN is the LED STATUS pin. - Control Process -> Red LED (closest to the Debug Header)
     GPIO_setPinConfigOutput(STAT_LED_R_PIN);
-    GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE);
+    GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);
+    GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);
+
+
 
     //
     // CLK_EN_FPGA_PIN is the FPGA Clock Enable pin. - generally not needed - there is pull-up
@@ -1699,7 +1718,7 @@ void main(void)
 
 
 
-    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
     //
     // CSMON Initialization -> ~ 2.25ms
     //
@@ -1711,7 +1730,7 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
-    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
+    GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
 
 
     //
@@ -1762,14 +1781,17 @@ void main(void)
     #if CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP == 0
 
     SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_8);        /*  8 * 512 * 256 @ 10Mhz -> ~104ms */
+    u16WatchdogPrescalerOld = u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_8;
     //
     // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
     //
     //(void)CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop(false);  /* Not Needed - Default false */
 
+
     #else
 
     SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_1);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
+    u16WatchdogPrescalerOld = u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_1;
     //
     // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
     //
@@ -1798,19 +1820,67 @@ void main(void)
         //
         SysCtl_serviceWatchdog();
 
+
+        if (u16WatchdogPrescaler != u16WatchdogPrescalerOld)
+        {
+            //SysCtl_disableWatchdog();
+            SysCtl_serviceWatchdog();
+            u16WatchdogPrescalerOld = u16WatchdogPrescaler;
+            SysCtl_setWatchdogPrescaler((SysCtl_WDPrescaler)u16WatchdogPrescaler);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
+            SysCtl_serviceWatchdog();
+            //SysCtl_enableWatchdog();
+
+        }
+
+
+
+
+
         //
         // Artificial Delay Main Loop
         //
-        DEVICE_DELAY_US(u16DelayMainLoop_usec);
+        SysCtl_delay(u32DelayMainLoop_Ticks);
 
-        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
+
+        //
+        // Artificial Delay Setup
+        //
+        if (u16DelayCtrlLoop_100nsec != u16DelayCtrlLoopOld_100nsec)
+        {
+            u16DelayCtrlLoopOld_100nsec = u16DelayCtrlLoop_100nsec;
+            u32DelayCtrlLoop_Ticks = (uint32_t)(((((long double)(u16DelayCtrlLoop_100nsec) * 0.1L) / (1000000.0L / (long double)DEVICE_SYSCLK_FREQ)) - 9.0L) / 5.0L);
+            if (u32DelayCtrlLoop_Ticks == 0)
+            {
+                u32DelayCtrlLoop_Ticks = 1;
+            }
+        }
+        if (u16DelayMainLoop_usec != u16DelayMainLoopOld_usec)
+        {
+            u16DelayMainLoopOld_usec = u16DelayMainLoop_usec;
+            u32DelayMainLoop_Ticks = (uint32_t)(((((long double)(u16DelayMainLoop_usec)) / (1000000.0L / (long double)DEVICE_SYSCLK_FREQ)) - 9.0L) / 5.0L);
+            if (u32DelayMainLoop_Ticks == 0)
+            {
+                u32DelayMainLoop_Ticks = 1;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
         //
         // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
         //
         eResponseCode_CSMON_eProcess = CSMON_eProcess();
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
-        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE);
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
 
 
         //
