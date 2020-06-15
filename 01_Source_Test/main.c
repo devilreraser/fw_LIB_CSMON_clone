@@ -47,12 +47,13 @@
 #define CSMON_PAR_LIST_MAXIMUM_COUNT                                    2                   /* Maximum Count */
 
 
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
 
 
-#define PARAMETER_COUNT_MAX        (819 + 1)/* Parameter 9 was independent RD and WR */
+
+#define PARAMETER_COUNT_MAX        (819 + 1)/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
 #define PARAMETER_ID_START_1000     0       /* Small and Big Numbers for ID (0 or 1) */
 
 
@@ -197,6 +198,10 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
  uint16_t u16TestData8 = 8;
  uint16_t u16TestData9 = 9;
 
+ uint16_t u16DelayCtrlLoop_usec = 0;   /* Control loop Period 50usec - to be checked */
+ uint16_t u16DelayMainLoop_usec = 0;
+
+
 
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
@@ -275,6 +280,10 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_PARAMETER_TST9    10009
 
 
+#define PARAM_ID_CTRL_LOOP_USEC    30000
+#define PARAM_ID_MAIN_LOOP_USEC    30001
+
+
 volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
@@ -294,7 +303,8 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #else
 
-
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
 
  {PARAM_ID_RD_WR_SCALETST, (uint32_t)&s16ScaleDataTst         ,  PAR(_SINT16,_RW,_NO)  , {"RDWR_Scale"}    ,    {"\n"}     ,   (uint32_t)(  300)  ,   (uint32_t)(  -100)  ,    (uint32_t)(200)    ,   2.5 },
  {PARAM_ID_READ_WRITE_TST, (uint32_t)&s16DummyDataTst         ,  PAR(_SINT16,_RW,_NO)  , {"RD_WR_Test"}    ,    {" "}      ,   (uint32_t)(  300)  ,   (uint32_t)(  -100)  ,    (uint32_t)(200)    ,   0.0 },
@@ -307,16 +317,16 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {PARAM_ID_REQRUNNINGMODE, (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* If Parameter ID 9 Write Request From PC */
  {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
 
- {10000                  , (uint32_t)&u16TestData0           ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.00 },
- {10001                  , (uint32_t)&u16TestData1           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.01 },
- {10002                  , (uint32_t)&u16TestData2           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.02 },
- {10003                  , (uint32_t)&u16TestData3           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.03 },
- {10004                  , (uint32_t)&u16TestData4           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.04 },
- {10005                  , (uint32_t)&u16TestData5           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.05 },
- {10006                  , (uint32_t)&u16TestData6           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.06 },
- {10007                  , (uint32_t)&u16TestData7           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.07 },
- {10008                  , (uint32_t)&u16TestData8           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.08 },
- {10009                  , (uint32_t)&u16TestData9           ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}     ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.09 },
+ {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.00 },
+ {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.01 },
+ {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.02 },
+ {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.03 },
+ {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.04 },
+ {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.05 },
+ {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.06 },
+ {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.07 },
+// {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.08 },
+// {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.09 },
 
  {1000                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_WO,_RD)  , {"Param_1000"}    ,    {"WROnly"} ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
  {1001                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1001"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
@@ -1122,6 +1132,9 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
  {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
  {20001                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
  {20002                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
@@ -1166,6 +1179,9 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
+
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
 
  {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
  {20001                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
@@ -1281,6 +1297,9 @@ void CSMON_vGetDateTime (
  **************************************************************************** */
 void ControlProcess(void)
 {
+
+
+
     //
     // Test For Data Consistency and Control Emulation
     //
@@ -1319,6 +1338,11 @@ void ControlProcess(void)
         s16DummyCurrentPhaseC = 0;
         s16DummyVoltageDCLink = 0;
     }
+
+    //
+    // Artificial Delay Control Loop
+    //
+    DEVICE_DELAY_US(u16DelayCtrlLoop_usec);
 
 
 
@@ -1775,9 +1799,9 @@ void main(void)
         SysCtl_serviceWatchdog();
 
         //
-        // Artificial Delay
+        // Artificial Delay Main Loop
         //
-        //DEVICE_DELAY_US(1140);
+        DEVICE_DELAY_US(u16DelayMainLoop_usec);
 
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE);
         //
