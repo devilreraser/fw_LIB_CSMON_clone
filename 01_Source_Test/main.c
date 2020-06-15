@@ -34,7 +34,23 @@
  * Configuration Definitions
  **************************************************************************** */
 
+
+
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
+
+/* *****************************************************************************
+ * Configuration Parameter Definitions
+ **************************************************************************** */
+
+#define CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES         0                   /* Each Type Repeated All Types Count Times  */
+#define CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES         1                   /* All Types Repeated All Types Count Times  */
+#define CSMON_PAR_LIST_MAXIMUM_COUNT                                    2                   /* Maximum Count */
+
+
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+
 
 #define PARAMETER_COUNT_MAX        (819 + 1)/* Parameter 9 was independent RD and WR */
 #define PARAMETER_ID_START_1000     0       /* Small and Big Numbers for ID (0 or 1) */
@@ -167,6 +183,7 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
  int16_t s16ScaleDataTst = 100;
 
  int16_t s16DummyData = 0x1234;
+ int32_t aDummyDataTable = 0x1234;
 
 
  uint16_t u16TestData0 = 0;
@@ -246,22 +263,6 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_STARUNNINGMODE     1006
 #endif
 
-
-volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
-{
-/* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
-/*                                                                   Type Access Pass                                                                                                                    */
-
-
-#if 0
-
- {1000                   , (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhA"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
-// {1001                   , (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhB"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
-// {1002                   , (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhC"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
-
-
-#else
-
 #define PARAM_ID_PARAMETER_TST0    10000
 #define PARAM_ID_PARAMETER_TST1    10001
 #define PARAM_ID_PARAMETER_TST2    10002
@@ -272,6 +273,26 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 #define PARAM_ID_PARAMETER_TST7    10007
 #define PARAM_ID_PARAMETER_TST8    10008
 #define PARAM_ID_PARAMETER_TST9    10009
+
+
+volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
+{
+/* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
+/*                                                                   Type Access Pass                                                                                                                    */
+
+
+
+#if CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_MAXIMUM_COUNT
+
+
+#if 0
+
+ {1000                   , (uint32_t)&s16DummyCurrentPhaseA   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhA"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+// {1001                   , (uint32_t)&s16DummyCurrentPhaseB   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhB"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+// {1002                   , (uint32_t)&s16DummyCurrentPhaseC   ,  PAR(_UINT16,_RW,_NO)  , {"CurrentPhC"}          ,    {""}      ,    (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(999)    ,   1.0 },
+
+
+#else
 
 
 
@@ -1098,6 +1119,102 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {1798                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1798"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
  {1799                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1799"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
 #endif
+
+#elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
+
+ {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20001                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20002                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20003                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20004                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20005                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+
+ {20010                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20011                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20012                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20013                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20014                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20015                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+
+ {20020                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20021                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20022                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20023                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20024                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20025                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+
+ {20030                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20031                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20032                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20033                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20034                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20035                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+
+ {20040                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20041                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20042                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20043                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20044                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20045                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+
+ {20050                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20051                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20052                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20053                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20054                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20055                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+
+#elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
+
+ {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20001                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20002                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20003                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20004                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20005                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+ {20010                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20011                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20012                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20013                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20014                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20015                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+ {20020                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20021                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20022                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20023                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20024                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20025                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+ {20030                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20031                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20032                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20033                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20034                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20035                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+ {20040                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20041                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20042                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20043                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20044                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20045                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+ {20050                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20051                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   1.0 },
+ {20052                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"0.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   0.0 },
+ {20053                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT32,_RW,_NO)  , {"Param_SINT32"}  ,    {"1.0"}    ,   (uint32_t)(1000000),   (uint32_t)(-1000000),    (uint32_t)(  0)    ,   1.0 },
+ {20054                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"0.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.0 },
+ {20055                  , (uint32_t)&aDummyDataTable         ,  PAR(_UINT08,_RW,_NO)  , {"Param_UINT08"}  ,    {"1.0"}    ,   (uint32_t)(  255)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
+
+
+#else
+
+#endif
+
+
 };
 
 
