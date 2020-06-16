@@ -27,6 +27,8 @@ extern "C"
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+#define CSMON_USE_DISCONNECT_ON_TIMEOUT         0
+#define CSMON_NO_MESSAGE_TIMEOUT_MILLISECONDS   6000.0
 
 /* *****************************************************************************
  * Constants and Macros Definitions
