@@ -316,7 +316,18 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #else
 
- {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    , 100.0 },
+ {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.00 },
+ {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.01 },
+ {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.02 },
+ {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.03 },
+ {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.04 },
+ {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.05 },
+ {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.06 },
+ {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.07 },
+ {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.08 },
+ {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.09 },
+
+{PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    , 100.0 },
  {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.1 },
  {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
  {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_WR)  , {"Param_Fail"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   1.0 },
@@ -332,17 +343,6 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {PARAM_ID_INCREMENT_LOOP, (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   (uint32_t)( 1024)  ,   (uint32_t)( -1024)  ,    (uint32_t)(256)    ,   0.1 },
  {PARAM_ID_REQRUNNINGMODE, (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* If Parameter ID 9 Write Request From PC */
  {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   (uint32_t)( true)  ,   (uint32_t)( false)  ,    (uint32_t)false    ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
-
- {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.00 },
- {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.01 },
- {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.02 },
- {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.03 },
- {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.04 },
- {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.05 },
- {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.06 },
- {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.07 },
- {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.08 },
- {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   (uint32_t)(65535)  ,   (uint32_t)(     0)  ,    (uint32_t)(  0)    ,   0.09 },
 
  {1000                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_WO,_RD)  , {"Param_1000"}    ,    {"WROnly"} ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.0 },
  {1001                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1001"}    ,    {"A"}      ,   (uint32_t)(10000)  ,   (uint32_t)(-10000)  ,    (uint32_t)(  0)    ,   0.1 },
