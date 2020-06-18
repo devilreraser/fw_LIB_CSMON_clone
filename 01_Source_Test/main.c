@@ -47,9 +47,9 @@
 #define CSMON_PAR_LIST_MAXIMUM_COUNT                                    2                   /* Maximum Count */
 
 
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
 
 
 
@@ -1584,9 +1584,9 @@ void ParameterInitialization(void)
 
     uint32_t u32ParamRealAddress;
 
-    uint32_t u32ParamVer;
-    uint32_t u32DateTime;
-    uint32_t u32CheckSum;
+    volatile uint32_t u32ParamVer;
+    volatile uint32_t u32DateTime;
+    volatile uint32_t u32CheckSum;
 
     uWord32_t uParamVerBackup;
     uWord32_t uDateTimeBackup;
