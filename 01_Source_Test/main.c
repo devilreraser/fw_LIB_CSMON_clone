@@ -231,6 +231,29 @@ uint32_t u32DelayMainLoop_Ticks = 1;
 uint16_t u16CountSetParameterFail = 0;
 uint16_t u16CountMaxParameterTest = PARAMETER_COUNT_MAX - 1;/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
 
+bool bResetAllTimeMeasures = 0;
+
+uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks;
+uint32_t u32TimeMainLoopProcessCSMON_End_Ticks;
+uint32_t u32TimeMainLoopProcessCSMON_Now_Ticks;
+uint32_t u32TimeMainLoopProcessCSMON_Max_Ticks;
+
+uint32_t u32TimeMainLoopCycle_Bgn_Ticks;
+uint32_t u32TimeMainLoopCycle_End_Ticks;
+uint32_t u32TimeMainLoopCycle_Now_Ticks;
+uint32_t u32TimeMainLoopCycle_Max_Ticks;
+
+
+uint32_t u32TimeCSMON_ISR_Ticks;
+uint32_t u32TimeCSMON_ISR_Max_Ticks;
+uint32_t u32TimeCtrlLoop_Ticks;
+uint32_t u32TimeCtrlLoopMax_Ticks;
+
+
+uint32_t u32ParamTime_Ticks;
+
+
+
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetServerOnStatus = CSMON_RESPONSE_CODE_OK;
@@ -315,6 +338,14 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_PARAM_SET_FAIL    30003
 #define PARAM_ID_PARAM_MAX_TEST    30004
 #define PARAM_ID_CTRL_PERIOD_US    30005
+#define PARAM_ID_MAIN_LOOP_TIME    30006
+#define PARAM_ID_CSMON_PRC_TIME    30007
+#define PARAM_ID_RESET_MSR_TIME    30008
+#define PARAM_ID_CSMON_ISR_TIME    30009
+#define PARAM_ID_CTRL_ISR_TIME     30010
+#define PARAM_ID_PARAMLOAD_TIME    30011
+
+
 
 volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
@@ -337,23 +368,29 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 
 
- {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.00 },
- {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.01 },
- {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.02 },
- {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.03 },
- {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.04 },
- {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.05 },
- {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.06 },
- {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.07 },
- {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.08 },
- {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.09 },
+ {PARAM_ID_CTRL_PERIOD_US, (uint32_t)&u16PeriodControl_usec   ,  PAR(_UINT16,_RW,_NO)  , {"CtrlPeriod"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+ {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_NO)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              , 100.0 },
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_NO)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.1 },
+ {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_NO)  , {"Main_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+ {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_NO)  , {"Param_Fail"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+
+ {PARAM_ID_MAIN_LOOP_TIME, (uint32_t)&u32TimeMainLoopCycle_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"MainLoopMax"}   ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+ {PARAM_ID_CSMON_PRC_TIME, (uint32_t)&u32TimeMainLoopProcessCSMON_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"CSMON_Main"}    ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_RESET_MSR_TIME, (uint32_t)&bResetAllTimeMeasures   ,  PAR(_UINT08,_RW,_NO)  , {"Meas_Reset"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
+
+ {PARAM_ID_CSMON_ISR_TIME, (uint32_t)&u32TimeCSMON_ISR_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"CSMON_ISR"}     ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_CTRL_ISR_TIME , (uint32_t)&u32TimeCtrlLoopMax_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"ControlISR"}    ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_PARAMLOAD_TIME, (uint32_t)&u32ParamTime_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"Param_Init"}   ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
 
 
- {PARAM_ID_CTRL_PERIOD_US, (uint32_t)&u16PeriodControl_usec   ,  PAR(_UINT16,_RW,_WR)  , {"CtrlPeriod"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
- {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              , 100.0 },
- {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.1 },
- {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
- {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_WR)  , {"Param_Fail"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
 
  {PARAM_ID_PARAM_MAX_TEST, (uint32_t)&u16CountMaxParameterTest,  PAR(_UINT16,_RW,_WR)  , {"Param_Test"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
  {PARAM_ID_RD_WR_SCALETST, (uint32_t)&s16ScaleDataTst         ,  PAR(_SINT16,_RW,_NO)  , {"RDWR_Scale"}    ,    {"\n"}     ,   INIT_MAX_MIN_DEF(s16Register,      300,       -100,        200)              ,   2.5 },
@@ -365,7 +402,20 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {PARAM_ID_VOLTAGE_DCLINK, (uint32_t)&s16DummyVoltageDCLink   ,  PAR(_SINT16,_RW,_RD)  , {"VoltageBus"}    ,    {"V"}      ,   INIT_MAX_MIN_DEF(s16Register,    10000,          0,        900)              ,   0.1 },
  {PARAM_ID_INCREMENT_LOOP, (uint32_t)&s16DummyIncrementLoop   ,  PAR(_SINT16,_RW,_WR)  , {"IncLoopTst"}    ,    {"A(0.5V)"},   INIT_MAX_MIN_DEF(s16Register,    10000,          0,          1)              ,   0.1 },
  {PARAM_ID_REQRUNNINGMODE, (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Write Request From PC */
- {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address) */
+ {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
+
+
+
+ {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.00 },
+ {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.01 },
+ {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.02 },
+ {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.03 },
+ {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.04 },
+ {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.05 },
+ {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.06 },
+ {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.07 },
+ {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.08 },
+ {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.09 },
 
  {1000                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1001"}    ,    {"A"}      ,   INIT_MAX_MIN_DEF(s16Register,    10000,     -10000,          0)              ,   0.1 },
  {1001                   , (uint32_t)&s16DummyData            ,  PAR(_SINT16,_RW,_RD)  , {"Param_1001"}    ,    {"A"}      ,   INIT_MAX_MIN_DEF(s16Register,    10000,     -10000,          0)              ,   0.1 },
@@ -1371,23 +1421,29 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 
- {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.00 },
- {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.01 },
- {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.02 },
- {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.03 },
- {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.04 },
- {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.05 },
- {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.06 },
- {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.07 },
- {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.08 },
- {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.09 },
+ {PARAM_ID_CTRL_PERIOD_US, (uint32_t)&u16PeriodControl_usec   ,  PAR(_UINT16,_RW,_NO)  , {"CtrlPeriod"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+ {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_NO)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              , 100.0 },
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_NO)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.1 },
+ {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_NO)  , {"Main_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+ {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_NO)  , {"Param_Fail"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+
+ {PARAM_ID_MAIN_LOOP_TIME, (uint32_t)&u32TimeMainLoopCycle_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"MainLoopMax"}   ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+ {PARAM_ID_CSMON_PRC_TIME, (uint32_t)&u32TimeMainLoopProcessCSMON_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"CSMON_Main"}    ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_RESET_MSR_TIME, (uint32_t)&bResetAllTimeMeasures   ,  PAR(_UINT08,_RW,_NO)  , {"Meas_Reset"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
+
+ {PARAM_ID_CSMON_ISR_TIME, (uint32_t)&u32TimeCSMON_ISR_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"CSMON_ISR"}     ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_CTRL_ISR_TIME , (uint32_t)&u32TimeCtrlLoopMax_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"ControlISR"}    ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_PARAMLOAD_TIME, (uint32_t)&u32ParamTime_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"Param_Init"}   ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
 
 
- {PARAM_ID_CTRL_PERIOD_US, (uint32_t)&u16PeriodControl_usec   ,  PAR(_UINT16,_RW,_WR)  , {"CtrlPeriod"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
- {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              , 100.0 },
- {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.1 },
- {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
- {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_WR)  , {"Param_Fail"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
 
  {PARAM_ID_PARAM_MAX_TEST, (uint32_t)&u16CountMaxParameterTest,  PAR(_UINT16,_RW,_WR)  , {"Param_Test"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
  {PARAM_ID_RD_WR_SCALETST, (uint32_t)&s16ScaleDataTst         ,  PAR(_SINT16,_RW,_NO)  , {"RDWR_Scale"}    ,    {"\n"}     ,   INIT_MAX_MIN_DEF(s16Register,      300,       -100,        200)              ,   2.5 },
@@ -1401,6 +1457,16 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {PARAM_ID_REQRUNNINGMODE, (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Write Request From PC */
  {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
 
+ {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.00 },
+ {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.01 },
+ {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.02 },
+ {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.03 },
+ {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.04 },
+ {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.05 },
+ {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.06 },
+ {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.07 },
+ {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.08 },
+ {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.09 },
 
  {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   INIT_MAX_MIN_DEF(s16Register,    10000,     -10000,          0)              ,   0.0 },
  {20001                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   INIT_MAX_MIN_DEF(s16Register,    10000,     -10000,          0)              ,   0.0 },
@@ -1447,23 +1513,30 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
 
- {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.00 },
- {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.01 },
- {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.02 },
- {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.03 },
- {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.04 },
- {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.05 },
- {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.06 },
- {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.07 },
- {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.08 },
- {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.09 },
+
+ {PARAM_ID_CTRL_PERIOD_US, (uint32_t)&u16PeriodControl_usec   ,  PAR(_UINT16,_RW,_NO)  , {"CtrlPeriod"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+ {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_NO)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              , 100.0 },
+ {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_NO)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.1 },
+ {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_NO)  , {"Main_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+ {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_NO)  , {"Param_Fail"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
+
+ {PARAM_ID_MAIN_LOOP_TIME, (uint32_t)&u32TimeMainLoopCycle_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"MainLoopMax"}   ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+ {PARAM_ID_CSMON_PRC_TIME, (uint32_t)&u32TimeMainLoopProcessCSMON_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"CSMON_Main"}    ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_RESET_MSR_TIME, (uint32_t)&bResetAllTimeMeasures   ,  PAR(_UINT08,_RW,_NO)  , {"Meas_Reset"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
+
+ {PARAM_ID_CSMON_ISR_TIME, (uint32_t)&u32TimeCSMON_ISR_Max_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"CSMON_ISR"}     ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_CTRL_ISR_TIME , (uint32_t)&u32TimeCtrlLoopMax_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"ControlISR"}    ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
+
+ {PARAM_ID_PARAMLOAD_TIME, (uint32_t)&u32ParamTime_Ticks
+                                                              ,  PAR(_UINT32,_RO,_NO)  , {"Param_Init"}   ,    {"Ticks"}  ,   INIT_MAX_MIN_DEF(u32Register, 0xFFFFFFFF,        0,          0)              ,   1.0 },
 
 
- {PARAM_ID_CTRL_PERIOD_US, (uint32_t)&u16PeriodControl_usec   ,  PAR(_UINT16,_RW,_WR)  , {"CtrlPeriod"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
- {PARAM_ID_CTRL_LOOP_NSEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"nsec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              , 100.0 },
- {PARAM_ID_CTRL_LOOP_USEC, (uint32_t)&u16DelayCtrlLoop_100nsec,  PAR(_UINT16,_RW,_WR)  , {"Ctrl_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.1 },
- {PARAM_ID_MAIN_LOOP_USEC, (uint32_t)&u16DelayMainLoop_usec   ,  PAR(_UINT16,_RW,_WR)  , {"Main_Delay"}    ,    {"usec"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
- {PARAM_ID_PARAM_SET_FAIL, (uint32_t)&u16CountSetParameterFail,  PAR(_UINT16,_RW,_WR)  , {"Param_Fail"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
 
  {PARAM_ID_PARAM_MAX_TEST, (uint32_t)&u16CountMaxParameterTest,  PAR(_UINT16,_RW,_WR)  , {"Param_Test"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   1.0 },
  {PARAM_ID_RD_WR_SCALETST, (uint32_t)&s16ScaleDataTst         ,  PAR(_SINT16,_RW,_NO)  , {"RDWR_Scale"}    ,    {"\n"}     ,   INIT_MAX_MIN_DEF(s16Register,      300,       -100,        200)              ,   2.5 },
@@ -1477,6 +1550,16 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  {PARAM_ID_REQRUNNINGMODE, (uint32_t)&bDummyReqstDevRunning   ,  PAR(_UINT08,_WO,_WR)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Write Request From PC */
  {PARAM_ID_STARUNNINGMODE, (uint32_t)&bDummyStatsDevRunning   ,  PAR(_UINT08,_RO,_NO)  , {"DevRunning"}    ,    {"boolean"},   INIT_MAX_MIN_DEF( u8Register,     true,      false,      false)              ,     1 }, /* If Parameter ID 9 Read  Request From PC (can be with Different Real Address)*/
 
+ {10000                  , (uint32_t)&u16TestData0            ,  PAR(_UINT16,_WO,_RD)  , {"Test_10000"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.00 },
+ {10001                  , (uint32_t)&u16TestData1            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10001"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.01 },
+ {10002                  , (uint32_t)&u16TestData2            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10002"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.02 },
+ {10003                  , (uint32_t)&u16TestData3            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10003"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.03 },
+ {10004                  , (uint32_t)&u16TestData4            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10004"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.04 },
+ {10005                  , (uint32_t)&u16TestData5            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10005"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.05 },
+ {10006                  , (uint32_t)&u16TestData6            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10006"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.06 },
+ {10007                  , (uint32_t)&u16TestData7            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10007"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.07 },
+ {10008                  , (uint32_t)&u16TestData8            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10008"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.08 },
+ {10009                  , (uint32_t)&u16TestData9            ,  PAR(_UINT16,_RW,_RD)  , {"Test_10009"}    ,    {"unit"}   ,   INIT_MAX_MIN_DEF(u16Register,    65535,          0,          0)              ,   0.09 },
 
  {20000                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"0.0"}    ,   INIT_MAX_MIN_DEF(s16Register,    10000,     -10000,          0)              ,   0.0 },
  {20001                  , (uint32_t)&aDummyDataTable         ,  PAR(_SINT16,_RW,_NO)  , {"Param_SINT16"}  ,    {"1.0"}    ,   INIT_MAX_MIN_DEF(s16Register,    10000,     -10000,          0)              ,   1.0 },
@@ -1592,8 +1675,9 @@ void CSMON_vGetDateTime (
  **************************************************************************** */
 void ControlProcess(void)
 {
-
+    u32TimeCtrlLoop_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
+
 
 
     //
@@ -1642,14 +1726,24 @@ void ControlProcess(void)
     SysCtl_delay(u32DelayCtrlLoop_Ticks);
 
 
-
+    u32TimeCSMON_ISR_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     //
     // Process Passed Flag Set - Need to be called from Processes with higher priority level in order CSMON to be able to get meaning-full (consistent) data
     eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY);
     ASSERT(eResponseCode_CSMON_eSetFlagProcessPassed != CSMON_RESPONSE_CODE_OK);
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
+    u32TimeCSMON_ISR_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32TimeCSMON_ISR_Ticks);//down count
+    if (u32TimeCSMON_ISR_Ticks > u32TimeCSMON_ISR_Max_Ticks)
+    {
+        u32TimeCSMON_ISR_Max_Ticks = u32TimeCSMON_ISR_Ticks;
+    }
 
 
+    u32TimeCtrlLoop_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32TimeCtrlLoop_Ticks);//down count
+    if (u32TimeCtrlLoop_Ticks > u32TimeCtrlLoopMax_Ticks)
+    {
+        u32TimeCtrlLoopMax_Ticks = u32TimeCtrlLoop_Ticks;
+    }
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);    /* Red LED (closest to the Debug Header) */
 }
 
@@ -2020,6 +2114,7 @@ void main(void)
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
 
 
+
     //
     // Firmware Application Version Set to CSMON
     //
@@ -2028,7 +2123,9 @@ void main(void)
     //
     // CSMON Parameter, Recorder, Scope Test Initialization
     //
+    u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     ParameterInitialization();
+    u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
     RecordersInitialization();
     ScopesInitialization();
 
@@ -2108,6 +2205,18 @@ void main(void)
         SysCtl_serviceWatchdog();
 
         //
+        // Main Loop cycle Delay Measure
+        //
+        u32TimeMainLoopCycle_Bgn_Ticks = u32TimeMainLoopCycle_End_Ticks;
+        u32TimeMainLoopCycle_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+        u32TimeMainLoopCycle_Now_Ticks = 0 - (u32TimeMainLoopCycle_End_Ticks - u32TimeMainLoopCycle_Bgn_Ticks);//down count
+        if (u32TimeMainLoopCycle_Now_Ticks > u32TimeMainLoopCycle_Max_Ticks)
+        {
+            u32TimeMainLoopCycle_Max_Ticks = u32TimeMainLoopCycle_Now_Ticks;
+        }
+
+
+        //
         // Manage WatchDog Prescaler
         //
         if (u16WatchdogPrescaler != u16WatchdogPrescalerOld)
@@ -2158,16 +2267,45 @@ void main(void)
 
 
 
+        if (bResetAllTimeMeasures)
+        {
+            bResetAllTimeMeasures = 0;
+            u32TimeMainLoopProcessCSMON_Now_Ticks = 0;
+            u32TimeMainLoopProcessCSMON_Max_Ticks = 0;
+            u32TimeMainLoopCycle_Now_Ticks = 0;
+            u32TimeMainLoopCycle_Max_Ticks = 0;
 
+            u32TimeCSMON_ISR_Max_Ticks = 0;
+            u32TimeCtrlLoopMax_Ticks = 0;
+
+        }
+
+
+
+
+        //
+        // CSMON Process In Main Loop Delay Measure
+        //
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
+        u32TimeMainLoopProcessCSMON_Bgn_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+
         //
         // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
         //
         eResponseCode_CSMON_eProcess = CSMON_eProcess();
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
-        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
 
+        //
+        // CSMON Process In Main Loop Delay Measure
+        //
+        GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
+        u32TimeMainLoopProcessCSMON_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+        u32TimeMainLoopProcessCSMON_Now_Ticks = 0 - (u32TimeMainLoopProcessCSMON_End_Ticks - u32TimeMainLoopProcessCSMON_Bgn_Ticks);//down count
+        if (u32TimeMainLoopProcessCSMON_Now_Ticks > u32TimeMainLoopProcessCSMON_Max_Ticks)
+        {
+            u32TimeMainLoopProcessCSMON_Max_Ticks = u32TimeMainLoopProcessCSMON_Now_Ticks;
+        }
 
         //
         // Device Running Control Indication - Set on Enter/Exit Run Mode
