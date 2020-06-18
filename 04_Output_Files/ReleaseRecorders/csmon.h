@@ -455,6 +455,14 @@ CSMON_eResponseCode_t CSMON_eSetFirmwareApplicationVersion (uint16_t u16Version)
 CSMON_eResponseCode_t CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop (bool bAutoServiceWatchDog);
 
 
+/* *****************************************************************************
+ * CSMON_eSetInternalTimerPeriod
+ *
+ * Input:
+ *      uint16_t microseconds
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetInternalTimerPeriod (uint16_t microseconds);
 
 
 
