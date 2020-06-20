@@ -464,6 +464,14 @@ CSMON_eResponseCode_t CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMai
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetInternalTimerPeriod (uint16_t microseconds);
 
+/* *****************************************************************************
+ * CSMON_eSetMaxTimeInISR
+ *
+ * Input:
+ *      uint16_t microseconds
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetMaxTimeInISR (uint16_t microseconds);
 
 
 /* *****************************************************************************
