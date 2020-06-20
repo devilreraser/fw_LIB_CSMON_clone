@@ -303,64 +303,12 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 /* Dummy Parameter List */
 
 #define PARAM_ID_MODBUS_MSG_CNT    65534
-#define PARAM_ID_READ_WRITE_TST        0
-#define PARAM_ID_RD_WR_SCALETST        1
 
-#define PARAM_ID_PARAMETER_TST0    10000
-#define PARAM_ID_PARAMETER_TST1    10001
-#define PARAM_ID_PARAMETER_TST2    10002
-#define PARAM_ID_PARAMETER_TST3    10003
-#define PARAM_ID_PARAMETER_TST4    10004
-#define PARAM_ID_PARAMETER_TST5    10005
-#define PARAM_ID_PARAMETER_TST6    10006
-#define PARAM_ID_PARAMETER_TST7    10007
-#define PARAM_ID_PARAMETER_TST8    10008
-#define PARAM_ID_PARAMETER_TST9    10009
-
-#if PARAMETER_ID_START_1000 == 0
-#define PARAM_ID_CURRENT_PHASEA       20
-#define PARAM_ID_CURRENT_PHASEB       21
-#define PARAM_ID_CURRENT_PHASEC       22
-#define PARAM_ID_VOLTAGE_DCLINK       23
-#define PARAM_ID_INCREMENT_LOOP        8
-#define PARAM_ID_REQRUNNINGMODE        9    /* ID 9 Write Request From PC */
-#define PARAM_ID_STARUNNINGMODE        9    /* ID 9 Read  Request From PC (can be with Different Real Address) */
-#else
-#define PARAM_ID_CURRENT_PHASEA     1000
-#define PARAM_ID_CURRENT_PHASEB     1001
-#define PARAM_ID_CURRENT_PHASEC     1002
-#define PARAM_ID_VOLTAGE_DCLINK     1003
-#define PARAM_ID_INCREMENT_LOOP     1004
-#define PARAM_ID_REQRUNNINGMODE     1005
-#define PARAM_ID_STARUNNINGMODE     1006
-#endif
-
-#define PARAM_ID_PARAMETER_TST0    10000
-#define PARAM_ID_PARAMETER_TST1    10001
-#define PARAM_ID_PARAMETER_TST2    10002
-#define PARAM_ID_PARAMETER_TST3    10003
-#define PARAM_ID_PARAMETER_TST4    10004
-#define PARAM_ID_PARAMETER_TST5    10005
-#define PARAM_ID_PARAMETER_TST6    10006
-#define PARAM_ID_PARAMETER_TST7    10007
-#define PARAM_ID_PARAMETER_TST8    10008
-#define PARAM_ID_PARAMETER_TST9    10009
-
-
-#define PARAM_ID_CTRL_LOOP_NSEC    30000
-#define PARAM_ID_CTRL_LOOP_USEC    30001
-#define PARAM_ID_MAIN_LOOP_USEC    30002
-#define PARAM_ID_PARAM_SET_FAIL    30003
-#define PARAM_ID_PARAM_MAX_TEST    30004
-#define PARAM_ID_CTRL_PERIOD_US    30005
-#define PARAM_ID_MAIN_LOOP_TIME    30006
-#define PARAM_ID_CSMON_PRC_TIME    30007
-#define PARAM_ID_RESET_MSR_TIME    30008
-#define PARAM_ID_CSMON_ISR_TIME    30009
-#define PARAM_ID_CTRL_ISR_TIME     30010
-#define PARAM_ID_PARAMLOAD_TIME    30011
-
-
+#define PARAM_ID_STARUNNINGMODE     0
+#define PARAM_ID_VOLTAGE_DCLINK     8
+#define PARAM_ID_CURRENT_PHASEA     9
+#define PARAM_ID_CURRENT_PHASEB     10
+#define PARAM_ID_CURRENT_PHASEC     11
 
 volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
@@ -403,10 +351,10 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001),
  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescaler,                   "WatchdogTime",       "msec",    7,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
- INIT_PARAMETER(    8, PAR(_UINT16,_RW,_WR), u16Register, &u16TestData0,                           "TestData0",          "0.00",    0x0000FFFF,    0,          0,      0.00),
- INIT_PARAMETER(    9, PAR(_UINT16,_RW,_WR), u16Register, &u16TestData1,                           "TestData1",          "0.01",    0x0000FFFF,    0,          0,      0.01),
- INIT_PARAMETER(   10, PAR(_UINT16,_RW,_WR), u16Register, &u16TestData2,                           "TestData2",          "0.02",    0x0000FFFF,    0,          0,      0.02),
- INIT_PARAMETER(   11, PAR(_UINT16,_RW,_WR), u16Register, &u16TestData3,                           "TestData3",          "0.03",    0x0000FFFF,    0,          0,      0.03),
+ INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
 
  INIT_PARAMETER( 1000, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
  INIT_PARAMETER( 1001, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
@@ -1444,6 +1392,11 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001),
   INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescaler,                   "WatchdogTime",       "msec",    7,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
+  INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
+  INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
+  INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
+  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
+
   INIT_PARAMETER(10000, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
   INIT_PARAMETER(10001, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
   INIT_PARAMETER(10002, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
@@ -1512,6 +1465,11 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(    5, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001),
   INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescaler,                   "WatchdogTime",       "msec",    7,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+
+  INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
+  INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
+  INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
+  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
 
   INIT_PARAMETER(10001, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "1.0",     10000,         -10000,     0,      1.0),
   INIT_PARAMETER(10101, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "1.0",     10000,         -10000,     0,      1.0),
@@ -2090,9 +2048,10 @@ void main(void)
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
 
     //
+    // Information For CSMON for the CPU Load
     //
-    //
-    CSMON_eSetMaxTimeInISR(u16PeriodControl_usec + 10);  /* SetMaxTimeInISR */
+    CSMON_eSetMaxTimeInISR(u16PeriodControl_usec - 10);  /* SetMaxTimeInISR in usec */
+    CSMON_eSetMinGuaranteedTimeBetweenTwoISRs(10);       /* SetMinGuaranteedTimeBetweenTwoISRs in usec */
 
 
 
@@ -2186,7 +2145,8 @@ void main(void)
         {
             u16PeriodControlOld_usec = u16PeriodControl_usec;
             CSMON_eSetInternalTimerPeriod(u16PeriodControl_usec);
-            CSMON_eSetMaxTimeInISR(u16PeriodControl_usec + 10);  /* SetMaxTimeInISR */
+            CSMON_eSetMaxTimeInISR(u16PeriodControl_usec - 10);  /* SetMaxTimeInISR in usec */
+            CSMON_eSetMinGuaranteedTimeBetweenTwoISRs(10);       /* SetMinGuaranteedTimeBetweenTwoISRs in usec */
         }
 
 
