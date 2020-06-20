@@ -473,6 +473,15 @@ CSMON_eResponseCode_t CSMON_eSetInternalTimerPeriod (uint16_t microseconds);
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetMaxTimeInISR (uint16_t microseconds);
 
+/* *****************************************************************************
+ * CSMON_eSetMinGuaranteedTimeBetweenTwoISRs
+ *
+ * Input:
+ *      uint16_t microseconds
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetMinGuaranteedTimeBetweenTwoISRs (uint16_t microseconds);
+
 
 /* *****************************************************************************
  * External Function Prototypes - need to be implemented externally
