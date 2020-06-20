@@ -48,8 +48,8 @@
 #define CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES         3                   /* All Types Repeated All Types Count Times  */
 
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MINIMUM_COUNT
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
 
 
@@ -1470,6 +1470,13 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
+
+  INIT_PARAMETER(10000, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
+  INIT_PARAMETER(10100, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
+  INIT_PARAMETER(10200, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
+  INIT_PARAMETER(10300, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
+  INIT_PARAMETER(10400, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
+  INIT_PARAMETER(10500, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "0.0",     10000,         -10000,     0,      0.0),
 
   INIT_PARAMETER(10001, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "1.0",     10000,         -10000,     0,      1.0),
   INIT_PARAMETER(10101, PAR(_SINT16,_RW,_NO), s16Register, &aDummyDataTable,                        "Param_SINT16",       "1.0",     10000,         -10000,     0,      1.0),
