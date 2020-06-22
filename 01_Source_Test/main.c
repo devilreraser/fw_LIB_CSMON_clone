@@ -224,6 +224,9 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
  uint16_t u16WatchdogPrescaler = 0;
  uint16_t u16WatchdogPrescalerOld = 0;
 
+ uint16_t u16WatchdogPrescalerTime = 0;
+ uint16_t u16WatchdogPrescalerTimeOld = 0;
+
 uint16_t u16DelayCtrlLoop_100nsec = 0;   /* Control loop Period 50usec - to be checked */
 uint16_t u16DelayCtrlLoopOld_100nsec = 0;
 
@@ -331,7 +334,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(60006, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0),
  INIT_PARAMETER(60007, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0),
  INIT_PARAMETER(60008, PAR(_UINT32,_RO,_NO), u32Register, &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0),
- INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "usec",    true,          false,      false,  1.0),
+ INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0),
 
  INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0),
  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
@@ -342,7 +345,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(    4, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    5, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001),
- INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescaler,                   "WatchdogTime",       "msec",    7,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+ INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,            1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
  INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
@@ -1372,7 +1375,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(60006, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0),
   INIT_PARAMETER(60007, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0),
   INIT_PARAMETER(60008, PAR(_UINT32,_RO,_NO), u32Register, &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0),
-  INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "usec",    true,          false,      false,  1.0),
+  INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0),
 
   INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0),
   INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
@@ -1383,7 +1386,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(    4, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    5, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001),
-  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescaler,                   "WatchdogTime",       "msec",    7,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
   INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
@@ -1446,7 +1449,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(60006, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0),
   INIT_PARAMETER(60007, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0),
   INIT_PARAMETER(60008, PAR(_UINT32,_RO,_NO), u32Register, &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0),
-  INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "usec",    true,          false,      false,  1.0),
+  INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0),
 
   INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0),
   INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
@@ -1457,7 +1460,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(    4, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    5, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001),
-  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescaler,                   "WatchdogTime",       "msec",    7,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,             1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
   INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
   INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
@@ -1872,6 +1875,78 @@ void ScopesInitialization(void)
 }
 
 
+void vGetWatchdogPrescaler(uint16_t u16TimeDiv)
+{
+    if(u16TimeDiv >= 64)
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_64;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 64;
+    }
+    else if(u16TimeDiv >= 32)
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_32;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 32;
+    }
+    else if(u16TimeDiv >= 16)
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_16;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 16;
+    }
+    else if(u16TimeDiv >= 8)
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_8;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 8;
+    }
+    else if(u16TimeDiv >= 4)
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_4;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 4;
+    }
+    else if(u16TimeDiv >= 2)
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_2;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 2;
+    }
+    else
+    {
+        u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_1;
+        u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 1;
+    }
+}
+
+void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
+{
+    switch(u16Prescaler)
+    {
+    case SYSCTL_WD_PRESCALE_1:
+        u16WatchdogPrescalerTime = 1;
+        break;
+    case SYSCTL_WD_PRESCALE_2:
+        u16WatchdogPrescalerTime = 2;
+        break;
+    case SYSCTL_WD_PRESCALE_4:
+        u16WatchdogPrescalerTime = 4;
+        break;
+    case SYSCTL_WD_PRESCALE_8:
+        u16WatchdogPrescalerTime = 8;
+        break;
+    case SYSCTL_WD_PRESCALE_16:
+        u16WatchdogPrescalerTime = 16;
+        break;
+    case SYSCTL_WD_PRESCALE_32:
+        u16WatchdogPrescalerTime = 32;
+        break;
+    case SYSCTL_WD_PRESCALE_64:
+        u16WatchdogPrescalerTime = 64;
+        break;
+    default:
+        u16WatchdogPrescalerTime = 1;
+        break;
+
+    }
+}
+
+
 /* *****************************************************************************
  * main
  **************************************************************************** */
@@ -2077,6 +2152,7 @@ void main(void)
 
     SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_8);        /*  8 * 512 * 256 @ 10Mhz -> ~104ms */
     u16WatchdogPrescalerOld = u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_8;
+    vSetWatchdogPrescalerTimeDiv(u16WatchdogPrescaler);
     //
     // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
     //
@@ -2087,6 +2163,7 @@ void main(void)
 
     SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_1);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
     u16WatchdogPrescalerOld = u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_1;
+    vSetWatchdogPrescalerTimeDiv(u16WatchdogPrescaler);
     //
     // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
     //
@@ -2156,15 +2233,22 @@ void main(void)
         }
 
 
+
         //
         // Manage WatchDog Prescaler
         //
+        if (u16WatchdogPrescalerTime != u16WatchdogPrescalerTimeOld)
+        {
+            u16WatchdogPrescalerTimeOld = u16WatchdogPrescalerTime;
+            vGetWatchdogPrescaler(u16WatchdogPrescalerTime);
+        }
         if (u16WatchdogPrescaler != u16WatchdogPrescalerOld)
         {
             //SysCtl_disableWatchdog();
             //SysCtl_serviceWatchdog();
             u16WatchdogPrescalerOld = u16WatchdogPrescaler;
             SysCtl_setWatchdogPrescaler((SysCtl_WDPrescaler)u16WatchdogPrescaler);
+            vSetWatchdogPrescalerTimeDiv(u16WatchdogPrescaler);
             //SysCtl_serviceWatchdog();
             //SysCtl_enableWatchdog();
         }
