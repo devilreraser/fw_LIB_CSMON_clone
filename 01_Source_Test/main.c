@@ -40,15 +40,14 @@
 #define CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES         2                   /* Each Type Repeated All Types Count Times  */
 #define CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES         3                   /* All Types Repeated All Types Count Times  */
 
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MINIMUM_COUNT
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MINIMUM_COUNT
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
 
 
 
-#define PARAMETER_COUNT_MAX        (1024 + 1)/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
-#define PARAMETER_ID_START_1000     0       /* Small and Big Numbers for ID (0 or 1) */
+#define PARAMETER_COUNT_MAX         1024
 
 
 /* Some Pinout */
@@ -198,7 +197,7 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
  int16_t s16DummyCurrentPhaseB = (1 << 14);
  int16_t s16DummyCurrentPhaseC = (2 << 14);
  int16_t s16DummyVoltageDCLink = (0 << 14);
- int16_t s16DummyIncrementLoop = (1 << 8);
+ int16_t s16DummyIncrementLoop = 10; //(1 << 8);
 
  uint16_t u16DummyDataCnt = 0;
  uint16_t* pu16ModbusMessageCounter = &u16DummyDataCnt;
@@ -240,7 +239,7 @@ uint32_t u32DelayCtrlLoop_Ticks = 1;
 uint32_t u32DelayMainLoop_Ticks = 1;
 
 uint16_t u16CountSetParameterFail = 0;
-uint16_t u16CountMaxParameterTest = PARAMETER_COUNT_MAX - 1;/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
+uint16_t u16CountMaxParameterTest = PARAMETER_COUNT_MAX;/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
 
 bool bResetAllTimeMeasures = 0;
 
@@ -320,6 +319,13 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
  /*                ID         Attributes      uAnyType32_t         MCU Address                          Name               Unit         Max        Min         Def      Norm */
  INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0),
+ INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
+ INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
+ INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO), u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Rd Addr */
+
 
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_MAXIMUM_COUNT
