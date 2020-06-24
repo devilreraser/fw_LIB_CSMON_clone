@@ -131,8 +131,8 @@ typedef struct
     uint16_t u16ParameterIndexID;
     uint16_t u16ParamAttributes;
     uint32_t u32RealAddress;
-    char au8Name[16];
-    char au8Unit[8];
+    char au8Name[CSMON_SET_PARAMETER_NAME_LENGTH_MAX];
+    char au8Unit[CSMON_SET_PARAMETER_UNIT_LENGTH_MAX];
     uAnyType32_t u32Max;
     uAnyType32_t u32Min;
     uAnyType32_t u32Def;
@@ -325,6 +325,7 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
  INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO), u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Rd Addr */
+ INIT_PARAMETER(65530, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "0123456789ABCDEFGHIJKLMNOPQRTV01",      "unit",    0x0000FFFF,    0,          0,      0.0),
 
 
 
