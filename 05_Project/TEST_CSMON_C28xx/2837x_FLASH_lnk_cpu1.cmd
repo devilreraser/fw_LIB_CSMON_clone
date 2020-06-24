@@ -26,12 +26,12 @@ PAGE 0 :  /* Program Memory */
    FLASHF           : origin = 0x090000, length = 0x008000	/* on-chip Flash */
    FLASHG           : origin = 0x098000, length = 0x008000	/* on-chip Flash */
    #if 1
-   FLASHH           : origin = 0x0A0000, length = 0x010000	/* on-chip Flash */
+   FLASHH           : origin = 0x0A0000, length = 0x018000	/* on-chip Flash */
    #else
    FLASHH           : origin = 0x0A0000, length = 0x008000	/* on-chip Flash */
    FLASHI           : origin = 0x0A8000, length = 0x008000	/* on-chip Flash */
-   #endif
    FLASHJ           : origin = 0x0B0000, length = 0x008000	/* on-chip Flash */
+   #endif
    FLASHK           : origin = 0x0B8000, length = 0x002000	/* on-chip Flash */
    FLASHL           : origin = 0x0BA000, length = 0x002000	/* on-chip Flash */
    FLASHM           : origin = 0x0BC000, length = 0x002000	/* on-chip Flash */

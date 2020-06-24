@@ -28,6 +28,10 @@ extern "C"
  * Configuration Definitions
  **************************************************************************** */
 
+/* used in eSetPrameter Function - combined size must not exceed 63 characters or will be trunked */
+#define CSMON_SET_PARAMETER_NAME_LENGTH_MAX     48
+#define CSMON_SET_PARAMETER_UNIT_LENGTH_MAX     16
+
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
