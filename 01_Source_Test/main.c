@@ -72,7 +72,7 @@
 #define INIT_MAX_MIN_DEF(_type, max, min, def_) \
         .u32Max._type = (max), .u32Min._type = (min), .u32Def._type = (def_)
 
-#define INIT_PARAMETER(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale) \
+#define INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, u8BitCount, u8StartBit, eVisualAttribute) \
  { \
     u16ID,                          /* u16ID */\
     (u16Attributes),                /* u16Attributes */\
@@ -82,9 +82,14 @@
     .u32Max.eType = (u32Maximum),   /* u32Maximum */\
     .u32Min.eType = (u32Minimum),   /* u32Minimum */\
     .u32Def.eType = (u32Default),   /* u32Default */\
-    floatScale                      /* floatScale */\
+    floatScale,                     /* floatScale */\
+    u8BitCount,                     /* u8BitCount */\
+    u8StartBit,                     /* u8StartBit */\
+    eVisualAttribute                /* eVisualAttribute */\
  }
 
+#define INIT_PARAMETER(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale) \
+        INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, 0, 0, CSMON_VISUAL_TYPE_HEX)
 
 
 /* *****************************************************************************
@@ -137,6 +142,9 @@ typedef struct
     uAnyType32_t u32Min;
     uAnyType32_t u32Def;
     float Norm;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+    uint_least8_t u8BitCount;
+    uint_least8_t u8StartBit;
+    CSMON_eVisualType_t eVisualAttribute;
 
 }MAIN_sParameterList_t;
 
@@ -325,8 +333,12 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
  INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO), u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Rd Addr */
- INIT_PARAMETER(65530, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF",      "unitunitunitunit",    0x0000FFFF,    0,          0,      0.0),
+ INIT_PARAMETER(60000, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF",      "unitunitunitunit",    0x0000FFFF,    0,          0,      0.0),
 
+ INIT_PARAMFULL(60001, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u4Start12",          "BIN",     0x0000FFFF,    0,          0,      0.0, 4,12,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60002, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u2Start2",           "BIN",     0x0000FFFF,    0,          0,      0.0, 2, 2,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60003, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u8Start8",           "BIN",     0x0000FFFF,    0,          0,      0.0, 8, 8,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60004, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u2Start4",           "BIN",     0x0000FFFF,    0,          0,      0.0, 2, 4,CSMON_VISUAL_TYPE_BIN),
 
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_MAXIMUM_COUNT
@@ -1722,7 +1734,11 @@ void ParameterInitialization(void)
                     asParameterList[u16Index].u32Max.u32Register,
                     asParameterList[u16Index].u32Min.u32Register,
                     asParameterList[u16Index].u32Def.u32Register,
-                    asParameterList[u16Index].Norm);
+                    asParameterList[u16Index].Norm,
+                    asParameterList[u16Index].u8BitCount,
+                    asParameterList[u16Index].u8StartBit,
+                    asParameterList[u16Index].eVisualAttribute
+                    );
             if(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK)
             {
                 u16CountSetParameterFail++;

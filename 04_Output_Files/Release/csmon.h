@@ -197,6 +197,21 @@ typedef enum
     CSMON_TRIGGER_MODE_ANY_EDGE,  /* not implemented for now */
 }CSMON_eTriggerMode_t;
 
+typedef enum
+{
+    CSMON_VISUAL_TYPE_MASK = 0x0007,
+
+    CSMON_VISUAL_TYPE_DEF = 0x0007,     /* type not specified (default hex if multiplier 0; if multiplier != 0 decimal) */
+
+    CSMON_VISUAL_TYPE_HEX = 0x0000,
+    CSMON_VISUAL_TYPE_DEC = 0x0001,
+    CSMON_VISUAL_TYPE_BIN = 0x0002,
+    CSMON_VISUAL_TYPE_SCI = 0x0003,     /* scientific */
+    CSMON_VISUAL_TYPE_ENG = 0x0004,     /* engineering */
+
+    CSMON_VISUAL_MASK     = 0xFFFF
+
+}CSMON_eVisualType_t; /* 16 bits - Library Internal Note! -> change also HMRECPRM_eVisualType_t */
 
 /* *****************************************************************************
  * Type Definitions
@@ -255,7 +270,7 @@ CSMON_eResponseCode_t CSMON_eSetFlagProcessPassed (CSMON_eIDProcess_t eID);
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t pfInput);
 
-
+#if 0
 /* *****************************************************************************
  * CSMON_eSetParameter
  *
@@ -271,6 +286,49 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
  *      float Norm                   - Normalization Scaling Factor             (Norm)
  *
  **************************************************************************** */
+#define CSMON_eSetParameter (       \
+            u16ParameterIndexID,    \
+            u32RealAddress,         \
+            u16ParamAttributes,     \
+            pu8Name,                \
+            pu8Unit,                \
+            u32Max,                 \
+            u32Min,                 \
+            u32Def,                 \
+            Norm)                   \
+        CSMON_eSetParameter (       \
+            u16ParameterIndexID,    \
+            u32RealAddress,         \
+            u16ParamAttributes,     \
+            pu8Name,                \
+            pu8Unit,                \
+            u32Max,                 \
+            u32Min,                 \
+            u32Def,                 \
+            Norm,                   \
+            0 , /* u8BitCount */    \
+            0 , /* u8BitOffset */   \
+            CSMON_VISUAL_TYPE_DEF)
+#endif
+
+/* *****************************************************************************
+ * CSMON_eSetParameter
+ *
+ * Input:
+ *      uint16_t u16ParameterIndexID - Parameter ID or Index in Table
+ *      uint32_t u32RealAddress      - Address of Parameter in DSP Memory Space (pVal Type-casted to uint32_t)
+ *      uint16_t u16ParamAttributes  - Parameter Attributes                     (Attr)
+ *      uint_least8_t* pu8Name       - Parameter Name                           (Name)
+ *      uint_least8_t* pu8Unit       - Parameter Units Description              (Unit)
+ *      uint32_t u32Max              - Maximum Value Type-casted to uint32_t    (Max Type-casted to uint32_t)
+ *      uint32_t u32Min              - Minimum Value Type-casted to uint32_t    (Min Type-casted to uint32_t)
+ *      uint32_t u32Def              - Default Value Type-casted to uint32_t    (Def Type-casted to uint32_t)
+ *      float Norm                   - Normalization Scaling Factor             (Norm)
+ *      uint_least8_t u8BitCount     - BitCount (if 0 -> internally et depending on the Parameter Attributes)
+ *      uint_least8_t u8StartBit     - StartBit 0..15 in 16-bit Parameter  (The Start Bit Index Of Parameter)
+ *      CSMON_eVisualType_t eVisualAttribute - For Now Only viualization type - see CSMON_eVisualType_t
+ *
+ **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetParameter (
         uint16_t u16ParameterIndexID,
         uint32_t u32RealAddress,
@@ -280,7 +338,11 @@ CSMON_eResponseCode_t CSMON_eSetParameter (
         uint32_t u32Max,
         uint32_t u32Min,
         uint32_t u32Def,
-        float Norm);
+        float Norm,
+        uint_least8_t u8BitCount,
+        uint_least8_t u8StartBit,
+        CSMON_eVisualType_t eVisualAttribute
+        );
 
 
 /* *****************************************************************************
