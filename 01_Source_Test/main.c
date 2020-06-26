@@ -1736,8 +1736,7 @@ void ParameterInitialization(void)
                     asParameterList[u16Index].u32Def.u32Register,
                     asParameterList[u16Index].Norm,
                     asParameterList[u16Index].u8BitCount,
-                    asParameterList[u16Index].u8StartBit,
-                    asParameterList[u16Index].eVisualAttribute
+                    asParameterList[u16Index].u8StartBit
                     );
             if(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK)
             {

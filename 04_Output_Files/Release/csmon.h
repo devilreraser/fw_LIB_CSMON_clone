@@ -307,8 +307,8 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
             u32Def,                 \
             Norm,                   \
             0 , /* u8BitCount */    \
-            0 , /* u8BitOffset */   \
-            CSMON_VISUAL_TYPE_DEF)
+            0)  /* u8BitOffset */
+
 #endif
 
 /* *****************************************************************************
@@ -340,8 +340,7 @@ CSMON_eResponseCode_t CSMON_eSetParameter (
         uint32_t u32Def,
         float Norm,
         uint_least8_t u8BitCount,
-        uint_least8_t u8StartBit,
-        CSMON_eVisualType_t eVisualAttribute
+        uint_least8_t u8StartBit
         );
 
 
