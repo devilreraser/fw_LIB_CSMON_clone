@@ -15,10 +15,12 @@ echo Process HexMonitor:
 cd 02_Libraries\HexMonitor
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
+git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push github master
 git.exe checkout -f -B master origin/master --
+git pull --progress -v --no-rebase "origin"
 cd ..\..
 
 echo.
@@ -26,10 +28,12 @@ echo Process MathAndControl:
 cd 02_Libraries\MathAndControl
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
+git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push github master
 git.exe checkout -f -B master origin/master --
+git pull --progress -v --no-rebase "origin"
 cd ..\..
 
 echo.
@@ -37,10 +41,12 @@ echo Process ModbusAddress:
 cd 02_Libraries\ModbusAddress
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
+git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push github master
 git.exe checkout -f -B master origin/master --
+git pull --progress -v --no-rebase "origin"
 cd ..\..
 
 echo.
@@ -48,10 +54,12 @@ echo Process Peripheral:
 cd 02_Libraries\Peripheral
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
+git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push github master
 git.exe checkout -f -B master origin/master --
+git pull --progress -v --no-rebase "origin"
 cd ..\..
 
 echo.
@@ -59,16 +67,19 @@ echo Process TestControl:
 cd 02_Libraries\TestControl
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
+git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push github master
 git.exe checkout -f -B master origin/master --
+git pull --progress -v --no-rebase "origin"
 cd ..\..
 
 echo.
 echo Process Project:
 git.exe fetch --all -v --progress
 git.exe checkout -f -B master remotes/github/master --
+git pull --progress -v --no-rebase "github"
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
 IF %ERRORLEVEL% == 0 goto CommitProject
 IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
@@ -89,6 +100,7 @@ git checkout remotes/github/master -- .gitmodules
 git commit -a -m "%_CommitString%"
 git push github master
 git.exe checkout -f -B master origin/master --
+git pull --progress -v --no-rebase "origin"
 
 echo Completed!
 echo Press Enter to Exit
