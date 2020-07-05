@@ -315,7 +315,7 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
  * CSMON_eSetParameter
  *
  * Input:
- *      uint16_t u16ParameterIndexID - Parameter ID or Index in Table
+ *      uint16_t u16ParameterIndexID - Parameter ID or Index in Table (must be 0..9999 for Array(string) Parameters)
  *      uint32_t u32RealAddress      - Address of Parameter in DSP Memory Space (pVal Type-casted to uint32_t)
  *      uint16_t u16ParamAttributes  - Parameter Attributes                     (Attr)
  *      uint_least8_t* pu8Name       - Parameter Name                           (Name)
@@ -324,9 +324,10 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
  *      uint32_t u32Min              - Minimum Value Type-casted to uint32_t    (Min Type-casted to uint32_t)
  *      uint32_t u32Def              - Default Value Type-casted to uint32_t    (Def Type-casted to uint32_t)
  *      float Norm                   - Normalization Scaling Factor             (Norm)
- *      uint_least8_t u8BitCount     - BitCount for bit field parameters.
+ *      uint_least8_t u8BitCountOrArrayElementSize
+ *                                   - BitCount for bit field parameters.
  *                                   - for non bit field parameters set to 0.
- *                                   - if 0 the bit count will be calculated from the Parameter Attributes
+ *                                   - if 0 the bit count (array element size) taken from the Parameter Attributes
  *      uint_least8_t u8StartBitOrArrayElementCount
  *                                   - BitOffset 0..15 in 16-bit Parameter (The Start Bit Index Of Parameter)
  *                                   - BitOffset 0..31 in 32-bit Parameter (The Start Bit Index Of Parameter)
@@ -345,7 +346,7 @@ CSMON_eResponseCode_t CSMON_eSetParameter (
         uint32_t u32Min,
         uint32_t u32Def,
         float Norm,
-        uint_least8_t u8BitCount,
+        uint_least8_t u8BitCountOrArrayElementSize,
         uint_least8_t u8StartBitOrArrayElementCount
         );
 
