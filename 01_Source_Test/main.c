@@ -142,8 +142,8 @@ typedef struct
     uAnyType32_t u32Min;
     uAnyType32_t u32Def;
     float Norm;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-    uint_least8_t u8BitCount;
-    uint_least8_t u8StartBit;
+    uint_least8_t u8BitCountOrArrayElementSize;
+    uint_least8_t u8StartBitOrArrayElementCount;
     CSMON_eVisualType_t eVisualAttribute;
 
 }MAIN_sParameterList_t;
@@ -207,6 +207,8 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
  int16_t s16DummyVoltageDCLink = (0 << 14);
  int16_t s16DummyIncrementLoop = 10; //(1 << 8);
 
+ uint64_t u64DummyDataCnt = 0;
+ uint32_t u32DummyDataCnt = 0;
  uint16_t u16DummyDataCnt = 0;
  uint16_t* pu16ModbusMessageCounter = &u16DummyDataCnt;
 
@@ -270,6 +272,10 @@ uint32_t u32TimeCtrlLoopMax_Ticks;
 
 uint32_t u32ParamTime_Ticks;
 
+char au8TestCharArray32[32] = "au8TestCharArray32";
+char au8TestCharArray16[16] = "auChar16";
+char au8TestCharArray8[8]   = "Tst08";
+
 
 
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
@@ -322,9 +328,6 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #if CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_MINIMUM_COUNT
 
-
-
-
  /*                ID         Attributes      uAnyType32_t         MCU Address                          Name               Unit         Max        Min         Def      Norm */
  INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0),
  INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1),
@@ -333,12 +336,47 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
  INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO), u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Rd Addr */
- INIT_PARAMETER(60000, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF",      "unitunitunitunit",    0x0000FFFF,    0,          0,      0.0),
 
- INIT_PARAMFULL(60001, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u4Start12",          "BIN",     0x0000FFFF,    0,          0,      0.0, 4,12,CSMON_VISUAL_TYPE_BIN),
- INIT_PARAMFULL(60002, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u2Start2",           "BIN",     0x0000FFFF,    0,          0,      0.0, 2, 2,CSMON_VISUAL_TYPE_BIN),
- INIT_PARAMFULL(60003, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u8Start8",           "BIN",     0x0000FFFF,    0,          0,      0.0, 8, 8,CSMON_VISUAL_TYPE_BIN),
- INIT_PARAMFULL(60004, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u2Start4",           "BIN",     0x0000FFFF,    0,          0,      0.0, 2, 4,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMETER(60001, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u32DummyDataCnt 0123456789ACDEF0123456789ABCDEF",      "unituntunitunit",    0xFFFFFFFF,    0,          0,      0.0),
+ INIT_PARAMFULL(60011, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u1Start  0",         "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 1, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60012, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u1Start  1",         "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 1, 1,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60013, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u1Start  8",         "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 1, 8,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60014, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u1Start 18",         "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 1,18,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60041, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u4Start22",          "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 4,22,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60042, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u3Start2",           "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 3, 2,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60043, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u8Start18",          "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 8,18,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60044, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u2Start4",           "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 2, 4,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60071, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u3Start0",           "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 3, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60072, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u5Start3",           "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 5, 3,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60073, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u6Start1",           "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 6, 1,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60074, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u9Start15",          "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 9,15,CSMON_VISUAL_TYPE_BIN),
+
+ INIT_PARAMETER(60000, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u16DummyDataCnt 0123456789ACDEF0123456789ABCDEF",      "unituntunitunit",    0x0000FFFF,    0,          0,      0.0),
+ INIT_PARAMFULL(60021, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u1Start  0",         "16BIN",   0x0000FFFF,    0,          0,      0.0, 1, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60022, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u1Start  1",         "16BIN",   0x0000FFFF,    0,          0,      0.0, 1, 1,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60023, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u1Start  8",         "16BIN",   0x0000FFFF,    0,          0,      0.0, 1, 8,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60024, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u1Start 15",         "16BIN",   0x0000FFFF,    0,          0,      0.0, 1,15,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60031, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u1Start0",           "8BIN",    0x000000FF,    0,          0,      0.0, 1, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60032, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u1Start2",           "8BIN",    0x000000FF,    0,          0,      0.0, 1, 2,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60033, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u1Start7",           "8BIN",    0x000000FF,    0,          0,      0.0, 1, 7,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60034, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u1Start4",           "8BIN",    0x000000FF,    0,          0,      0.0, 1, 4,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60051, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u4Start12",          "16BIN",   0x0000FFFF,    0,          0,      0.0, 4,12,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60052, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u3Start2",           "16BIN",   0x0000FFFF,    0,          0,      0.0, 3, 2,CSMON_VISUAL_TYPE_BIN),
+ //INIT_PARAMFULL(60053, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u8Start8",           "16BIN",   0x0000FFFF,    0,          0,      0.0, 8, 8,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60054, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u2Start4",           "16BIN",   0x0000FFFF,    0,          0,      0.0, 2, 4,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60061, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u4Start0",           "8BIN",    0x000000FF,    0,          0,      0.0, 4, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60062, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u3Start2",           "8BIN",    0x000000FF,    0,          0,      0.0, 3, 2,CSMON_VISUAL_TYPE_BIN),
+ //INIT_PARAMFULL(60063, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u8Start0",           "8BIN",    0x000000FF,    0,          0,      0.0, 8, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60064, PAR(_UINT08,_RW,_NO), u8Register,  &u16DummyDataCnt,                        "u2Start4",           "8BIN",    0x000000FF,    0,          0,      0.0, 2, 4,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60081, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u3Start0",           "16BIN",   0x0000FFFF,    0,          0,      0.0, 3, 0,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60082, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u5Start2",           "16BIN",   0x0000FFFF,    0,          0,      0.0, 5, 2,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60083, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u7Start8",           "16BIN",   0x0000FFFF,    0,          0,      0.0, 7, 8,CSMON_VISUAL_TYPE_BIN),
+ INIT_PARAMFULL(60084, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "u2Start14",          "16BIN",   0x0000FFFF,    0,          0,      0.0, 2,14,CSMON_VISUAL_TYPE_BIN),
+
+
+ INIT_PARAMFULL(3000,  PAR(_A_UINT08,_RW,_NO), u8Register, au8TestCharArray32,                     "au8TestCharArray32", "str",     0xFF,          0,          0,      0.0, 0,32,CSMON_VISUAL_TYPE_DEF),
+ INIT_PARAMFULL(3001,  PAR(_A_UINT08,_RW,_NO), u8Register, au8TestCharArray16,                     "au8TestCharArray16", "str",     0xFF,          0,          0,      0.0, 0,16,CSMON_VISUAL_TYPE_DEF),
+ INIT_PARAMFULL(3002,  PAR(_A_UINT08,_RW,_NO), u8Register, au8TestCharArray8,                      "au8TestCharArray8",  "str",     0xFF,          0,          0,      0.0, 0, 8,CSMON_VISUAL_TYPE_DEF),
 
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_MAXIMUM_COUNT
@@ -1735,8 +1773,8 @@ void ParameterInitialization(void)
                     asParameterList[u16Index].u32Min.u32Register,
                     asParameterList[u16Index].u32Def.u32Register,
                     asParameterList[u16Index].Norm,
-                    asParameterList[u16Index].u8BitCount,
-                    asParameterList[u16Index].u8StartBit
+                    asParameterList[u16Index].u8BitCountOrArrayElementSize,
+                    asParameterList[u16Index].u8StartBitOrArrayElementCount
                     );
             if(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK)
             {
