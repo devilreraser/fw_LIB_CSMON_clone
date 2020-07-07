@@ -40,8 +40,8 @@
 #define CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES         2                   /* Each Type Repeated All Types Count Times  */
 #define CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES         3                   /* All Types Repeated All Types Count Times  */
 
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MINIMUM_COUNT
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MINIMUM_COUNT
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
 
@@ -336,6 +336,12 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1),
  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Wr Addr */
  INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO), u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0),    /* Parameter ID 0 - Rd Addr */
+
+ INIT_PARAMFULL(60093, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "93",                 "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 32, 0,CSMON_VISUAL_TYPE_DEF),
+ //INIT_PARAMFULL(   93, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "93",                 "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 0, 32,CSMON_VISUAL_TYPE_DEF),
+ //INIT_PARAMFULL(300,   PAR(_A_UINT08,_RW,_NO), u8Register, au8TestCharArray32,                     "au8TestCharArray32", "str",     0xFF,          0,          0,      0.0, 32,0,CSMON_VISUAL_TYPE_DEF),
+ //INIT_PARAMFULL(301,   PAR(_A_UINT08,_RW,_NO), u8Register, au8TestCharArray16,                     "au8TestCharArray16", "str",     0xFF,          0,          0,      0.0, 16,0,CSMON_VISUAL_TYPE_DEF),
+ //INIT_PARAMFULL(302,   PAR(_A_UINT08,_RW,_NO), u8Register, au8TestCharArray8,                      "au8TestCharArray8",  "str",     0xFF,          0,          0,      0.0,  8,0,CSMON_VISUAL_TYPE_DEF),
 
  INIT_PARAMETER(60001, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u32DummyDataCnt 0123456789ACDEF0123456789ABCDEF",      "unituntunitunit",    0xFFFFFFFF,    0,          0,      0.0),
  INIT_PARAMFULL(60011, PAR(_UINT32,_RW,_NO), u32Register, &u32DummyDataCnt,                        "u1Start  0",         "32BIN",   0xFFFFFFFF,    0,          0,      0.0, 1, 0,CSMON_VISUAL_TYPE_BIN),
@@ -2014,6 +2020,8 @@ void main(void)
 {
     uint16_t u16FreeRunningTimerTicksPerMicroSecond;
     uint16_t u16FreeRunningTimerPrescaller;
+
+
 
     //
     // Configure PLL, disable WD, enable peripheral clocks.
