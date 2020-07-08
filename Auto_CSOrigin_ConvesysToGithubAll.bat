@@ -14,6 +14,8 @@ echo.
 echo Process HexMonitor:
 cd 02_Libraries\HexMonitor
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master remotes/convesys/master --
+git pull --progress -v --no-rebase "convesys"
 git.exe checkout -f -B master remotes/github/master --
 git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
@@ -27,6 +29,8 @@ echo.
 echo Process MathAndControl:
 cd 02_Libraries\MathAndControl
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master remotes/convesys/master --
+git pull --progress -v --no-rebase "convesys"
 git.exe checkout -f -B master remotes/github/master --
 git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
@@ -40,6 +44,8 @@ echo.
 echo Process ModbusAddress:
 cd 02_Libraries\ModbusAddress
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master remotes/convesys/master --
+git pull --progress -v --no-rebase "convesys"
 git.exe checkout -f -B master remotes/github/master --
 git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
@@ -53,6 +59,8 @@ echo.
 echo Process Peripheral:
 cd 02_Libraries\Peripheral
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master remotes/convesys/master --
+git pull --progress -v --no-rebase "convesys"
 git.exe checkout -f -B master remotes/github/master --
 git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
@@ -66,6 +74,8 @@ echo.
 echo Process TestControl:
 cd 02_Libraries\TestControl
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master remotes/convesys/master --
+git pull --progress -v --no-rebase "convesys"
 git.exe checkout -f -B master remotes/github/master --
 git pull --progress -v --no-rebase "github"
 git merge --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ..\..\ConvesysToGithub.in
@@ -78,6 +88,8 @@ cd ..\..
 echo.
 echo Process Project:
 git.exe fetch --all -v --progress
+git.exe checkout -f -B master remotes/convesys/master --
+git pull --progress -v --no-rebase "convesys"
 git.exe checkout -f -B master remotes/github/master --
 git pull --progress -v --no-rebase "github"
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
