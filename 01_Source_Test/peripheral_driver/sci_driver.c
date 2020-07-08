@@ -59,6 +59,12 @@ void SCI_DRV_vErrorResetProcess(uint32_t base)
         SCI_performSoftwareReset(base);
         SCI_DRV_ErrorRx[SCI_DRV_eGetModuleIndexFromBase(base)]++;
     }
+
+    if ((HWREGH(base + SCI_O_FFRX) & SCI_FFRX_RXFFOVF) == SCI_FFRX_RXFFOVF)
+    {
+        SCI_resetRxFIFO(base);
+        SCI_DRV_ErrorRx[SCI_DRV_eGetModuleIndexFromBase(base)]++;
+    }
 }
 
 
