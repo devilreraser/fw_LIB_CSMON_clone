@@ -111,7 +111,7 @@ git status
 pause >nul
 @echo off
 :CommitProject
-pause
+rem pause
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes
 git reset HEAD .gitmodules
