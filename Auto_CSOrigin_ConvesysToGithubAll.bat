@@ -1,4 +1,4 @@
-@echo on
+@echo off
 echo.
 echo.CONVESYS ORIGIN Used!
 echo.
@@ -94,19 +94,20 @@ git.exe fetch --all -v --progress
 rem pause
 git.exe checkout -f -B master remotes/convesys/master --
 rem pause
-git pull --progress -v --rebase "convesys" master
+git pull --progress -v --no-rebase "convesys" master
 rem pause
 git lfs install --skip-smudge
 rem git lfs install
 rem pause 
 git.exe checkout -f -B master remotes/github/master --
 rem pause
-git pull --progress -v --rebase "github" master
+git pull --progress -v --no-rebase "github" master
 git lfs pull
 git lfs install --force
 rem pause
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
-rem pause
+echo Resolve Merge Conflicts In PROJECT With Convesys Master before Autoresolve
+pause
 IF %ERRORLEVEL% == 0 goto CommitProject
 IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
 echo Auto Resolve Merge Conflicts In PROJECT With Convesys Master:
@@ -119,6 +120,8 @@ git status
 pause >nul
 @echo off
 :CommitProject
+echo Resolve Merge Conflicts In PROJECT With Convesys Master after Autoresolve
+pause
 rem pause
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes

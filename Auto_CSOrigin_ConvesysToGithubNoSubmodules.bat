@@ -10,18 +10,27 @@ echo Commit Message: "%_CommitString%"
 
 echo.
 echo Process Project:
-git lfs uninstall
-git.exe fetch --all -v --progress
-git.exe checkout -f -B master remotes/convesys/master --
-git pull --progress -v --no-rebase "convesys"
-rem pause
-git.exe checkout -f -B master remotes/github/master --
 git lfs install
-git pull --progress -v --no-rebase "github"
+git lfs uninstall
+rem pause
+git.exe fetch --all -v --progress
+rem pause
+git.exe checkout -f -B master remotes/convesys/master --
+rem pause
+git pull --progress -v --no-rebase "convesys" master
+rem pause
+git lfs install --skip-smudge
+rem git lfs install
+rem pause 
+git.exe checkout -f -B master remotes/github/master --
+rem pause
+git pull --progress -v --no-rebase "github" master
 git lfs pull
+git lfs install --force
 rem pause
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
-rem pause
+echo Resolve Merge Conflicts In PROJECT With Convesys Master before Autoresolve
+pause
 IF %ERRORLEVEL% == 0 goto CommitProject
 IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
 echo Auto Resolve Merge Conflicts In PROJECT With Convesys Master:
@@ -34,6 +43,8 @@ git status
 pause >nul
 @echo off
 :CommitProject
+echo Resolve Merge Conflicts In PROJECT With Convesys Master after Autoresolve
+pause
 rem pause
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes
@@ -46,7 +57,7 @@ git push github master
 rem pause
 git lfs uninstall
 git.exe checkout -f -B master remotes/origin/master --
-git pull --progress -v --no-rebase "origin"
+git pull --progress -v --no-rebase "origin" master
 
 echo Completed!
 echo Press Enter to Exit
