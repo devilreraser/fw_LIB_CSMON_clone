@@ -218,6 +218,18 @@ typedef enum
  **************************************************************************** */
 typedef void (*CSMON_pfVoid_t)(void);
 
+
+typedef struct
+{
+    uint16_t bTriggered         : 1;
+    uint16_t bReady             : 1;
+    uint16_t bWrongConfig       : 1;
+    uint16_t bNotImplemented    : 1;
+    uint16_t bInit              : 1;
+
+}CSMON_sExternalRecorderStatus;
+
+
 /* *****************************************************************************
  * Function-Like Macro
  **************************************************************************** */
@@ -444,6 +456,25 @@ CSMON_eResponseCode_t CSMON_eSetParameterInRecorderAtPosition (
 CSMON_eResponseCode_t CSMON_eSetParameterCountInRecorder (
         uint16_t u16RecorderIndex,
         uint16_t u16ParameterCount);
+
+/* *****************************************************************************
+ * CSMON_eSetExternalRecorderUsage
+ *
+ * Input:
+ *      uint16_t u16RecorderIndex               - Recorder Index (Recorder0, ... RecorderN)
+ *      uint16_t* pu16PntrRecorderStatus        - Pointer to status of type CSMON_sExternalRecorderStatus
+ *      uint16_t* pu16DataFirstSampleAddress    - Pointer to Address In Recorder Buffer Of the First (Start) Data Sample (currenly pointed address in external buffer)
+ *      uint32_t u32CircleBufferSampleCount     - Count Samples In The circular Buffer (circle buffer size in samples)
+ *      uint32_t u32CircleBufferStartAddress    - Starting Address of The circular Buffer
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetExternalRecorderUsage (
+        uint16_t u16RecorderIndex,
+        uint16_t* pu16PntrRecorderStatus,
+        uint16_t* pu16DataFirstSampleAddress,
+        uint32_t u32CircleBufferSampleCount,
+        uint32_t u32CircleBufferStartAddress
+        );
 
 
 /* *****************************************************************************
