@@ -227,15 +227,32 @@ typedef enum
 typedef void (*CSMON_pfVoid_t)(void);
 
 
+
+
+
+
+
 typedef struct
 {
-    uint16_t bTriggered         : 1;
-    uint16_t bReady             : 1;
-    uint16_t bWrongConfig       : 1;
-    uint16_t bNotImplemented    : 1;
-    uint16_t bInit              : 1;
+    uint16_t bTriggered         : 1;    /* set bit -> trigger condition detected                            #define TSP_CAPTURE 0x0001 */
+    uint16_t bReady             : 1;    /* set bit -> trigger condition. captured and post trigger expired  #define TSP_READY 0x0002 */
+    uint16_t bWrongConfig       : 1;    /* Error during configuration TSPDAT_T TSdat                        #define TSP_WRONG_CONFIG 0x0004 */
+    uint16_t bNotRunning        : 1;    /* TSP not released                                                 #define TSP_DISABLED 0x0008 */
+    uint16_t bInit              : 1;    /*                                                                  #define TSP_IS_INIT 0x0010 */
 
 }CSMON_sExternalRecorderStatus;
+
+typedef struct
+{
+    uint16_t bReleased          : 1;    /* set bit -> TSP is released       #define TSP_ENABLE 0x0001 */
+    uint16_t bStart             : 1;    /* set bit -> TSP starts            #define TSP_START 0x0002 */
+
+}CSMON_sExternalRecorderControl;
+
+
+
+
+
 
 
 /* *****************************************************************************

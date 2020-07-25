@@ -1735,10 +1735,12 @@ void ControlProcess(void)
         {
             bDummyStatsDevRunning = true;
 
+            #if EXTERNAL_RECORDERS == 0
             //
             // CSMON Internal Recorders Start with Already Setup Configuration
             //
             CSMON_vSetStartRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+            #endif
 
             s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStartup;
             s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStartup;
@@ -1764,10 +1766,13 @@ void ControlProcess(void)
         {
             bDummyStatsDevRunning = false;
 
+            #if EXTERNAL_RECORDERS == 0
             //
-            // CSMON Internal Recorders Stop (Trigger)
+            // CSMON Internal Recorders Stop (Trigger Emulation)
             //
-            CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+            //CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+            CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDER_2);
+            #endif
 
             s16DummyCurrentPhaseAIdle = s16DummyCurrentPhaseA;
             s16DummyCurrentPhaseBIdle = s16DummyCurrentPhaseB;

@@ -213,21 +213,46 @@ typedef enum
 
 }CSMON_eVisualType_t; /* 16 bits - Library Internal Note! -> change also HMRECPRM_eVisualType_t */
 
+typedef enum
+{
+    CSMON_TIME_MICRO_SECONDS = 0,        /* u32MicroSec0BuffOvf1 in Micro-Seconds  */
+    CSMON_TIME_BUFFER_OVERFLOW = 1,      /* u32MicroSec0BuffOvf1 is buffer overflow counter (ticks(value) from free rolling timer) */
+}CSMON_eMicroSec0BuffOvf1Mode_t;
+
+
+
 /* *****************************************************************************
  * Type Definitions
  **************************************************************************** */
 typedef void (*CSMON_pfVoid_t)(void);
 
 
+
+
+
+
+
 typedef struct
 {
-    uint16_t bTriggered         : 1;
-    uint16_t bReady             : 1;
-    uint16_t bWrongConfig       : 1;
-    uint16_t bNotImplemented    : 1;
-    uint16_t bInit              : 1;
+    uint16_t bTriggered         : 1;    /* set bit -> trigger condition detected                            #define TSP_CAPTURE 0x0001 */
+    uint16_t bReady             : 1;    /* set bit -> trigger condition. captured and post trigger expired  #define TSP_READY 0x0002 */
+    uint16_t bWrongConfig       : 1;    /* Error during configuration TSPDAT_T TSdat                        #define TSP_WRONG_CONFIG 0x0004 */
+    uint16_t bNotRunning        : 1;    /* TSP not released                                                 #define TSP_DISABLED 0x0008 */
+    uint16_t bInit              : 1;    /*                                                                  #define TSP_IS_INIT 0x0010 */
 
 }CSMON_sExternalRecorderStatus;
+
+typedef struct
+{
+    uint16_t bReleased          : 1;    /* set bit -> TSP is released       #define TSP_ENABLE 0x0001 */
+    uint16_t bStart             : 1;    /* set bit -> TSP starts            #define TSP_START 0x0002 */
+
+}CSMON_sExternalRecorderControl;
+
+
+
+
+
 
 
 /* *****************************************************************************
@@ -460,12 +485,29 @@ CSMON_eResponseCode_t CSMON_eSetParameterCountInRecorder (
 /* *****************************************************************************
  * CSMON_eSetExternalRecorderUsage
  *
- * Input:
+ * Inputs:
+ *
+ * Recorder ID:
  *      uint16_t u16RecorderIndex               - Recorder Index (Recorder0, ... RecorderN)
+ *
+ * Recorder Status:
  *      uint16_t* pu16PntrRecorderStatus        - Pointer to status of type CSMON_sExternalRecorderStatus
+ *
+ * Recorder Buffer:
  *      uint16_t* pu16DataFirstSampleAddress    - Pointer to Address In Recorder Buffer Of the First (Start) Data Sample (currenly pointed address in external buffer)
  *      uint32_t u32CircleBufferSampleCount     - Count Samples In The circular Buffer (circle buffer size in samples)
  *      uint32_t u32CircleBufferStartAddress    - Starting Address of The circular Buffer
+ *
+ * Recorder Trigger Time:
+ *      CSMON_eMicroSec0BuffOvf1Mode_t eTriggerSubSecondMode    - Sub-second mode
+ *      uint32_t* pu32TriggerMicrosecondsOrRollingTimerTicks    - Pointer to Trigger Sub-Second Value (value interpretation depends on Sub-second mode)
+ *      uint_least8_t* pu8TriggerBCDSeconds                     - Pointer to Trigger Seconds (Binary Coded Decimal Value)
+ *      uint_least8_t* pu8TriggerBCDMinutes                     - Pointer to Trigger Minutes (Binary Coded Decimal Value)
+ *      uint_least8_t* pu8TriggerBCDHours                       - Pointer to Trigger Hours   (Binary Coded Decimal Value)
+ *      uint_least8_t* pu8TriggerBCDWeekdays                    - Pointer to Trigger Weekdays(Binary Coded Decimal Value)
+ *      uint_least8_t* pu8TriggerBCDDay                         - Pointer to Trigger Day     (Binary Coded Decimal Value)
+ *      uint_least8_t* pu8TriggerBCDMonth                       - Pointer to Trigger Month   (Binary Coded Decimal Value)
+ *      uint_least8_t* pu8TriggerBCDYear                        - Pointer to Trigger Year    (Binary Coded Decimal Value)
  *
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetExternalRecorderUsage (
@@ -473,7 +515,16 @@ CSMON_eResponseCode_t CSMON_eSetExternalRecorderUsage (
         uint16_t* pu16PntrRecorderStatus,
         uint16_t* pu16DataFirstSampleAddress,
         uint32_t u32CircleBufferSampleCount,
-        uint32_t u32CircleBufferStartAddress
+        uint32_t u32CircleBufferStartAddress,
+        CSMON_eMicroSec0BuffOvf1Mode_t eTriggerSubSecondMode,
+        uint32_t* pu32TriggerMicrosecondsOrRollingTimerTicks,
+        uint_least8_t* pu8TriggerBCDSeconds,
+        uint_least8_t* pu8TriggerBCDMinutes,
+        uint_least8_t* pu8TriggerBCDHours,
+        uint_least8_t* pu8TriggerBCDWeekdays,
+        uint_least8_t* pu8TriggerBCDDay,
+        uint_least8_t* pu8TriggerBCDMonth,
+        uint_least8_t* pu8TriggerBCDYear
         );
 
 
