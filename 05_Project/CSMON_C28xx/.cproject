@@ -67,6 +67,7 @@
 									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=0"/>
 									<listOptionValue builtIn="false" value="NO_FREEMASTER"/>
+									<listOptionValue builtIn="false" value="_CSMON_EXTERNAL_RECORDERS_TEST_REDIRECT_TO_INTERNAL_RECORDERS=0"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_18.12.compilerID.DIAG_WARNING.281453842" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_18.12.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
@@ -253,6 +254,7 @@
 									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=1"/>
 									<listOptionValue builtIn="false" value="HMDRV_USE_DEBUG_PIN=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_EXTERNAL_RECORDERS_TEST_REDIRECT_TO_INTERNAL_RECORDERS=1"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_18.12.compilerID.DIAG_WARNING.1734520259" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_18.12.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>

@@ -104,6 +104,7 @@ typedef enum
     CSMON_RECORDER_0    = 0,
     CSMON_RECORDER_1    = 1,
     CSMON_RECORDER_2    = 2,
+    CSMON_RECORDER_COUNT_MAX
 }CSMON_eRecorderIndex_t;
 
 typedef enum
@@ -136,6 +137,7 @@ typedef enum
     CSMON_SCOPE_0    = 0,
     CSMON_SCOPE_1    = 1,
     CSMON_SCOPE_2    = 2,
+    CSMON_SCOPE_COUNT_MAX
 }CSMON_eScopeIndex_t;
 
 typedef enum
@@ -240,7 +242,7 @@ typedef struct
     uint16_t bNotRunning        : 1;    /* TSP not released                                                 #define TSP_DISABLED 0x0008 */
     uint16_t bInit              : 1;    /*                                                                  #define TSP_IS_INIT 0x0010 */
 
-}CSMON_sExternalRecorderStatus;
+}CSMON_sExternalRecorderStatus;     /* fix HMRECPRM_sExternalRecorderStatus */
 
 typedef struct
 {
