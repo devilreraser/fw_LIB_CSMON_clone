@@ -15,6 +15,7 @@
  * Header Includes
  **************************************************************************** */
 #include <stdbool.h>
+#include <stddef.h>
 
 #include "main.h"
 #include "device.h"
@@ -30,6 +31,16 @@
  * Configuration Definitions
  **************************************************************************** */
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
+
+
+#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   5900
+#define RECORDER0_TOTAL_SAMPLE_COUNT        6000
+#define RECORDER1_PRETRIGGER_SAMPLE_COUNT   5900
+#define RECORDER1_TOTAL_SAMPLE_COUNT        6000
+#define RECORDER2_PRETRIGGER_SAMPLE_COUNT   5900
+#define RECORDER2_TOTAL_SAMPLE_COUNT        6000
+
+
 
 /* *****************************************************************************
  * Configuration Parameter Definitions
@@ -150,6 +161,27 @@ typedef struct
 
 }MAIN_sParameterList_t;
 
+
+typedef struct
+{
+    CSMON_sExternalRecorderStatus sStatus;
+    uint32_t u32StartAddressFirstDataSample;
+    uint32_t u32CircleBufferSampleCount;
+    uint32_t u32CircleBufferStartAddress;
+    CSMON_eMicroSec0BuffOvf1Mode_t eTriggerSubSecondMode;   /* Used Sync Time Between Recorder's Samples at Trigger Condition detection */
+    uint32_t u32TriggerMicrosecondsOrRollingTimerTicks;
+    uint_least8_t u8TriggerBCDSeconds;
+    uint_least8_t u8TriggerBCDMinutes;
+    uint_least8_t u8TriggerBCDHours;
+    uint_least8_t u8TriggerBCDWeekdays;
+    uint_least8_t u8TriggerBCDDay;
+    uint_least8_t u8TriggerBCDMonth;
+    uint_least8_t u8TriggerBCDYear;
+
+}MAIN_sExternalRecorderHandle_t;
+
+
+
 /* *****************************************************************************
  * Function-Like Macros
  **************************************************************************** */
@@ -198,7 +230,50 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
     /* 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 2001-01-01-Mon-00:00:00 */
 };
 
+
+
+MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[CSMON_RECORDER_COUNT_MAX] =
+{
+ {
+  {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
+  NULL,                                     /* u32StartAddressFirstDataSample */
+  RECORDER0_TOTAL_SAMPLE_COUNT,             /* u32CircleBufferSampleCount */
+  0x140000,                                 /* u32CircleBufferStartAddress - EMIF */
+  CSMON_TIME_MICRO_SECONDS,                 /* eTriggerSubSecondMode */
+  0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
+  0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
+ },
+ {
+  {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
+  NULL,                                     /* u32StartAddressFirstDataSample */
+  RECORDER1_TOTAL_SAMPLE_COUNT,             /* u32CircleBufferSampleCount */
+  0x180000,                                 /* u32CircleBufferStartAddress - EMIF */
+  CSMON_TIME_MICRO_SECONDS,                 /* eTriggerSubSecondMode */
+  0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
+  0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
+ },
+ {
+  {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
+  NULL,                                     /* u32StartAddressFirstDataSample */
+  RECORDER2_TOTAL_SAMPLE_COUNT,             /* u32CircleBufferSampleCount */
+  0x1C0000,                                 /* u32CircleBufferStartAddress - EMIF */
+  CSMON_TIME_MICRO_SECONDS,                 /* eTriggerSubSecondMode */
+  0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
+  0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
+ },
+};
+
+
+
+
+
+
     bool MAIN_bDateTimeSet = false;
+
+
+
+
+
 
     bool bDummyStatsDevRunning = false;
     bool bDummyReqstDevRunning = false;
@@ -230,6 +305,12 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
     int16_t s16DummyCurrentPhaseC = (2 << 14);
     int16_t s16DummyVoltageDCLink = (0 << 14);
     int16_t s16DummyIncrementLoop = 10; //(1 << 8);
+
+    int32_t s32DummyCurrentPhaseA = 0;
+    int32_t s32DummyCurrentPhaseB = 0;
+    int32_t s32DummyCurrentPhaseC = 0;
+    int32_t s32DummyVoltageDCLink = 0;
+    int32_t s32DummyIncrementLoop = 0;
 
  uint64_t u64DummyDataCnt = 0;
  uint32_t u32DummyDataCnt = 0;
@@ -343,6 +424,11 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_CURRENT_PHASEB     10
 #define PARAM_ID_CURRENT_PHASEC     11
 
+#define PARAM_ID_VOLTAGE_DCLINK_32  28
+#define PARAM_ID_CURRENT_PHASEA_32  29
+#define PARAM_ID_CURRENT_PHASEB_32  30
+#define PARAM_ID_CURRENT_PHASEC_32  31
+
 volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
@@ -378,6 +464,11 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
   INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
   INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
   INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
+
+  INIT_PARAMETER(   28, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyVoltageDCLink,                  "VoltageBus32",       "V",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   29, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseA,                  "CurrentPhA32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   30, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseB,                  "CurrentPhB32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   31, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseC,                  "CurrentPhC32",       "A",       1000000000,    -1000000000,0,      0.000001F),
 
   INIT_PARAMETER(  108, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLinkStartup,           "VoltageBusStart",    "V",       10000,         -10000,     0,      1.0F),
   INIT_PARAMETER(  109, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseAStartup,           "CurrentPhAStart",    "A",       10000,         -10000,     0,      1.0F),
@@ -1735,15 +1826,22 @@ void ControlProcess(void)
         {
             bDummyStatsDevRunning = true;
 
+            //#if EXTERNAL_RECORDERS == 0
             //
             // CSMON Internal Recorders Start with Already Setup Configuration
             //
             CSMON_vSetStartRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+            //#endif
 
             s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStartup;
             s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStartup;
             s16DummyCurrentPhaseC = s16DummyCurrentPhaseCStartup;
             s16DummyVoltageDCLink = s16DummyVoltageDCLinkStartup;
+
+            s32DummyCurrentPhaseA += (int32_t)s16DummyCurrentPhaseAStartup*10000;
+            s32DummyCurrentPhaseB += (int32_t)s16DummyCurrentPhaseBStartup*10000;
+            s32DummyCurrentPhaseC += (int32_t)s16DummyCurrentPhaseCStartup*10000;
+            s32DummyVoltageDCLink += (int32_t)s16DummyVoltageDCLinkStartup*10000;
         }
         else
         {
@@ -1751,6 +1849,11 @@ void ControlProcess(void)
             s16DummyCurrentPhaseB += s16DummyIncrementLoopB;
             s16DummyCurrentPhaseC += s16DummyIncrementLoopC;
             s16DummyVoltageDCLink += s16DummyIncrementLoopV;
+
+            s32DummyCurrentPhaseA += (int32_t)s16DummyIncrementLoopA*10000;
+            s32DummyCurrentPhaseB += (int32_t)s16DummyIncrementLoopB*10000;
+            s32DummyCurrentPhaseC += (int32_t)s16DummyIncrementLoopC*10000;
+            s32DummyVoltageDCLink += (int32_t)s16DummyIncrementLoopV*10000;
 
             s16DummyCurrentPhaseC += s16DummyIncrementLoopCDiff;
             s16DummyIncrementLoopCDiff = 0 - s16DummyIncrementLoopCDiff;
@@ -1764,10 +1867,13 @@ void ControlProcess(void)
         {
             bDummyStatsDevRunning = false;
 
+            //#if EXTERNAL_RECORDERS == 0
             //
-            // CSMON Internal Recorders Stop (Trigger)
+            // CSMON Internal Recorders Stop (Trigger Emulation)
             //
-            CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+            //CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+            CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDER_2);
+            //#endif
 
             s16DummyCurrentPhaseAIdle = s16DummyCurrentPhaseA;
             s16DummyCurrentPhaseBIdle = s16DummyCurrentPhaseB;
@@ -1919,23 +2025,25 @@ void RecordersInitialization(void)
 {
     /* Recorder 0 */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_0);
+            CSMON_RECORDER_0, PARAM_ID_STARUNNINGMODE, CSMON_POSITION_IN_RECORDER_0);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_1);
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_1);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_2);
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_2);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_3);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA_32, CSMON_POSITION_IN_RECORDER_4);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
-            CSMON_RECORDER_0, CSMON_COUNT_PARAMETERS_4);
+            CSMON_RECORDER_0, CSMON_COUNT_PARAMETERS_5);
 
     /* Recorder 1 */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_0);
+            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEA_32, CSMON_POSITION_IN_RECORDER_0);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_1);
+            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEB_32, CSMON_POSITION_IN_RECORDER_1);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_2);
+            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEC_32, CSMON_POSITION_IN_RECORDER_2);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_1, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
@@ -1979,22 +2087,22 @@ void RecordersInitialization(void)
     /* Recorder 0 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_0,
-            5900,   /* PreTriggerSampleCount */
-            6000,   /* TotalSampleCount */
+            RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
+            RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
 
     /* Recorder 1 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_1,
-            5900,   /* PreTriggerSampleCount */
-            6000,   /* TotalSampleCount */
+            RECORDER1_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
+            RECORDER1_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
 
     /* Recorder 2 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_2,
-            5900,   /* PreTriggerSampleCount */
-            6000,   /* TotalSampleCount */
+            RECORDER2_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
+            RECORDER2_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
 
 }
@@ -2283,6 +2391,65 @@ void main(void)
     //
     CSMON_vSetSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
 
+
+    #if EXTERNAL_RECORDERS == 1
+    //
+    // CSMON External Recorder Usage Setup
+    //
+    CSMON_eSetExternalRecorderUsage
+    (
+                                    CSMON_RECORDER_0,
+ (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].sStatus,
+ (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].u32StartAddressFirstDataSample,
+             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferSampleCount,
+             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferStartAddress,
+             sExternalRecoderHandle[CSMON_RECORDER_0].eTriggerSubSecondMode,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u32TriggerMicrosecondsOrRollingTimerTicks,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDSeconds,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMinutes,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDHours,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDWeekdays,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDDay,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMonth,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDYear
+    );
+
+    CSMON_eSetExternalRecorderUsage
+    (
+                                    CSMON_RECORDER_1,
+ (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].sStatus,
+ (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].u32StartAddressFirstDataSample,
+             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferSampleCount,
+             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferStartAddress,
+             sExternalRecoderHandle[CSMON_RECORDER_1].eTriggerSubSecondMode,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u32TriggerMicrosecondsOrRollingTimerTicks,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDSeconds,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMinutes,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDHours,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDWeekdays,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDDay,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMonth,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDYear
+    );
+
+    CSMON_eSetExternalRecorderUsage
+    (
+                                    CSMON_RECORDER_2,
+ (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].sStatus,
+ (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].u32StartAddressFirstDataSample,
+             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferSampleCount,
+             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferStartAddress,
+             sExternalRecoderHandle[CSMON_RECORDER_2].eTriggerSubSecondMode,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u32TriggerMicrosecondsOrRollingTimerTicks,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDSeconds,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMinutes,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDHours,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDWeekdays,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDDay,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMonth,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDYear
+    );
+    #endif
 
     //
     // Register Function Call In CSMON Timer Period ISR (default Timer Period is 50 usec)
