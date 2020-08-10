@@ -485,6 +485,69 @@ CSMON_eResponseCode_t CSMON_eSetParameterCountInRecorder (
         uint16_t u16ParameterCount);
 
 /* *****************************************************************************
+ * CSMON_eGetRecorderConfiguration
+ *
+ * Input:
+ *      uint16_t  u16RecorderIndex   - Recorder Index (Recorder0, ... RecorderN)
+ *      uint32_t* pu32PreTriggerSampleCount
+ *      uint32_t* pu32TotalSampleCount
+ *      float*    pf32SampleRateHz       - Sample Rate in Hz
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eGetRecorderConfiguration (
+        uint16_t  u16RecorderIndex,
+        uint32_t* pu32PreTriggerSampleCount,
+        uint32_t* pu32TotalSampleCount,
+        float*    pf32SampleRateHz);
+
+/* *****************************************************************************
+ * CSMON_eGetRecorderTriggerAtPosition
+ *
+ * Input:
+ *      uint16_t  u16RecorderIndex    - Recorder Index (Recorder0, ... RecorderN)
+ *      uint16_t* pu16ParameterID     - Parameter ID or Index in Table
+        uint32_t* pu32TresholdValue   - TypeCast To uint32_t
+        uint16_t* pu16TriggerMode     - See CSMON_eTriggerMode_t
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eGetRecorderTriggerAtPosition (
+        uint16_t  u16RecorderIndex,
+        uint16_t* pu16ParameterID,
+        uint32_t* pu32TresholdValue,
+        uint16_t* pu16TriggerMode);
+
+/* *****************************************************************************
+ * CSMON_eGetParameterInRecorderAtPosition
+ *
+ * Input:
+ *      uint16_t u16RecorderIndex    - Recorder Index (Recorder0, ... RecorderN)
+ *      uint16_t u16ParameterPos     - Position of the Parameter In The Recorder Sequence
+ *      uint16_t *pu16ParameterID    - Parameter ID or Index in Table
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eGetParameterInRecorderAtPosition (
+        uint16_t u16RecorderIndex,
+        uint16_t u16ParameterPos,
+        uint16_t *pu16ParameterID);
+
+/* *****************************************************************************
+ * CSMON_eGetParameterCountInRecorder
+ *
+ * Input:
+ *      uint16_t u16RecorderIndex      - Recorder Index (Recorder0, ... RecorderN)
+ *      uint16_t* pu16ParameterCount   - Count Parameters used In The Recorder Sequence
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eGetParameterCountInRecorder (
+        uint16_t u16RecorderIndex,
+        uint16_t* pu16ParameterCount);
+
+
+
+
+
+
+/* *****************************************************************************
  * CSMON_eSetExternalRecorderUsage
  *
  * Inputs:
