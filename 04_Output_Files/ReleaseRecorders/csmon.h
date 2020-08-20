@@ -559,7 +559,7 @@ CSMON_eResponseCode_t CSMON_eGetParameterCountInRecorder (
  *      uint16_t* pu16PntrRecorderStatus        - Pointer to status of type CSMON_sExternalRecorderStatus
  *
  * Recorder Buffer:
- *      uint16_t* pu16DataFirstSampleAddress    - Pointer to Address In Recorder Buffer Of the First (Start) Data Sample (currenly pointed address in external buffer)
+ *      uint16_t* pu16DataFirstSampleAddress    - Pointer to Address In Recorder Buffer Of the First (Start) Data Sample (currently pointed address in external buffer)
  *      uint32_t u32CircleBufferSampleCount     - Count Samples In The circular Buffer (circle buffer size in samples)
  *      uint32_t u32CircleBufferStartAddress    - Starting Address of The circular Buffer
  *
