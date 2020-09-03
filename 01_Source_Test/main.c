@@ -32,14 +32,21 @@
  **************************************************************************** */
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
 
+#define RECORDER0_ONLY_TEST                             0
 
+#if RECORDER0_ONLY_TEST
+#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   52
+#define RECORDER0_TOTAL_SAMPLE_COUNT        512
+#define RECORDER_COUNT                      1
+#else
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   5900
 #define RECORDER0_TOTAL_SAMPLE_COUNT        6000
 #define RECORDER1_PRETRIGGER_SAMPLE_COUNT   5900
 #define RECORDER1_TOTAL_SAMPLE_COUNT        6000
 #define RECORDER2_PRETRIGGER_SAMPLE_COUNT   5900
 #define RECORDER2_TOTAL_SAMPLE_COUNT        6000
-
+#define RECORDER_COUNT                      CSMON_RECORDER_COUNT_MAX
+#endif
 
 
 /* *****************************************************************************
@@ -232,7 +239,7 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
 
 
 
-MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[CSMON_RECORDER_COUNT_MAX] =
+MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
 {
  {
   {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
@@ -243,6 +250,7 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[CSMON_RECORDER_COUNT_MAX] 
   0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
  },
+#if RECORDER0_ONLY_TEST == 0
  {
   {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
   NULL,                                     /* u32StartAddressFirstDataSample */
@@ -261,6 +269,7 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[CSMON_RECORDER_COUNT_MAX] 
   0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
  },
+#endif
 };
 
 
@@ -582,6 +591,12 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
  INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
+
+ INIT_PARAMETER(   28, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyVoltageDCLink,                  "VoltageBus32",       "V",       1000000000,    -1000000000,0,      0.000001F),
+ INIT_PARAMETER(   29, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseA,                  "CurrentPhA32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+ INIT_PARAMETER(   30, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseB,                  "CurrentPhB32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+ INIT_PARAMETER(   31, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseC,                  "CurrentPhC32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+
 
  INIT_PARAMETER( 1000, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
  INIT_PARAMETER( 1001, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
@@ -1588,10 +1603,10 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
  INIT_PARAMETER( 1993, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
  INIT_PARAMETER( 1994, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
  INIT_PARAMETER( 1995, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
- INIT_PARAMETER( 1996, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
- INIT_PARAMETER( 1997, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
- INIT_PARAMETER( 1998, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
- INIT_PARAMETER( 1999, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
+ //INIT_PARAMETER( 1996, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
+ //INIT_PARAMETER( 1997, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
+ //INIT_PARAMETER( 1998, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
+ //INIT_PARAMETER( 1999, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyData,                           "Param_1000",         "A",       10000,         -10000,     0,      0.1),
 
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
@@ -1826,12 +1841,16 @@ void ControlProcess(void)
         {
             bDummyStatsDevRunning = true;
 
+#if RECORDER0_ONLY_TEST == 0
             //#if EXTERNAL_RECORDERS == 0
             //
             // CSMON Internal Recorders Start with Already Setup Configuration
             //
             CSMON_vSetStartRecorderParameterMask(CSMON_MASK_RECORDERS_012);
             //#endif
+#else
+            CSMON_vSetStartRecorderParameterMask(CSMON_MASK_RECORDER_0);
+#endif
 
             s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStartup;
             s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStartup;
@@ -1867,6 +1886,7 @@ void ControlProcess(void)
         {
             bDummyStatsDevRunning = false;
 
+#if RECORDER0_ONLY_TEST == 0
             //#if EXTERNAL_RECORDERS == 0
             //
             // CSMON Internal Recorders Stop (Trigger Emulation)
@@ -1874,6 +1894,7 @@ void ControlProcess(void)
             //CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDERS_012);
             CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDER_2);
             //#endif
+#endif
 
             s16DummyCurrentPhaseAIdle = s16DummyCurrentPhaseA;
             s16DummyCurrentPhaseBIdle = s16DummyCurrentPhaseB;
@@ -1963,6 +1984,7 @@ void ParameterInitialization(void)
         /* Invalid Table - Reset Parameter Table */
         CSMON_eResetParameterTable();                                   /* Reset Internal Used Parameters Count */
 
+
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
@@ -2013,6 +2035,15 @@ void ParameterInitialization(void)
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);         /* Amber LED (middle Led) */
         CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
+
+
+        /* Recorder And Scope Initialization Made Once after parameter initialized */
+        RecordersInitialization();
+        ScopesInitialization();
+
+
+
+
     }
 
 
@@ -2034,8 +2065,17 @@ void RecordersInitialization(void)
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_3);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA_32, CSMON_POSITION_IN_RECORDER_4);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB_32, CSMON_POSITION_IN_RECORDER_5);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC_32, CSMON_POSITION_IN_RECORDER_6);
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+            CSMON_RECORDER_0, PARAM_ID_VOLTAGE_DCLINK_32, CSMON_POSITION_IN_RECORDER_7);
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
-            CSMON_RECORDER_0, CSMON_COUNT_PARAMETERS_5);
+            CSMON_RECORDER_0, CSMON_COUNT_PARAMETERS_8);
+
+
+    #if RECORDER0_ONLY_TEST == 0
 
     /* Recorder 1 */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
@@ -2061,27 +2101,7 @@ void RecordersInitialization(void)
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
             CSMON_RECORDER_2, CSMON_COUNT_PARAMETERS_4);
 
-
-    /* Trigger Recorder 0 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_0,
-            PARAM_ID_STARUNNINGMODE,
-            (uint32_t)true,
-            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
-
-    /* Trigger Recorder 1 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_1,
-            PARAM_ID_STARUNNINGMODE,
-            (uint32_t)true,
-            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
-
-    /* Trigger Recorder 2 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_2,
-            (uint16_t)0,
-            (uint32_t)0,
-            (uint16_t)CSMON_TRIGGER_MODE_NONE);
+    #endif
 
 
     /* Recorder 0 Configuration */
@@ -2090,6 +2110,8 @@ void RecordersInitialization(void)
             RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
+
+    #if RECORDER0_ONLY_TEST == 0
 
     /* Recorder 1 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
@@ -2104,6 +2126,34 @@ void RecordersInitialization(void)
             RECORDER2_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER2_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
+    #endif
+
+    /* Note !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration */
+
+
+    /* Trigger Recorder 0 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_0,
+            PARAM_ID_STARUNNINGMODE,
+            (uint32_t)true,
+            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
+
+    #if RECORDER0_ONLY_TEST == 0
+
+    /* Trigger Recorder 1 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_1,
+            PARAM_ID_STARUNNINGMODE,
+            (uint32_t)true,
+            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
+
+    /* Trigger Recorder 2 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_2,
+            (uint16_t)0,
+            (uint32_t)0,
+            (uint16_t)CSMON_TRIGGER_MODE_NONE);
+    #endif
 
 }
 
@@ -2382,14 +2432,9 @@ void main(void)
     u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     ParameterInitialization();
     u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
-    RecordersInitialization();
-    ScopesInitialization();
 
 
-    //
-    // CSMON Internal Recorders Setup with Already Made Configuration
-    //
-    CSMON_vSetSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+
 
 
     #if EXTERNAL_RECORDERS == 1
@@ -2413,7 +2458,9 @@ void main(void)
             &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMonth,
             &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDYear
     );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
 
+    #if RECORDER0_ONLY_TEST == 0
     CSMON_eSetExternalRecorderUsage
     (
                                     CSMON_RECORDER_1,
@@ -2431,6 +2478,7 @@ void main(void)
             &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMonth,
             &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDYear
     );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_1);
 
     CSMON_eSetExternalRecorderUsage
     (
@@ -2449,6 +2497,20 @@ void main(void)
             &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMonth,
             &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDYear
     );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_2);
+    #endif
+
+    #else
+
+    #if RECORDER0_ONLY_TEST == 0
+    //
+    // CSMON Internal Recorders Setup with Already Made Configuration
+    //
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+    #else
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
+    #endif
+
     #endif
 
     //
