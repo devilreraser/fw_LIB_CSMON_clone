@@ -250,7 +250,7 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
   0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
  },
-#if RECORDER_COUNT > 1
+#if RECORDER0_ONLY_TEST == 0
  {
   {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
   NULL,                                     /* u32StartAddressFirstDataSample */
@@ -1984,6 +1984,7 @@ void ParameterInitialization(void)
         /* Invalid Table - Reset Parameter Table */
         CSMON_eResetParameterTable();                                   /* Reset Internal Used Parameters Count */
 
+
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
@@ -2034,6 +2035,15 @@ void ParameterInitialization(void)
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);         /* Amber LED (middle Led) */
         CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
+
+
+        /* Recorder And Scope Initialization Made Once after parameter initialized */
+        RecordersInitialization();
+        ScopesInitialization();
+
+
+
+
     }
 
 
@@ -2065,7 +2075,7 @@ void RecordersInitialization(void)
             CSMON_RECORDER_0, CSMON_COUNT_PARAMETERS_8);
 
 
-#if RECORDER0_ONLY_TEST == 0
+    #if RECORDER0_ONLY_TEST == 0
 
     /* Recorder 1 */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
@@ -2091,35 +2101,8 @@ void RecordersInitialization(void)
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
             CSMON_RECORDER_2, CSMON_COUNT_PARAMETERS_4);
 
-#endif
+    #endif
 
-
-    /* Trigger Recorder 0 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_0,
-            PARAM_ID_STARUNNINGMODE,
-            (uint32_t)true,
-            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
-
-
-
-#if RECORDER0_ONLY_TEST == 0
-
-
-    /* Trigger Recorder 1 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_1,
-            PARAM_ID_STARUNNINGMODE,
-            (uint32_t)true,
-            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
-
-    /* Trigger Recorder 2 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_2,
-            (uint16_t)0,
-            (uint32_t)0,
-            (uint16_t)CSMON_TRIGGER_MODE_NONE);
-#endif
 
     /* Recorder 0 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
@@ -2128,7 +2111,7 @@ void RecordersInitialization(void)
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
 
-#if RECORDER0_ONLY_TEST == 0
+    #if RECORDER0_ONLY_TEST == 0
 
     /* Recorder 1 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
@@ -2143,7 +2126,34 @@ void RecordersInitialization(void)
             RECORDER2_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER2_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             20000.0); /* Sample Frequency in Hz */
-#endif
+    #endif
+
+    /* Note !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration */
+
+
+    /* Trigger Recorder 0 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_0,
+            PARAM_ID_STARUNNINGMODE,
+            (uint32_t)true,
+            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
+
+    #if RECORDER0_ONLY_TEST == 0
+
+    /* Trigger Recorder 1 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_1,
+            PARAM_ID_STARUNNINGMODE,
+            (uint32_t)true,
+            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
+
+    /* Trigger Recorder 2 */
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+            CSMON_RECORDER_2,
+            (uint16_t)0,
+            (uint32_t)0,
+            (uint16_t)CSMON_TRIGGER_MODE_NONE);
+    #endif
 
 }
 
@@ -2422,18 +2432,10 @@ void main(void)
     u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     ParameterInitialization();
     u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
-    RecordersInitialization();
-    ScopesInitialization();
 
 
-#if RECORDER0_ONLY_TEST == 0
-    //
-    // CSMON Internal Recorders Setup with Already Made Configuration
-    //
-    CSMON_vSetSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
-#else
-    CSMON_vSetSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
-#endif
+
+
 
     #if EXTERNAL_RECORDERS == 1
     //
@@ -2456,8 +2458,9 @@ void main(void)
             &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMonth,
             &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDYear
     );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
 
-#if RECORDER0_ONLY_TEST == 0
+    #if RECORDER0_ONLY_TEST == 0
     CSMON_eSetExternalRecorderUsage
     (
                                     CSMON_RECORDER_1,
@@ -2475,6 +2478,7 @@ void main(void)
             &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMonth,
             &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDYear
     );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_1);
 
     CSMON_eSetExternalRecorderUsage
     (
@@ -2493,7 +2497,19 @@ void main(void)
             &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMonth,
             &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDYear
     );
-#endif
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_2);
+    #endif
+
+    #else
+
+    #if RECORDER0_ONLY_TEST == 0
+    //
+    // CSMON Internal Recorders Setup with Already Made Configuration
+    //
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
+    #else
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
+    #endif
 
     #endif
 
