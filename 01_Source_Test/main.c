@@ -48,6 +48,18 @@
 #define RECORDER_COUNT                      CSMON_RECORDER_COUNT_MAX
 #endif
 
+#define RECORDER_SAMPLE_TIME_FIX_1MS        1       /* If 1kHz sample frequency in CSMON PC Application 1ms equals 1sample */
+
+#if RECORDER_SAMPLE_TIME_FIX_1MS
+#define RECORDER0_SAMPLE_FREQUENCY_HZ       1000.0
+#define RECORDER1_SAMPLE_FREQUENCY_HZ       1000.0
+#define RECORDER2_SAMPLE_FREQUENCY_HZ       1000.0
+#else
+#define RECORDER0_SAMPLE_FREQUENCY_HZ      20000.0
+#define RECORDER1_SAMPLE_FREQUENCY_HZ      20000.0
+#define RECORDER2_SAMPLE_FREQUENCY_HZ      20000.0
+#endif
+
 
 /* *****************************************************************************
  * Configuration Parameter Definitions
@@ -2109,7 +2121,7 @@ void RecordersInitialization(void)
             CSMON_RECORDER_0,
             RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            20000.0); /* Sample Frequency in Hz */
+            RECORDER0_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
 
     #if RECORDER0_ONLY_TEST == 0
 
@@ -2118,14 +2130,14 @@ void RecordersInitialization(void)
             CSMON_RECORDER_1,
             RECORDER1_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER1_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            20000.0); /* Sample Frequency in Hz */
+            RECORDER1_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
 
     /* Recorder 2 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_2,
             RECORDER2_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER2_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            20000.0); /* Sample Frequency in Hz */
+            RECORDER2_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
     #endif
 
     /* Note !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration */
@@ -2154,6 +2166,72 @@ void RecordersInitialization(void)
             (uint32_t)0,
             (uint16_t)CSMON_TRIGGER_MODE_NONE);
     #endif
+
+
+    #if EXTERNAL_RECORDERS == 1
+    //
+    // CSMON External Recorder Usage Setup
+    //
+    CSMON_eSetExternalRecorderUsage
+    (
+                                    CSMON_RECORDER_0,
+    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].sStatus,
+    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].u32StartAddressFirstDataSample,
+             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferSampleCount,
+             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferStartAddress,
+             sExternalRecoderHandle[CSMON_RECORDER_0].eTriggerSubSecondMode,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u32TriggerMicrosecondsOrRollingTimerTicks,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDSeconds,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMinutes,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDHours,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDWeekdays,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDDay,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMonth,
+            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDYear
+    );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
+
+    #if RECORDER0_ONLY_TEST == 0
+    CSMON_eSetExternalRecorderUsage
+    (
+                                    CSMON_RECORDER_1,
+    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].sStatus,
+    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].u32StartAddressFirstDataSample,
+             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferSampleCount,
+             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferStartAddress,
+             sExternalRecoderHandle[CSMON_RECORDER_1].eTriggerSubSecondMode,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u32TriggerMicrosecondsOrRollingTimerTicks,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDSeconds,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMinutes,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDHours,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDWeekdays,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDDay,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMonth,
+            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDYear
+    );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_1);
+
+    CSMON_eSetExternalRecorderUsage
+    (
+                                    CSMON_RECORDER_2,
+    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].sStatus,
+    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].u32StartAddressFirstDataSample,
+             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferSampleCount,
+             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferStartAddress,
+             sExternalRecoderHandle[CSMON_RECORDER_2].eTriggerSubSecondMode,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u32TriggerMicrosecondsOrRollingTimerTicks,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDSeconds,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMinutes,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDHours,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDWeekdays,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDDay,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMonth,
+            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDYear
+    );
+    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_2);
+    #endif
+
+#endif
 
 }
 
@@ -2435,83 +2513,15 @@ void main(void)
 
 
 
-
-
-    #if EXTERNAL_RECORDERS == 1
-    //
-    // CSMON External Recorder Usage Setup
-    //
-    CSMON_eSetExternalRecorderUsage
-    (
-                                    CSMON_RECORDER_0,
- (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].sStatus,
- (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].u32StartAddressFirstDataSample,
-             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferSampleCount,
-             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferStartAddress,
-             sExternalRecoderHandle[CSMON_RECORDER_0].eTriggerSubSecondMode,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u32TriggerMicrosecondsOrRollingTimerTicks,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDSeconds,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMinutes,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDHours,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDWeekdays,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDDay,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMonth,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDYear
-    );
-    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
-
-    #if RECORDER0_ONLY_TEST == 0
-    CSMON_eSetExternalRecorderUsage
-    (
-                                    CSMON_RECORDER_1,
- (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].sStatus,
- (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].u32StartAddressFirstDataSample,
-             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferSampleCount,
-             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferStartAddress,
-             sExternalRecoderHandle[CSMON_RECORDER_1].eTriggerSubSecondMode,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u32TriggerMicrosecondsOrRollingTimerTicks,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDSeconds,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMinutes,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDHours,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDWeekdays,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDDay,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMonth,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDYear
-    );
-    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_1);
-
-    CSMON_eSetExternalRecorderUsage
-    (
-                                    CSMON_RECORDER_2,
- (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].sStatus,
- (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].u32StartAddressFirstDataSample,
-             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferSampleCount,
-             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferStartAddress,
-             sExternalRecoderHandle[CSMON_RECORDER_2].eTriggerSubSecondMode,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u32TriggerMicrosecondsOrRollingTimerTicks,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDSeconds,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMinutes,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDHours,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDWeekdays,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDDay,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMonth,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDYear
-    );
-    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_2);
-    #endif
-
-    #else
-
-    #if RECORDER0_ONLY_TEST == 0
     //
     // CSMON Internal Recorders Setup with Already Made Configuration
     //
+    #if RECORDER0_ONLY_TEST == 0
     CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDERS_012);
     #else
     CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
     #endif
 
-    #endif
 
     //
     // Register Function Call In CSMON Timer Period ISR (default Timer Period is 50 usec)
