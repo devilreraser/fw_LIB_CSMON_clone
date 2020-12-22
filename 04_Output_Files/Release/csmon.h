@@ -97,6 +97,7 @@ typedef enum
     CSMON_MASK_RECORDERS_1_2 =((1 << 1)|(1 << 2)),
     CSMON_MASK_RECORDERS_2_0 =((1 << 2)|(1 << 0)),
     CSMON_MASK_RECORDERS_012 =((1 << 0)|(1 << 1)|(1 << 2)),
+    CSMON_MASK_RECORDERS_ALL =CSMON_MASK_RECORDERS_012,
 }CSMON_eRecorderParameterMask_t;
 
 typedef enum
@@ -435,6 +436,8 @@ uint32_t CSMON_u32GetParameterCheckSum (void);
  *      uint32_t u32TotalSampleCount
  *      float f32SampleRateHz       - Sample Rate in Hz
  *
+ * Note : !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration
+ *
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetRecorderConfiguration (
         uint16_t u16RecorderIndex,
@@ -448,8 +451,10 @@ CSMON_eResponseCode_t CSMON_eSetRecorderConfiguration (
  * Input:
  *      uint16_t u16RecorderIndex   - Recorder Index (Recorder0, ... RecorderN)
  *      uint16_t u16ParameterID     - Parameter ID or Index in Table
-        uint32_t u32TresholdValue   - TypeCast To uint32_t
-        uint16_t u16TriggerMode     - See CSMON_eTriggerMode_t
+ *      uint32_t u32TresholdValue   - TypeCast To uint32_t
+ *      uint16_t u16TriggerMode     - See CSMON_eTriggerMode_t
+ *
+ * Note : !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration
  *
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetRecorderTriggerAtPosition (
@@ -625,6 +630,11 @@ CSMON_eResponseCode_t CSMON_eSetParameterCountInScope (
  * CSMON_vSetSetupRecorderParameterMask
  **************************************************************************** */
 void CSMON_vSetSetupRecorderParameterMask (CSMON_eRecorderParameterMask_t eMask);
+
+/* *****************************************************************************
+ * CSMON_vAddSetupRecorderParameterMask
+ **************************************************************************** */
+void CSMON_vAddSetupRecorderParameterMask (CSMON_eRecorderParameterMask_t eMask);
 
 /* *****************************************************************************
  * CSMON_vSetStartRecorderParameterMask
