@@ -32,11 +32,12 @@
  **************************************************************************** */
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
 
-#define RECORDER0_ONLY_TEST                             0
+#define RECORDER0_ONLY_TEST                             1
 
 #if RECORDER0_ONLY_TEST
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   52
-#define RECORDER0_TOTAL_SAMPLE_COUNT        512
+#define RECORDER0_TOTAL_SAMPLE_COUNT        10000
+//#define RECORDER_COUNT                      3
 #define RECORDER_COUNT                      1
 #else
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   5900
