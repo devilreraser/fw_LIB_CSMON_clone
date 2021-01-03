@@ -31,7 +31,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.TMS320F28379D_XDS100v2.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="TEST_CSMON_C28xx"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.TMS320F28379D_XDS100v3.ccxml.Texas Instruments XDS100v3 USB Debug Probe_0/C28xx_CPU1" value="TEST_CSMON_C28xx"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:TEST_CSMON_C28xx}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28379D.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="D:/repo_git\fw_LIB_CSMON\04_Output_Files\Release\TEST_CSMON_C28xx.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28379D.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="D:\repo_github\fw_BasicAFE\02_Libraries\LIB_CSMON\04_Output_Files\Release\TEST_CSMON_C28xx.out"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28379D_XDS100v2.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="D:\repo_git\fw_LIB_CSMON\04_Output_Files\Release\TEST_CSMON_C28xx.out"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28379D_XDS100v3.ccxml.Texas Instruments XDS100v3 USB Debug Probe_0/C28xx_CPU1" value="D:\repo_git\fw_LIB_CSMON\04_Output_Files\ReleaseRecorders\TEST_CSMON_C28xx.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
