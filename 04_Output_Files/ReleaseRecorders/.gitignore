@@ -1,1 +1,3 @@
 TEST_CSMON_C28xx.*
+csmon.h
+CSMON_C28xx.lib
