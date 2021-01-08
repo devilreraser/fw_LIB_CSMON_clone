@@ -2481,7 +2481,7 @@ void main(void)
 
 
 
-
+    //RecordersInitialization();
 
 
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
