@@ -106,22 +106,27 @@ git lfs pull
 git lfs install --force
 rem pause
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
-echo Resolve Merge Conflicts In PROJECT With Convesys Master before Autoresolve
-pause
 IF %ERRORLEVEL% == 0 goto CommitProject
 IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
-echo Auto Resolve Merge Conflicts In PROJECT With Convesys Master:
-pause >nul
+echo Printing Conflicts In PROJECT:
+rem pause
 FOR /F %%F IN ('git diff --name-only --diff-filter=U') DO echo "%%F"
-@echo on
-pause >nul
+echo Resolve Merge Conflicts In PROJECT With Convesys Master before Autoresolve
+pause
+rem @echo on
+echo Auto Resolve Merge Conflicts In PROJECT With Convesys Master:
+pause
 FOR /F %%F IN ('git diff --name-only --diff-filter=U') DO git checkout convesys/master -- "%%F"
 git status
-pause >nul
-@echo off
-:CommitProject
+pause
+rem @echo off
 echo Resolve Merge Conflicts In PROJECT With Convesys Master after Autoresolve
 pause
+:CommitProject
+SET /P _CommitAck= Please enter "y" for Commit to GitHub. Any other symbol skips commit:
+IF "%_CommitAck%"=="y" goto CommitGitHub
+goto EndCommit
+:CommitGitHub
 rem pause
 git reset HEAD .gitattributes
 git checkout remotes/github/master -- .gitattributes
@@ -132,6 +137,7 @@ git commit -a -m "%_CommitString%"
 rem pause
 git push github master
 rem pause
+:EndCommit
 git lfs uninstall
 git.exe checkout -f -B master remotes/origin/master --
 git pull --progress -v --no-rebase "origin" master
