@@ -1,0 +1,20 @@
+
+
+in Initialization (initialization phase or idle task) - not time critical
+
+CSMON_eInit()
+CSMON_eResetParameterTable()
+CSMON_eSetParameter()
+CSMON_eApplyParameterChanges()
+
+CSMON_eSetRecorderConfiguration()
+CSMON_eSetExternalRecorderUsage()
+CSMON_eProcess()
+CSMON_eSetServerOnStatus()
+
+
+in Runtime - time critical
+
+CSMON_eSetParameterCountInRecorder()
+CSMON_eSetParameterInRecorderAtPosition()
+CSMON_vAddSetupRecorderParameterMask()
