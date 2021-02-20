@@ -17,9 +17,27 @@
 #include "emif_driver.h"
 #include "device.h"
 
+
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+#define BOARDCFG_BOARD_SCC_NONE             0
+#define BOARDCFG_BOARD_SCC_BIG              1
+#define BOARDCFG_BOARD_SCC_SMALL_TEST       2
+#define BOARDCFG_BOARD_CS_1107_SCC          3
+#define BOARDCFG_BOARD_CS_1107_SCC_R01      4
+
+#ifdef _CS_1107_SCC_R01
+    #define BOARDCFG_BOARD          BOARDCFG_BOARD_CS_1107_SCC_R01
+#elif defined _CS_1107_SCC
+    #define BOARDCFG_BOARD          BOARDCFG_BOARD_CS_1107_SCC
+#else
+    #ifdef CPU
+        #define BOARDCFG_BOARD          BOARDCFG_BOARD_SCC_SMALL_TEST
+    #else
+        #define BOARDCFG_BOARD          BOARDCFG_BOARD_SCC_BIG
+    #endif
+#endif
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -65,7 +83,7 @@ EMIF_AsyncTimingParams sEMIFParam =
     7,      //        uint32_t rStrobe;           //!< Read Strobe Cycles (tested upto 85 deg ambient 82 degrees MRAM Package Cool point)
     0,      //        uint32_t rHold;             //!< Read Hold Cycles
     0,      //        uint32_t wSetup;            //!< Write Setup Cycles
-    1,      //        uint32_t wStrobe;           //!< Write Strobe Cycles
+    2,      //        uint32_t wStrobe;           //!< Write Strobe Cycles      //1+1 wait state if FPGA not configured, otherwise 1 is enough
     0,      //        uint32_t wHold;             //!< Write Hold Cycles
     0,      //        uint32_t turnArnd;          //!< TurnAround Cycles
 };
@@ -77,6 +95,7 @@ uint16_t u16UseA19AsBA1 = USE_A19_AS_BA1;
 /* *****************************************************************************
  * Prototype of functions definitions
  **************************************************************************** */
+void setupEMIF1PinmuxAsync16BitBoardSCC(uint16_t u16UseA19AsBA1);
 void setupEMIF1PinmuxAsync32BitBoardSCC(uint16_t u16UseA19AsBA1);
 
 
@@ -122,7 +141,11 @@ void EMIF_DRV_vInit(void)
     //
     // Configure GPIO pins for EMIF1.
     //
+#if (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC_R01) || (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC)
+    setupEMIF1PinmuxAsync16BitBoardSCC(u16UseA19AsBA1);
+#else
     setupEMIF1PinmuxAsync32BitBoardSCC(u16UseA19AsBA1);
+#endif
 
     //
     // Configures Normal Asynchronous Mode of Operation.
@@ -141,6 +164,72 @@ void EMIF_DRV_vInit(void)
     EMIF_setAsyncDataBusWidth(EMIF1_BASE, EMIF_ASYNC_CS2_OFFSET, eAsyncDataWidth);
     EMIF_setAsyncTimingParams(EMIF1_BASE, EMIF_ASYNC_CS2_OFFSET, &sEMIFParam);
 }
+
+void setupEMIF1PinmuxAsync16BitBoardSCC(uint16_t u16UseA19AsBA1)
+{
+    uint16_t i;
+
+    GPIO_setPinConfig(GPIO_31_EM1WEN);      //WE
+    GPIO_setQualificationMode(31, GPIO_QUAL_ASYNC);  //could be not needed
+
+    GPIO_setPinConfig(GPIO_34_EM1CS2N);
+    GPIO_setPinConfig(GPIO_35_EM1CS3N);
+    GPIO_setPinConfig(GPIO_28_EM1CS4N);
+
+    GPIO_setPinConfig(GPIO_37_EM1OEN);      //OE
+
+    // Selecting address lines.
+    GPIO_setPinConfig(GPIO_38_EM1A0);//
+    GPIO_setPinConfig(GPIO_39_EM1A1);
+    GPIO_setPinConfig(GPIO_40_EM1A2);
+    GPIO_setPinConfig(GPIO_41_EM1A3);
+    GPIO_setPinConfig(GPIO_44_EM1A4);//
+    GPIO_setPinConfig(GPIO_45_EM1A5);
+    GPIO_setPinConfig(GPIO_46_EM1A6);
+    GPIO_setPinConfig(GPIO_47_EM1A7);
+    GPIO_setPinConfig(GPIO_48_EM1A8);
+    GPIO_setPinConfig(GPIO_49_EM1A9);
+    GPIO_setPinConfig(GPIO_50_EM1A10);
+    GPIO_setPinConfig(GPIO_51_EM1A11);
+    GPIO_setPinConfig(GPIO_52_EM1A12);
+    GPIO_setPinConfig(GPIO_86_EM1A13);//
+    GPIO_setPinConfig(GPIO_87_EM1A14);
+    GPIO_setPinConfig(GPIO_88_EM1A15);
+    GPIO_setPinConfig(GPIO_89_EM1A16);
+    GPIO_setPinConfig(GPIO_90_EM1A17);
+    GPIO_setPinConfig(GPIO_91_EM1A18);
+    if (u16UseA19AsBA1 > 0) {
+        GPIO_setPinConfig(GPIO_92_EM1BA1);
+    }
+
+    // Selecting data lines.
+    GPIO_setPinConfig(GPIO_69_EM1D15);
+    GPIO_setPinConfig(GPIO_70_EM1D14);
+    GPIO_setPinConfig(GPIO_71_EM1D13);
+    GPIO_setPinConfig(GPIO_72_EM1D12);
+    GPIO_setPinConfig(GPIO_73_EM1D11);
+    GPIO_setPinConfig(GPIO_74_EM1D10);
+    GPIO_setPinConfig(GPIO_75_EM1D9);
+    GPIO_setPinConfig(GPIO_76_EM1D8);
+    GPIO_setPinConfig(GPIO_77_EM1D7);
+    GPIO_setPinConfig(GPIO_78_EM1D6);
+    GPIO_setPinConfig(GPIO_79_EM1D5);
+    GPIO_setPinConfig(GPIO_80_EM1D4);
+    GPIO_setPinConfig(GPIO_81_EM1D3);
+    GPIO_setPinConfig(GPIO_82_EM1D2);
+    GPIO_setPinConfig(GPIO_83_EM1D1);
+    GPIO_setPinConfig(GPIO_85_EM1D0);
+
+    int startGPIO = 69;
+    // Setup Async Mode for Data pins.
+    for (i=startGPIO; i<=85; i++) {
+        if (i != 84) {
+            GPIO_setPadConfig( i, GPIO_PIN_TYPE_PULLUP );
+            GPIO_setQualificationMode( i, GPIO_QUAL_ASYNC );
+        }
+    }
+}
+
 
 
 void setupEMIF1PinmuxAsync32BitBoardSCC(uint16_t u16UseA19AsBA1)

@@ -73,10 +73,10 @@
 #define CSMON_PAR_LIST_RECORDER_DEBUG                                   4
 
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MINIMUM_COUNT
-//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
+#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_MAXIMUM_COUNT
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_EACH_TYPE_REPEATED_ALL_TYPES_COUNT_TIMES
 //#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_ALL_TYPES_REPEATED_ALL_TYPES_COUNT_TIMES
-#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_RECORDER_DEBUG
+//#define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_RECORDER_DEBUG
 
 
 
@@ -2389,10 +2389,12 @@ void main(void)
 
 
 
+#ifdef _CS_1107_SCC_R01
+
+#else
     //
     // LEDs
     //
-
     // STAT_LED_G_PIN is the LED STATUS pin. - Init and Main Loop CSMON CPU Load -> Green LED (closest to the MCU Led)
     GPIO_setPinConfigOutput(STAT_LED_G_PIN);
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW);
@@ -2409,12 +2411,12 @@ void main(void)
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);
 
 
-
     //
     // CLK_EN_FPGA_PIN is the FPGA Clock Enable pin. - generally not needed - there is pull-up
     //
     GPIO_setPinConfigOutput(CLK_EN_FPGA_PIN);
     GPIO_writePin(CLK_EN_FPGA_PIN, 1);
+#endif
 
 
 
