@@ -77,16 +77,29 @@ typedef struct
  * Variables Definitions
  **************************************************************************** */
 
+#if (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC_R01) || (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC)
+EMIF_AsyncTimingParams sEMIFParam =
+{
+    0,      // uint32_t rSetup;     //!< Read Setup Cycles
+    7,      // uint32_t rStrobe;    //!< Read Strobe Cycles (tested at 25 deg ambient)
+    0,      // uint32_t rHold;      //!< Read Hold Cycles
+    1,      // uint32_t wSetup;     //!< Write Setup Cycles
+    1,      // uint32_t wStrobe;    //!< Write Strobe Cycles
+    2,      // uint32_t wHold;      //!< Write Hold Cycles
+    0,      // uint32_t turnArnd;   //!< TurnAround Cycles
+};
+#else
 EMIF_AsyncTimingParams sEMIFParam =
 {
     0,      //        uint32_t rSetup;            //!< Read Setup Cycles
     7,      //        uint32_t rStrobe;           //!< Read Strobe Cycles (tested upto 85 deg ambient 82 degrees MRAM Package Cool point)
     0,      //        uint32_t rHold;             //!< Read Hold Cycles
     0,      //        uint32_t wSetup;            //!< Write Setup Cycles
-    2,      //        uint32_t wStrobe;           //!< Write Strobe Cycles      //1+1 wait state if FPGA not configured, otherwise 1 is enough
+    1,      //        uint32_t wStrobe;           //!< Write Strobe Cycles
     0,      //        uint32_t wHold;             //!< Write Hold Cycles
     0,      //        uint32_t turnArnd;          //!< TurnAround Cycles
 };
+#endif
 
 EMIF_AsyncDataWidth eAsyncDataWidth = EMIF_ASYNC_DATA_WIDTH;
 uint16_t u16UseA19AsBA1 = USE_A19_AS_BA1;
@@ -170,13 +183,21 @@ void setupEMIF1PinmuxAsync16BitBoardSCC(uint16_t u16UseA19AsBA1)
     uint16_t i;
 
     GPIO_setPinConfig(GPIO_31_EM1WEN);      //WE
-    GPIO_setQualificationMode(31, GPIO_QUAL_ASYNC);  //could be not needed
+    //GPIO_setQualificationMode(31, GPIO_QUAL_ASYNC);  //could be not needed
 
     GPIO_setPinConfig(GPIO_34_EM1CS2N);
     GPIO_setPinConfig(GPIO_35_EM1CS3N);
     GPIO_setPinConfig(GPIO_28_EM1CS4N);
 
+#if 0
     GPIO_setPinConfig(GPIO_37_EM1OEN);      //OE
+#else
+    GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(37));
+    GPIO_setDirectionMode(37, GPIO_DIR_MODE_OUT);
+    GPIO_setPadConfig(37, GPIO_PIN_TYPE_STD);
+    GPIO_setQualificationMode(37, GPIO_QUAL_ASYNC);
+    GPIO_writePin(37,0);
+#endif
 
     // Selecting address lines.
     GPIO_setPinConfig(GPIO_38_EM1A0);//
@@ -198,8 +219,13 @@ void setupEMIF1PinmuxAsync16BitBoardSCC(uint16_t u16UseA19AsBA1)
     GPIO_setPinConfig(GPIO_89_EM1A16);
     GPIO_setPinConfig(GPIO_90_EM1A17);
     GPIO_setPinConfig(GPIO_91_EM1A18);
-    if (u16UseA19AsBA1 > 0) {
+    if (u16UseA19AsBA1 > 0)
+    {
         GPIO_setPinConfig(GPIO_92_EM1BA1);
+    }
+    else
+    {
+        GPIO_setPinConfig(GPIO_92_EM1A19);
     }
 
     // Selecting data lines.
