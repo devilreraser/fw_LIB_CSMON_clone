@@ -27,6 +27,10 @@
 #include "parameter.h"
 #include "datetime.h"
 
+#ifdef _CS_1107_SCC_R01
+#include "peripheral.h"
+#endif
+
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
@@ -2541,6 +2545,13 @@ void main(void)
     CSMON_eSetMinGuaranteedTimeBetweenTwoISRs(10);       /* SetMinGuaranteedTimeBetweenTwoISRs in usec */
 
 
+#ifdef _CS_1107_SCC_R01
+    //
+    // PERIPHERAL
+    //
+    PERIPHERAL_vInit();
+#endif
+
 
     //
     // Reset the WatchDog counter
@@ -2776,6 +2787,13 @@ void main(void)
         FPGA_SCI_DRV_vProcessUartRx();
         FPGA_SCI_DRV_vProcess();
 
+
+#ifdef _CS_1107_SCC_R01
+        //
+        // PERIPHERAL
+        //
+        PERIPHERAL_vProcess();
+#endif
 
     }
 

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TEST_CSMON_C28xx</name>
+	<name>PERIPHERAL_C28xx</name>
 	<comment></comment>
 	<projects>
-		<project>CSMON_C28xx</project>
-		<project>PERIPHERAL_C28xx</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -28,54 +26,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>01_Source_Test</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>C2000Ware_LIB</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_TestUsage</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>PERIPHERAL_LIB</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/datetime.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/datetime.h</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/main.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/main.c</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/main.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/main.h</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/projectcfg.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/projectcfg.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib</name>
@@ -83,84 +36,14 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/Release</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseRecorders</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseTestCS1107</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_TestUsage/parameter.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/parameter.h</locationURI>
-		</link>
-		<link>
-			<name>PERIPHERAL_LIB/Release</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>Release/TEST_CSMON_C28xx.out</name>
+			<name>Debug/PERIPHERAL_C28xx.lib</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
-			<name>ReleaseRecorders/TEST_CSMON_C28xx.out</name>
+			<name>Release/PERIPHERAL_C28xx.lib</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
-		</link>
-		<link>
-			<name>ReleaseTestCS1107/TEST_CSMON_C28xx.out</name>
-			<type>1</type>
-			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/emif_driver.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/emif_driver.c</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/emif_driver.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/emif_driver.h</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/fpga_sci_driver.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/fpga_sci_driver.c</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/fpga_sci_driver.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/fpga_sci_driver.h</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/sci_driver.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/sci_driver.c</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/sci_driver.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/sci_driver.h</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/uart_driver.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/uart_driver.c</locationURI>
-		</link>
-		<link>
-			<name>01_Source_Test/peripheral_driver/uart_driver.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/peripheral_driver/uart_driver.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/adc.c</name>
@@ -456,51 +339,6 @@
 			<name>C2000Ware_LIB/driverlib/xbar.h</name>
 			<type>1</type>
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/xbar.h</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/Release/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/Release/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/csmon.h</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseRecorders/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseRecorders/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseRecorders/csmon.h</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseTestCS1107/.gitignore</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/.gitignore</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseTestCS1107/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseTestCS1107/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/csmon.h</locationURI>
-		</link>
-		<link>
-			<name>PERIPHERAL_LIB/Release/PERIPHERAL_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/PERIPHERAL_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>PERIPHERAL_LIB/Release/peripheral.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/peripheral.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/.ccsproject</name>
