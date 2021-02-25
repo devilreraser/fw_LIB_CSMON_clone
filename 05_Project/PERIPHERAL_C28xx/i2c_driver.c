@@ -20,9 +20,6 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
-#define I2CA                        0
-#define I2CB                        1
-#define I2C_COUNT                   2       //I2CA, I2CB
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -39,17 +36,6 @@
 #define MAX_BUFFER_SIZE             14      // Max is currently 14 because if
                                             // 2 address bytes and the 16-byte
                                             // FIFO
-
-//
-// I2C message states for I2CMsg struct
-//
-#define MSG_STATUS_INACTIVE         0x0000 // Message not in use, do not send
-#define MSG_STATUS_SEND_WITHSTOP    0x0010 // Send message with stop bit
-#define MSG_STATUS_WRITE_BUSY       0x0011 // Message sent, wait for stop
-#define MSG_STATUS_SEND_NOSTOP      0x0020 // Send message without stop bit
-#define MSG_STATUS_SEND_NOSTOP_BUSY 0x0021 // Message sent, wait for ARDY
-#define MSG_STATUS_RESTART          0x0022 // Ready to become master-receiver
-#define MSG_STATUS_READ_BUSY        0x0023 // Wait for stop before reading data
 
 //
 // Error messages for read and write functions
@@ -98,7 +84,7 @@ struct I2CMsg i2cMsgOut[I2C_COUNT] =
     {
         NULL,
         NULL,
-        MSG_STATUS_INACTIVE,
+        I2C_STATUS_INACTIVE,
         REGISTER_ADDRESS_SIZE,
         SLAVE_ADDRESS,
         NUM_BYTES,
@@ -121,7 +107,7 @@ struct I2CMsg i2cMsgOut[I2C_COUNT] =
     {
         NULL,
         NULL,
-        MSG_STATUS_INACTIVE,
+        I2C_STATUS_INACTIVE,
         REGISTER_ADDRESS_SIZE,
         SLAVE_ADDRESS,
         NUM_BYTES,
@@ -147,7 +133,7 @@ struct I2CMsg i2cMsgIn[I2C_COUNT]  =
     {
         NULL,
         NULL,
-        MSG_STATUS_INACTIVE,
+        I2C_STATUS_INACTIVE,
         REGISTER_ADDRESS_SIZE,
         SLAVE_ADDRESS,
         NUM_BYTES,
@@ -160,7 +146,7 @@ struct I2CMsg i2cMsgIn[I2C_COUNT]  =
     {
         NULL,
         NULL,
-        MSG_STATUS_INACTIVE,
+        I2C_STATUS_INACTIVE,
         REGISTER_ADDRESS_SIZE,
         SLAVE_ADDRESS,
         NUM_BYTES,
@@ -318,7 +304,7 @@ uint16_t readData(uint32_t base, struct I2CMsg *msg)
     // If we are in the address setup phase, send the address without a
     // stop condition.
     //
-    if(msg->msgStatus == MSG_STATUS_SEND_NOSTOP)
+    if(msg->msgStatus == I2C_STATUS_SEND_NOSTOP)
     {
         //
         // Check if bus busy
@@ -344,7 +330,7 @@ uint16_t readData(uint32_t base, struct I2CMsg *msg)
         I2C_setConfig(base, I2C_MASTER_SEND_MODE);
         I2C_sendStartCondition(base);
     }
-    else if(msg->msgStatus == MSG_STATUS_RESTART)
+    else if(msg->msgStatus == I2C_STATUS_RESTART)
     {
         //
         // Address setup phase has completed. Now setup how many bytes expected
@@ -380,12 +366,12 @@ __interrupt void i2cAISR(void)
         //
         // If completed message was writing data, reset msg to inactive state
         //
-        if(currentMsgPtr[I2CA]->msgStatus == MSG_STATUS_WRITE_BUSY)
+        if(currentMsgPtr[I2CA]->msgStatus == I2C_STATUS_WRITE_BUSY)
         {
-            currentMsgPtr[I2CA]->msgStatus = MSG_STATUS_INACTIVE;
+            currentMsgPtr[I2CA]->msgStatus = I2C_STATUS_INACTIVE;
             if (currentMsgPtr[I2CA]->pStatus != NULL)
             {
-                *currentMsgPtr[I2CA]->pStatus = MSG_STATUS_INACTIVE;
+                *currentMsgPtr[I2CA]->pStatus = I2C_STATUS_INACTIVE;
             }
         }
         else
@@ -398,20 +384,20 @@ __interrupt void i2cAISR(void)
             // message status to try again. User may want to limit the number
             // of retries before generating an error.
             //
-            if(currentMsgPtr[I2CA]->msgStatus == MSG_STATUS_SEND_NOSTOP_BUSY)
+            if(currentMsgPtr[I2CA]->msgStatus == I2C_STATUS_SEND_NOSTOP_BUSY)
             {
-                currentMsgPtr[I2CA]->msgStatus = MSG_STATUS_SEND_NOSTOP;
+                currentMsgPtr[I2CA]->msgStatus = I2C_STATUS_SEND_NOSTOP;
             }
             //
             // If completed message was reading I2C Slave data, reset message to
             // inactive state and read data from FIFO.
             //
-            else if(currentMsgPtr[I2CA]->msgStatus == MSG_STATUS_READ_BUSY)
+            else if(currentMsgPtr[I2CA]->msgStatus == I2C_STATUS_READ_BUSY)
             {
-                currentMsgPtr[I2CA]->msgStatus = MSG_STATUS_INACTIVE;
+                currentMsgPtr[I2CA]->msgStatus = I2C_STATUS_INACTIVE;
                 if (currentMsgPtr[I2CA]->pStatus != NULL)
                 {
-                    *currentMsgPtr[I2CA]->pStatus = MSG_STATUS_INACTIVE;
+                    *currentMsgPtr[I2CA]->pStatus = I2C_STATUS_INACTIVE;
                 }
 
                 for(i=0; (i < currentMsgPtr[I2CA]->numBytes) && (i < NUM_BYTES); i++)
@@ -423,12 +409,9 @@ __interrupt void i2cAISR(void)
                     }
                 }
 
-
                 //
                 // Check received data
                 //
-
-
 #if 0
                 for(i=0; i < NUM_BYTES; i++)
                 {
@@ -473,9 +456,9 @@ __interrupt void i2cAISR(void)
             I2C_sendStopCondition(I2CA_BASE);
             I2C_clearStatus(I2CA_BASE, I2C_STS_NO_ACK);
         }
-        else if(currentMsgPtr[I2CA]->msgStatus == MSG_STATUS_SEND_NOSTOP_BUSY)
+        else if(currentMsgPtr[I2CA]->msgStatus == I2C_STATUS_SEND_NOSTOP_BUSY)
         {
-            currentMsgPtr[I2CA]->msgStatus = MSG_STATUS_RESTART;
+            currentMsgPtr[I2CA]->msgStatus = I2C_STATUS_RESTART;
         }
     }
     else
@@ -513,13 +496,13 @@ __interrupt void i2cBISR(void)
         //
         // If completed message was writing data, reset msg to inactive state
         //
-        if(currentMsgPtr[I2CB]->msgStatus == MSG_STATUS_WRITE_BUSY)
+        if(currentMsgPtr[I2CB]->msgStatus == I2C_STATUS_WRITE_BUSY)
         {
-            currentMsgPtr[I2CB]->msgStatus = MSG_STATUS_INACTIVE;
+            currentMsgPtr[I2CB]->msgStatus = I2C_STATUS_INACTIVE;
 
             if (currentMsgPtr[I2CB]->pStatus != NULL)
             {
-                *currentMsgPtr[I2CB]->pStatus = MSG_STATUS_INACTIVE;
+                *currentMsgPtr[I2CB]->pStatus = I2C_STATUS_INACTIVE;
             }
         }
         else
@@ -532,20 +515,20 @@ __interrupt void i2cBISR(void)
             // message status to try again. User may want to limit the number
             // of retries before generating an error.
             //
-            if(currentMsgPtr[I2CB]->msgStatus == MSG_STATUS_SEND_NOSTOP_BUSY)
+            if(currentMsgPtr[I2CB]->msgStatus == I2C_STATUS_SEND_NOSTOP_BUSY)
             {
-                currentMsgPtr[I2CB]->msgStatus = MSG_STATUS_SEND_NOSTOP;
+                currentMsgPtr[I2CB]->msgStatus = I2C_STATUS_SEND_NOSTOP;
             }
             //
             // If completed message was reading I2C Slave data, reset message to
             // inactive state and read data from FIFO.
             //
-            else if(currentMsgPtr[I2CB]->msgStatus == MSG_STATUS_READ_BUSY)
+            else if(currentMsgPtr[I2CB]->msgStatus == I2C_STATUS_READ_BUSY)
             {
-                currentMsgPtr[I2CB]->msgStatus = MSG_STATUS_INACTIVE;
+                currentMsgPtr[I2CB]->msgStatus = I2C_STATUS_INACTIVE;
                 if (currentMsgPtr[I2CB]->pStatus != NULL)
                 {
-                    *currentMsgPtr[I2CB]->pStatus = MSG_STATUS_INACTIVE;
+                    *currentMsgPtr[I2CB]->pStatus = I2C_STATUS_INACTIVE;
                 }
 
                 for(i=0; (i < currentMsgPtr[I2CB]->numBytes) && (i < NUM_BYTES); i++)
@@ -604,9 +587,9 @@ __interrupt void i2cBISR(void)
             I2C_sendStopCondition(I2CB_BASE);
             I2C_clearStatus(I2CB_BASE, I2C_STS_NO_ACK);
         }
-        else if(currentMsgPtr[I2CB]->msgStatus == MSG_STATUS_SEND_NOSTOP_BUSY)
+        else if(currentMsgPtr[I2CB]->msgStatus == I2C_STATUS_SEND_NOSTOP_BUSY)
         {
-            currentMsgPtr[I2CB]->msgStatus = MSG_STATUS_RESTART;
+            currentMsgPtr[I2CB]->msgStatus = I2C_STATUS_RESTART;
         }
     }
     else
@@ -642,9 +625,22 @@ void fail(void)
     for(;;);
 }
 
+uint32_t I2C_u32BaseFromIndex(uint16_t indexI2C)
+{
+    uint32_t u32Result;
+
+    u32Result = I2CA_BASE;
+    u32Result += indexI2C * (I2CB_BASE - I2CA_BASE);
+    return u32Result;
+}
+
+
 void i2cRWProcess(uint16_t indexI2C)
 {
     uint16_t error;
+
+    uint32_t base;
+    base = I2C_u32BaseFromIndex(indexI2C);
 
     //
     // **** Write data to I2C ****
@@ -652,12 +648,12 @@ void i2cRWProcess(uint16_t indexI2C)
     // Check the outgoing message to see if it should be sent. In this
     // example it is initialized to send with a stop bit.
     //
-    if(i2cMsgOut[indexI2C].msgStatus == MSG_STATUS_SEND_WITHSTOP)
+    if(i2cMsgOut[indexI2C].msgStatus == I2C_STATUS_SEND_WITHSTOP)
     {
         //
         // Send the data to the I2C
         //
-        error = writeData(indexI2C, &i2cMsgOut[indexI2C]);
+        error = writeData(base, &i2cMsgOut[indexI2C]);
 
         //
         // If communication is correctly initiated, set msg status to busy
@@ -669,7 +665,7 @@ void i2cRWProcess(uint16_t indexI2C)
         if(error == SUCCESS)
         {
             currentMsgPtr[indexI2C] = &i2cMsgOut[indexI2C];
-            i2cMsgOut[indexI2C].msgStatus = MSG_STATUS_WRITE_BUSY;
+            i2cMsgOut[indexI2C].msgStatus = I2C_STATUS_WRITE_BUSY;
         }
     }
 
@@ -679,17 +675,17 @@ void i2cRWProcess(uint16_t indexI2C)
     // Check outgoing message status. Bypass read section if status is
     // not inactive.
     //
-    if (i2cMsgOut[indexI2C].msgStatus == MSG_STATUS_INACTIVE)
+    if (i2cMsgOut[indexI2C].msgStatus == I2C_STATUS_INACTIVE)
     {
         //
         // Check incoming message status
         //
-        if(i2cMsgIn[indexI2C].msgStatus == MSG_STATUS_SEND_NOSTOP)
+        if(i2cMsgIn[indexI2C].msgStatus == I2C_STATUS_SEND_NOSTOP)
         {
             //
             // Send EEPROM address setup
             //
-            while(readData(indexI2C, &i2cMsgIn[indexI2C]) != SUCCESS)
+            while(readData(base, &i2cMsgIn[indexI2C]) != SUCCESS)
             {
                 //
                 // Maybe setup an attempt counter to break an infinite
@@ -705,7 +701,7 @@ void i2cRWProcess(uint16_t indexI2C)
             // Update current message pointer and message status
             //
             currentMsgPtr[indexI2C] = &i2cMsgIn[indexI2C];
-            i2cMsgIn[indexI2C].msgStatus = MSG_STATUS_SEND_NOSTOP_BUSY;
+            i2cMsgIn[indexI2C].msgStatus = I2C_STATUS_SEND_NOSTOP_BUSY;
         }
 
         //
@@ -714,12 +710,12 @@ void i2cRWProcess(uint16_t indexI2C)
         // I2C Slave. Complete the communication with a stop bit. msgStatus is
         // updated in the interrupt service routine.
         //
-        else if(i2cMsgIn[indexI2C].msgStatus == MSG_STATUS_RESTART)
+        else if(i2cMsgIn[indexI2C].msgStatus == I2C_STATUS_RESTART)
         {
             //
             // Read data portion
             //
-            while(readData(indexI2C, &i2cMsgIn[indexI2C]) != SUCCESS)
+            while(readData(base, &i2cMsgIn[indexI2C]) != SUCCESS)
             {
                 //
                 // Maybe setup an attempt counter to break an infinite
@@ -731,7 +727,7 @@ void i2cRWProcess(uint16_t indexI2C)
             // Update current message pointer and message status
             //
             currentMsgPtr[indexI2C] = &i2cMsgIn[indexI2C];
-            i2cMsgIn[indexI2C].msgStatus = MSG_STATUS_READ_BUSY;
+            i2cMsgIn[indexI2C].msgStatus = I2C_STATUS_READ_BUSY;
         }
     }
 
@@ -744,7 +740,7 @@ void i2cRWProcess(uint16_t indexI2C)
  **************************************************************************** */
 void I2C_DRIVER_vInit(void)
 {
-    uint16_t i;
+    //uint16_t i;
 
     //
     // Initialize GPIOs 2 and 3 for use as SDA B and SCL B respectively
@@ -763,8 +759,8 @@ void I2C_DRIVER_vInit(void)
     // Interrupts that are used in this example are re-mapped to ISR functions
     // found within this file.
     //
-    //Interrupt_register(I2CA_BASE, &i2cAISR);
-    Interrupt_register(I2CB_BASE, &i2cBISR);
+    //Interrupt_register(INT_I2CA, &i2cAISR);
+    Interrupt_register(INT_I2CB, &i2cBISR);
 
     //
     // Set I2C use, initializing it for FIFO mode
@@ -775,11 +771,11 @@ void I2C_DRIVER_vInit(void)
     //
     // Clear incoming message buffer
     //
-    for (i = 0; i < MAX_BUFFER_SIZE; i++)
-    {
-        //i2cMsgIn[I2CA].msgBuffer[i] = 0x0000;
-        i2cMsgIn[I2CB].msgBuffer[i] = 0x0000;
-    }
+    //for (i = 0; i < MAX_BUFFER_SIZE; i++)
+    //{
+    //    //i2cMsgIn[I2CA].msgBuffer[i] = 0x0000;
+    //    i2cMsgIn[I2CB].msgBuffer[i] = 0x0000;
+    //}
 
     //
     // Set message pointer used in interrupt to point to outgoing message
@@ -805,7 +801,7 @@ void I2C_DRIVER_vProcess(void)
 void I2C_DRIVER_vSetupMessageSlave (uint16_t indexI2C, uint16_t slaveAddress, uint16_t registerAddressBytes, bool bRead)
 {
     struct I2CMsg *setupMsgPtr;
-    if (bRead)
+    if (bRead == I2C_RD)
     {
         setupMsgPtr = &i2cMsgIn[indexI2C];
     }
@@ -825,7 +821,7 @@ bool I2C_DRIVER_vReadData (uint16_t indexI2C, uint16_t registerStartAddress, uin
 
     setupMsgPtr = &i2cMsgIn[indexI2C];
 
-    if (setupMsgPtr->msgStatus == MSG_STATUS_INACTIVE)
+    if (setupMsgPtr->msgStatus == I2C_STATUS_INACTIVE)
     {
         bResult = true;
         setupMsgPtr->pData = pData;
@@ -833,13 +829,13 @@ bool I2C_DRIVER_vReadData (uint16_t indexI2C, uint16_t registerStartAddress, uin
         setupMsgPtr->pStatus = pStatus;
         if (setupMsgPtr->pStatus != NULL)
         {
-            *setupMsgPtr->pStatus = MSG_STATUS_READ_BUSY;
+            *setupMsgPtr->pStatus = I2C_STATUS_READ_BUSY;
         }
 
         setupMsgPtr->registerAddr[0] = (registerStartAddress >> 0) & 0x00FF;
         setupMsgPtr->registerAddr[1] = (registerStartAddress >> 8) & 0x00FF;
 
-        setupMsgPtr->msgStatus = MSG_STATUS_SEND_NOSTOP;
+        setupMsgPtr->msgStatus = I2C_STATUS_SEND_NOSTOP;
     }
 
 
@@ -855,7 +851,7 @@ bool I2C_DRIVER_vWriteData (uint16_t indexI2C, uint16_t registerStartAddress, ui
 
     setupMsgPtr = &i2cMsgOut[indexI2C];
 
-    if (setupMsgPtr->msgStatus == MSG_STATUS_INACTIVE)
+    if (setupMsgPtr->msgStatus == I2C_STATUS_INACTIVE)
     {
         setupMsgPtr->pData = pData;
         if ((setupMsgPtr->pData != NULL) && (countBytes <= MAX_BUFFER_SIZE))
@@ -866,7 +862,7 @@ bool I2C_DRIVER_vWriteData (uint16_t indexI2C, uint16_t registerStartAddress, ui
             setupMsgPtr->pStatus = pStatus;
             if (setupMsgPtr->pStatus != NULL)
             {
-                *setupMsgPtr->pStatus = MSG_STATUS_WRITE_BUSY;
+                *setupMsgPtr->pStatus = I2C_STATUS_WRITE_BUSY;
             }
 
             setupMsgPtr->registerAddr[0] = (registerStartAddress >> 0) & 0x00FF;
@@ -876,7 +872,7 @@ bool I2C_DRIVER_vWriteData (uint16_t indexI2C, uint16_t registerStartAddress, ui
             {
                 setupMsgPtr->msgBuffer[i] = pData[i];
             }
-            setupMsgPtr->msgStatus = MSG_STATUS_SEND_WITHSTOP;
+            setupMsgPtr->msgStatus = I2C_STATUS_SEND_WITHSTOP;
         }
     }
 
