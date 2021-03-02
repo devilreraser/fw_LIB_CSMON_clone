@@ -83,8 +83,8 @@ void DS3231MZ_vInit(void)
     I2C_DRIVER_vSetupMessageSlave(I2CB, DS3231MZ_SLAVE_ADDRESS, DS3231MZ_REG_ADDR_SIZE, I2C_WR);
 }
 
-connect resistor DSP_SDA_RTC <-> SDA_RTC ?
-connect resistor DSP_SCL_RTC <-> SCL_RTC ?
+//connect resistor DSP_SDA_RTC <-> SDA_RTC ?
+//connect resistor DSP_SCL_RTC <-> SCL_RTC ?
 
 void DS3231MZ_vProcess(void)
 {

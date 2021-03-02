@@ -39,6 +39,17 @@
     #endif
 #endif
 
+
+#define BOARDCFG_EMIF1_CS2_START_ADDRESS    0x00100000
+#define BOARDCFG_EMIF1_CS3_START_ADDRESS    0x00300000
+#define BOARDCFG_EMIF1_CS4_START_ADDRESS    0x00380000
+
+#define BOARDCFG_EMIF1_CS2_LENGTH           0x00200000
+#define BOARDCFG_EMIF1_CS3_LENGTH           0x00080000
+#define BOARDCFG_EMIF1_CS4_LENGTH           0x00060000
+
+
+
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
@@ -76,6 +87,19 @@ typedef struct
 /* *****************************************************************************
  * Variables Definitions
  **************************************************************************** */
+
+#if (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC_R01)
+EMIF_AsyncTimingParams sEMIFParamFPGA =
+{
+    0,      // uint32_t rSetup;     //!< Read Setup Cycles
+    7,      // uint32_t rStrobe;    //!< Read Strobe Cycles (tested at 25 deg ambient)
+    0,      // uint32_t rHold;      //!< Read Hold Cycles
+    1,      // uint32_t wSetup;     //!< Write Setup Cycles
+    1,      // uint32_t wStrobe;    //!< Write Strobe Cycles
+    2,      // uint32_t wHold;      //!< Write Hold Cycles
+    0,      // uint32_t turnArnd;   //!< TurnAround Cycles
+};
+#endif
 
 #if (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC_R01) || (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC)
 EMIF_AsyncTimingParams sEMIFParam =
@@ -176,6 +200,25 @@ void EMIF_DRV_vInit(void)
     //
     EMIF_setAsyncDataBusWidth(EMIF1_BASE, EMIF_ASYNC_CS2_OFFSET, eAsyncDataWidth);
     EMIF_setAsyncTimingParams(EMIF1_BASE, EMIF_ASYNC_CS2_OFFSET, &sEMIFParam);
+
+#if (BOARDCFG_BOARD == BOARDCFG_BOARD_CS_1107_SCC_R01)
+    //
+    // Configures Normal Asynchronous Mode of Operation.
+    //
+    EMIF_setAsyncMode(EMIF1_BASE, EMIF_ASYNC_CS3_OFFSET,
+                      EMIF_ASYNC_NORMAL_MODE);
+
+    //
+    // Disables Extended Wait Mode.
+    //
+    EMIF_disableAsyncExtendedWait(EMIF1_BASE, EMIF_ASYNC_CS3_OFFSET);
+
+    //
+    // Configure EMIF1 Data Bus Width.
+    //
+    EMIF_setAsyncDataBusWidth(EMIF1_BASE, EMIF_ASYNC_CS3_OFFSET, eAsyncDataWidth);
+    EMIF_setAsyncTimingParams(EMIF1_BASE, EMIF_ASYNC_CS3_OFFSET, &sEMIFParamFPGA);
+#endif
 }
 
 void setupEMIF1PinmuxAsync16BitBoardSCC(uint16_t u16UseA19AsBA1)
@@ -189,7 +232,7 @@ void setupEMIF1PinmuxAsync16BitBoardSCC(uint16_t u16UseA19AsBA1)
     GPIO_setPinConfig(GPIO_35_EM1CS3N);
     GPIO_setPinConfig(GPIO_28_EM1CS4N);
 
-#if 0
+#if 1
     GPIO_setPinConfig(GPIO_37_EM1OEN);      //OE
 #else
     GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(37));
