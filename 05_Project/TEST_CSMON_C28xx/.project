@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>CSMON_C28xx</project>
+		<project>PERIPHERAL_C28xx</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -43,6 +44,11 @@
 		</link>
 		<link>
 			<name>CSMON_TestUsage</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>PERIPHERAL_LIB</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -87,9 +93,19 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/ReleaseTestCS1107</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>CSMON_TestUsage/parameter.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/parameter.h</locationURI>
+		</link>
+		<link>
+			<name>PERIPHERAL_LIB/Release</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>Release/TEST_CSMON_C28xx.out</name>
@@ -98,6 +114,11 @@
 		</link>
 		<link>
 			<name>ReleaseRecorders/TEST_CSMON_C28xx.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
+			<name>ReleaseTestCS1107/TEST_CSMON_C28xx.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
@@ -455,6 +476,31 @@
 			<name>CSMON_LIB/ReleaseRecorders/csmon.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseRecorders/csmon.h</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ReleaseTestCS1107/.gitignore</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/.gitignore</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ReleaseTestCS1107/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ReleaseTestCS1107/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/csmon.h</locationURI>
+		</link>
+		<link>
+			<name>PERIPHERAL_LIB/Release/PERIPHERAL_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/PERIPHERAL_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>PERIPHERAL_LIB/Release/peripheral.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/peripheral.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/.ccsproject</name>
