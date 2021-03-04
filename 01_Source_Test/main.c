@@ -20,9 +20,15 @@
 #include "main.h"
 #include "device.h"
 #include "emif_driver.h"
+
+#ifdef _CS_1107_SCC_R01
+#include "fpga_driver.h"
+#else
 #include "sci_driver.h"
 #include "uart_driver.h"
 #include "fpga_sci_driver.h"
+#endif
+
 #include "csmon.h"
 #include "parameter.h"
 #include "datetime.h"
@@ -1845,7 +1851,11 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
     u32TimeCtrlLoop_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+#ifdef _CS_1107_SCC_R01
+
+#else
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
+#endif
 
 
 
@@ -1959,7 +1969,11 @@ void ControlProcess(void)
     {
         u32TimeCtrlLoopMax_Ticks = u32TimeCtrlLoop_Ticks;
     }
+#ifdef _CS_1107_SCC_R01
+
+#else
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);    /* Red LED (closest to the Debug Header) */
+#endif
 }
 
 
@@ -2005,7 +2019,11 @@ void ParameterInitialization(void)
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
+#ifdef _CS_1107_SCC_R01
+
+#else
             GPIO_writePin(STAT_LED_A_B_PIN, (u16Index & 1) );     /* Amber LED (middle Led) */
+#endif
 
             u32ParamRealAddress = asParameterList[u16Index].u32RealAddress;
 
@@ -2049,9 +2067,19 @@ void ParameterInitialization(void)
         EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
 
 
+#ifdef _CS_1107_SCC_R01
+
+#else
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);         /* Amber LED (middle Led) */
+#endif
+
         CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
+
+#ifdef _CS_1107_SCC_R01
+
+#else
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
+#endif
 
 
         /* Recorder And Scope Initialization Made Once after parameter initialized */
@@ -2450,6 +2478,9 @@ void main(void)
     }
 
 
+#ifdef _CS_1107_SCC_R01
+
+#else
     //
     //  FPGA SCI Communication
     //
@@ -2484,13 +2515,17 @@ void main(void)
     FPGA_SCI_DRV_vSetupFreeTimerTicksPerMicroSecond(u16FreeRunningTimerTicksPerMicroSecond);
     Interrupt_enable(INT_SCIC_RX);
     Interrupt_enable(INT_SCIC_TX);
-
+#endif
 
 
     //RecordersInitialization();
 
 
+#ifdef _CS_1107_SCC_R01
+
+#else
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
+#endif
     //
     // CSMON Initialization -> ~ 2.25ms
     //
@@ -2502,7 +2537,11 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
+#ifdef _CS_1107_SCC_R01
+
+#else
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
+#endif
 
 
 
@@ -2724,7 +2763,11 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
+#ifdef _CS_1107_SCC_R01
+
+#else
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
+#endif
         u32TimeMainLoopProcessCSMON_Bgn_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
 
         //
@@ -2737,7 +2780,11 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
+#ifdef _CS_1107_SCC_R01
+
+#else
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
+#endif
         u32TimeMainLoopProcessCSMON_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
         u32TimeMainLoopProcessCSMON_Now_Ticks = 0 - (u32TimeMainLoopProcessCSMON_End_Ticks - u32TimeMainLoopProcessCSMON_Bgn_Ticks);//down count
         if (u32TimeMainLoopProcessCSMON_Now_Ticks > u32TimeMainLoopProcessCSMON_Max_Ticks)
@@ -2753,6 +2800,34 @@ void main(void)
         ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
 
 
+        //
+        // RTC Process
+        //
+#ifdef _CS_1107_SCC_R01
+        if (MAIN_bDateTimeSet)
+        {
+            FPGA_DRV_vSetDateTime (
+                    MAIN_sDateTimeSet.u8Seconds,
+                    MAIN_sDateTimeSet.u8Minutes,
+                    MAIN_sDateTimeSet.u8Hours,
+                    MAIN_sDateTimeSet.u8Weekdays,
+                    MAIN_sDateTimeSet.u8Day,
+                    MAIN_sDateTimeSet.u8Month,
+                    MAIN_sDateTimeSet.u8Year);
+            MAIN_bDateTimeSet = false;
+        }
+
+        FPGA_DRV_vGetDateTime (
+                &MAIN_sDateTimeGet.u8Seconds,
+                &MAIN_sDateTimeGet.u8Minutes,
+                &MAIN_sDateTimeGet.u8Hours,
+                &MAIN_sDateTimeGet.u8Weekdays,
+                &MAIN_sDateTimeGet.u8Day,
+                &MAIN_sDateTimeGet.u8Month,
+                &MAIN_sDateTimeGet.u8Year);
+
+
+#else
         //
         // RTC Process To From FPGA
         //
@@ -2786,6 +2861,7 @@ void main(void)
         SCI_DRV_vErrorResetProcess(SCI_DRV_u32GetBaseFromModuleIndex((SCI_DRV_eModule_t)FPGA_SCI_DRV_UART_MODULE));
         FPGA_SCI_DRV_vProcessUartRx();
         FPGA_SCI_DRV_vProcess();
+#endif
 
 
 #ifdef _CS_1107_SCC_R01
