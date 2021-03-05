@@ -69,13 +69,13 @@ PAGE 1 : /* Data Memory */
 
    EMIF1_CS0n      : origin = 0x80000000, length = 0x10000000
    EMIF1_CS2n      : origin = 0x00100000, length = 0x00200000
-   EMIF1_CS3n      : origin = 0x00300000, length = 0x00080000
+   //EMIF1_CS3n      : origin = 0x00300000, length = 0x00080000
    EMIF1_CS4n      : origin = 0x00380000, length = 0x00060000
    EMIF2_CS0n      : origin = 0x90000000, length = 0x10000000
    EMIF2_CS2n      : origin = 0x00002000, length = 0x00001000
 
 
-
+   FPGA_RAM	   : origin = 0x00300000, length = 0x00000010
 
 }
 
@@ -122,6 +122,8 @@ SECTIONS
    .switch             : > FLASHB      PAGE = 0, ALIGN(4)
    
    .reset              : > RESET,     PAGE = 0, TYPE = DSECT /* not used, */
+
+   .fpgaram			   : > FPGA_RAM,        PAGE = 1
 
    Filter_RegsFile     : > RAMGS0,	   PAGE = 1
    

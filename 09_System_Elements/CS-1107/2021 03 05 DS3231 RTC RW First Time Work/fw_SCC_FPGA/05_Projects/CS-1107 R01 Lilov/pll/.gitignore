@@ -1,0 +1,14 @@
+/*.cst
+/*.edn
+/*.fdc
+/*.jhd
+/*.ldc
+/*.naf
+/*.sort
+/*.srp
+/*.sym
+/*.tcl
+/*.log
+#/*_tmpl.vhd
+/archv
+/._Real_._Math_.vhd
