@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		ispXCF	SYSTEM	"IspXCF.dtd" >
+<ispXCF version="3.11.1">
+	<Comment></Comment>
+	<Chain>
+		<Comm>JTAG</Comm>
+		<Device>
+			<SelectedProg value="TRUE"/>
+			<Pos>1</Pos>
+			<Vendor>WinBond</Vendor>
+			<Family>MachXO3LF</Family>
+			<Name>LCMXO3LF-9400C</Name>
+			<Package>All</Package>
+			<Bypass>
+				<InstrLen>8</InstrLen>
+				<InstrVal>11111111</InstrVal>
+				<BScanLen>1</BScanLen>
+				<BScanVal>0</BScanVal>
+			</Bypass>
+			<File>D:/repo_git/fw_SCC_FPGA/05_Projects/CS-1113_R01 Lilov/impl1/CS_1113_R01_impl1.bit</File>
+			<FileTime>02/23/21 01:10:09</FileTime>
+			<Operation>SPI Flash Erase,Program,Verify</Operation>
+			<Option>
+				<SVFVendor>JTAG STANDARD</SVFVendor>
+				<Usercode>0x00000000</Usercode>
+				<AccessMode>SPI Flash Programming</AccessMode>
+			</Option>
+			<FPGALoader>
+			<CPLDDevice>
+				<Device>
+					<Pos>1</Pos>
+					<Vendor>Lattice</Vendor>
+					<Family>MachXO3LF</Family>
+					<Name>LCMXO3LF-9400C</Name>
+					<IDCode>0x612be043</IDCode>
+					<Package>All</Package>
+					<PON>LCMXO3LF-9400C</PON>
+					<Bypass>
+						<InstrLen>8</InstrLen>
+						<InstrVal>11111111</InstrVal>
+						<BScanLen>1</BScanLen>
+						<BScanVal>0</BScanVal>
+					</Bypass>
+					<Operation>Enable SPI</Operation>
+					<Option>
+						<SVFVendor>JTAG STANDARD</SVFVendor>
+						<IOState>HighZ</IOState>
+						<PreloadLength>760</PreloadLength>
+						<IOVectorData>0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</IOVectorData>
+						<AccessMode>JTAG</AccessMode>
+					</Option>
+				</Device>
+			</CPLDDevice>
+			<FlashDevice>
+				<Device>
+					<Pos>1</Pos>
+					<Vendor>WinBond</Vendor>
+					<Family>SPI Serial Flash</Family>
+					<Name>W25Q128JV</Name>
+					<IDCode>0x17</IDCode>
+					<Package>8-pin SOIC</Package>
+					<Operation>SPI Flash Erase,Program,Verify</Operation>
+					<File>D:/repo_git/fw_SCC_FPGA/05_Projects/CS-1113_R01 Lilov/impl1/CS_1113_R01_impl1.bit</File>
+					<AddressBase>0x00010000</AddressBase>
+					<EndAddress>0x00020000</EndAddress>
+					<DeviceSize>128</DeviceSize>
+					<DataSize>35033</DataSize>
+					<NumberOfDevices>1</NumberOfDevices>
+					<ReInitialize value="FALSE"/>
+				</Device>
+			</FlashDevice>
+			<FPGADevice>
+				<Device>
+					<Pos>1</Pos>
+					<Name></Name>
+					<File>D:/repo_git/fw_SCC_FPGA/05_Projects/CS-1113_R01 Lilov/impl1/CS_1113_R01_impl1.bit</File>
+					<LocalChainList>
+						<LocalDevice index="-99"
+							name="Unknown"
+							file="D:/repo_git/fw_SCC_FPGA/05_Projects/CS-1113_R01 Lilov/impl1/CS_1113_R01_impl1.bit"/>
+					</LocalChainList>
+					<Option>
+						<SVFVendor>JTAG STANDARD</SVFVendor>
+					</Option>
+				</Device>
+			</FPGADevice>
+			</FPGALoader>
+		</Device>
+	</Chain>
+	<ProjectOptions>
+		<Program>SEQUENTIAL</Program>
+		<Process>ENTIRED CHAIN</Process>
+		<OperationOverride>No Override</OperationOverride>
+		<StartTAP>TLR</StartTAP>
+		<EndTAP>TLR</EndTAP>
+		<VerifyUsercode value="FALSE"/>
+		<TCKDelay>3</TCKDelay>
+	</ProjectOptions>
+	<CableOptions>
+		<CableName>USB</CableName>
+		<PortAdd>EzUSB-0</PortAdd>
+		<USBID>\\?\usb#vid_1134&amp;amp;pid_8001#6&amp;amp;31aab78c&amp;amp;0&amp;amp;2#</USBID>
+	</CableOptions>
+</ispXCF>

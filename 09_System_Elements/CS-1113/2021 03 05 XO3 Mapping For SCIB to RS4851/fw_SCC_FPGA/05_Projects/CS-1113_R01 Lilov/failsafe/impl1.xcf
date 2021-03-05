@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE		ispXCF	SYSTEM	"IspXCF.dtd" >
+<ispXCF version="3.11.1">
+	<Comment></Comment>
+	<Chain>
+		<Comm>JTAG</Comm>
+		<Device>
+			<SelectedProg value="TRUE"/>
+			<Pos>1</Pos>
+			<Vendor>WinBond</Vendor>
+			<Family>MachXO3LF</Family>
+			<Name>LCMXO3LF-9400C</Name>
+			<Package>All</Package>
+			<PON>LCMXO3LF-9400C</PON>
+			<Bypass>
+				<InstrLen>8</InstrLen>
+				<InstrVal>11111111</InstrVal>
+				<BScanLen>1</BScanLen>
+				<BScanVal>0</BScanVal>
+			</Bypass>
+			<File>D:/repo_git/fw_SCC_FPGA/05_Projects/CS-1113_R01 Lilov/failsafe/CS_1113_R01_failsafe.jed</File>
+			<FileTime>02/22/21 23:08:15</FileTime>
+			<JedecChecksum>0xD827</JedecChecksum>
+			<Operation>FLASH Erase,Program,Verify</Operation>
+			<Option>
+				<SVFVendor>JTAG STANDARD</SVFVendor>
+				<IOState>HighZ</IOState>
+				<PreloadLength>760</PreloadLength>
+				<IOVectorData>0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</IOVectorData>
+				<SVFProcessor>SVF Processor</SVFProcessor>
+				<Usercode>0x00000000</Usercode>
+				<AccessMode>FLASH</AccessMode>
+			</Option>
+		</Device>
+	</Chain>
+	<ProjectOptions>
+		<Program>SEQUENTIAL</Program>
+		<Process>ENTIRED CHAIN</Process>
+		<OperationOverride>No Override</OperationOverride>
+		<StartTAP>TLR</StartTAP>
+		<EndTAP>TLR</EndTAP>
+		<VerifyUsercode value="FALSE"/>
+		<TCKDelay>3</TCKDelay>
+	</ProjectOptions>
+	<CableOptions>
+		<CableName>USB</CableName>
+		<PortAdd>EzUSB-0</PortAdd>
+		<USBID>\\?\usb#vid_1134&amp;amp;pid_8001#6&amp;amp;31aab78c&amp;amp;0&amp;amp;2#</USBID>
+	</CableOptions>
+</ispXCF>

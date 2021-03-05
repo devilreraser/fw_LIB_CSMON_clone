@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="CS_1113_R01" device="LCMXO3LF-9400C-6BG484I" default_implementation="impl1">
+    <Options/>
+    <Implementation title="failsafe" dir="failsafe" description="failsafe" synthesis="lse" default_strategy="Strategy1">
+        <Options def_top="TOP"/>
+        <Source name="TOP_FAILSAFE.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="TOP"/>
+        </Source>
+        <Source name="CS_1113_R01.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+        <Source name="failsafe/impl1.xcf" type="Programming Project File" type_short="Programming">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="impl1" dir="impl1" description="impl1" synthesis="lse" default_strategy="Strategy1">
+        <Options def_top="TOP"/>
+        <Source name="TOP.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="TOP"/>
+        </Source>
+        <Source name="CS_1113_R01.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+        <Source name="impl1/impl1.xcf" type="Programming Project File" type_short="Programming">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="working" dir="working" description="working" synthesis="lse" default_strategy="Strategy1">
+        <Options def_top="TOP"/>
+        <Source name="TOP.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="TOP"/>
+        </Source>
+        <Source name="CS_1113_R01.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+        <Source name="working/impl1.xcf" type="Programming Project File" type_short="Programming">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="CS_1113_R011.sty"/>
+</BaliProject>
