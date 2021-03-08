@@ -353,10 +353,9 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
  int16_t s16DummyDataTst = 100;
  int16_t s16ScaleDataTst = 100;
 
- int16_t s16DummyData = 0x1234;
- int32_t aDummyDataTable = 0x1234;
 
 
+typedef uint16_t PARS_START[__LINE__];
  uint16_t u16TestData0 = 0;
  uint16_t u16TestData1 = 1;
  uint16_t u16TestData2 = 2;
@@ -367,6 +366,12 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
  uint16_t u16TestData7 = 7;
  uint16_t u16TestData8 = 8;
  uint16_t u16TestData9 = 9;
+typedef uint16_t PARS_END[__LINE__];
+
+#define PARAMETER_COUNT_TEST sizeof(PARS_END)-sizeof(PARS_START)-1
+
+ int16_t s16DummyData = PARAMETER_COUNT_TEST;
+ int32_t aDummyDataTable = 0x1234;
 
  uint16_t u16WatchdogPrescaler = 0;
  uint16_t u16WatchdogPrescalerOld = 0;
@@ -2199,11 +2204,22 @@ void RecordersInitialization(void)
 
 
     /* Recorder 0 Configuration */
+
+#if 0
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
             CSMON_RECORDER_0,
             RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
             RECORDER0_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
+#else
+    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfigurationSkipSamples (
+            CSMON_RECORDER_0,
+            RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
+            RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
+            RECORDER0_SAMPLE_FREQUENCY_HZ / 3.0); /* Sample Frequency in Hz */
+#endif
+
+
 
     #if RECORDER0_ONLY_TEST == 0
 
