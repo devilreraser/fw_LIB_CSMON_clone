@@ -446,6 +446,26 @@ CSMON_eResponseCode_t CSMON_eSetRecorderConfiguration (
         float f32SampleRateHz);
 
 /* *****************************************************************************
+ * CSMON_eSetRecorderConfigurationSkipSamples
+ *
+ * Input:
+ *      uint16_t u16RecorderIndex   - Recorder Index (Recorder0, ... RecorderN)
+ *      uint32_t u32PreTriggerSampleCount
+ *      uint32_t u32TotalSampleCount
+ *      float f32RequestedSampleRateHz       - Requested Sample Rate in Hz
+ *
+ *
+ * Note : !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration
+ *        !!! Assume Recorder Sample Rate Fixed To HMRECPRM_TIME_BASE_0 (Default 50 usec)
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetRecorderConfigurationSkipSamples (
+        uint16_t u16RecorderIndex,
+        uint32_t u32PreTriggerSampleCount,
+        uint32_t u32TotalSampleCount,
+        float f32RequestedSampleRateHz);
+
+/* *****************************************************************************
  * CSMON_eSetRecorderTriggerAtPosition
  *
  * Input:

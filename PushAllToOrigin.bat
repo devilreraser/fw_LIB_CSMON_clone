@@ -10,41 +10,41 @@ echo HexMonitor:
 echo.
 cd 02_Libraries\HexMonitor
 git commit -a -m "%_CommitString%"
-git push --progress "origin" master
+git push --progress "origin"
 cd ..\..
 echo.
 echo MathAndControl:
 echo.
 cd 02_Libraries\MathAndControl
 git commit -a -m "%_CommitString%"
-git push --progress "origin" master
+git push --progress "origin"
 cd ..\..
 echo.
 echo ModbusAddress:
 echo.
 cd 02_Libraries\ModbusAddress
 git commit -a -m "%_CommitString%"
-git push --progress "origin" master
+git push --progress "origin"
 cd ..\..
 echo.
 echo Peripheral:
 echo.
 cd 02_Libraries\Peripheral
 git commit -a -m "%_CommitString%"
-git push --progress "origin" master
+git push --progress "origin"
 cd ..\..
 echo.
 echo TestControl:
 echo.
 cd 02_Libraries\TestControl
 git commit -a -m "%_CommitString%"
-git push --progress "origin" master
+git push --progress "origin"
 cd ..\..
 echo.
 echo Process Project:
 echo.
 git commit -a -m "%_CommitString%"
-git push --progress "origin" master
+git push --progress "origin"
 echo.
 echo Completed!
 echo Press Enter to Exit
