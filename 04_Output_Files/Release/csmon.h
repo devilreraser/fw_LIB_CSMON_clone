@@ -222,6 +222,39 @@ typedef enum
     CSMON_TIME_BUFFER_OVERFLOW = 1,      /* u32MicroSec0BuffOvf1 is buffer overflow counter (ticks(value) from free rolling timer) */
 }CSMON_eMicroSec0BuffOvf1Mode_t;
 
+typedef enum
+{
+    /* CSMON_EL_INDEX,                                       0, Parameternummer, mandatory   */
+    /* CSMON_EL_ATTR,                                        1, Attribut, mandatory          */
+    /* CSMON_EL_NAME,                                        2, Name, mandatory              */
+    /* CSMON_L_UNIT,                                         3, Einheit, optional            */
+    /* CSMON_EL_MAX,                                         4, Maximalwert, optional        */
+    /* CSMON_EL_MIN,                                         5, Minimalwert, optional        */
+    /* CSMON_EL_DEF,                                         6, Defaultwert, optional        */
+    /* CSMON_EL_NORM,                                        7, Normierungsfaktor, optional  */
+    CSMON_EL_VAL = 8                                      /* 8, Wert, mandatory              */
+} CSMON_eParameterElement_t;
+
+//! return codes des Parameterinterfaces
+typedef enum
+{
+    CSMON_RC_PARA_OK,                                     /* 0, fehlerfreier Zugriff                                */
+    CSMON_RC_PARA_NOT_EXIST,                              /* 1, Parameter existiert nicht                           */
+    CSMON_RC_ELEM_NOT_EXIST,                              /* 2, Element existiert nicht                             */
+    CSMON_RC_ATTR_NOT_EXIST,                              /* 3, Attribut existiert nicht                            */
+    CSMON_RC_NULL_POINTER,                                /* 4, es wurde ein NULL-Pointer übergeben                 */
+    CSMON_RC_WRONG_TYPE,                                  /* 5, falscher Typ                                        */
+    CSMON_RC_WRONG_SIZE,                                  /* 6, falsche Größe                                       */
+    CSMON_RC_VALUE_HIGH,                                  /* 7, Wert zu groß                                        */
+    CSMON_RC_VALUE_LOW,                                   /* 8, Wert zu klein                                       */
+    CSMON_RC_READ_ONLY,                                   /* 9, Schreibversuch auf Read-only                        */
+    CSMON_RC_WRITE_ONLY,                                  /* 10, Leseversuch auf Write-only                         */
+    CSMON_RC_PERM_DENIED,                                 /* 11, keine Zugriffsberechtigung                         */
+    CSMON_RC_PAR_WRONG_CMD,                               /* 12, falscher Kommandocode                              */
+    CSMON_RC_PAR_WRONG_FRAME,                             /* 13, Gesamtframe header + Daten hat falsche Länge       */
+    CSMON_RC_PAR_WRONG_STATE_WRITE,                       /* 14, Schreiben im aktuellen Zustand nicht erlaubt       */
+    CSMON_RC_PAR_UNVALID_DATA                             /* 15, ungültige Daten                                    */
+} CSMON_eReturnCodeParameter_t;                           /* RC_PAR_T                                               */
 
 
 /* *****************************************************************************
@@ -229,6 +262,23 @@ typedef enum
  **************************************************************************** */
 typedef void (*CSMON_pfVoid_t)(void);
 
+/********************************************************************************
+* FUNKTIONSNAME:    RC_PAR_T WriteParElement(UINT16 index, PAR_EL_T element, UINT16* len, void* Data, UINT16 nostore, UINT16 datamode, UINT16 password)*
+*********************************************************************************/
+/*  !\param         index       -   Parameternummer                                             -   uint16_t u16Index
+*    \param         element     -   Element des Parameters                                      -   CSMON_eParameterElement_t eElement
+*    \param         pLen        -   Länge der Daten                                             -   uint16_t* pu16Len
+*    \param         Data        -   Datenpuffer                                                 -   void* pData
+*    \param         nostore     -  = 1 forces data not to be stored in EEPROM                   -   int16_t u16NoStore
+*    \param         datamode    -  0: resort by character (default M&P), 1: write directly      -   uint16_t u16DataMode
+*    \param         password    -  0: no password evaluation, 1: password is evaluated          -   uint16_t u16Password
+*    \remarks       liest die Daten aus dem Puffer und schreibt sie in den Parameter
+*
+*    \retval        RC_PAR_T                                                                    -   CSMON_eParameterElement_t
+********************************************************************************/
+/* RC_PAR_T WriteParElement(UINT16 u16Index, PAR_EL_T element, UINT16* pLen, void* Data, UINT16 nostore, UINT16 datamode, UINT16 password) */
+
+typedef CSMON_eReturnCodeParameter_t (*CSMON_pfWriteParElement_t)(uint16_t u16Index, CSMON_eParameterElement_t eElement, uint16_t* pu16Len, void* pData, uint16_t u16NoStore, uint16_t u16DataMode, uint16_t u16Password);
 
 
 
@@ -730,6 +780,17 @@ CSMON_eResponseCode_t CSMON_eSetMaxTimeInISR (uint16_t microseconds);
  *
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetMinGuaranteedTimeBetweenTwoISRs (uint16_t microseconds);
+
+/* *****************************************************************************
+ * CSMON_eRegisterWriteParElementCallbackFunction
+ *
+ * Input:
+ *      CSMON_pfWriteParElement_t pfWriteParElementCb
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eRegisterWriteParElementCallbackFunction (CSMON_pfWriteParElement_t pfWriteParElementCb);
+
+
 
 
 /* *****************************************************************************
