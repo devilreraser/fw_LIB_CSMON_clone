@@ -2448,6 +2448,19 @@ void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
     }
 }
 
+CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParameterElement_t eElement, uint16_t* pu16Len, void* pData, uint16_t u16NoStore, uint16_t u16DataMode, uint16_t u16Password)
+{
+    CSMON_eReturnCodeParameter_t eResult = CSMON_RC_PARA_OK;
+
+    uint32_t u32Data = *((uint32_t*)pData);
+    uint16_t u16Data = *((uint16_t*)pData);
+    uint16_t u16Len = *((uint16_t*)pu16Len);
+
+    return eResult;
+}
+
+
+
 
 /* *****************************************************************************
  * main
@@ -2697,6 +2710,12 @@ void main(void)
     (void)CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop(true);
 
     #endif
+
+
+    //
+    // Register Write Parameter Element Function
+    //
+    (void)CSMON_eRegisterWriteParElementCallbackFunction(eWriteParElement);
 
 
     //
