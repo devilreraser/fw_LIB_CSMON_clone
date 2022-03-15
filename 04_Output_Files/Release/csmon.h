@@ -790,6 +790,17 @@ CSMON_eResponseCode_t CSMON_eSetMinGuaranteedTimeBetweenTwoISRs (uint16_t micros
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eRegisterWriteParElementCallbackFunction (CSMON_pfWriteParElement_t pfWriteParElementCb);
 
+/* *****************************************************************************
+ * CSMON_eSetupWriteParElementFixedArguments
+ *
+ * Inputs:
+ *      CSMON_eParameterElement_t eElement,
+ *      uint16_t u16NoStore,
+ *      uint16_t u16DataMode,
+ *      uint16_t u16Password
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetupWriteParElementFixedArguments (CSMON_eParameterElement_t eElement, uint16_t u16NoStore, uint16_t u16DataMode, uint16_t u16Password);
 
 
 
