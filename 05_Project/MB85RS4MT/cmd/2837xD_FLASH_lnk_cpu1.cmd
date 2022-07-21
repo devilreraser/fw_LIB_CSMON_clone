@@ -94,7 +94,7 @@ SECTIONS
    .const              : > FLASHF,       PAGE = 0,       ALIGN(8)
 #else
    .pinit              : > FLASHB,       PAGE = 0,       ALIGN(8)
-   .ebss               : >> RAMLS5 | RAMGS0 | RAMGS1,    PAGE = 1
+   .ebss               : >> RAMLS5 | RAMGS0 | RAMGS1 | RAMGS2 | RAMGS3 | RAMGS4 | RAMGS5,    PAGE = 1
    .esysmem            : > RAMLS5,       PAGE = 1
    .cio                : > RAMLS5,       PAGE = 1
    /* Initalized sections go in Flash */

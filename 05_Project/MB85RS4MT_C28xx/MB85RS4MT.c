@@ -26,7 +26,8 @@
  * Configuration Definitions
  **************************************************************************** */
 #define FIFO_WORDSIZE       (8)
-#define SPI_TIMEOUT         10000
+//#define WAIT_SPI_TIMEOUT         10000
+#define WAIT_SPI_TIMEOUT         0xFFFFFFFE
 
 
 
@@ -187,15 +188,30 @@ int MB85RS4MT_Start(void)
     return SPI_OK;
 }
 
+int wait_idle_fail(void)
+{
+#if WAIT_SPI_TIMEOUT == 0xFFFFFFFF
+    while(mb85rs4mt_spi.complete == 0){} //Wait for previous command completion
+    return SPI_OK;
+#else
+    uint32_t i=0;
+    while(!mb85rs4mt_spi.complete && (i<WAIT_SPI_TIMEOUT)) i++;//Wait for previous command completion
+    if(i >= WAIT_SPI_TIMEOUT)
+        return SPI_TIMEOUT_ERROR;
+    else
+        return SPI_OK;
+#endif
+}
+
+
+
 /*
  * Sends write enable command
  */
 int MB85RS4MT_WriteEnable(void)
 {
-    uint16_t i=0;
 
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;//Wait for previous command completion
-    if(i == SPI_TIMEOUT) return SPI_TIMEOUT_ERROR;
+    if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
     ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);           // At this point the RX FIFO should be empty
 
@@ -219,10 +235,7 @@ int MB85RS4MT_WriteEnable(void)
  */
 int MB85RS4MT_WriteDisable(void)
 {
-    uint16_t i=0;
-
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;//Wait for previous command completion
-    if(i == SPI_TIMEOUT) return SPI_TIMEOUT_ERROR;
+    if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
     ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);           // At this point the RX FIFO should be empty
 
@@ -255,10 +268,7 @@ int MB85RS4MT_WriteDisable(void)
  */
 int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
 {
-    uint16_t i=0;
-
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;              //Wait for previous command completion
-    if(i == SPI_TIMEOUT) return SPI_TIMEOUT_ERROR;
+    if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
     ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                           // At this point the RX FIFO should be empty
 
@@ -333,10 +343,7 @@ int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
  */
 int MB85RS4MT_ReadDataInternal(uint32_t address, uint16_t *buf, uint16_t len)
 {
-    uint16_t i=0;
-
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;                //Wait for previous command completion
-    if(i == SPI_TIMEOUT) return SPI_TIMEOUT_ERROR;
+    if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
     ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                             // At this point the RX FIFO should be empty
 
@@ -443,8 +450,17 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
     }
     return result;
 }
+int MB85RS4MT_ReadDataRaw(uint32_t address, uint16_t *buf, uint16_t len)
+{
+    return MB85RS4MT_ReadDataInternal(address, buf, len);
+}
+
 #else
-int MB85RS4MT_ReadData(uint16_t address, uint16_t *buf, uint16_t len)
+int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
+{
+    return MB85RS4MT_ReadDataInternal(address, buf, len);
+}
+int MB85RS4MT_ReadDataRaw(uint32_t address, uint16_t *buf, uint16_t len)
 {
     return MB85RS4MT_ReadDataInternal(address, buf, len);
 }
@@ -460,15 +476,12 @@ int MB85RS4MT_IsBusy(void)
  */
 int MB85RS4MT_WriteStatReg(uint16_t val)
 {
-    uint16_t i=0;
-
     if (mb85rs4mt_spi.wr_en == 0)
     {
         (void)MB85RS4MT_WriteEnable();
     }
 
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;//Wait for previous command completion
-    if(i == SPI_TIMEOUT) return SPI_TIMEOUT_ERROR;
+    if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
     ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);           // At this point the RX FIFO should be empty
 
@@ -492,11 +505,9 @@ int MB85RS4MT_WriteStatReg(uint16_t val)
  */
 int MB85RS4MT_ReadStatReg(uint16_t *val)
 {
-    uint16_t i=0;
     volatile uint16_t dummy;
 
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;            //Wait for previous command completion
-    if(i == SPI_TIMEOUT) goto timeout;
+    if(wait_idle_fail()) goto timeout;
 
     ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                         // At this point the RX FIFO should be empty
 
@@ -511,9 +522,7 @@ int MB85RS4MT_ReadStatReg(uint16_t *val)
     SpicRegs.SPITXBUF = OPCODE_RDSR<<8;                               // Send the opcode
     SpicRegs.SPITXBUF = 0x0000;                                       // Dummy transfer to initiate read
 
-    i=0;
-    while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;            //Wait for previous command completion
-    if(i == SPI_TIMEOUT) goto timeout;
+    if(wait_idle_fail()) goto timeout;
 
     *val = SpicRegs.SPIRXBUF&0xFF;                                    // The second byte in the FIFO is the STATREG value
                                                                       // Previous byte was read in the ISR

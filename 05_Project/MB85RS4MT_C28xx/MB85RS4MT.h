@@ -69,6 +69,7 @@ int MB85RS4MT_WriteEnable(void);
 int MB85RS4MT_WriteDisable(void);
 int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len);
 int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len);
+int MB85RS4MT_ReadDataRaw(uint32_t address, uint16_t *buf, uint16_t len);
 int MB85RS4MT_IsBusy(void);
 int MB85RS4MT_WriteStatReg(uint16_t val);
 int MB85RS4MT_ReadStatReg(uint16_t *val);

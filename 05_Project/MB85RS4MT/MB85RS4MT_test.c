@@ -35,9 +35,12 @@ uint16_t test_write_read = 0;
 uint16_t adr = 0;
 uint16_t buf[10];
 uint16_t dat[10] = {0x0001, 0x0203, 0x0405, 0x0607, 0x0809, 0x0A0B, 0x0C0D, 0x0E0F}; //Two extra words for CRC32
-uint16_t map[256] = {0};
+uint16_t map[4096] = {0};
 uint32_t crc;
 
+#ifdef _USE_LIBRARY
+uint16_t raw[4096] = {0};
+#endif
 
 
 uint16_t test_stat_reg = 0;
@@ -49,7 +52,7 @@ uint16_t val_stat_request = 0;
 uint16_t val_stat_after = 0;
 uint16_t val_stat_add = 0;
 
-int res0, res1, res2, res3, res4, res5, res6;
+int res0, res1, res2, res3, res4, res5, res6, res7;
 
 
 //function prototypes
@@ -192,8 +195,12 @@ void main(void)
             #ifndef _USE_LIBRARY
             res6 = mb85rs4mt_read_data(0, map, sizeof(map));      // Read memory map
             #else
+            memset(raw, 0, sizeof(raw));                    // Clear read buffer
+            EALLOW; EDIS;                                   // Check here
             res6 = MB85RS4MT_ReadData(0, map, sizeof(map));       // Read memory map
+            res7 = MB85RS4MT_ReadDataRaw(0, raw, sizeof(raw));       // Read memory map
             #endif
+
 
 
 
