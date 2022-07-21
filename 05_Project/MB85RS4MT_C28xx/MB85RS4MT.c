@@ -52,6 +52,7 @@
  **************************************************************************** */
 typedef struct  {
     uint16_t opcode;       // Last MB85RS4MT command
+    uint16_t wr_en;        // 1 - write enabled
     uint16_t complete;     // 1 - previous command has complete
     uint16_t words_left;   // bytes still to be transfered
     uint16_t *buf;         // points to the read/write buffer,
@@ -178,6 +179,8 @@ int MB85RS4MT_WriteEnable(void)
 
     SpicRegs.SPITXBUF = OPCODE_WREN<<8;                 // Send the opcode
 
+    mb85rs4mt_spi.wr_en = 1;
+
     return SPI_OK;
 }
 
@@ -202,6 +205,8 @@ int MB85RS4MT_WriteDisable(void)
     SpicRegs.SPIFFRX.bit.RXFFIL = 1;                    // We will send/receive one byte
 
     SpicRegs.SPITXBUF = OPCODE_WRDI<<8;                 // Send the opcode
+
+    mb85rs4mt_spi.wr_en = 0;
 
     return SPI_OK;
 }
@@ -300,6 +305,11 @@ int MB85RS4MT_IsBusy(void)
 int MB85RS4MT_WriteStatReg(uint16_t val)
 {
     uint16_t i=0;
+
+    if (mb85rs4mt_spi.wr_en == 0)
+    {
+        (void)MB85RS4MT_WriteEnable();
+    }
 
     while(!mb85rs4mt_spi.complete && (i<SPI_TIMEOUT)) i++;//Wait for previous command completion
     if(i == SPI_TIMEOUT) return SPI_TIMEOUT_ERROR;

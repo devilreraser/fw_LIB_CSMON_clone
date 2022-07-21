@@ -128,7 +128,7 @@ void main(void)
     #ifndef _USE_LIBRARY
     res0 = mb85rs4mt_write_enable();
     #else
-    res0 = MB85RS4MT_WriteEnable();
+    //res0 = MB85RS4MT_WriteEnable();   //optional
     #endif
 
     while(1)
