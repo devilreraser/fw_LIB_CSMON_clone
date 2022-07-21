@@ -99,14 +99,14 @@ int MB85RS4MT_Init(void)
     EALLOW;
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO69 = 3;       // GPIO069 is SPI_SIMOC
-    GpioCtrlRegs.GPCMUX1.bit.GPIO69 = 3;
+    //GpioCtrlRegs.GPCMUX1.bit.GPIO69 = 3;
 
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO70 = 3;       // GPIO070 is SPI_SOMIC
-    GpioCtrlRegs.GPCMUX1.bit.GPIO70 = 3;
+    //GpioCtrlRegs.GPCMUX1.bit.GPIO70 = 3;
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO71 = 3;       // GPIO071 is SPI_CLKC
-    GpioCtrlRegs.GPCMUX1.bit.GPIO71 = 3;
+    //GpioCtrlRegs.GPCMUX1.bit.GPIO71 = 3;
 
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO72 = 0;       // GPIO72 is GPIO
@@ -114,9 +114,9 @@ int MB85RS4MT_Init(void)
     GpioDataRegs.GPCDAT.bit.GPIO72 = 1;         // Set High initially
 
 
-    GpioCtrlRegs.GPCQSEL1.bit.GPIO69 = 3;       //Async, no Sync or Qualification
-    GpioCtrlRegs.GPCQSEL1.bit.GPIO70 = 3;       //Async, no Sync or Qualification
-    GpioCtrlRegs.GPCQSEL1.bit.GPIO71 = 3;       //Async, no Sync or Qualification
+    //GpioCtrlRegs.GPCQSEL1.bit.GPIO69 = 3;       //Async, no Sync or Qualification
+    //GpioCtrlRegs.GPCQSEL1.bit.GPIO70 = 3;       //Async, no Sync or Qualification
+    //GpioCtrlRegs.GPCQSEL1.bit.GPIO71 = 3;       //Async, no Sync or Qualification
     GpioCtrlRegs.GPCQSEL1.bit.GPIO72 = 3;       //Async, no Sync or Qualification
 
     EDIS;
@@ -124,9 +124,10 @@ int MB85RS4MT_Init(void)
 
     SpicRegs.SPICCR.bit.SPISWRESET = 0;         // SPI in reset
 
-    SpicRegs.SPIFFTX.all = 0xC020;              // Enable TX FIFOs
+
+    SpicRegs.SPIFFTX.all = 0xC000;              // Enable TX FIFOs
                                                 // TX FIFO in RESET
-                                                // Enable TX FIFO interrupt
+                                                // Disable TX FIFO interrupt
                                                 // Interrupt if TX FIFO empty (zero bytes)
 
     SpicRegs.SPIFFCT.all = 0x0;                 // Send next bite immediately after the previous one
@@ -149,9 +150,11 @@ int MB85RS4MT_Init(void)
     SpicRegs.SPICTL.bit.SPIINTENA = 1;          // Interrupts disabled, in FIFO mode we enable the interrupt
                                                 // using RXFFIENA and TXFFIENA
 
+    SpicRegs.SPICCR.bit.HS_MODE = 0x1;
     SpicRegs.SPIBRR.bit.SPI_BIT_RATE = MB85RS4MT_SPI_BAUDRATE; // Set the baud rate
 
-    SpicRegs.SPIPRI.bit.FREE = 1;               // Debugger doesn't halt the SPI
+
+    //SpicRegs.SPIPRI.bit.FREE = 1;               // Debugger doesn't halt the SPI
 
     SpicRegs.SPICCR.bit.SPISWRESET = 1;         // Release the SPI from reset
 
@@ -254,6 +257,7 @@ int MB85RS4MT_WriteDisable(void)
     return SPI_OK;
 }
 
+uint32_t address_spi = 0;
 
 /*
  * Writes data array at given offset
@@ -270,25 +274,6 @@ int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
 {
     if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
-    ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                           // At this point the RX FIFO should be empty
-
-    mb85rs4mt_spi.complete = 0;                                         // Command just started
-
-    GpioDataRegs.GPCDAT.bit.GPIO72 = 0;                                 // Assert CS
-
-    mb85rs4mt_spi.opcode = OPCODE_WRITE;                                // Set the opcode
-
-    mb85rs4mt_spi.buf = data;                                           // Data to be sent
-    mb85rs4mt_spi.words_left = len;                                     // Words to be send
-
-    SpicRegs.SPIFFRX.bit.RXFFIL = 4;                                    // We will send/receive 4 bytes = opcode
-                                                                        // and 3 bytes for the address
-    SpicRegs.SPITXBUF = OPCODE_WRITE<<8;
-
-    SpicRegs.SPITXBUF = ((uint16_t)(address>>16))&0xFF00;               // Address is 3 bytes,
-                                                                        // the chip ignores the first byte
-    SpicRegs.SPITXBUF = ((uint16_t)address)&0xFF00;                     // Address MSB
-    SpicRegs.SPITXBUF = ((uint16_t)address)<<8;                         // Address LSB
 
     #if MB85RS4MT_USE_RAM_BUFFER
     mb85rs4mt_ram_copy_len = 0;
@@ -326,6 +311,28 @@ int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
     }
     #endif
 
+    address_spi = address << 1;
+
+    ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                           // At this point the RX FIFO should be empty
+
+    mb85rs4mt_spi.complete = 0;                                         // Command just started
+
+    GpioDataRegs.GPCDAT.bit.GPIO72 = 0;                                 // Assert CS
+
+    mb85rs4mt_spi.opcode = OPCODE_WRITE;                                // Set the opcode
+
+    mb85rs4mt_spi.buf = data;                                           // Data to be sent
+    mb85rs4mt_spi.words_left = len;                                     // Words to be send
+
+    SpicRegs.SPIFFRX.bit.RXFFIL = 4;                                    // We will send/receive 4 bytes = opcode
+                                                                        // and 3 bytes for the address
+    SpicRegs.SPITXBUF = OPCODE_WRITE<<8;
+
+    SpicRegs.SPITXBUF = ((uint16_t)(address_spi>>8))&0xFF00;               // Address is 3 bytes,
+                                                                        // the chip ignores the first byte
+    SpicRegs.SPITXBUF = ((uint16_t)address_spi)&0xFF00;                     // Address MSB
+    SpicRegs.SPITXBUF = ((uint16_t)address_spi)<<8;                         // Address LSB
+
     return SPI_OK;
 }
 
@@ -344,27 +351,6 @@ int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
 int MB85RS4MT_ReadDataInternal(uint32_t address, uint16_t *buf, uint16_t len)
 {
     if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
-
-    ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                             // At this point the RX FIFO should be empty
-
-    mb85rs4mt_spi.complete = 0;                                           // Command just started
-
-    GpioDataRegs.GPCDAT.bit.GPIO72 = 0;                                   // Assert CS
-
-    mb85rs4mt_spi.opcode = OPCODE_READ;                                   // Set the opcode
-
-    mb85rs4mt_spi.buf = buf;                                              // Data to be sent
-    mb85rs4mt_spi.words_left = len;                                       // Words to be send
-
-    SpicRegs.SPIFFRX.bit.RXFFIL = 4;                                      // We will send/receive 4 bytes = opcode
-                                                                          // and 3 bytes for the address
-    SpicRegs.SPITXBUF = OPCODE_READ<<8;
-
-    SpicRegs.SPITXBUF = ((uint16_t)(address>>16))&0xFF00;                 // Address is 3 bytes,
-                                                                          // the chip ignores the first byte
-    SpicRegs.SPITXBUF = ((uint16_t)address)&0xFF00;                       // Address MSB
-    SpicRegs.SPITXBUF = ((uint16_t)address)<<8;                           // Address LSB
-
 
     #if MB85RS4MT_USE_RAM_BUFFER
     mb85rs4mt_ram_copy_len = 0;
@@ -398,17 +384,66 @@ int MB85RS4MT_ReadDataInternal(uint32_t address, uint16_t *buf, uint16_t len)
     }
     #endif
 
+    address_spi = address << 1;
+
+    ASSERT(SpicRegs.SPIFFRX.bit.RXFFST == 0);                             // At this point the RX FIFO should be empty
+
+    mb85rs4mt_spi.complete = 0;                                           // Command just started
+
+    GpioDataRegs.GPCDAT.bit.GPIO72 = 0;                                   // Assert CS
+
+    mb85rs4mt_spi.opcode = OPCODE_READ;                                   // Set the opcode
+
+    mb85rs4mt_spi.buf = buf;                                              // Data to be sent
+    mb85rs4mt_spi.words_left = len;                                       // Words to be send
+
+    SpicRegs.SPIFFRX.bit.RXFFIL = 4;                                      // We will send/receive 4 bytes = opcode
+                                                                          // and 3 bytes for the address
+    SpicRegs.SPITXBUF = OPCODE_READ<<8;
+
+    SpicRegs.SPITXBUF = ((uint16_t)(address_spi>>8))&0xFF00;                 // Address is 3 bytes,
+                                                                          // the chip ignores the first byte
+    SpicRegs.SPITXBUF = ((uint16_t)address_spi)&0xFF00;                       // Address MSB
+    SpicRegs.SPITXBUF = ((uint16_t)address_spi)<<8;                           // Address LSB
+
     return SPI_OK;
 }
 
 #if MB85RS4MT_USE_RAM_BUFFER
+
+uint16_t *buf_spi = 0;
+uint32_t adr_spi = 0;
+uint16_t len_spi = 0;
+
 int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
 {
     int result = SPI_OK;
 
+    buf_spi = buf;
+    adr_spi = address;
+    len_spi = len;
 
     mb85rs4mt_ram_copy_len = 0;
     {
+        if(address < mb85rs4mt_ram_buffer_start_address)  /* address before ram buffer */
+        {
+            if (len_spi > (mb85rs4mt_ram_buffer_start_address - address))
+            {
+                len_spi = (mb85rs4mt_ram_buffer_start_address - address);
+            }
+            result = MB85RS4MT_ReadDataInternal(adr_spi, buf_spi, len_spi);
+
+            len -= len_spi;
+            address += len_spi;
+            buf += len_spi;
+
+
+            buf_spi = buf;
+            adr_spi = address;
+            len_spi = len;
+
+        }
+
         if(address >= mb85rs4mt_ram_buffer_start_address)   /* copy from beginning */
         {
             if (address < (mb85rs4mt_ram_buffer_start_address + MB85RS4MT_RAM_BUFFER_SIZE))
@@ -421,7 +456,8 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
                 }
                 mb85rs4mt_ram_data_offset = 0;
             }
-            address += mb85rs4mt_ram_copy_len;
+            adr_spi += mb85rs4mt_ram_copy_len;
+            buf_spi += mb85rs4mt_ram_copy_len;
         }
         else //if(address < mb85rs4mt_ram_buffer_start_address)  /* copy at end */
         {
@@ -442,11 +478,11 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
         }
     }
 
-    len -= mb85rs4mt_ram_copy_len;
+    len_spi -= mb85rs4mt_ram_copy_len;
 
     if(len)
     {
-        result = MB85RS4MT_ReadDataInternal(address, buf, len);
+        result = MB85RS4MT_ReadDataInternal(adr_spi, buf_spi, len_spi);
     }
     return result;
 }
@@ -537,12 +573,13 @@ timeout:
 }
 
 
+uint16_t idx, read_has_started, write_has_started;
 //
 // RX FIFO ISR
 //
 __interrupt void MB85RS4MT_RXFIFO_ISR(void){
     uint16_t i, words_in_batch;
-    static uint16_t idx, read_has_started, write_has_started;
+
     volatile uint16_t dummy;
 
     switch(mb85rs4mt_spi.opcode) {

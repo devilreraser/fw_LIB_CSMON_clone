@@ -26,16 +26,16 @@ extern "C"
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
-#define MB85RS4MT_SPI_BAUDRATE              ((200E6 / 4) / 1E6) - 1
+#define MB85RS4MT_SPI_BAUDRATE              ((200000000 / 10000000) - 1)        /* ??? only 10 MHz */
 
 #define MB85RS4MT_USE_RAM_BUFFER            1
 
 #if MB85RS4MT_USE_RAM_BUFFER
 #ifndef MB85RS4MT_RAM_BUFFER_SIZE
-#define MB85RS4MT_RAM_BUFFER_SIZE           4096
+#define MB85RS4MT_RAM_BUFFER_SIZE           1024
 #endif
 #ifndef MB85RS4MT_RAM_BUFFER_START_ADDRESS
-#define MB85RS4MT_RAM_BUFFER_START_ADDRESS  0
+#define MB85RS4MT_RAM_BUFFER_START_ADDRESS  1024
 #endif
 #endif
 

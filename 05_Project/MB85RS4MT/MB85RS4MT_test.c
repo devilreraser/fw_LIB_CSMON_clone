@@ -10,6 +10,7 @@
 #include "F2837xD_device.h"
 #include "F2837xD_Gpio_defines.h"
 #include "F2837xD_GlobalPrototypes.h"
+#include "F2837xD_cputimervars.h"
 
 #include "crc32.h"
 #include "MB85RS4MT.h"
@@ -25,23 +26,33 @@
 #define LED_OFF     1
 #define LED_ON      0
 
+#define USE_CRC     0
+
 
 //#define STATREG_TEST
 #define READ_WRITE_TEST1
 
-
+#define READ_WRITE_TEST_SIZE_DATA   (256)
+#if USE_CRC
+#define READ_WRITE_TEST_SIZE        (READ_WRITE_TEST_SIZE_DATA+2)     //Two extra words for CRC32
+#else
+#define READ_WRITE_TEST_SIZE        READ_WRITE_TEST_SIZE_DATA
+#endif
 uint16_t test_write_read = 0;
 
-uint16_t adr = 0;
-uint16_t buf[10];
-uint16_t dat[10] = {0x0001, 0x0203, 0x0405, 0x0607, 0x0809, 0x0A0B, 0x0C0D, 0x0E0F}; //Two extra words for CRC32
+uint32_t adr = 0;
+uint16_t buffer[READ_WRITE_TEST_SIZE];
+uint16_t dat[READ_WRITE_TEST_SIZE];
 uint16_t map[4096] = {0};
+#if USE_CRC
 uint32_t crc;
+#endif
 
 #ifdef _USE_LIBRARY
 uint16_t raw[4096] = {0};
 #endif
 
+uint16_t bResetErrorLed = 0;
 
 uint16_t test_stat_reg = 0;
 
@@ -52,12 +63,16 @@ uint16_t val_stat_request = 0;
 uint16_t val_stat_after = 0;
 uint16_t val_stat_add = 0;
 
+uint16_t dat_inc = 0x0101;
+uint16_t dat_init = 0x0202;
+
 int res0, res1, res2, res3, res4, res5, res6, res7;
 
 
 //function prototypes
+#if USE_CRC
 void add_crc32(uint16_t *data, unsigned int len);
-
+#endif
 
 //Definition of DELAY_US ---------
 #define CPU_RATE   5.00L   // for a 200MHz CPU clock speed (SYSCLKOUT)
@@ -65,7 +80,25 @@ extern void F28x_usDelay(long LoopCount);
 #define DELAY_US(A)  F28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_RATE) - 9.0L) / 5.0L)
 
 
+uint32_t u32WholeTestTimerLast;
+uint32_t u32WholeTestTimerNow;
+uint32_t u32WholeTestTimeDiff;
 
+uint32_t u32WriteTestTimerLast;
+uint32_t u32WriteTestTimerNow;
+uint32_t u32WriteTestTimeDiff;
+
+uint32_t u32WriteFullTestTimerLast;
+uint32_t u32WriteFullTestTimerNow;
+uint32_t u32WriteFullTestTimeDiff;
+
+uint32_t u32ReadTestTimerLast;
+uint32_t u32ReadTestTimerNow;
+uint32_t u32ReadTestTimeDiff;
+
+uint32_t u32ReadFullTestTimerLast;
+uint32_t u32ReadFullTestTimerNow;
+uint32_t u32ReadFullTestTimeDiff;
 
 void main(void)
 {
@@ -97,6 +130,30 @@ void main(void)
 
     DINT;                                               // Step 3. Clear all interrupts and initialize PIE vector table:
                                                         // Disable CPU interrupts
+
+    ClkCfgRegs.LOSPCP.bit.LSPCLKDIV = 0;                //Set LSPCLK equal to SYSCLK
+
+    //
+    // Step 4. Initialize the Device Peripheral. This function can be
+    //         found in F2837xD_CpuTimers.c
+    //
+       InitCpuTimers();   // For this example, only initialize the Cpu Timers
+
+    //
+    // Configure CPU-Timer 0 to __interrupt every 500 milliseconds:
+    // 60MHz CPU Freq, 50 millisecond Period (in uSeconds)
+    //
+    //   ConfigCpuTimer(&CpuTimer0, 60, 500000);
+
+    //
+    // To ensure precise timing, use write-only instructions to write to the entire
+    // register. Therefore, if any of the configuration bits are changed in
+    // ConfigCpuTimer and InitCpuTimers (in F2837xD_cputimervars.h), the below
+    // settings must also be updated.
+    //
+       CpuTimer0Regs.TCR.all = 0x4001;
+
+
 
     InitPieCtrl();                                      // Initialize the PIE control registers to their default state.
                                                         // The default state is all PIE interrupts disabled and flags
@@ -135,37 +192,102 @@ void main(void)
     res0 = MB85RS4MT_Start();
     #endif
 
+    //adr = 0;
+
+#if 1
+    dat[0] = 0x0001;
+    for(i=1;i<READ_WRITE_TEST_SIZE_DATA;i++)
+    {
+        dat[i] = (dat[i-1]+ (dat_init >> 8)) & 0xFF | ((dat[i-1] & 0xFF00) + (dat_init &0xFF00));                          // Init dat
+    }
+#else
+    for(i=0;i<READ_WRITE_TEST_SIZE_DATA;i++)
+        dat[i] = 0;                          // Init dat
+#endif
+
     while(1)
     {
         GPIO_WritePin(LED1_PIN, !GPIO_ReadPin(LED1_PIN));
 
-        if (test_write_read)
+        while (test_write_read)
         {
-            test_write_read = 0;
+            if (bResetErrorLed)
+            {
 
-            GPIO_WritePin(LED2_PIN, LED_OFF);
+                u32WholeTestTimerLast = CpuTimer0Regs.TIM.all;
+                u32WholeTestTimeDiff = 0;
+                u32WriteTestTimeDiff = 0;
+                u32WriteFullTestTimeDiff = 0;
+                u32ReadTestTimeDiff = 0;
+                u32ReadFullTestTimeDiff = 0;
+
+                bResetErrorLed = 0;
+                GPIO_WritePin(LED4_PIN, LED_OFF);
+            }
+
+            GPIO_WritePin(LED2_PIN, LED_ON);
             GPIO_WritePin(LED3_PIN, LED_ON);
+            GPIO_WritePin(LED1_PIN, LED_OFF);
 
-            for(i=0;i<8;i++)
-                dat[i] = dat[i]+ 0x101;                          // Update dat
+            test_write_read--;
 
-            add_crc32(dat, 8);                                // Add CRC32 at the end of the dat
-            #ifndef _USE_LIBRARY
-            res1 = mb85rs4mt_write_data(adr, dat, 10);        // Write the dat and the CRC32
-            #else
-            res1 = MB85RS4MT_WriteData(adr, dat, 10);        // Write the dat and the CRC32
+            if (dat_inc)
+            {
+                for(i=0;i<READ_WRITE_TEST_SIZE_DATA;i++)
+                {
+                    dat[i] = ((dat[i]+ (dat_inc>>8)) & 0xFF) | ((dat[i] & 0xFF00) + (dat_inc & 0xFF00));                          // Update dat
+                }
+            }
+
+            #if USE_CRC
+            add_crc32(dat, READ_WRITE_TEST_SIZE_DATA);                                // Add CRC32 at the end of the dat
             #endif
 
-            memset(buf, 0, sizeof(buf));                    // Clear read buffer
-            //for(i=0;i<10;i++)buf[i] = 0;                    // Clear read buffer
+            u32WriteTestTimerLast = CpuTimer0Regs.TIM.all;
+            u32WriteFullTestTimerLast = CpuTimer0Regs.TIM.all;
+
+            #ifndef _USE_LIBRARY
+            res1 = mb85rs4mt_write_data(adr, dat, READ_WRITE_TEST_SIZE);        // Write the dat and the CRC32
+            #else
+            res1 = MB85RS4MT_WriteData(adr, dat, READ_WRITE_TEST_SIZE);        // Write the dat and the CRC32
+            #endif
+
+            /* calc u32WriteTestTimeDiff */
+            u32WriteTestTimerNow = CpuTimer0Regs.TIM.all;
+            u32WriteTestTimeDiff += u32WriteTestTimerLast - u32WriteTestTimerNow;
+            u32WriteTestTimerLast = u32WriteTestTimerNow;
+
+            #ifndef _USE_LIBRARY
+            //DELAY_US(1000*100);  //0.1 sec
+            while(mb85rs4mt_busy()) {}
+            #else
+            while(MB85RS4MT_IsBusy()) {}
+            #endif
+
+            /* calc u32WriteFullTestTimeDiff */
+            u32WriteFullTestTimerNow = CpuTimer0Regs.TIM.all;
+            u32WriteFullTestTimeDiff += u32WriteFullTestTimerLast - u32WriteFullTestTimerNow;
+            u32WriteFullTestTimerLast = u32WriteFullTestTimerNow;
+
+
+            memset(buffer, 0, sizeof(buffer));                    // Clear read buffer
+            //for(i=0;i<10;i++)buffer[i] = 0;                    // Clear read buffer
 
             EALLOW; EDIS;                                   // Check here
 
+            u32ReadTestTimerLast = CpuTimer0Regs.TIM.all;
+            u32ReadFullTestTimerLast = CpuTimer0Regs.TIM.all;
+
             #ifndef _USE_LIBRARY
-            res2 = mb85rs4mt_read_data(adr++, buf, 10);      // Read from memory
+            res2 = mb85rs4mt_read_data(adr++, buffer, READ_WRITE_TEST_SIZE);      // Read from memory
             #else
-            res2 = MB85RS4MT_ReadData(adr++, buf, 10);       // Read from memory
+            res2 = MB85RS4MT_ReadData(adr++, buffer, READ_WRITE_TEST_SIZE);       // Read from memory
             #endif
+
+            /* calc u32ReadTestTimeDiff */
+            u32ReadTestTimerNow = CpuTimer0Regs.TIM.all;
+            u32ReadTestTimeDiff += u32ReadTestTimerLast - u32ReadTestTimerNow;
+            u32ReadTestTimerLast = u32ReadTestTimerNow;
 
 
             #ifndef _USE_LIBRARY
@@ -175,20 +297,28 @@ void main(void)
             while(MB85RS4MT_IsBusy()) {}
             #endif
 
+            /* calc u32ReadFullTestTimeDiff */
+            u32ReadFullTestTimerNow = CpuTimer0Regs.TIM.all;
+            u32ReadFullTestTimeDiff += u32ReadFullTestTimerLast - u32ReadFullTestTimerNow;
+            u32ReadFullTestTimerLast = u32ReadFullTestTimerNow;
 
-            crc = crc32_halfbyte(buf, 8, 0);               //CRC32 of the dat
 
-            if(((uint16_t)crc != buf[8]) || ((uint16_t)(crc>>16) != buf[9]) )
+
+
+            #if USE_CRC
+            crc = crc32_halfbyte(buffer, READ_WRITE_TEST_SIZE_DATA, 0);               //CRC32 of the dat
+
+            if(((uint16_t)crc != buffer[READ_WRITE_TEST_SIZE_DATA]) || ((uint16_t)(crc>>16) != buffer[READ_WRITE_TEST_SIZE_DATA+1]) )
+            #else
+            if(memcmp(buffer, dat, READ_WRITE_TEST_SIZE_DATA) != 0)
+            #endif
             {
                 EALLOW; EDIS;                              // Check here
                 GPIO_WritePin(LED4_PIN, LED_ON);
             }
-            else
-            {
-                GPIO_WritePin(LED4_PIN, LED_OFF);
-            }
 
 
+#if 0
             memset(map, 0, sizeof(map));                    // Clear read buffer
             EALLOW; EDIS;                                   // Check here
 
@@ -200,18 +330,41 @@ void main(void)
             res6 = MB85RS4MT_ReadData(0, map, sizeof(map));       // Read memory map
             res7 = MB85RS4MT_ReadDataRaw(0, raw, sizeof(raw));       // Read memory map
             #endif
+#endif
 
+            /* calc u32WholeTestTimeDiff */
+            u32WholeTestTimerNow = CpuTimer0Regs.TIM.all;
+            u32WholeTestTimeDiff += u32WholeTestTimerLast - u32WholeTestTimerNow;
+            u32WholeTestTimerLast = u32WholeTestTimerNow;
 
-
+            if (test_write_read == 0)
+            {
+                GPIO_WritePin(LED2_PIN, LED_OFF);
+                GPIO_WritePin(LED3_PIN, LED_ON);
+                bResetErrorLed = 1;
+            }
 
         }
 
-        if (test_stat_reg)
+
+
+
+
+        while (test_stat_reg)
         {
-            test_stat_reg = 0;
+            if (bResetErrorLed)
+            {
+                bResetErrorLed = 0;
+                GPIO_WritePin(LED4_PIN, LED_OFF);
+            }
 
             GPIO_WritePin(LED2_PIN, LED_ON);
-            GPIO_WritePin(LED3_PIN, LED_OFF);
+            GPIO_WritePin(LED3_PIN, LED_ON);
+            GPIO_WritePin(LED1_PIN, LED_OFF);
+            test_stat_reg--;
+
+
+
 
             #ifndef _USE_LIBRARY
             res3 = mb85rs4mt_read_statreg(&val_stat_before);
@@ -246,7 +399,14 @@ void main(void)
             }
             else
             {
-                GPIO_WritePin(LED4_PIN, LED_OFF);
+                //GPIO_WritePin(LED4_PIN, LED_OFF);
+            }
+
+            if (test_stat_reg == 0)
+            {
+                GPIO_WritePin(LED2_PIN, LED_ON);
+                GPIO_WritePin(LED3_PIN, LED_OFF);
+                bResetErrorLed = 1;
             }
         }
         DELAY_US(1000*1000);                           // 1 sec
