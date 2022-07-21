@@ -129,6 +129,7 @@ void main(void)
     res0 = mb85rs4mt_write_enable();
     #else
     //res0 = MB85RS4MT_WriteEnable();   //optional
+    res0 = MB85RS4MT_Start();
     #endif
 
     while(1)

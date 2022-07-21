@@ -20,11 +20,15 @@
 #include "F2837xD_spi.h"
 
 
+
+
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
 #define FIFO_WORDSIZE       (8)
 #define SPI_TIMEOUT         10000
+
+
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -46,6 +50,8 @@
 /* *****************************************************************************
  * Enumeration Definitions
  **************************************************************************** */
+
+
 
 /* *****************************************************************************
  * Type Definitions
@@ -70,10 +76,19 @@ typedef struct  {
  **************************************************************************** */
 volatile mb85rs4mt_spi_tag mb85rs4mt_spi;    // Status of the SPI transaction
 
+#if MB85RS4MT_USE_RAM_BUFFER
+uint16_t mb85rs4mt_ram_buffer[MB85RS4MT_RAM_BUFFER_SIZE];
+uint16_t mb85rs4mt_ram_copy_len;
+uint32_t mb85rs4mt_ram_copy_address;
+uint16_t mb85rs4mt_ram_data_offset;
+uint32_t mb85rs4mt_ram_buffer_start_address = MB85RS4MT_RAM_BUFFER_START_ADDRESS;
+#endif
+
 /* *****************************************************************************
  * Prototype of functions definitions
  **************************************************************************** */
 interrupt void MB85RS4MT_RXFIFO_ISR(void);
+int MB85RS4MT_ReadDataInternal(uint32_t address, uint16_t *buf, uint16_t len);
 
 /* *****************************************************************************
  * Functions
@@ -157,6 +172,21 @@ int MB85RS4MT_Init(void)
     return 0;
 }
 
+
+/*
+ * Initialization after enabled interrupts
+ */
+int MB85RS4MT_Start(void)
+{
+    MB85RS4MT_WriteEnable();
+
+    #if MB85RS4MT_USE_RAM_BUFFER
+    MB85RS4MT_ReadDataInternal(mb85rs4mt_ram_buffer_start_address, mb85rs4mt_ram_buffer, MB85RS4MT_RAM_BUFFER_SIZE);
+    #endif
+
+    return SPI_OK;
+}
+
 /*
  * Sends write enable command
  */
@@ -223,7 +253,7 @@ int MB85RS4MT_WriteDisable(void)
  * If previous command is not complete in given time frame this function returns SPI_TIMEOUT_ERROR.
  * Nonblocking function, it doesn't wait the whole buffer to be send, returns immediately SPI_OK instead
  */
-int MB85RS4MT_WriteData(uint16_t address, uint16_t *data, uint16_t len)
+int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
 {
     uint16_t i=0;
 
@@ -245,10 +275,46 @@ int MB85RS4MT_WriteData(uint16_t address, uint16_t *data, uint16_t len)
                                                                         // and 3 bytes for the address
     SpicRegs.SPITXBUF = OPCODE_WRITE<<8;
 
-    SpicRegs.SPITXBUF = 0x0000;                                         // Address is 3 bytes,
+    SpicRegs.SPITXBUF = ((uint16_t)(address>>16))&0xFF00;               // Address is 3 bytes,
                                                                         // the chip ignores the first byte
-    SpicRegs.SPITXBUF = address&0xFF00;                                 // Address MSB
-    SpicRegs.SPITXBUF = address<<8;                                     // Address LSB
+    SpicRegs.SPITXBUF = ((uint16_t)address)&0xFF00;                     // Address MSB
+    SpicRegs.SPITXBUF = ((uint16_t)address)<<8;                         // Address LSB
+
+    #if MB85RS4MT_USE_RAM_BUFFER
+    mb85rs4mt_ram_copy_len = 0;
+    {
+        if(address >= mb85rs4mt_ram_buffer_start_address)   /* copy from beginning */
+        {
+            if (address < (mb85rs4mt_ram_buffer_start_address + MB85RS4MT_RAM_BUFFER_SIZE))
+            {
+                mb85rs4mt_ram_copy_address = address - mb85rs4mt_ram_buffer_start_address;
+                mb85rs4mt_ram_copy_len = len;
+                if ((mb85rs4mt_ram_copy_address + mb85rs4mt_ram_copy_len) > MB85RS4MT_RAM_BUFFER_SIZE)
+                {
+                    mb85rs4mt_ram_copy_len = MB85RS4MT_RAM_BUFFER_SIZE - mb85rs4mt_ram_copy_address;
+                }
+                mb85rs4mt_ram_data_offset = 0;
+            }
+        }
+        else //if(address < mb85rs4mt_ram_buffer_start_address)  /* copy at end */
+        {
+            if ((address + len) > mb85rs4mt_ram_buffer_start_address)
+            {
+                mb85rs4mt_ram_copy_address = 0;
+                mb85rs4mt_ram_data_offset = mb85rs4mt_ram_buffer_start_address - address;
+                mb85rs4mt_ram_copy_len = len - mb85rs4mt_ram_data_offset;
+                if ((mb85rs4mt_ram_copy_address + mb85rs4mt_ram_copy_len) > MB85RS4MT_RAM_BUFFER_SIZE)
+                {
+                    mb85rs4mt_ram_copy_len = MB85RS4MT_RAM_BUFFER_SIZE - mb85rs4mt_ram_copy_address;
+                }
+            }
+        }
+        if (mb85rs4mt_ram_copy_len)
+        {
+            memcpy(&mb85rs4mt_ram_buffer[mb85rs4mt_ram_copy_address], &mb85rs4mt_spi.buf[mb85rs4mt_ram_data_offset], mb85rs4mt_ram_copy_len);
+        }
+    }
+    #endif
 
     return SPI_OK;
 }
@@ -265,7 +331,7 @@ int MB85RS4MT_WriteData(uint16_t address, uint16_t *data, uint16_t len)
  * If previous command is not complete in given time frame this function returns SPI_TIMEOUT_ERROR.
  * Nonblocking function, it doesn't wait the whole buffer to be send, returns immediately SPI_OK instead
  */
-int MB85RS4MT_ReadData(uint16_t address, uint16_t *buf, uint16_t len)
+int MB85RS4MT_ReadDataInternal(uint32_t address, uint16_t *buf, uint16_t len)
 {
     uint16_t i=0;
 
@@ -286,13 +352,103 @@ int MB85RS4MT_ReadData(uint16_t address, uint16_t *buf, uint16_t len)
     SpicRegs.SPIFFRX.bit.RXFFIL = 4;                                      // We will send/receive 4 bytes = opcode
                                                                           // and 3 bytes for the address
     SpicRegs.SPITXBUF = OPCODE_READ<<8;
-    SpicRegs.SPITXBUF = 0x0000;                                           // Address is 3 bytes,
+
+    SpicRegs.SPITXBUF = ((uint16_t)(address>>16))&0xFF00;                 // Address is 3 bytes,
                                                                           // the chip ignores the first byte
-    SpicRegs.SPITXBUF = address&0xFF00;                                   // Address MSB
-    SpicRegs.SPITXBUF = address<<8;                                       // Address LSB
+    SpicRegs.SPITXBUF = ((uint16_t)address)&0xFF00;                       // Address MSB
+    SpicRegs.SPITXBUF = ((uint16_t)address)<<8;                           // Address LSB
+
+
+    #if MB85RS4MT_USE_RAM_BUFFER
+    mb85rs4mt_ram_copy_len = 0;
+    {
+        if(address >= mb85rs4mt_ram_buffer_start_address)   /* copy from beginning */
+        {
+            if (address < (mb85rs4mt_ram_buffer_start_address + MB85RS4MT_RAM_BUFFER_SIZE))
+            {
+                mb85rs4mt_ram_copy_address = address - mb85rs4mt_ram_buffer_start_address;
+                mb85rs4mt_ram_copy_len = len;
+                if ((mb85rs4mt_ram_copy_address + mb85rs4mt_ram_copy_len) > MB85RS4MT_RAM_BUFFER_SIZE)
+                {
+                    mb85rs4mt_ram_copy_len = MB85RS4MT_RAM_BUFFER_SIZE - mb85rs4mt_ram_copy_address;
+                }
+                mb85rs4mt_ram_data_offset = 0;
+            }
+        }
+        else //if(address < mb85rs4mt_ram_buffer_start_address)  /* copy at end */
+        {
+            if ((address + len) > mb85rs4mt_ram_buffer_start_address)
+            {
+                mb85rs4mt_ram_copy_address = 0;
+                mb85rs4mt_ram_data_offset = mb85rs4mt_ram_buffer_start_address - address;
+                mb85rs4mt_ram_copy_len = len - mb85rs4mt_ram_data_offset;
+                if ((mb85rs4mt_ram_copy_address + mb85rs4mt_ram_copy_len) > MB85RS4MT_RAM_BUFFER_SIZE)
+                {
+                    mb85rs4mt_ram_copy_len = MB85RS4MT_RAM_BUFFER_SIZE - mb85rs4mt_ram_copy_address;
+                }
+            }
+        }
+    }
+    #endif
 
     return SPI_OK;
 }
+
+#if MB85RS4MT_USE_RAM_BUFFER
+int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
+{
+    int result = SPI_OK;
+
+
+    mb85rs4mt_ram_copy_len = 0;
+    {
+        if(address >= mb85rs4mt_ram_buffer_start_address)   /* copy from beginning */
+        {
+            if (address < (mb85rs4mt_ram_buffer_start_address + MB85RS4MT_RAM_BUFFER_SIZE))
+            {
+                mb85rs4mt_ram_copy_address = address - mb85rs4mt_ram_buffer_start_address;
+                mb85rs4mt_ram_copy_len = len;
+                if ((mb85rs4mt_ram_copy_address + mb85rs4mt_ram_copy_len) > MB85RS4MT_RAM_BUFFER_SIZE)
+                {
+                    mb85rs4mt_ram_copy_len = MB85RS4MT_RAM_BUFFER_SIZE - mb85rs4mt_ram_copy_address;
+                }
+                mb85rs4mt_ram_data_offset = 0;
+            }
+            address += mb85rs4mt_ram_copy_len;
+        }
+        else //if(address < mb85rs4mt_ram_buffer_start_address)  /* copy at end */
+        {
+            if ((address + len) > mb85rs4mt_ram_buffer_start_address)
+            {
+                mb85rs4mt_ram_copy_address = 0;
+                mb85rs4mt_ram_data_offset = mb85rs4mt_ram_buffer_start_address - address;
+                mb85rs4mt_ram_copy_len = len - mb85rs4mt_ram_data_offset;
+                if ((mb85rs4mt_ram_copy_address + mb85rs4mt_ram_copy_len) > MB85RS4MT_RAM_BUFFER_SIZE)
+                {
+                    mb85rs4mt_ram_copy_len = MB85RS4MT_RAM_BUFFER_SIZE - mb85rs4mt_ram_copy_address;
+                }
+            }
+        }
+        if (mb85rs4mt_ram_copy_len)
+        {
+            memcpy(&buf[mb85rs4mt_ram_data_offset], &mb85rs4mt_ram_buffer[mb85rs4mt_ram_copy_address], mb85rs4mt_ram_copy_len);
+        }
+    }
+
+    len -= mb85rs4mt_ram_copy_len;
+
+    if(len)
+    {
+        result = MB85RS4MT_ReadDataInternal(address, buf, len);
+    }
+    return result;
+}
+#else
+int MB85RS4MT_ReadData(uint16_t address, uint16_t *buf, uint16_t len)
+{
+    return MB85RS4MT_ReadDataInternal(address, buf, len);
+}
+#endif
 
 int MB85RS4MT_IsBusy(void)
 {
@@ -451,8 +607,20 @@ __interrupt void MB85RS4MT_RXFIFO_ISR(void){
                 GpioDataRegs.GPCDAT.bit.GPIO72 = 1;                 // Release CS
                 read_has_started = 0;                               // Reset the static variables
                 idx = 0;
+
+                #if MB85RS4MT_USE_RAM_BUFFER
+                if (mb85rs4mt_ram_copy_len)
+                {
+                    memcpy(&mb85rs4mt_ram_buffer[mb85rs4mt_ram_copy_address], &mb85rs4mt_spi.buf[mb85rs4mt_ram_data_offset], mb85rs4mt_ram_copy_len);
+                }
+                #endif
+
                 mb85rs4mt_spi.complete = 1;                         // Command completes now
-            } else {
+
+
+            }
+            else
+            {
                                                                     // Words to be read in the next batch
                 words_in_batch = (mb85rs4mt_spi.words_left>FIFO_WORDSIZE)?FIFO_WORDSIZE:mb85rs4mt_spi.words_left;
 
