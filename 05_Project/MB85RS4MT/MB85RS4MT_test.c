@@ -108,19 +108,19 @@ void main(void)
                                                         // The shell ISR routines are found in F2837xD_DefaultIsr.c.
                                                         // This function is found in F2837xD_PieVect.c.
 
-    EALLOW;
-    PieVectTable.SPIC_RX_INT = &mb85rs4mt_RXFIFO_ISR;   // SPIC_RX FIFO ISR
-    EDIS;
 
     #ifndef _USE_LIBRARY
     InitSPIC_mb85rs4mt();                               // Initialize the SPIC for use with MB85RS4MT
+    EALLOW;
+    PieVectTable.SPIC_RX_INT = &mb85rs4mt_RXFIFO_ISR;   // SPIC_RX FIFO ISR
+    EDIS;
+    PieCtrlRegs.PIECTRL.bit.ENPIE = 1;                  // Enable the PIE block
+    PieCtrlRegs.PIEIER6.bit.INTx9 = 1;                  // Enable PIE Group 6, INT 9 => SPIC_RX
+    IER=M_INT6;                                         // Enable CPU INT6
     #else
     MB85RS4MT_Init();
     #endif
 
-    PieCtrlRegs.PIECTRL.bit.ENPIE = 1;                  // Enable the PIE block
-    PieCtrlRegs.PIEIER6.bit.INTx9 = 1;                  // Enable PIE Group 6, INT 9 => SPIC_RX
-    IER=M_INT6;                                         // Enable CPU INT6
     IFR = 0x0000;                                       // Clear all flags
     EINT;                                               // Enable Global Interrupts
     ERTM;                                               // We can debug ISRs

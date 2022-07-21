@@ -23,14 +23,15 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+#define FIFO_WORDSIZE       (8)
+#define SPI_TIMEOUT         10000
 
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
 //SPI related constants
-#define SPI_TIMEOUT           10000
-#define SPI_TIMEOUT_ERROR     777
-#define SPI_OK                0
+#define SPI_TIMEOUT_ERROR   777
+#define SPI_OK              0
 
 // MB85RS4MT opcodes.
 #define OPCODE_WREN     0x06    /* Write enable */
@@ -71,6 +72,7 @@ volatile mb85rs4mt_spi_tag mb85rs4mt_spi;    // Status of the SPI transaction
 /* *****************************************************************************
  * Prototype of functions definitions
  **************************************************************************** */
+interrupt void MB85RS4MT_RXFIFO_ISR(void);
 
 /* *****************************************************************************
  * Functions
@@ -141,6 +143,15 @@ int MB85RS4MT_Init(void)
     SpicRegs.SPIFFRX.bit.RXFIFORESET=1;         // Release the RX FIFO
 
     mb85rs4mt_spi.complete = 1;                   // Previous command is complete
+
+    //interrupts register
+    EALLOW;
+    PieVectTable.SPIC_RX_INT = &MB85RS4MT_RXFIFO_ISR;   // SPIC_RX FIFO ISR
+    EDIS;
+    PieCtrlRegs.PIECTRL.bit.ENPIE = 1;                  // Enable the PIE block
+    PieCtrlRegs.PIEIER6.bit.INTx9 = 1;                  // Enable PIE Group 6, INT 9 => SPIC_RX
+    IER=M_INT6;                                         // Enable CPU INT6
+
 
     return 0;
 }
@@ -350,5 +361,108 @@ timeout:
     return SPI_TIMEOUT_ERROR;
 }
 
+
+//
+// RX FIFO ISR
+//
+__interrupt void MB85RS4MT_RXFIFO_ISR(void){
+    uint16_t i, words_in_batch;
+    static uint16_t idx, read_has_started, write_has_started;
+    volatile uint16_t dummy;
+
+    switch(mb85rs4mt_spi.opcode) {
+
+        case OPCODE_WREN:
+        case OPCODE_WRDI:
+        case OPCODE_WRSR:
+
+            GpioDataRegs.GPCDAT.bit.GPIO72 = 1;                     // Release CS
+
+            while(SpicRegs.SPIFFRX.bit.RXFFST > 0)                  // Read all RX FIFO
+                dummy = SpicRegs.SPIRXBUF;
+
+            mb85rs4mt_spi.complete = 1;                             // Those commands complete on the first interrupt
+
+            break;
+
+        case OPCODE_RDSR:
+            GpioDataRegs.GPCDAT.bit.GPIO72 = 1;                     // Release CS
+            dummy = SpicRegs.SPIRXBUF;                              // Read the first byte which is not needed,
+                                                                    // so the ISR doesn't fire again
+            mb85rs4mt_spi.complete = 1;                             // RDST completes on the first interrupt
+            break;
+
+        case OPCODE_WRITE:
+            if(!write_has_started){                                 // Zero the 'idx' at the start of the transaction
+                idx = 0;
+                write_has_started = 1;
+
+            }
+
+            if (mb85rs4mt_spi.words_left == 0){
+                GpioDataRegs.GPCDAT.bit.GPIO72 = 1;                 // Release CS
+                mb85rs4mt_spi.complete = 1;                         // Command completes now
+                idx = 0;
+            } else {
+                                                                    // Words to be send in the next batch
+                words_in_batch = (mb85rs4mt_spi.words_left>FIFO_WORDSIZE)?FIFO_WORDSIZE:mb85rs4mt_spi.words_left;
+
+                SpicRegs.SPIFFRX.bit.RXFFIL = 2*(words_in_batch);   // Interrupt after that many bytes
+
+                for(i=0;i<words_in_batch; i++){                     // Put the data in the TX FIFO
+                    SpicRegs.SPITXBUF = mb85rs4mt_spi.buf[idx];     // MSB part of SPITXBUF is used
+                    SpicRegs.SPITXBUF = mb85rs4mt_spi.buf[idx]<<8;
+                    idx++;
+                }
+
+                mb85rs4mt_spi.words_left -= words_in_batch;         // Update the remaining data
+            }
+
+            while(SpicRegs.SPIFFRX.bit.RXFFST > 0)                  // Clean the RX FIFO
+                dummy = SpicRegs.SPIRXBUF;
+
+            break;
+
+        case OPCODE_READ:
+            if(read_has_started) {                                  // Not the first batch
+                 while(SpicRegs.SPIFFRX.bit.RXFFST > 0){            // Read all the data from RX FIFO
+                     mb85rs4mt_spi.buf[idx] = SpicRegs.SPIRXBUF<<8; // LSB part of SPIRXBUF is used
+                     mb85rs4mt_spi.buf[idx] |= (SpicRegs.SPIRXBUF&0x00FF);
+                     idx++;
+                 }
+             } else {
+                 for(i=0;i<4; i++)                                  // Clean the RX FIFO
+                     dummy = SpicRegs.SPIRXBUF;
+                 read_has_started = 1;
+                 idx = 0;
+             }
+
+            if (mb85rs4mt_spi.words_left == 0){
+                GpioDataRegs.GPCDAT.bit.GPIO72 = 1;                 // Release CS
+                read_has_started = 0;                               // Reset the static variables
+                idx = 0;
+                mb85rs4mt_spi.complete = 1;                         // Command completes now
+            } else {
+                                                                    // Words to be read in the next batch
+                words_in_batch = (mb85rs4mt_spi.words_left>FIFO_WORDSIZE)?FIFO_WORDSIZE:mb85rs4mt_spi.words_left;
+
+                SpicRegs.SPIFFRX.bit.RXFFIL = 2*words_in_batch;     // Interrupt after that many bytes
+
+                for(i=0;i<2*words_in_batch; i++)                    // Fill the TX FIFO with dummy data to initiate next batch
+                    SpicRegs.SPITXBUF = 0x0000;                     // dummy data
+
+                mb85rs4mt_spi.words_left -= words_in_batch;         // Update the remaining data
+            }
+
+            break;
+
+        default:
+            break;
+    }
+
+    SpicRegs.SPIFFRX.bit.RXFFINTCLR=1;           // Clear Interrupt flag
+    PieCtrlRegs.PIEACK.all|=M_INT6;              // Issue PIE ACK
+
+}
 
 
