@@ -26,7 +26,8 @@ extern "C"
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
-#define MB85RS4MT_SPI_BAUDRATE              ((200000000 / 10000000) - 1)        /* ??? only 10 MHz */
+#define MANUAL_DECREASE 6
+#define MB85RS4MT_SPI_BAUDRATE              ((200000000 / 10000000) - 1 - MANUAL_DECREASE)        /* ??? only 10 MHz (14.285 MHz) */
 
 #define MB85RS4MT_USE_RAM_BUFFER            1
 

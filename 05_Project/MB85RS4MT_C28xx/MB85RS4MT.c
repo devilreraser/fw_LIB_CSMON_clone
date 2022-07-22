@@ -99,14 +99,14 @@ int MB85RS4MT_Init(void)
     EALLOW;
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO69 = 3;       // GPIO069 is SPI_SIMOC
-    //GpioCtrlRegs.GPCMUX1.bit.GPIO69 = 3;
+    GpioCtrlRegs.GPCMUX1.bit.GPIO69 = 3;
 
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO70 = 3;       // GPIO070 is SPI_SOMIC
-    //GpioCtrlRegs.GPCMUX1.bit.GPIO70 = 3;
+    GpioCtrlRegs.GPCMUX1.bit.GPIO70 = 3;
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO71 = 3;       // GPIO071 is SPI_CLKC
-    //GpioCtrlRegs.GPCMUX1.bit.GPIO71 = 3;
+    GpioCtrlRegs.GPCMUX1.bit.GPIO71 = 3;
 
 
     GpioCtrlRegs.GPCGMUX1.bit.GPIO72 = 0;       // GPIO72 is GPIO
@@ -114,10 +114,10 @@ int MB85RS4MT_Init(void)
     GpioDataRegs.GPCDAT.bit.GPIO72 = 1;         // Set High initially
 
 
-    //GpioCtrlRegs.GPCQSEL1.bit.GPIO69 = 3;       //Async, no Sync or Qualification
-    //GpioCtrlRegs.GPCQSEL1.bit.GPIO70 = 3;       //Async, no Sync or Qualification
-    //GpioCtrlRegs.GPCQSEL1.bit.GPIO71 = 3;       //Async, no Sync or Qualification
-    GpioCtrlRegs.GPCQSEL1.bit.GPIO72 = 3;       //Async, no Sync or Qualification
+    GpioCtrlRegs.GPCQSEL1.bit.GPIO69 = 0;       //Async, no Sync or Qualification
+    GpioCtrlRegs.GPCQSEL1.bit.GPIO70 = 0;       //Async, no Sync or Qualification
+    GpioCtrlRegs.GPCQSEL1.bit.GPIO71 = 0;       //Async, no Sync or Qualification
+    GpioCtrlRegs.GPCQSEL1.bit.GPIO72 = 0;       //Async, no Sync or Qualification
 
     EDIS;
 
@@ -306,7 +306,7 @@ int MB85RS4MT_WriteData(uint32_t address, uint16_t *data, uint16_t len)
         }
         if (mb85rs4mt_ram_copy_len)
         {
-            memcpy(&mb85rs4mt_ram_buffer[mb85rs4mt_ram_copy_address], &mb85rs4mt_spi.buf[mb85rs4mt_ram_data_offset], mb85rs4mt_ram_copy_len);
+            memcpy(&mb85rs4mt_ram_buffer[mb85rs4mt_ram_copy_address], &data[mb85rs4mt_ram_data_offset], mb85rs4mt_ram_copy_len);
         }
     }
     #endif
@@ -423,7 +423,7 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
     adr_spi = address;
     len_spi = len;
 
-    mb85rs4mt_ram_copy_len = 0;
+    //mb85rs4mt_ram_copy_len = 0;
     {
         if(address < mb85rs4mt_ram_buffer_start_address)  /* address before ram buffer */
         {
@@ -432,6 +432,8 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
                 len_spi = (mb85rs4mt_ram_buffer_start_address - address);
             }
             result = MB85RS4MT_ReadDataInternal(adr_spi, buf_spi, len_spi);
+
+            if(wait_idle_fail()) return SPI_TIMEOUT_ERROR;
 
             len -= len_spi;
             address += len_spi;
@@ -443,7 +445,7 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
             len_spi = len;
 
         }
-
+        mb85rs4mt_ram_copy_len = 0;
         if(address >= mb85rs4mt_ram_buffer_start_address)   /* copy from beginning */
         {
             if (address < (mb85rs4mt_ram_buffer_start_address + MB85RS4MT_RAM_BUFFER_SIZE))
@@ -480,7 +482,7 @@ int MB85RS4MT_ReadData(uint32_t address, uint16_t *buf, uint16_t len)
 
     len_spi -= mb85rs4mt_ram_copy_len;
 
-    if(len)
+    if(len_spi)
     {
         result = MB85RS4MT_ReadDataInternal(adr_spi, buf_spi, len_spi);
     }
