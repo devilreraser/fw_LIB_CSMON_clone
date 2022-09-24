@@ -43,6 +43,11 @@
 //
 // Included Files
 //
+//#include "F2806x_Cla_typedefs.h"// F2806x CLA Type definitions
+#include "F2806x_Device.h"      // F2806x Headerfile Include File
+#include "F2806x_Examples_Local.h"    // F2806x Examples Include File
+#include "Flash2806x_API_Library.h"
+
 #include "driverlib.h"
 
 //*****************************************************************************
@@ -111,6 +116,39 @@
 #define DEVICE_SYSCLK_FREQ          ((DEVICE_OSCSRC_FREQ * 9 * 1) / 2)
 #define DEVICE_LSPCLK_DIVIDER       2
 #define DEVICE_LSPCLK_FREQ          (DEVICE_SYSCLK_FREQ / DEVICE_LSPCLK_DIVIDER)
+
+
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------------
+   These key values are used to unlock the CSM by this example
+   They are defined in Example_Flash2806x_CsmKeys.asm
+--------------------------------------------------------------------------*/
+extern Uint16 PRG_key0;        //   CSM Key values
+extern Uint16 PRG_key1;
+extern Uint16 PRG_key2;
+extern Uint16 PRG_key3;
+extern Uint16 PRG_key4;
+extern Uint16 PRG_key5;
+extern Uint16 PRG_key6;
+extern Uint16 PRG_key7;
+
+
+
+//*****************************************************************************
+//
+// Function Prototypes
+//
+//*****************************************************************************
+
+#define DEVICE_DELAY_US(x)  DELAY_US(x)
+
 
 #else
 
