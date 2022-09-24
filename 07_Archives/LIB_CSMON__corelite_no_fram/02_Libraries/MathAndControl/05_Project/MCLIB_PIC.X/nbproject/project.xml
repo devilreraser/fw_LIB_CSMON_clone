@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>com.microchip.mplab.nbide.embedded.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>MCLIB_PIC</name>
+            <creation-uuid>51e3655c-0d6f-4ae1-9b1b-e66d21c0ec51</creation-uuid>
+            <make-project-type>0</make-project-type>
+            <c-extensions>c</c-extensions>
+            <cpp-extensions/>
+            <header-extensions>h</header-extensions>
+            <asminc-extensions/>
+            <sourceEncoding>ISO-8859-1</sourceEncoding>
+            <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>../../01_Source</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>dsPIC33EP64GS804</name>
+                    <type>3</type>
+                </confElem>
+                <confElem>
+                    <name>dsPIC33EP512MU814</name>
+                    <type>3</type>
+                </confElem>
+                <confElem>
+                    <name>PIC16F18345</name>
+                    <type>3</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
+        </data>
+    </configuration>
+</project>

@@ -1,0 +1,12 @@
+*.o
+*.i
+*.d
+*.mk
+*.p1
+05_Project/HMLIB_PIC.X/dist/dsPIC33EP512MU814/production/HMLIB_PIC.X.a
+05_Project/HMLIB_PIC.X/nbproject/Makefile-genesis.properties
+05_Project/HMLIB_PIC.X/nbproject/Package-dsPIC33EP512MU814.bash
+05_Project/HMLIB_PIC.X/nbproject/private/.LCKconfigurations.xml~
+05_Project/HMLIB_PIC.X/nbproject/private/configurations.xml
+05_Project/HMLIB_PIC.X/nbproject/private/private.xml
+05_Project/HMLIB_PIC.X/dist/dsPIC33EP512MU814/debug/HMLIB_PIC.X.a
