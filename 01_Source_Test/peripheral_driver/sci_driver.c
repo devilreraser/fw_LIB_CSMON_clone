@@ -106,6 +106,7 @@ uint32_t SCI_DRV_u32GetBaseFromModuleIndex(SCI_DRV_eModule_t index)
     return (index * (SCIB_BASE - SCIA_BASE) + SCIA_BASE);
 }
 
+#ifdef SCIA_BASE
 __interrupt void SCIA_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCIA_BASE);
@@ -121,7 +122,9 @@ __interrupt void SCIA_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCIA_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP9);
 }
+#endif
 
+#ifdef SCIB_BASE
 __interrupt void SCIB_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCIB_BASE);
@@ -137,7 +140,9 @@ __interrupt void SCIB_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCIB_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP9);
 }
+#endif
 
+#ifdef SCIC_BASE
 __interrupt void SCIC_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCIC_BASE);
@@ -153,7 +158,9 @@ __interrupt void SCIC_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCIC_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP8);
 }
+#endif
 
+#ifdef SCID_BASE
 __interrupt void SCID_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCID_BASE);
@@ -169,7 +176,7 @@ __interrupt void SCID_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCID_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP8);
 }
-
+#endif
 
 
 

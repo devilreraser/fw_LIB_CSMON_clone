@@ -31,7 +31,22 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>C2000Ware_Device</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2000Ware_Device</locationURI>
+		</link>
+		<link>
 			<name>C2000Ware_LIB</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>C2806x_Device</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -64,6 +79,26 @@
 			<name>C2000Ware_LIB/driverlib</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/common</name>
+			<type>2</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/driverlib</name>
+			<type>2</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/headers</name>
+			<type>2</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/inc</name>
+			<type>2</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc</locationURI>
 		</link>
 		<link>
 			<name>HexMonitor/.git</name>
@@ -109,6 +144,11 @@
 			<name>ModbusAddress/01_Source</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Motor28062/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
 			<name>Peripheral/.git</name>
@@ -644,6 +684,11 @@
 			<name>Peripheral/01_Source/TI</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/.ccsproject</name>

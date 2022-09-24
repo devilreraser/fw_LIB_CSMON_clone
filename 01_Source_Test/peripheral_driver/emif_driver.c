@@ -27,6 +27,8 @@
 #define BOARDCFG_BOARD_CS_1107_SCC          3
 #define BOARDCFG_BOARD_CS_1107_SCC_R01      4
 
+
+
 #ifdef _CS_1107_SCC_R01
     #define BOARDCFG_BOARD          BOARDCFG_BOARD_CS_1107_SCC_R01
 #elif defined _CS_1107_SCC

@@ -20,14 +20,23 @@
 
 #include "main.h"
 #include "device.h"
-#include "emif_driver.h"
 
-#ifdef _CS_1107_SCC_R01
+#if defined(__TMS320F2806X__)
+
+#include "sci_driver.h"
+#include "uart_driver.h"
+
+#else
+
+#include "emif_driver.h"
+#if defined(_CS_1107_SCC_R01)
 #include "fpga_driver.h"
 #else
 #include "sci_driver.h"
 #include "uart_driver.h"
 #include "fpga_sci_driver.h"
+#endif
+
 #endif
 
 #include "csmon.h"
@@ -1857,7 +1866,9 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
     u32TimeCtrlLoop_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
@@ -1987,7 +1998,9 @@ void ControlProcess(void)
     {
         u32TimeCtrlLoopMax_Ticks = u32TimeCtrlLoop_Ticks;
     }
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);    /* Red LED (closest to the Debug Header) */
@@ -2037,7 +2050,9 @@ void ParameterInitialization(void)
         /* Add Parameters */
         for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
         {
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
             GPIO_writePin(STAT_LED_A_B_PIN, (u16Index & 1) );     /* Amber LED (middle Led) */
@@ -2085,7 +2100,9 @@ void ParameterInitialization(void)
         EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
 
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);         /* Amber LED (middle Led) */
@@ -2093,7 +2110,9 @@ void ParameterInitialization(void)
 
         CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
@@ -2456,6 +2475,8 @@ CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParamete
     uint16_t u16Data = *((uint16_t*)pData);
     uint16_t u16Len = *((uint16_t*)pu16Len);
 
+
+
     return eResult;
 }
 
@@ -2482,12 +2503,12 @@ void main(void)
     //
     Device_initGPIO();
 
-
+#ifndef __TMS320F2806x__
     //
     // EMIF
     //
     EMIF_DRV_vInit();
-
+#endif
 
     //
     // Clear all interrupts and initialize PIE vector table:
@@ -2499,7 +2520,9 @@ void main(void)
 
 
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     //
@@ -2556,7 +2579,9 @@ void main(void)
     }
 
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     //
@@ -2599,7 +2624,9 @@ void main(void)
     //RecordersInitialization();
 
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
@@ -2615,7 +2642,9 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
@@ -2847,7 +2876,9 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
@@ -2864,7 +2895,9 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
@@ -2887,7 +2920,12 @@ void main(void)
         //
         // RTC Process
         //
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+        //TBD!!!
+
+#elif defined(_CS_1107_SCC_R01)
+
         if (MAIN_bDateTimeSet)
         {
             FPGA_DRV_vSetDateTime (
