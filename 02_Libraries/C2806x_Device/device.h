@@ -202,6 +202,8 @@ extern uint16_t RamfuncsRunSize;
 
 #endif
 
+#endif
+
 extern uint32_t Example_PassCount;
 extern uint32_t Example_Fail;
 
@@ -222,7 +224,6 @@ extern void Example_setResultFail(void);
 extern void Example_done(void);
 
 
-#endif
 
 
 //

@@ -100,7 +100,8 @@
 
 
 
-#define PARAMETER_COUNT_MAX         1024
+//#define PARAMETER_COUNT_MAX         1024
+#define PARAMETER_COUNT_MAX         64
 
 
 /* Some Pinout */
@@ -2471,9 +2472,9 @@ CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParamete
 {
     CSMON_eReturnCodeParameter_t eResult = CSMON_RC_PARA_OK;
 
-    uint32_t u32Data = *((uint32_t*)pData);
-    uint16_t u16Data = *((uint16_t*)pData);
-    uint16_t u16Len = *((uint16_t*)pu16Len);
+    //uint32_t u32Data = *((uint32_t*)pData);
+    //uint16_t u16Data = *((uint16_t*)pData);
+    //uint16_t u16Len = *((uint16_t*)pu16Len);
 
 
 
