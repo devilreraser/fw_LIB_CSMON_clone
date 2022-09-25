@@ -119,10 +119,12 @@ PAGE 0 :   /* Program Memory */
 //   FLASHE      : origin = 0x3EE000, length = 0x002000     /* on-chip FLASH */
 //   FLASHD      : origin = 0x3F0000, length = 0x002000     /* on-chip FLASH */
 //   FLASHC      : origin = 0x3F2000, length = 0x002000     /* on-chip FLASH */
-//   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH for bootloader */
+//   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH for bootloader with 16kW */
 //   FLASHA      : origin = 0x3F6000, length = 0x002000     /* on-chip FLASH for bootloader */
 
-   FLASH_APP      : origin = 0x3E8000, length = 0x00BF80     /* on-chip FLASH */
+   FLASH_APP      : origin = 0x3E8000, length = 0x00DFF0     /* on-chip FLASH for app if used bootloader with 8kW */
+   //FLASH_APP      : origin = 0x3E8000, length = 0x00BFF0     /* on-chip FLASH for app if used bootloader with 16kW */
+
    CSM_RSVD    : origin = 0x3F7F80, length = 0x000076     /* Part of FLASHA.  Program with all 0x0000 when CSM is in use. */
    //for Standalone Usage
    BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA.  Used for "boot to Flash" bootloader mode. */

@@ -155,11 +155,6 @@ void Example_MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr
 //*****************************************************************************
 void Device_init(void)
 {
-#ifdef _FLASH
-    // We must copy required user interface functions to RAM.
-    Example_MemCopy(&RamfuncsLoadStart, &RamfuncsLoadEnd, &RamfuncsRunStart);
-#endif
-
     //
     // Step 1. Initialize System Control:
     // PLL, WatchDog, enable Peripheral Clocks
@@ -252,6 +247,25 @@ void Device_init(void)
    #ifdef SW_API
       Example_MemCopy(&Flash28_API_LoadStart, &Flash28_API_LoadEnd, &Flash28_API_RunStart);
    #endif
+
+
+
+#ifdef _FLASH
+    #if 1
+    // We must copy required user interface functions to RAM.
+    Example_MemCopy(&RamfuncsLoadStart, &RamfuncsLoadEnd, &RamfuncsRunStart);
+    #else
+    memcpy(&RamfuncsRunStart, &RamfuncsLoadStart, (Uint32)&RamfuncsLoadSize);
+    #endif
+#endif
+
+
+      //
+      // Call Flash Initialization to setup flash waitstates
+      // This function must reside in RAM
+      //
+      InitFlash();
+
 
 
     /*------------------------------------------------------------------

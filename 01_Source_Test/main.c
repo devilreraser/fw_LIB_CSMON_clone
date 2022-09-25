@@ -101,7 +101,7 @@
 
 
 //#define PARAMETER_COUNT_MAX         1024
-#define PARAMETER_COUNT_MAX         64
+#define PARAMETER_COUNT_MAX         128
 
 
 /* Some Pinout */
@@ -2397,8 +2397,63 @@ void ScopesInitialization(void)
 }
 
 
+void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
+{
+#if 1
+    if ((u16Prescaler >= SYSCTL_WD_PRESCALE_1) && (u16Prescaler <= SYSCTL_WD_PRESCALE_64))
+    {
+        u16WatchdogPrescalerTime = (1 << (u16Prescaler-1));
+    }
+    else
+    {
+        u16WatchdogPrescalerTime = 1;
+    }
+
+
+#else
+    switch(u16Prescaler)
+    {
+    case SYSCTL_WD_PRESCALE_1:
+        u16WatchdogPrescalerTime = 1;
+        break;
+    case SYSCTL_WD_PRESCALE_2:
+        u16WatchdogPrescalerTime = 2;
+        break;
+    case SYSCTL_WD_PRESCALE_4:
+        u16WatchdogPrescalerTime = 4;
+        break;
+    case SYSCTL_WD_PRESCALE_8:
+        u16WatchdogPrescalerTime = 8;
+        break;
+    case SYSCTL_WD_PRESCALE_16:
+        u16WatchdogPrescalerTime = 16;
+        break;
+    case SYSCTL_WD_PRESCALE_32:
+        u16WatchdogPrescalerTime = 32;
+        break;
+    case SYSCTL_WD_PRESCALE_64:
+        u16WatchdogPrescalerTime = 64;
+        break;
+    default:
+        u16WatchdogPrescalerTime = 1;
+        break;
+
+    }
+#endif
+}
+
 void vGetWatchdogPrescaler(uint16_t u16TimeDiv)
 {
+#if 1
+    u16WatchdogPrescaler = 1;
+    while (u16TimeDiv > 1)
+    {
+        u16TimeDiv >>= 1;
+        u16WatchdogPrescaler++;
+    }
+    vSetWatchdogPrescalerTimeDiv(u16WatchdogPrescaler);
+    u16WatchdogPrescalerTimeOld = u16WatchdogPrescalerTime;
+#else
     if(u16TimeDiv >= 64)
     {
         u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_64;
@@ -2434,38 +2489,7 @@ void vGetWatchdogPrescaler(uint16_t u16TimeDiv)
         u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_1;
         u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 1;
     }
-}
-
-void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
-{
-    switch(u16Prescaler)
-    {
-    case SYSCTL_WD_PRESCALE_1:
-        u16WatchdogPrescalerTime = 1;
-        break;
-    case SYSCTL_WD_PRESCALE_2:
-        u16WatchdogPrescalerTime = 2;
-        break;
-    case SYSCTL_WD_PRESCALE_4:
-        u16WatchdogPrescalerTime = 4;
-        break;
-    case SYSCTL_WD_PRESCALE_8:
-        u16WatchdogPrescalerTime = 8;
-        break;
-    case SYSCTL_WD_PRESCALE_16:
-        u16WatchdogPrescalerTime = 16;
-        break;
-    case SYSCTL_WD_PRESCALE_32:
-        u16WatchdogPrescalerTime = 32;
-        break;
-    case SYSCTL_WD_PRESCALE_64:
-        u16WatchdogPrescalerTime = 64;
-        break;
-    default:
-        u16WatchdogPrescalerTime = 1;
-        break;
-
-    }
+#endif
 }
 
 CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParameterElement_t eElement, uint16_t* pu16Len, void* pData, uint16_t u16NoStore, uint16_t u16DataMode, uint16_t u16Password)
@@ -2516,9 +2540,10 @@ void main(void)
     // Disable CPU interrupts
     // Initialize interrupt controller and vector table.
     //
+#ifndef __TMS320F2806x__
     Interrupt_initModule();
     Interrupt_initVectorTable();
-
+#endif
 
 
 #ifdef _CS_1291
