@@ -77,7 +77,7 @@
 #include "uart.h"
 //#include "sdfm.h"
 //#include "spi.h"
-#include "sysctl.h"
+#include "sysctl_2806x.h"
 //#include "upp.h"
 //#include "version.h"
 //#include "xbar.h"

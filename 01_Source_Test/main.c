@@ -2797,6 +2797,8 @@ void main(void)
     EINT;
     ERTM;
 
+    uint32_t u32TestSendCounter = 0;
+
     for (;;)
     {
         //
@@ -2892,7 +2894,15 @@ void main(void)
             }
         }
 
-
+        u32TestSendCounter++;
+        if (u32TestSendCounter >= 10000)
+        {
+            u32TestSendCounter = 0;
+            UART_PutChar(0, 0x55);
+            UART_PutChar(0, 0x56);
+            UART_PutChar(0, 0x57);
+            UART_PutChar(0, 0x58);
+        }
 
 
 
