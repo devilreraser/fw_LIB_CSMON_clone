@@ -2765,6 +2765,11 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
+    else
+    {
+        u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
+    }
+
 #ifdef _CS_1291
 
 #elif defined(_CS_1107_SCC_R01)
@@ -2894,7 +2899,7 @@ void main(void)
     EINT;
     ERTM;
 
-    uint32_t u32TestSendCounter = 0;
+    //uint32_t u32TestSendCounter = 0;
 
     for (;;)
     {
@@ -2991,15 +2996,15 @@ void main(void)
             }
         }
 
-        u32TestSendCounter++;
-        if (u32TestSendCounter >= 100000)
-        {
-            u32TestSendCounter = 0;
-            SCI_writeCharBlockingFIFO(0, 0x55);
-            SCI_writeCharBlockingFIFO(0, 0x56);
-            SCI_writeCharBlockingFIFO(0, 0x57);
-            SCI_writeCharBlockingFIFO(0, 0x58);
-        }
+//        u32TestSendCounter++;
+//        if (u32TestSendCounter >= 100000)
+//        {
+//            u32TestSendCounter = 0;
+//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x55);
+//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x56);
+//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x57);
+//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x58);
+//        }
 
 
 
