@@ -96,25 +96,36 @@
 
 #if 1
 
+
+#define USE_10_MHz_OR_INTOSC
+
+
+#ifdef USE_10_MHz_OR_INTOSC
+
+//CLKIN is a 10 MHz crystal or internal 10 MHz oscillator
+#define DEVICE_OSCSRC_FREQ          10000000U
+#else
 //
 // 20MHz XTAL on controlCARD. For use with SysCtl_getClock().
 //
 #define DEVICE_OSCSRC_FREQ          20000000U
 
+#endif
+
 //
 // Define to pass to SysCtl_setClock(). Will configure the clock as follows:
 // PLLSYSCLK = 20MHz (XTAL_OSC) * 9 (IMULT) * 1 (FMULT) / 2 (PLLCLK_BY_2)
 //
-#define DEVICE_SETCLOCK_CFG         (SYSCTL_OSCSRC_XTAL | SYSCTL_IMULT(9) |  \
-                                     SYSCTL_FMULT_NONE | SYSCTL_SYSDIV(2) |   \
-                                     SYSCTL_PLL_ENABLE)
+//#define DEVICE_SETCLOCK_CFG         (SYSCTL_OSCSRC_XTAL | SYSCTL_IMULT(9) |  \
+//                                     SYSCTL_FMULT_NONE | SYSCTL_SYSDIV(2) |   \
+//                                     SYSCTL_PLL_ENABLE)
 
 //
 // 200MHz SYSCLK frequency based on the above DEVICE_SETCLOCK_CFG. Update the
 // code below if a different clock configuration is used!
 //
-#define DEVICE_SYSCLK_FREQ          ((DEVICE_OSCSRC_FREQ * 9 * 1) / 2)
-#define DEVICE_LSPCLK_DIVIDER       2
+#define DEVICE_SYSCLK_FREQ          ((DEVICE_OSCSRC_FREQ * 9 * 2) / 2)
+#define DEVICE_LSPCLK_DIVIDER       1
 #define DEVICE_LSPCLK_FREQ          (DEVICE_SYSCLK_FREQ / DEVICE_LSPCLK_DIVIDER)
 
 

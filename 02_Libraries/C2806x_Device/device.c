@@ -162,7 +162,11 @@ void Device_init(void)
     //
     InitSysCtrl();
 
+    EALLOW;
+
     SysCtrlRegs.LOSPCP.all = 0x0000;
+
+    EDIS;
 
     //
     // Step 2. Initalize GPIO:

@@ -21,7 +21,7 @@
 #include "main.h"
 #include "device.h"
 
-#if defined(__TMS320F2806X__)
+#if defined(__TMS320F2806x__)
 
 #include "sci_driver.h"
 #include "uart_driver.h"
@@ -114,6 +114,11 @@
 #define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
 #define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
 #endif
+
+#define STAT_LED_EQEP1I_PIN 23
+#define STAT_LED_EQEP1S_PIN 22
+#define STAT_LED_EQEP1B_PIN 21
+#define STAT_LED_EQEP1A_PIN 20
 
 #define STAT_LED_ENABLE_LEVEL_LOW 0
 #define STAT_LED_DISABLE_LVL_HIGH   (!STAT_LED_ENABLE_LEVEL_LOW)
@@ -235,6 +240,83 @@ typedef struct
 #define GPIO_PIN_MODE_GPIO(_pin_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_GPIO, _pin_)))
 #endif
 #ifndef IO_DRV_H
+
+#if defined(__TMS320F2806x__)
+//void GPIO_writePin_2806x(uint32_t pin, uint32_t level)
+//{
+//    if (level == 1)
+//    {
+//        if (pin < 32)
+//        {
+//            GpioDataRegs.GPASET.all |= ((uint32_t)1 << pin);
+//        }
+//        else
+//        {
+//            GpioDataRegs.GPBSET.all |= ((uint32_t)1 << (pin-32));
+//        }
+//
+//    }
+//    else
+//    {
+//        if (pin < 32)
+//        {
+//            GpioDataRegs.GPACLEAR.all |= ((uint32_t)1 << pin);
+//        }
+//        else
+//        {
+//            GpioDataRegs.GPBCLEAR.all |= ((uint32_t)1 << (pin-32));
+//        }
+//    }
+//}
+
+
+void GPIO_setPinConfigOutput(uint32_t PinNumber)
+{
+    Uint32 mask;
+
+    // Before calling the Toggle Test, we must setup
+    // the MUX and DIR registers.
+
+    //led_pin_write(PinNumber, 1);
+
+    if(PinNumber > (Uint16)47)
+    {
+        asm("    ESTOP0");  // Stop here. Invalid option.
+        for(;;);
+    }
+
+    // Pins GPIO32-GPIO47
+    else if(PinNumber >= 32)
+    {
+        EALLOW;
+        mask = ~( ((Uint32)1 << (PinNumber-32)*2) | ((Uint32)1 << (PinNumber-32)*2+1) );
+        GpioCtrlRegs.GPBMUX1.all &= mask;
+        GpioCtrlRegs.GPBDIR.all = GpioCtrlRegs.GPBDIR.all | ((Uint32)1 << (PinNumber-32) );
+        EDIS;
+    }
+
+    // Pins GPIO16-GPIO31
+    else if(PinNumber >= 16)
+    {
+        EALLOW;
+        mask = ~( ((Uint32)1 << (PinNumber-16)*2) | ((Uint32)1 << (PinNumber-16)*2+1) );
+        GpioCtrlRegs.GPAMUX2.all &= mask;
+        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
+        EDIS;
+    }
+
+    // Pins GPIO0-GPIO15
+    else
+    {
+        EALLOW;
+        mask = ~( ((Uint32)1 << PinNumber*2) | ((Uint32)1 << PinNumber*2+1 ));
+        GpioCtrlRegs.GPAMUX1.all &= mask;
+        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
+        EDIS;
+    }
+
+}
+#else
 #define GPIO_setPinConfigInput(_pin_) \
         GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(_pin_));\
         GPIO_setDirectionMode(_pin_, GPIO_DIR_MODE_IN);\
@@ -249,6 +331,9 @@ typedef struct
         GPIO_setQualificationMode(_pin_, GPIO_QUAL_ASYNC);\
         GPIO_writePin(_pin_, 0);\
         GPIO_setMasterCore(_pin_, GPIO_CORE_CPU1)
+
+
+#endif
 #endif
 
 /* *****************************************************************************
@@ -396,7 +481,7 @@ uint16_t u16DelayMainLoop_usec = 0;
 uint16_t u16DelayMainLoopOld_usec = 0;
 
 uint16_t u16PeriodControl_usec = 50;            /* Default Initialization Value for ISR Period */
-uint16_t u16PeriodControlOld_usec;
+uint16_t u16PeriodControlOld_usec = 0;
 
 uint32_t u32DelayCtrlLoop_Ticks = 1;
 uint32_t u32DelayMainLoop_Ticks = 1;
@@ -1867,8 +1952,11 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
     u32TimeCtrlLoop_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-#ifdef _CS_1291
 
+
+
+#ifdef _CS_1291
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
 #elif defined(_CS_1107_SCC_R01)
 
 #else
@@ -1978,8 +2066,11 @@ void ControlProcess(void)
     //
     // Artificial Delay Control Loop
     //
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+
     SysCtl_delay(u32DelayCtrlLoop_Ticks);
 
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
 
     u32TimeCSMON_ISR_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     //
@@ -1993,6 +2084,8 @@ void ControlProcess(void)
         u32TimeCSMON_ISR_Max_Ticks = u32TimeCSMON_ISR_Ticks;
     }
 
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
 
     u32TimeCtrlLoop_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32TimeCtrlLoop_Ticks);//down count
     if (u32TimeCtrlLoop_Ticks > u32TimeCtrlLoopMax_Ticks)
@@ -2000,7 +2093,7 @@ void ControlProcess(void)
         u32TimeCtrlLoopMax_Ticks = u32TimeCtrlLoop_Ticks;
     }
 #ifdef _CS_1291
-
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
 #elif defined(_CS_1107_SCC_R01)
 
 #else
@@ -2546,14 +2639,18 @@ void main(void)
 #endif
 
 
+    //
+    // LEDs or debug GPIO
+    //
 #ifdef _CS_1291
+    /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+    GPIO_setPinConfigOutput(STAT_LED_EQEP1I_PIN);
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);
+
 
 #elif defined(_CS_1107_SCC_R01)
 
 #else
-    //
-    // LEDs
-    //
     // STAT_LED_G_PIN is the LED STATUS pin. - Init and Main Loop CSMON CPU Load -> Green LED (closest to the MCU Led)
     GPIO_setPinConfigOutput(STAT_LED_G_PIN);
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW);
@@ -2895,13 +2992,13 @@ void main(void)
         }
 
         u32TestSendCounter++;
-        if (u32TestSendCounter >= 10000)
+        if (u32TestSendCounter >= 100000)
         {
             u32TestSendCounter = 0;
-            UART_PutChar(0, 0x55);
-            UART_PutChar(0, 0x56);
-            UART_PutChar(0, 0x57);
-            UART_PutChar(0, 0x58);
+            SCI_writeCharBlockingFIFO(0, 0x55);
+            SCI_writeCharBlockingFIFO(0, 0x56);
+            SCI_writeCharBlockingFIFO(0, 0x57);
+            SCI_writeCharBlockingFIFO(0, 0x58);
         }
 
 

@@ -75,7 +75,14 @@ void SCI_DRV_vInitFIFO(uint32_t base, uint32_t baud, uint32_t config)
 {
 
     HWREGH(base + SCI_O_CCR) = 0;   /* explicitly clear ADDRIDLE_MODE (in SCI_setConfig not cleared) */
+
+    #if defined(__TMS320F2806x__)
+    SCI_setConfig(base, DEVICE_LSPCLK_FREQ, baud, config);
+    #warning "to do get real LSPCLK frequency"
+    #else
     SCI_setConfig(base, SysCtl_getLowSpeedClock(DEVICE_OSCSRC_FREQ), baud, config);
+    #endif
+
     SCI_enableModule(base);
 
     SCI_disableLoopback(base);
