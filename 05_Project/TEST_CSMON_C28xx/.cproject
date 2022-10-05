@@ -84,7 +84,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER.1824916970" name="Emit diagnostic identifier numbers (--display_error_number)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAPFILE_CONTENTS.176669785" name="Display attribute settings in map file (--mapfile_contents)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAPFILE_CONTENTS" useByScannerDiscovery="false" value="all" valueType="string"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO.823221244" name="Detailed link information data-base into &lt;file&gt; (--xml_link_info, -xml_link_info)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO" useByScannerDiscovery="false" value="${ProjName}_linkInfo.xml" valueType="string"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.128446065" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" useByScannerDiscovery="false" value="0x380" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.128446065" name="Set C system stack size (--stack_size, -stack)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" useByScannerDiscovery="false" value="0x380" valueType="string"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD_SRCS.1164929850" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD2_SRCS.1267432084" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD2_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__GEN_CMDS.334627730" name="Generated Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__GEN_CMDS"/>
@@ -95,8 +95,11 @@
 					<sourceEntries>
 						<entry excluding="C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/include"/>
-						<entry excluding="driverlib.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/targetConfigs"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/cmd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/include"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -187,7 +190,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.DISPLAY_ERROR_NUMBER.867681897" name="Emit diagnostic identifier numbers (--display_error_number)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.DISPLAY_ERROR_NUMBER" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.MAPFILE_CONTENTS.666065971" name="Display attribute settings in map file (--mapfile_contents)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.MAPFILE_CONTENTS" useByScannerDiscovery="false" value="all" valueType="string"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.XML_LINK_INFO.1298658324" name="Detailed link information data-base into &lt;file&gt; (--xml_link_info, -xml_link_info)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.XML_LINK_INFO" useByScannerDiscovery="false" value="${ProjName}_linkInfo.xml" valueType="string"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE.1331537818" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE" useByScannerDiscovery="false" value="0x380" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE.1331537818" name="Set C system stack size (--stack_size, -stack)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE" useByScannerDiscovery="false" value="0x380" valueType="string"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD_SRCS.2434174" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD2_SRCS.1562063374" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD2_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__GEN_CMDS.1706248862" name="Generated Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__GEN_CMDS"/>
@@ -198,8 +201,11 @@
 					<sourceEntries>
 						<entry excluding="C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/include"/>
-						<entry excluding="driverlib.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/targetConfigs"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/cmd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/include"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -291,7 +297,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.DISPLAY_ERROR_NUMBER.1726933780" name="Emit diagnostic identifier numbers (--display_error_number)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.DISPLAY_ERROR_NUMBER" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.MAPFILE_CONTENTS.1602836233" name="Display attribute settings in map file (--mapfile_contents)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.MAPFILE_CONTENTS" useByScannerDiscovery="false" value="all" valueType="string"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.XML_LINK_INFO.2026249502" name="Detailed link information data-base into &lt;file&gt; (--xml_link_info, -xml_link_info)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.XML_LINK_INFO" useByScannerDiscovery="false" value="${ProjName}_linkInfo.xml" valueType="string"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE.1832791569" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE" useByScannerDiscovery="false" value="0x380" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE.1832791569" name="Set C system stack size (--stack_size, -stack)" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.linkerID.STACK_SIZE" useByScannerDiscovery="false" value="0x380" valueType="string"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD_SRCS.127849869" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD2_SRCS.107374643" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__CMD2_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__GEN_CMDS.1500856773" name="Generated Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_20.2.exeLinker.inputType__GEN_CMDS"/>
@@ -302,8 +308,11 @@
 					<sourceEntries>
 						<entry excluding="C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/include"/>
-						<entry excluding="driverlib.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/targetConfigs"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/cmd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/include"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -419,7 +428,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/Debug/driverlib.lib|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Peripheral/01_Source/TMS320F2806x/io_drv.c|Peripheral/01_Source/TMS320F2806x/xbar.c|Peripheral/01_Source/TMS320F2806x/uart_drv.c|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/common/cmd|Peripheral/01_Source/TMS320F2806x/io_drv.c|Peripheral/01_Source/TMS320F2806x/xbar.c|Peripheral/01_Source/TMS320F2806x/uart_drv.c|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
