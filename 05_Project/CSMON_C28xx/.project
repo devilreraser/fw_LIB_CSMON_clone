@@ -661,19 +661,19 @@
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/parameter.h</locationURI>
 		</link>
 		<link>
-			<name>ModbusAddress/01_Source/short_names_dummy.c</name>
+			<name>ModbusAddress/01_Source/short_names.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/short_names_dummy.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/short_names.c</locationURI>
 		</link>
 		<link>
-			<name>ModbusAddress/01_Source/short_names_dummy.csv</name>
+			<name>ModbusAddress/01_Source/short_names.csv</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/short_names_dummy.csv</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/short_names.csv</locationURI>
 		</link>
 		<link>
-			<name>ModbusAddress/01_Source/short_names_dummy.h</name>
+			<name>ModbusAddress/01_Source/short_names.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/short_names_dummy.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/short_names.h</locationURI>
 		</link>
 		<link>
 			<name>ModbusAddress/01_Source/template.c</name>
