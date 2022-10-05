@@ -242,6 +242,8 @@ typedef struct
 #ifndef IO_DRV_H
 
 #if defined(__TMS320F2806x__)
+
+//moved to gpio.c / gpio.h
 //void GPIO_writePin_2806x(uint32_t pin, uint32_t level)
 //{
 //    if (level == 1)
@@ -270,52 +272,52 @@ typedef struct
 //}
 
 
-void GPIO_setPinConfigOutput(uint32_t PinNumber)
-{
-    Uint32 mask;
-
-    // Before calling the Toggle Test, we must setup
-    // the MUX and DIR registers.
-
-    //led_pin_write(PinNumber, 1);
-
-    if(PinNumber > (Uint16)47)
-    {
-        asm("    ESTOP0");  // Stop here. Invalid option.
-        for(;;);
-    }
-
-    // Pins GPIO32-GPIO47
-    else if(PinNumber >= 32)
-    {
-        EALLOW;
-        mask = ~( ((Uint32)1 << (PinNumber-32)*2) | ((Uint32)1 << (PinNumber-32)*2+1) );
-        GpioCtrlRegs.GPBMUX1.all &= mask;
-        GpioCtrlRegs.GPBDIR.all = GpioCtrlRegs.GPBDIR.all | ((Uint32)1 << (PinNumber-32) );
-        EDIS;
-    }
-
-    // Pins GPIO16-GPIO31
-    else if(PinNumber >= 16)
-    {
-        EALLOW;
-        mask = ~( ((Uint32)1 << (PinNumber-16)*2) | ((Uint32)1 << (PinNumber-16)*2+1) );
-        GpioCtrlRegs.GPAMUX2.all &= mask;
-        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
-        EDIS;
-    }
-
-    // Pins GPIO0-GPIO15
-    else
-    {
-        EALLOW;
-        mask = ~( ((Uint32)1 << PinNumber*2) | ((Uint32)1 << PinNumber*2+1 ));
-        GpioCtrlRegs.GPAMUX1.all &= mask;
-        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
-        EDIS;
-    }
-
-}
+//void GPIO_setPinConfigOutput(uint32_t PinNumber)
+//{
+//    Uint32 mask;
+//
+//    // Before calling the Toggle Test, we must setup
+//    // the MUX and DIR registers.
+//
+//    //led_pin_write(PinNumber, 1);
+//
+//    if(PinNumber > (Uint16)47)
+//    {
+//        asm("    ESTOP0");  // Stop here. Invalid option.
+//        for(;;);
+//    }
+//
+//    // Pins GPIO32-GPIO47
+//    else if(PinNumber >= 32)
+//    {
+//        EALLOW;
+//        mask = ~( ((Uint32)1 << (PinNumber-32)*2) | ((Uint32)1 << (PinNumber-32)*2+1) );
+//        GpioCtrlRegs.GPBMUX1.all &= mask;
+//        GpioCtrlRegs.GPBDIR.all = GpioCtrlRegs.GPBDIR.all | ((Uint32)1 << (PinNumber-32) );
+//        EDIS;
+//    }
+//
+//    // Pins GPIO16-GPIO31
+//    else if(PinNumber >= 16)
+//    {
+//        EALLOW;
+//        mask = ~( ((Uint32)1 << (PinNumber-16)*2) | ((Uint32)1 << (PinNumber-16)*2+1) );
+//        GpioCtrlRegs.GPAMUX2.all &= mask;
+//        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
+//        EDIS;
+//    }
+//
+//    // Pins GPIO0-GPIO15
+//    else
+//    {
+//        EALLOW;
+//        mask = ~( ((Uint32)1 << PinNumber*2) | ((Uint32)1 << PinNumber*2+1 ));
+//        GpioCtrlRegs.GPAMUX1.all &= mask;
+//        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
+//        EDIS;
+//    }
+//
+//}
 #else
 #define GPIO_setPinConfigInput(_pin_) \
         GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(_pin_));\
@@ -2899,7 +2901,10 @@ void main(void)
     EINT;
     ERTM;
 
-    //uint32_t u32TestSendCounter = 0;
+#define TEST_UART_SEND 0
+#if TEST_UART_SEND
+    uint32_t u32TestSendCounter = 0;
+#endif
 
     for (;;)
     {
@@ -2995,17 +3000,17 @@ void main(void)
                 u32DelayMainLoop_Ticks = 1;
             }
         }
-
-//        u32TestSendCounter++;
-//        if (u32TestSendCounter >= 100000)
-//        {
-//            u32TestSendCounter = 0;
-//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x55);
-//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x56);
-//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x57);
-//            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x58);
-//        }
-
+#if TEST_UART_SEND
+        u32TestSendCounter++;
+        if (u32TestSendCounter >= 100000)
+        {
+            u32TestSendCounter = 0;
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x55);
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x56);
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x57);
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x58);
+        }
+#endif
 
 
 
