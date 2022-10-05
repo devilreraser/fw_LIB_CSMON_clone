@@ -95,11 +95,7 @@
 					<sourceEntries>
 						<entry excluding="C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/targetConfigs"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/cmd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -201,11 +197,7 @@
 					<sourceEntries>
 						<entry excluding="C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/targetConfigs"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/cmd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -308,11 +300,7 @@
 					<sourceEntries>
 						<entry excluding="C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/common/targetConfigs"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/driverlib/Debug"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/cmd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="C2806x_LIB/headers/source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -428,7 +416,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/common/cmd|Peripheral/01_Source/TMS320F2806x/io_drv.c|Peripheral/01_Source/TMS320F2806x/xbar.c|Peripheral/01_Source/TMS320F2806x/uart_drv.c|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/common/cmd|Peripheral/01_Source/TMS320F2806x/io_drv.c|Peripheral/01_Source/TMS320F2806x/xbar.c|Peripheral/01_Source/TMS320F2806x/uart_drv.c|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
