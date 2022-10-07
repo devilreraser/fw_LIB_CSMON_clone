@@ -99,31 +99,39 @@
 #define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_RECORDER_DEBUG
 
 
-
-//#define PARAMETER_COUNT_MAX         1024
-#define PARAMETER_COUNT_MAX         128
-
+#if _CSMON_IN_INTERNAL_RAM
+#define PARAMETER_COUNT_MAX             64
+#else
+#ifndef __TMS320F2806x__
+#define PARAMETER_COUNT_MAX             1024
+#else
+#define PARAMETER_COUNT_MAX             256
+#endif
+#endif
 
 /* Some Pinout */
-#ifdef _LAUNCHXL_F28379D
-#define STAT_LED_G_PIN      28      /* N/A */
-#define STAT_LED_A_B_PIN    31      /* D10 Blue */
-#define STAT_LED_R_PIN      34      /* D9 */
-#else
-#define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */
-#define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
-#define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
-#endif
+#ifdef __TMS320F2806x__
 
 #define STAT_LED_EQEP1I_PIN 23
 #define STAT_LED_EQEP1S_PIN 22
 #define STAT_LED_EQEP1B_PIN 21
 #define STAT_LED_EQEP1A_PIN 20
 
+#elif defined(_LAUNCHXL_F28379D)
+#define STAT_LED_G_PIN      28      /* N/A */
+#define STAT_LED_A_B_PIN    31      /* D10 Blue */
+#define STAT_LED_R_PIN      34      /* D9 */
+#else
+//1038
+#define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */
+#define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
+#define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
+#define CLK_EN_FPGA_PIN     33
+#endif
+
 #define STAT_LED_ENABLE_LEVEL_LOW 0
 #define STAT_LED_DISABLE_LVL_HIGH   (!STAT_LED_ENABLE_LEVEL_LOW)
 
-#define CLK_EN_FPGA_PIN     33
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -488,26 +496,27 @@ uint16_t u16PeriodControlOld_usec = 0;
 uint32_t u32DelayCtrlLoop_Ticks = 1;
 uint32_t u32DelayMainLoop_Ticks = 1;
 
+uint16_t u16CountSetParameterFree = 0;
 uint16_t u16CountSetParameterFail = 0;
 uint16_t u16CountMaxParameterTest = PARAMETER_COUNT_MAX;/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
 
 bool bResetAllTimeMeasures = 0;
 
-uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks;
-uint32_t u32TimeMainLoopProcessCSMON_End_Ticks;
-uint32_t u32TimeMainLoopProcessCSMON_Now_Ticks;
-uint32_t u32TimeMainLoopProcessCSMON_Max_Ticks;
+uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks = 0;
+uint32_t u32TimeMainLoopProcessCSMON_End_Ticks = 0;
+uint32_t u32TimeMainLoopProcessCSMON_Now_Ticks = 0;
+uint32_t u32TimeMainLoopProcessCSMON_Max_Ticks = 0;
 
-uint32_t u32TimeMainLoopCycle_Bgn_Ticks;
-uint32_t u32TimeMainLoopCycle_End_Ticks;
-uint32_t u32TimeMainLoopCycle_Now_Ticks;
-uint32_t u32TimeMainLoopCycle_Max_Ticks;
+uint32_t u32TimeMainLoopCycle_Bgn_Ticks = 0;
+uint32_t u32TimeMainLoopCycle_End_Ticks = 0;
+uint32_t u32TimeMainLoopCycle_Now_Ticks = 0;
+uint32_t u32TimeMainLoopCycle_Max_Ticks = 0;
 
 
-uint32_t u32TimeCSMON_ISR_Ticks;
-uint32_t u32TimeCSMON_ISR_Max_Ticks;
-uint32_t u32TimeCtrlLoop_Ticks;
-uint32_t u32TimeCtrlLoopMax_Ticks;
+uint32_t u32TimeCSMON_ISR_Ticks = 0;
+uint32_t u32TimeCSMON_ISR_Max_Ticks = 0;
+uint32_t u32TimeCtrlLoop_Ticks = 0;
+uint32_t u32TimeCtrlLoopMax_Ticks = 0;
 
 
 uint32_t u32ParamTime_Ticks;
@@ -532,10 +541,10 @@ uint32_t u32GetBaudError_PPM = 0;
 
 
 /* Parameter Table Version, DateTime, Checksum */
-#define PARAM_TABLE_VERSION                 (uint32_t)0
+#define PARAM_TABLE_VERSION                 (uint32_t)1
 #define PARAM_TABLE_DATETIME                (uint32_t)DATETIME_BUILD
 
-
+#ifndef __TMS320F2806x__
 #define EMIF_AUX_PARAM_TABLE_VER_ADDRESS    0x00120006      /* This address here I put only for the example. You should use your memory space address */
 #define EMIF_AUX_BUILD_DATE_TIME_ADDRESS    0x00120008      /* This address here I put only for the example. You should use your memory space address */
 #define EMIF_AUX_BACKUP_CHECKSUM_ADDRESS    0x0012000A      /* This address here I put only for the example. You should use your memory space address */
@@ -545,7 +554,7 @@ volatile uint16_t* EMIF_AUX_pu16ParamVerBackupInEmif = (uint16_t*)(EMIF_AUX_PARA
 volatile uint16_t* EMIF_AUX_pu16DateTimeBackupInEmif = (uint16_t*)(EMIF_AUX_BUILD_DATE_TIME_ADDRESS);
 volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACKUP_CHECKSUM_ADDRESS);
 
-
+#endif
 
 
 
@@ -563,6 +572,7 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_CURRENT_PHASEA_32  29
 #define PARAM_ID_CURRENT_PHASEB_32  30
 #define PARAM_ID_CURRENT_PHASEC_32  31
+
 
 volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 {
@@ -2103,13 +2113,31 @@ void ControlProcess(void)
 #endif
 }
 
+/* *****************************************************************************
+ * ExternalParametersInitialization
+ **************************************************************************** */
+void ExternalParametersInitialization(void)
+{
+    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8Name, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListStringUnits((uint_least8_t *)&asParameterList[0].au8Unit, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+    CSMON_eSetParameterListCntBitEleSz((uint_least8_t *)&asParameterList[0].u8BitCountOrArrayElementSize, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListStBitEleCnt((uint_least8_t *)&asParameterList[0].u8StartBitOrArrayElementCount, sizeof(asParameterList[0]));
+
+}
 
 /* *****************************************************************************
  * ParameterInitialization
  **************************************************************************** */
 void ParameterInitialization(void)
 {
-    uint16_t u16Index;
+    volatile uint16_t u16Index;
 
     uint32_t u32ParamRealAddress;
 
@@ -2121,6 +2149,7 @@ void ParameterInitialization(void)
     uWord32_t uDateTimeBackup;
     uWord32_t uCheckSumBackup;
 
+#ifndef __TMS320F2806x__
     /* Note: with current EMIF board configuration 32Bit Writes Are not working - need use 16-bit writes */
     uParamVerBackup.au16Word[0] = EMIF_AUX_pu16ParamVerBackupInEmif[0];              /* Get Stored In MRAM TableVer Backup */
     uParamVerBackup.au16Word[1] = EMIF_AUX_pu16ParamVerBackupInEmif[1];              /* Get Stored In MRAM TableVer Backup */
@@ -2128,12 +2157,17 @@ void ParameterInitialization(void)
     uDateTimeBackup.au16Word[1] = EMIF_AUX_pu16DateTimeBackupInEmif[1];              /* Get Stored In MRAM DateTime Backup */
     uCheckSumBackup.au16Word[0] = EMIF_AUX_pu16CheckSumBackupInEmif[0];              /* Get Stored In MRAM CheckSum Backup */
     uCheckSumBackup.au16Word[1] = EMIF_AUX_pu16CheckSumBackupInEmif[1];              /* Get Stored In MRAM CheckSum Backup */
-
+#else
+    uParamVerBackup.u32Register = 0xFFFFFFFF;
+    uDateTimeBackup.u32Register = 0xFFFFFFFF;
+    uCheckSumBackup.u32Register = 0xAA561234;
+#endif
     u32ParamVer = PARAM_TABLE_VERSION;
     u32DateTime = PARAM_TABLE_DATETIME;
     u32CheckSum = CSMON_u32GetParameterCheckSum();                        /* Get Checksum From CSMON */
 
     u16CountSetParameterFail = 0;
+    u16CountSetParameterFree = 0;
 
     if ( (uParamVerBackup.u32Register != u32ParamVer)
       || (uDateTimeBackup.u32Register != u32DateTime)
@@ -2158,9 +2192,11 @@ void ParameterInitialization(void)
 
             if (asParameterList[u16Index].u16ParameterIndexID == PARAM_ID_MODBUS_MSG_CNT)
             {
+                CSMON_vSetModbusMessageCounterRegisterRealAddress((uint32_t)&u16DummyDataCnt);
                 pu16ModbusMessageCounter = (uint16_t*)CSMON_u32GetModbusMessageCounterRegisterRealAddress();
                 u32ParamRealAddress = (uint32_t)pu16ModbusMessageCounter;
             }
+
 
             eResponseCode_CSMON_eSetParameter =
                 CSMON_eSetParameter (
@@ -2176,12 +2212,18 @@ void ParameterInitialization(void)
                     asParameterList[u16Index].u8BitCountOrArrayElementSize,
                     asParameterList[u16Index].u8StartBitOrArrayElementCount
                     );
+            if (u32ParamRealAddress == NULL)
+            {
+                u16CountSetParameterFree++;
+            }
+            else
             if(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK)
             {
                 u16CountSetParameterFail++;
             }
         }
 
+#ifndef __TMS320F2806x__
         /* Backup ParamVer */
         uParamVerBackup.u32Register = u32ParamVer;
         EMIF_AUX_pu16ParamVerBackupInEmif[0] = uParamVerBackup.au16Word[0];
@@ -2194,7 +2236,7 @@ void ParameterInitialization(void)
         uCheckSumBackup.u32Register = CSMON_u32GetParameterCheckSum();
         EMIF_AUX_pu16CheckSumBackupInEmif[0] = uCheckSumBackup.au16Word[0];
         EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
-
+#endif
 
 #ifdef _CS_1291
 
@@ -2601,6 +2643,8 @@ CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParamete
 }
 
 
+uint16_t u16FreeRunningTimerTicksPerMicroSecond;
+uint16_t u16FreeRunningTimerPrescaller;
 
 
 /* *****************************************************************************
@@ -2608,8 +2652,6 @@ CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParamete
  **************************************************************************** */
 void main(void)
 {
-    uint16_t u16FreeRunningTimerTicksPerMicroSecond;
-    uint16_t u16FreeRunningTimerPrescaller;
 
 
 
@@ -2791,7 +2833,13 @@ void main(void)
     // CSMON Parameter, Recorder, Scope Test Initialization
     //
     u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     ParameterInitialization();
+    ExternalParametersInitialization();
+#else
+    ParameterInitialization();
+#endif
     u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
 
 
@@ -2936,7 +2984,7 @@ void main(void)
         //
         u32TimeMainLoopCycle_Bgn_Ticks = u32TimeMainLoopCycle_End_Ticks;
         u32TimeMainLoopCycle_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-        u32TimeMainLoopCycle_Now_Ticks = 0 - (u32TimeMainLoopCycle_End_Ticks - u32TimeMainLoopCycle_Bgn_Ticks);//down count
+        u32TimeMainLoopCycle_Now_Ticks = u32TimeMainLoopCycle_Bgn_Ticks - u32TimeMainLoopCycle_End_Ticks;//down count
         if (u32TimeMainLoopCycle_Now_Ticks > u32TimeMainLoopCycle_Max_Ticks)
         {
             u32TimeMainLoopCycle_Max_Ticks = u32TimeMainLoopCycle_Now_Ticks;

@@ -360,6 +360,36 @@ CSMON_eResponseCode_t CSMON_eSetFlagProcessPassed (CSMON_eIDProcess_t eID);
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t pfInput);
 
+
+
+
+/* *****************************************************************************
+ * CSMON_eSetParameterList Interfaces
+ *
+ * Input:
+ *      xxxxxx_t *pxxxxxxx - First Input is pointer to  external resource
+ *      uint16_t u16Offset - Offset between elements
+ *
+ **************************************************************************** */
+
+/* First Put Real Address (Call this function in application software) to calculate count parameters internally (last index is NULL) */
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pu32RealAddress, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListParamAttrib(uint16_t *pu16ParamAttributes, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListShortNaming(uint_least8_t *au8Name, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListStringUnits(uint_least8_t *au8Unit, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataMaximum(uint32_t *pu32Max, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataMinimum(uint32_t *pu32Min, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataDefault(uint32_t *pu32Def, uint16_t u16Offset);
+/* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+CSMON_eResponseCode_t CSMON_eSetParameterListValueFormat(float *Norm, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListCntBitEleSz(uint_least8_t *pu8BitCountOrArrayElementSize, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListStBitEleCnt(uint_least8_t *u8StartBitOrArrayElementCount, uint16_t u16Offset);
+
+
+
+
+
 #if 0
 /* *****************************************************************************
  * CSMON_eSetParameter
@@ -720,6 +750,11 @@ void CSMON_vSetStopRecorderParameterMask (CSMON_eRecorderParameterMask_t eMask);
  * CSMON_u32GetModbusMessageCounterRegisterRealAddress
  **************************************************************************** */
 uint32_t CSMON_u32GetModbusMessageCounterRegisterRealAddress(void);
+
+/* *****************************************************************************
+ * CSMON_vSetModbusMessageCounterRegisterRealAddress
+ **************************************************************************** */
+void CSMON_vSetModbusMessageCounterRegisterRealAddress(uint32_t u32RealAddress);
 
 
 /* *****************************************************************************

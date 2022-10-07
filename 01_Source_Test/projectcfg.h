@@ -27,6 +27,19 @@
 #define PROJECTCFG_UART_PARITY_MODBUS           SCI_CONFIG_PAR_NONE
 
 
+#ifdef _CSMON_FREE_RUN_TIMER_EXTERNAL
+#define PROJECTCFG_FREE_RUN_TIMER_EXTERNAL 1
+#else
+#define PROJECTCFG_FREE_RUN_TIMER_EXTERNAL 0
+#endif
+
+#ifdef _PARAM_LIST_READ_ONLY
+#define PROJECTCFG_PARAM_LIST_READ_ONLY 1
+#else
+#define PROJECTCFG_PARAM_LIST_READ_ONLY 0
+#endif
+
+
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */

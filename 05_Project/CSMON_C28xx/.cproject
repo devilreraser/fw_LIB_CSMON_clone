@@ -530,7 +530,6 @@
 									<listOptionValue builtIn="false" value="NO_USE_CONTROL"/>
 									<listOptionValue builtIn="false" value="_HMDRV_USE_UART_INIT"/>
 									<listOptionValue builtIn="false" value="_CSMON_RECORDERS_IN_FLAG_PROCESS_PASSED_INTERFACE"/>
-									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_EVEN_PARITY=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=1"/>
@@ -540,7 +539,10 @@
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
 									<listOptionValue builtIn="false" value="NO_CSMON_FORCE_CONTROL_SUITE_LIB"/>
-									<listOptionValue builtIn="false" value="_PARAM_LIST_READ_ONLY"/>
+									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
+									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.1435648004" name="C Dialect" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.C11" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1629809782" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">

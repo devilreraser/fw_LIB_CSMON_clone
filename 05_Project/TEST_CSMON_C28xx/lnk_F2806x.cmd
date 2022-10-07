@@ -148,13 +148,16 @@ PAGE 1 :   /* Data Memory */
    BOOT_RSVD   : origin = 0x000000, length = 0x000050     /* Part of M0, BOOT rom will use this for stack */
    RAMM0       : origin = 0x000050, length = 0x0003B0     /* on-chip RAM block M0 */
    RAMM1       : origin = 0x000400, length = 0x000400     /* on-chip RAM block M1 */
+   //RAML2       : origin = 0x008C00, length = 0x00B400     /* on-chip RAM block L2 */
    RAML2       : origin = 0x008C00, length = 0x000400     /* on-chip RAM block L2 */
    RAML3       : origin = 0x009000, length = 0x001000	  /* on-chip RAM block L3 */
+   //RAML4       : origin = 0x00A000, length = 0x00A000     /* on-chip RAM block L4 */
    RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
    RAML5       : origin = 0x00C000, length = 0x002000     /* on-chip RAM block L5 */
-   RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
-   RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
-   RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
+   RAML6       : origin = 0x00E000, length = 0x006000     /* on-chip RAM block L6 */
+   //RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
+   //RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
+   //RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
    USB_RAM     : origin = 0x040000, length = 0x000800     /* USB RAM		  */   
 
 }
@@ -188,9 +191,9 @@ SECTIONS
 
    /* Allocate uninitialized data sections: */
    .stack              : > RAMM0,      PAGE = 1
-   .ebss               : >> RAML4 | RAML5 | RAML6 | RAML7 | RAML8,      PAGE = 1
+   .ebss               : >> RAML2 | RAML3 | RAML4 | RAML5 | RAML6,      PAGE = 1
    .esysmem            : > RAML2,      PAGE = 1
-   .cio                : > RAML5,      PAGE = 1
+   .cio                : > RAML3,      PAGE = 1
 
    /* Initialized sections to go in Flash */
    /* For SDFlash to program these, they must be allocated to page 0 */
@@ -204,10 +207,10 @@ SECTIONS
    /* Allocate FPU math areas: */
    FPUmathTables       : > FPUTABLES,  PAGE = 0, TYPE = NOLOAD
    
-   DMARAML5	           : > RAML5,      PAGE = 1
-   DMARAML6	           : > RAML6,      PAGE = 1
-   DMARAML7	           : > RAML7,      PAGE = 1
-   DMARAML8	           : > RAML8,      PAGE = 1   
+   //DMARAML5	           : > RAML5,      PAGE = 1
+   //DMARAML6	           : > RAML6,      PAGE = 1
+   //DMARAML7	           : > RAML7,      PAGE = 1
+   //DMARAML8	           : > RAML8,      PAGE = 1
 
   /* Uncomment the section below if calling the IQNexp() or IQexp()
       functions from the IQMath.lib library in order to utilize the
