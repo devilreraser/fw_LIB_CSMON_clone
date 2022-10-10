@@ -99,6 +99,7 @@
 #define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_RECORDER_DEBUG
 
 
+#ifndef PARAMETER_COUNT_MAX
 #if _CSMON_IN_INTERNAL_RAM
 #define PARAMETER_COUNT_MAX             64
 #else
@@ -106,6 +107,7 @@
 #define PARAMETER_COUNT_MAX             1024
 #else
 #define PARAMETER_COUNT_MAX             256
+#endif
 #endif
 #endif
 
