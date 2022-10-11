@@ -359,7 +359,10 @@
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
-									<listOptionValue builtIn="false" value="PARAMETER_COUNT_MAX=80"/>
+									<listOptionValue builtIn="false" value="PARAMETER_COUNT_MAX=256"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=0"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.63666750" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.1433555854" name="Option deprecated, set by default (--large_memory_model, -ml)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" useByScannerDiscovery="false" value="true" valueType="boolean"/>

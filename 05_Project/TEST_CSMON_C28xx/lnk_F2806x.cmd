@@ -156,9 +156,9 @@ PAGE 1 :   /* Data Memory */
    //RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
    //RAML5       : origin = 0x00C000, length = 0x002000     /* on-chip RAM block L5 */
    //RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
-   RAML78       : origin = 0x010000, length = 0x004000     /* on-chip RAM block L7 */
-   //RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
-   //RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
+   //RAML78       : origin = 0x010000, length = 0x004000     /* on-chip RAM block L7 */
+   RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
+   RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
    USB_RAM     : origin = 0x040000, length = 0x000800     /* USB RAM		  */   
 
 }
@@ -192,7 +192,7 @@ SECTIONS
 
    /* Allocate uninitialized data sections: */
    .stack              : > RAMM0,      PAGE = 1
-   .ebss               : >> RAML2 | RAML3456 | RAML78 | RAMM1,      PAGE = 1
+   .ebss               : >> RAML2 | RAML3456 | RAML7 | RAML8 | RAMM1,      PAGE = 1
    .esysmem            : > RAML2,      PAGE = 1
    .cio                : > RAML2,      PAGE = 1
 
