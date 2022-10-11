@@ -141,7 +141,7 @@
 #define INIT_MAX_MIN_DEF(_type, max, min, def_) \
         .u32Max._type = (max), .u32Min._type = (min), .u32Def._type = (def_)
 
-#define INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, u8BitCount, u8StartBit, eVisualAttribute) \
+#define INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, u8BitCount, u8StartBit, eVisualAttribute, u8Elements, bitField, arrayType, bRO, bWO, bNR, bNW, pFunc) \
  { \
     u16ID,                          /* u16ID */\
     (u16Attributes),                /* u16Attributes */\
@@ -154,11 +154,22 @@
     floatScale,                     /* floatScale */\
     u8BitCount,                     /* u8BitCount */\
     u8StartBit,                     /* u8StartBit */\
-    eVisualAttribute                /* eVisualAttribute */\
+    eVisualAttribute,               /* eVisualAttribute */\
+    .uParameterSize.sSize.u8SizeElement = u8BitCount, \
+    fix if 0 for use external list
+    .uParameterSize.sSize.u8BitOffet = u8StartBit, \
+    .uParameterFlags.sFlags.u8ElementCount = u8Elements, /* element count (multiples of element size) or bit if bit field */\
+    .uParameterFlags.sFlags.bBitField = bitField, \
+    .uParameterFlags.sFlags.bArray = arrayType, /* Array Type Register */ \
+    .uParameterFlags.sFlags.bReadOnly = bRO, \
+    .uParameterFlags.sFlags.bWriteOnly = bWO, \
+    .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
+    .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
+    .u32ProcessFunc = pFunc \
  }
 
 #define INIT_PARAMETER(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale) \
-        INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, 0, 0, CSMON_VISUAL_TYPE_HEX)
+        INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, 0, 0, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, 0, 0, NULL)
 
 
 /* *****************************************************************************
@@ -214,6 +225,9 @@ typedef struct
     uint_least8_t u8BitCountOrArrayElementSize;
     uint_least8_t u8StartBitOrArrayElementCount;
     CSMON_eVisualType_t eVisualAttribute;
+    CSMON_uRegisterAddressTableSize uParameterSize;
+    CSMON_uRegisterAddressTableFlags uParameterFlags;
+    uint32_t u32ProcessFunc;
 
 }MAIN_sParameterList_t;
 
@@ -2121,8 +2135,11 @@ void ControlProcess(void)
 void ExternalParametersInitialization(void)
 {
     CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_eSetParameterListProcessFunc((uint32_t *)&asParameterList[0].u32ProcessFunc, sizeof(asParameterList[0]));
     CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListRegisterSize((uint16_t *)&asParameterList[0].uParameterSize.u16Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListRegisterFlags((uint16_t *)&asParameterList[0].uParameterFlags.u16Register, sizeof(asParameterList[0]));
+    //CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
     CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8Name, sizeof(asParameterList[0]));
     CSMON_eSetParameterListStringUnits((uint_least8_t *)&asParameterList[0].au8Unit, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));

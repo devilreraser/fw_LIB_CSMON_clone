@@ -304,7 +304,40 @@ typedef struct
 
 
 
+/* External Parameter Descriptor Tables (Note: must match with HMMODBUS definitions) */
 
+typedef struct
+{
+    uint16_t bReadOnly : 1;
+    uint16_t bWriteOnly : 1;
+    uint16_t bReadDenySkipCSMON : 1;           /* When Not Found as CSMON Parameter Skip Deny Read through ModBus */
+    uint16_t bWriteDenySkipCSMON : 1;          /* When Not Found as CSMON Parameter Skip Deny Write through ModBus */
+    uint16_t bArray : 1;                       /* Array Type Register */
+    uint16_t bBitField : 1;                    /*  */
+    uint16_t bReserved : 2;                    /*  */
+    uint16_t u8ElementCount : 8;               /* element count (multiples of element size) or bit if bit field */
+
+}CSMON_sRegisterAddressTableFlags;
+
+typedef union
+{
+    uint16_t u16Register;
+    CSMON_sRegisterAddressTableFlags sFlags;
+}CSMON_uRegisterAddressTableFlags;
+
+
+typedef struct
+{
+    uint16_t u8SizeElement : 8;
+    uint16_t u8BitOffet : 8;
+
+}CSMON_sRegisterAddressTableSize;
+
+typedef union
+{
+    uint16_t u16Register;
+    CSMON_sRegisterAddressTableSize sSize;
+}CSMON_uRegisterAddressTableSize;
 
 
 
@@ -374,8 +407,11 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
 
 /* First Put Real Address (Call this function in application software) to calculate count parameters internally (last index is NULL) */
 CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pu32RealAddress, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListProcessFunc(uint32_t *pu32ProcessFunc, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListParamAttrib(uint16_t *pu16ParamAttributes, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListRegisterSize(uint16_t *pu16RegisterSize, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListRegisterFlags(uint16_t *pu16RegisterFlags, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListParamAttrib(uint16_t *pu16ParamAttributes, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListShortNaming(uint_least8_t *au8Name, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListStringUnits(uint_least8_t *au8Unit, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListDataMaximum(uint32_t *pu32Max, uint16_t u16Offset);
