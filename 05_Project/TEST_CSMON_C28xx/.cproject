@@ -355,7 +355,7 @@
 									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
 									<listOptionValue builtIn="false" value="_FLASH"/>
 									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
-									<listOptionValue builtIn="false" value="EXTERNAL_RECORDERS=1"/>
+									<listOptionValue builtIn="false" value="EXTERNAL_RECORDERS=0"/>
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>

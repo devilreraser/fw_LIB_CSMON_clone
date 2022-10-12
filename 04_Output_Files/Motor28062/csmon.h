@@ -32,6 +32,7 @@ extern "C"
 #define CSMON_SET_PARAMETER_NAME_LENGTH_MAX     48
 #define CSMON_SET_PARAMETER_UNIT_LENGTH_MAX     16
 
+
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
@@ -407,7 +408,7 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
 
 /* First Put Real Address (Call this function in application software) to calculate count parameters internally (last index is NULL) */
 CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pu32RealAddress, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListProcessFunc(uint32_t *pu32ProcessFunc, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListProcessFunc(uint32_t *pu32ProcessFunc, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListRegisterSize(uint16_t *pu16RegisterSize, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListRegisterFlags(uint16_t *pu16RegisterFlags, uint16_t u16Offset);
@@ -419,8 +420,8 @@ CSMON_eResponseCode_t CSMON_eSetParameterListDataMinimum(uint32_t *pu32Min, uint
 CSMON_eResponseCode_t CSMON_eSetParameterListDataDefault(uint32_t *pu32Def, uint16_t u16Offset);
 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
 CSMON_eResponseCode_t CSMON_eSetParameterListValueFormat(float *Norm, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListCntBitEleSz(uint_least8_t *pu8BitCountOrArrayElementSize, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListStBitEleCnt(uint_least8_t *u8StartBitOrArrayElementCount, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListCntBitEleSz(uint_least8_t *pu8BitCountOrArrayElementSize, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListStBitEleCnt(uint_least8_t *u8StartBitOrArrayElementCount, uint16_t u16Offset);
 
 
 
