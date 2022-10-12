@@ -150,12 +150,14 @@ PAGE 1 :   /* Data Memory */
    RAMM1       : origin = 0x000400, length = 0x000400     /* on-chip RAM block M1 */
    //RAML2       : origin = 0x008C00, length = 0x00B400     /* on-chip RAM block L2 */
    RAML2       : origin = 0x008C00, length = 0x000400     /* on-chip RAM block L2 */
-   RAML3456       : origin = 0x009000, length = 0x007000	  /* on-chip RAM block L3 */
+   //RAML3456       : origin = 0x009000, length = 0x007000	  /* on-chip RAM block L3 */
+   //RAML345       : origin = 0x009000, length = 0x005000	  /* on-chip RAM block L3 */
+   RAML34       : origin = 0x009000, length = 0x003000	  /* on-chip RAM block L3 */
    //RAML3       : origin = 0x009000, length = 0x001000	  /* on-chip RAM block L3 */
    //RAML456       : origin = 0x00A000, length = 0x006000     /* on-chip RAM block L4 */
    //RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
-   //RAML5       : origin = 0x00C000, length = 0x002000     /* on-chip RAM block L5 */
-   //RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
+   RAML5       : origin = 0x00C000, length = 0x002000     /* on-chip RAM block L5 */
+   RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
    //RAML78       : origin = 0x010000, length = 0x004000     /* on-chip RAM block L7 */
    RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
    RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
@@ -192,7 +194,7 @@ SECTIONS
 
    /* Allocate uninitialized data sections: */
    .stack              : > RAMM0,      PAGE = 1
-   .ebss               : >> RAML2 | RAML3456 | RAML7 | RAML8 | RAMM1,      PAGE = 1
+   .ebss               : >> RAML2 | RAML34 | RAML5 | RAML6 | RAML7 | RAML8 | RAMM1,      PAGE = 1
    .esysmem            : > RAML2,      PAGE = 1
    .cio                : > RAML2,      PAGE = 1
 

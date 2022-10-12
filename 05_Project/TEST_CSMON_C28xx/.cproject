@@ -359,7 +359,7 @@
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
-									<listOptionValue builtIn="false" value="PARAMETER_COUNT_MAX=256"/>
+									<listOptionValue builtIn="false" value="NO_PARAMETER_COUNT_MAX=256"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=0"/>
