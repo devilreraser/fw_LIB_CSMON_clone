@@ -309,14 +309,14 @@ typedef struct
 
 typedef struct
 {
+    uint16_t u8StartBitOrArrayElementCount : 8;
     uint16_t bReadOnly : 1;
     uint16_t bWriteOnly : 1;
     uint16_t bReadDenySkipCSMON : 1;           /* When Not Found as CSMON Parameter Skip Deny Read through ModBus */
     uint16_t bWriteDenySkipCSMON : 1;          /* When Not Found as CSMON Parameter Skip Deny Write through ModBus */
+    uint16_t bReserved : 2;                    /*  */
     uint16_t bArray : 1;                       /* Array Type Register */
     uint16_t bBitField : 1;                    /*  */
-    uint16_t bReserved : 2;                    /*  */
-    uint16_t u8ElementCount : 8;               /* element count (multiples of element size) or bit if bit field */
 
 }CSMON_sRegisterAddressTableFlags;
 
