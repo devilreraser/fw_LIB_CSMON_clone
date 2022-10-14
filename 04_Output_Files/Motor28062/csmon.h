@@ -341,6 +341,43 @@ typedef union
 }CSMON_uRegisterAddressTableSize;
 
 
+typedef struct
+{
+    uint16_t u8PaddingByte : 8;
+    uint16_t u8BitsCount : 8;
+}CSMON_sParameterDefinitionsBitsCount_t;
+
+typedef union
+{
+    uint16_t u16Register;
+    CSMON_sParameterDefinitionsBitsCount_t sBitsCount;
+}CSMON_uParameterDefinitionsBitsCount_t;
+
+typedef struct
+{
+    uint16_t eDefaultWriteFunctionCode : 8;  /* HMMODBUS_eCommands eDefaultWriteFunctionCode */
+    uint16_t eDefaultReadFunctionCode : 8;   /* HMMODBUS_eCommands eDefaultReadFunctionCode */
+}CSMON_sParameterDefinitionsFunctionCode_t;
+
+typedef union
+{
+    uint16_t u16Register;
+    CSMON_sParameterDefinitionsFunctionCode_t sFunctionCode;
+}CSMON_uParameterDefinitionsFunctionCode_t;
+
+typedef struct
+{
+    uint16_t eWriteAccessLevelMin : 7;                   /* CSMON_eAccessLevels eWriteAccessLevelMin as uint8_t because HMDRV_ADDR_WIDTH = 1 to work */
+    uint16_t bStore : 1;                                 /* PAR_STORE Flag In CSMON */
+    uint16_t eReadAccessLevelMin : 8;                    /* CSMON_eAccessLevels eReadAccessLevelMin as uint8_t because HMDRV_ADDR_WIDTH = 1 to work */
+}CSMON_sParameterDefinitionsAccessLevel_t;
+
+typedef union
+{
+    uint16_t u16Register;
+    CSMON_sParameterDefinitionsAccessLevel_t sAccessLevel;
+}CSMON_uParameterDefinitionsAccessLevel_t;
+
 
 /* *****************************************************************************
  * Function-Like Macro
@@ -412,6 +449,9 @@ CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pu32RealAddre
 CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListRegisterSize(uint16_t *pu16RegisterSize, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListRegisterFlags(uint16_t *pu16RegisterFlags, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListFunctionCode(uint16_t *pu16Data, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListAccessLevel(uint16_t *pu16Data, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListBitsCount(uint16_t *pu16Data, uint16_t u16Offset);
 //CSMON_eResponseCode_t CSMON_eSetParameterListParamAttrib(uint16_t *pu16ParamAttributes, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListShortNaming(uint_least8_t *au8Name, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListStringUnits(uint_least8_t *au8Unit, uint16_t u16Offset);
