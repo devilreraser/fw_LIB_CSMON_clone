@@ -136,34 +136,34 @@
 
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
 
-#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, u8Bits, u8Offs, eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, eVisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
  { \
     .u16ParameterIndexID = u16ID,                          /* u16ID */\
     .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                /* u16Attributes */\
     .u32RealAddress = (uint32_t)(u32Address),         /* u32Address */\
-    .au8Name = {au8Name},                      /* au8Name */\
-    .au8Unit = {au8Unit},                      /* au8Unit */\
+    .au8Name = {strName},                      /* au8Name */\
+    .au8Unit = {strUnit},                      /* au8Unit */\
     .u32Max.eType = (u32Maximum),   /* u32Maximum */\
     .u32Min.eType = (u32Minimum),   /* u32Minimum */\
     .u32Def.eType = (u32Default),   /* u32Default */\
     .Norm = floatScale,                     /* floatScale */\
-    0,                              /* u8BitCount - can be u8Bits (here used default 0 and generated from type(attribute)) */\
-    0,                              /* u8StartBit - can be u8Offs (here used default 0) */\
-    eVisualAttribute,               /* eVisualAttribute */\
+    .u8BitCountOrArrayElementSize = 0,                              /* u8BitCountOrArrayElementSize - can be u8Bits (here used default 0 and generated from type(attribute)) */\
+    .u8StartBitOrArrayElementCount = 0,                              /* u8StartBitOrArrayElementCount - can be u8Offs (here used default 0) */\
+    .eVisualAttribute = VisualAttribute,               /* eVisualAttribute */\
     .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
     .uParameterSize.sSize.u8CountElements = u8Elements,\
     .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
     .uParameterFlags.sFlags.bBitField = bitField, \
     .uParameterFlags.sFlags.bArray = arrayType, /* Array Type Register */ \
-    .uParameterFlags.sFlags.bReadOnly = bRO, \
-    .uParameterFlags.sFlags.bWriteOnly = bWO, \
+    .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
+    .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
     .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
     .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
     .u32ProcessFunc = pFunc \
  }
 
-#define INIT_PARAMETER(u16ID, u16Attributes, u8Bits, u8Offs, eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale) \
-        INIT_PARAMFULL(u16ID, u16Attributes, u8Bits, u8Offs, eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, 0, 0, NULL)
+#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
+        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
 #else
 
 
@@ -231,7 +231,7 @@
     .uParameterFlags.sFlags.bBitField = bitField, \
     .uParameterFlags.sFlags.bArray = arrayType,         /* Array Type Register */ \
     .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
-    .uParameterFlags.sFlags.bWriteOnly =1^(paramAccess & 1), \
+    .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
     .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
     .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
     .uFunctionCode.sFunctionCode.eDefaultWriteFunctionCode = funcWr, \
@@ -790,8 +790,10 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
   INIT_PARAMETER(60009,     _UINT08,_RW,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
 
   INIT_PARAMETER(65534,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0F),
-  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x00,        4,        1,         1,     8,    0, u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
-  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x00,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+//  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x00,        4,        1,         1,     8,    0, u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+//  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x00,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
   INIT_PARAMETER(    1,     _SINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16ScaleDataTst,                        "ReadWriteScale",     "*3.1415", 10000,         -10000,     0,      3.1415F),
   INIT_PARAMETER(    2,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoop,                  "IncLoopTest",        "A(0.5V)", 10000,         -10000,     0,      1.0F),
   INIT_PARAMETER(    3,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
@@ -2320,16 +2322,19 @@ void ExternalParametersInitialization(void)
     CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
     CSMON_eSetParameterListRegisterSize((uint16_t *)&asParameterList[0].uParameterSize.u16Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListRegisterFlags((uint16_t *)&asParameterList[0].uParameterFlags.u16Register, sizeof(asParameterList[0]));
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     CSMON_eSetParameterListFunctionCode((uint16_t *)&asParameterList[0].uFunctionCode, sizeof(asParameterList[0]));
     CSMON_eSetParameterListAccessLevel((uint16_t *)&asParameterList[0].uAccessLevel, sizeof(asParameterList[0]));
     CSMON_eSetParameterListBitsCount((uint16_t *)&asParameterList[0].uBitsCount, sizeof(asParameterList[0]));
+#endif
     //CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8NameUnit, sizeof(asParameterList[0]));
+#endif
     CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-
 }
 
 /* *****************************************************************************
