@@ -136,7 +136,7 @@
 
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
 
-#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
  { \
     .u16ParameterIndexID = u16ID,                          /* u16ID */\
     .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                /* u16Attributes */\
@@ -149,7 +149,7 @@
     .Norm = floatScale,                     /* floatScale */\
     .u8BitCountOrArrayElementSize = 0,                              /* u8BitCountOrArrayElementSize - can be u8Bits (here used default 0 and generated from type(attribute)) */\
     .u8StartBitOrArrayElementCount = 0,                              /* u8StartBitOrArrayElementCount - can be u8Offs (here used default 0) */\
-    .eVisualAttribute = VisualAttribute,               /* eVisualAttribute */\
+    .eVisualTypeAttribute = VisualAttribute,               /* eVisualTypeAttribute */\
     .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
     .uParameterSize.sSize.u8CountElements = u8Elements,\
     .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
@@ -162,8 +162,8 @@
     .u32ProcessFunc = pFunc \
  }
 
-#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
-        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
+#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
+        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
 #else
 
 
@@ -213,7 +213,7 @@
     ((uint16_t)STR_PADDED(x)[62] & 0xFF) | ((uint16_t)STR_PADDED(x)[63] << 8), \
     }
 
-#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, visualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
  { \
     .u16ParameterIndexID = u16ID,                       /* u16ID */\
     .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                /* u16Attributes */\
@@ -221,6 +221,8 @@
     .uBitsCount.sBitsCount.u8PaddingByte = (0),         /* uBitsCount.sBitsCount.u8PaddingByte; */\
     .u32RealAddress = (uint32_t)(u32Address),           /* u32Address */\
     .au8NameUnit = ZIP_STRING(strName "\t" strUnit),    /* au8NameUnit */\
+    .eDataTypeAttribute = DataTypeAttribute,               /* eDataTypeAttribute */\
+    .eVisualTypeAttribute = VisualAttribute,               /* eVisualTypeAttribute */\
     .u32Max.eType = (u32Maximum),                       /* u32Maximum */\
     .u32Min.eType = (u32Minimum),                       /* u32Minimum */\
     .u32Def.eType = (u32Default),                       /* u32Default */\
@@ -241,8 +243,8 @@
     .uAccessLevel.sAccessLevel.bStore = bStorable, \
  }
 
-#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
-        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
+#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
+        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
 #endif
 
 
@@ -316,10 +318,9 @@ typedef struct
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     uint32_t u32ProcessFunc;
 #endif
-#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
-    CSMON_eVisualType_t eVisualAttribute;
+    CSMON_eDataType_t eDataTypeAttribute;
+    CSMON_eVisualType_t eVisualTypeAttribute;
     //uint16_t u16Dummy;
-#endif
 
 }MAIN_sParameterList_t;
 
@@ -777,62 +778,62 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
 #if CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_RECORDER_DEBUG
 
 #if 1
- /*                ID         Attributes       fucnWr, funcRd, accessWr, accessRd, bStorable,  Bits, Offs, uAnyType32_t         MCU Address                          Name               Unit         Max        Min         Def      Norm */
-  INIT_PARAMETER(60000,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16PeriodControl_usec,                  "CtrlLoopPeriod",     "usec",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60001,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      0.1F),
-  INIT_PARAMETER(60002,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16DelayMainLoop_usec,                  "MainLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60003,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16CountSetParameterFail,               "Parameters_Fail",    "unit",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60004,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60005,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60006,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60007,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60008,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60009,     _UINT08,_RW,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
+ /*                ID         Attributes       fucnWr, funcRd, accessWr, accessRd, bStorable,  Bits, Offs, uAnyType32_t                               MCU Address                          Name               Unit         Max        Min         Def      Norm */
+  INIT_PARAMETER(60000,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16PeriodControl_usec,                  "CtrlLoopPeriod",     "usec",    0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60001,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      0.1F),
+  INIT_PARAMETER(60002,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayMainLoop_usec,                  "MainLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60003,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16CountSetParameterFail,               "Parameters_Fail",    "unit",    0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60004,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60005,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60006,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60007,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60008,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60009,     _UINT08,_RW,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U16,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
 
-  INIT_PARAMETER(65534,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0F),
-  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
-  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
-//  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x00,        4,        1,         1,     8,    0, u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
-//  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x00,   0x03,        4,        1,         1,     8,    0, u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
-  INIT_PARAMETER(    1,     _SINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16ScaleDataTst,                        "ReadWriteScale",     "*3.1415", 10000,         -10000,     0,      3.1415F),
-  INIT_PARAMETER(    2,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoop,                  "IncLoopTest",        "A(0.5V)", 10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    3,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    4,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    5,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    6,     _UINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001F),
-  INIT_PARAMETER(    7,     _UINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,            1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+  INIT_PARAMETER(65534,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0F),
+  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+//  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x00,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+//  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x00,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+  INIT_PARAMETER(    1,     _SINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16ScaleDataTst,                        "ReadWriteScale",     "*3.1415", 10000,         -10000,     0,      3.1415F),
+  INIT_PARAMETER(    2,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoop,                  "IncLoopTest",        "A(0.5V)", 10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    3,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    4,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    5,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    6,     _UINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001F),
+  INIT_PARAMETER(    7,     _UINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,            1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
-  INIT_PARAMETER(    8,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    9,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(   10,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(   11,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    8,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    9,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   10,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   11,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(   28,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, &s32DummyVoltageDCLink,                  "VoltageBus32",       "V",       1000000000,    -1000000000,0,      0.000001F),
-  INIT_PARAMETER(   29,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, &s32DummyCurrentPhaseA,                  "CurrentPhA32",       "A",       1000000000,    -1000000000,0,      0.000001F),
-  INIT_PARAMETER(   30,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, &s32DummyCurrentPhaseB,                  "CurrentPhB32",       "A",       1000000000,    -1000000000,0,      0.000001F),
-  INIT_PARAMETER(   31,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, &s32DummyCurrentPhaseC,                  "CurrentPhC32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   28,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyVoltageDCLink,                  "VoltageBus32",       "V",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   29,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyCurrentPhaseA,                  "CurrentPhA32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   30,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyCurrentPhaseB,                  "CurrentPhB32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   31,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyCurrentPhaseC,                  "CurrentPhC32",       "A",       1000000000,    -1000000000,0,      0.000001F),
 
-  INIT_PARAMETER(  108,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyVoltageDCLinkStartup,           "VoltageBusStart",    "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  109,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseAStartup,           "CurrentPhAStart",    "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  110,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseBStartup,           "CurrentPhBStart",    "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  111,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseCStartup,           "CurrentPhCStart",    "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  108,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLinkStartup,           "VoltageBusStart",    "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  109,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseAStartup,           "CurrentPhAStart",    "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  110,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseBStartup,           "CurrentPhBStart",    "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  111,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseCStartup,           "CurrentPhCStart",    "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  208,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyVoltageDCLinkStop,              "VoltageBusStop",     "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  209,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseAStop,              "CurrentPhAStop",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  210,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseBStop,              "CurrentPhBStop",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  211,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseCStop,              "CurrentPhCStop",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  208,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLinkStop,              "VoltageBusStop",     "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  209,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseAStop,              "CurrentPhAStop",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  210,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseBStop,              "CurrentPhBStop",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  211,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseCStop,              "CurrentPhCStop",     "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  308,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyVoltageDCLinkIdle,              "VoltageBusIdle",     "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  309,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseAIdle,              "CurrentPhAIdle",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  310,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseBIdle,              "CurrentPhBIdle",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  311,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyCurrentPhaseCIdle,              "CurrentPhCIdle",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  308,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLinkIdle,              "VoltageBusIdle",     "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  309,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseAIdle,              "CurrentPhAIdle",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  310,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseBIdle,              "CurrentPhBIdle",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  311,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseCIdle,              "CurrentPhCIdle",     "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  408,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoopA,                 "IncLoopTestA",       "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  409,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoopB,                 "IncLoopTestB",       "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  410,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoopC,                 "IncLoopTestC",       "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  411,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoopV,                 "IncLoopTestV",       "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  408,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopA,                 "IncLoopTestA",       "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  409,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopB,                 "IncLoopTestB",       "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  410,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopC,                 "IncLoopTestC",       "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  411,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopV,                 "IncLoopTestV",       "V",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  412,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, &s16DummyIncrementLoopCDiff,             "IncLoopTestCDiff",   "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  412,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopCDiff,             "IncLoopTestCDiff",   "A",       10000,         -10000,     0,      1.0F),
 #endif
 
 
@@ -2330,6 +2331,8 @@ void ExternalParametersInitialization(void)
     //CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8NameUnit, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataType((uint16_t *)&asParameterList[0].eDataTypeAttribute, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListVisualType((uint16_t *)&asParameterList[0].eVisualTypeAttribute, sizeof(asParameterList[0]));
 #endif
     CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));

@@ -32,6 +32,8 @@ extern "C"
 #define CSMON_SET_PARAMETER_NAME_LENGTH_MAX     48
 #define CSMON_SET_PARAMETER_UNIT_LENGTH_MAX     16
 
+#define CSMON_NUMERIC_64BIT     0
+
 
 /* *****************************************************************************
  * Constants and Macros Definitions
@@ -201,6 +203,37 @@ typedef enum
     CSMON_TRIGGER_MODE_ANY_EDGE,  /* not implemented for now */
 }CSMON_eTriggerMode_t;
 
+
+
+typedef enum
+{
+    CSMON_DATA_TYPE_BOOL_FLAG = 0x0200,
+    CSMON_DATA_TYPE_ENUM_FLAG = 0x0100,
+    CSMON_DATA_TYPE_SIGNED_FLAG = 0x0080,
+    CSMON_DATA_TYPE_FLOAT_FLAG = 0x0040,
+    CSMON_DATA_TYPE_SIZE_MASK = 0x0003,
+
+    CSMON_DATA_TYPE_U8  = 0x0000,
+    CSMON_DATA_TYPE_U16 = 0x0001,
+    CSMON_DATA_TYPE_U32 = 0x0002,
+    CSMON_DATA_TYPE_U64 = 0x0003, /* for HMRECPRM_eVariant64_t or larger */
+
+    CSMON_DATA_TYPE_S8  = 0x0080,
+    CSMON_DATA_TYPE_S16 = 0x0081,
+    CSMON_DATA_TYPE_S32 = 0x0082,
+    CSMON_DATA_TYPE_S64 = 0x0083, /* for HMRECPRM_eVariant64_t or larger */
+
+    CSMON_DATA_TYPE_F16 = 0x00C1,
+    CSMON_DATA_TYPE_F32 = 0x00C2,
+    CSMON_DATA_TYPE_F64 = 0x00C3, /* for HMRECPRM_eVariant64_t or larger */
+
+    CSMON_DATA_TYPE_MASK = 0xFFFF
+
+}CSMON_eDataType_t; /* 16 bits - change also HMRECPRM_eVariantType_t */
+
+
+
+
 typedef enum
 {
     CSMON_VISUAL_TYPE_MASK = 0x0007,
@@ -216,6 +249,8 @@ typedef enum
     CSMON_VISUAL_MASK     = 0xFFFF
 
 }CSMON_eVisualType_t; /* 16 bits - Library Internal Note! -> change also HMRECPRM_eVisualType_t */
+
+
 
 typedef enum
 {
@@ -454,12 +489,24 @@ CSMON_eResponseCode_t CSMON_eSetParameterListAccessLevel(uint16_t *pu16Data, uin
 CSMON_eResponseCode_t CSMON_eSetParameterListBitsCount(uint16_t *pu16Data, uint16_t u16Offset);
 //CSMON_eResponseCode_t CSMON_eSetParameterListParamAttrib(uint16_t *pu16ParamAttributes, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListShortNaming(uint_least8_t *au8Name, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListStringUnits(uint_least8_t *au8Unit, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListDataMaximum(uint32_t *pu32Max, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListDataMinimum(uint32_t *pu32Min, uint16_t u16Offset);
-CSMON_eResponseCode_t CSMON_eSetParameterListDataDefault(uint32_t *pu32Def, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListStringUnits(uint_least8_t *au8Unit, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataType(uint16_t *pData, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListVisualType(uint16_t *pData, uint16_t u16Offset);
+#if CSMON_NUMERIC_64BIT
+CSMON_eResponseCode_t CSMON_eSetParameterListDataMaximum(uint64_t *pMaximum, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataMinimum(uint64_t *pMinimum, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataDefault(uint64_t *pDefault, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListDataMultply(uint64_t *pMultply, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataOffset(uint64_t *pOffset, uint16_t u16Offset);
+#else
+CSMON_eResponseCode_t CSMON_eSetParameterListDataMaximum(uint32_t *pMaximum, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataMinimum(uint32_t *pMinimum, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataDefault(uint32_t *pDefault, uint16_t u16Offset);
+//CSMON_eResponseCode_t CSMON_eSetParameterListDataMultply(uint32_t *pMultply, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListDataOffset(uint32_t *pOffset, uint16_t u16Offset);
+#endif
 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-CSMON_eResponseCode_t CSMON_eSetParameterListValueFormat(float *Norm, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListValueFormat(float *Norm, uint16_t u16Offset);  //used for CSMON_eSetParameterListDataMultply
 //CSMON_eResponseCode_t CSMON_eSetParameterListCntBitEleSz(uint_least8_t *pu8BitCountOrArrayElementSize, uint16_t u16Offset);
 //CSMON_eResponseCode_t CSMON_eSetParameterListStBitEleCnt(uint_least8_t *u8StartBitOrArrayElementCount, uint16_t u16Offset);
 
