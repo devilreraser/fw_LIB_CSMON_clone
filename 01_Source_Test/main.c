@@ -305,6 +305,7 @@ typedef struct
     uAnyType32_t u32Max;
     uAnyType32_t u32Min;
     uAnyType32_t u32Def;
+    uAnyType32_t u32Offset;
     float Norm;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     uint_least8_t u8BitCountOrArrayElementSize;
@@ -783,12 +784,12 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
   INIT_PARAMETER(60001,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      0.1F),
   INIT_PARAMETER(60002,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayMainLoop_usec,                  "MainLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      1.0F),
   INIT_PARAMETER(60003,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16CountSetParameterFail,               "Parameters_Fail",    "unit",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60004,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60005,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60006,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60007,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60008,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U16,  &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60009,     _UINT08,_RW,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U16,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
+  INIT_PARAMETER(60004,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60005,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60006,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60007,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60008,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60009,     _UINT08,_RW,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8,   &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
 
   INIT_PARAMETER(65534,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0F),
   INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
@@ -2338,6 +2339,7 @@ void ExternalParametersInitialization(void)
     CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+    CSMON_eSetParameterListDataOffset((uint32_t *)&asParameterList[0].u32Offset.u32Register, sizeof(asParameterList[0]));
 }
 
 /* *****************************************************************************
