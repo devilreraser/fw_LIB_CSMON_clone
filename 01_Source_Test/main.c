@@ -173,11 +173,11 @@
 #define STRLEN(a)           STRLENPADDED((a "\0\0\0\0\0\0\0\0\0")) // padding required to prevent 'index out of range' issues.
 
 
-#define STR_PADDED(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
 
 #define STR_LENGTH(x) sizeof(x)
 
-
+#if CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX == 64
+#define STR_PADDED(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
 #define ZIP_STRING(x) { \
     ((uint16_t)STR_PADDED(x)[ 0] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 1] << 8), \
     ((uint16_t)STR_PADDED(x)[ 2] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 3] << 8), \
@@ -212,20 +212,43 @@
     ((uint16_t)STR_PADDED(x)[60] & 0xFF) | ((uint16_t)STR_PADDED(x)[61] << 8), \
     ((uint16_t)STR_PADDED(x)[62] & 0xFF) | ((uint16_t)STR_PADDED(x)[63] << 8), \
     }
+#elif CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX == 32
+#define STR_PADDED(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
+#define ZIP_STRING(x) { \
+    ((uint16_t)STR_PADDED(x)[ 0] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 1] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 2] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 3] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 4] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 5] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 6] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 7] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 8] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 9] << 8), \
+    ((uint16_t)STR_PADDED(x)[10] & 0xFF) | ((uint16_t)STR_PADDED(x)[11] << 8), \
+    ((uint16_t)STR_PADDED(x)[12] & 0xFF) | ((uint16_t)STR_PADDED(x)[13] << 8), \
+    ((uint16_t)STR_PADDED(x)[14] & 0xFF) | ((uint16_t)STR_PADDED(x)[15] << 8), \
+    ((uint16_t)STR_PADDED(x)[16] & 0xFF) | ((uint16_t)STR_PADDED(x)[17] << 8), \
+    ((uint16_t)STR_PADDED(x)[18] & 0xFF) | ((uint16_t)STR_PADDED(x)[19] << 8), \
+    ((uint16_t)STR_PADDED(x)[20] & 0xFF) | ((uint16_t)STR_PADDED(x)[21] << 8), \
+    ((uint16_t)STR_PADDED(x)[22] & 0xFF) | ((uint16_t)STR_PADDED(x)[23] << 8), \
+    ((uint16_t)STR_PADDED(x)[24] & 0xFF) | ((uint16_t)STR_PADDED(x)[25] << 8), \
+    ((uint16_t)STR_PADDED(x)[26] & 0xFF) | ((uint16_t)STR_PADDED(x)[27] << 8), \
+    ((uint16_t)STR_PADDED(x)[28] & 0xFF) | ((uint16_t)STR_PADDED(x)[29] << 8), \
+    ((uint16_t)STR_PADDED(x)[30] & 0xFF) | ((uint16_t)STR_PADDED(x)[31] << 8), \
+    }
+#endif
 
+#if CSMON_REALADR_16BIT
 #define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
  { \
     .u16ParameterIndexID = u16ID,                       /* u16ID */\
-    .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                /* u16Attributes */\
+    /* .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                u16Attributes */\
     .uBitsCount.sBitsCount.u8BitsCount = (u8Bits),      /* uBitsCount.sBitsCount.u8BitsCount; */\
     .uBitsCount.sBitsCount.u8PaddingByte = (0),         /* uBitsCount.sBitsCount.u8PaddingByte; */\
-    .u32RealAddress = (uint32_t)(u32Address),           /* u32Address */\
+    .u16RealAddress = (uint16_t)((uint32_t)((uint32_t*)(u32Address))),           /* u32Address */\
     .au8NameUnit = ZIP_STRING(strName "\t" strUnit),    /* au8NameUnit */\
     .eDataTypeAttribute = DataTypeAttribute,               /* eDataTypeAttribute */\
-    .eVisualTypeAttribute = VisualAttribute,               /* eVisualTypeAttribute */\
+    /* .eVisualTypeAttribute = VisualAttribute,               eVisualTypeAttribute */\
     .u32Max.eType = (u32Maximum),                       /* u32Maximum */\
     .u32Min.eType = (u32Minimum),                       /* u32Minimum */\
     .u32Def.eType = (u32Default),                       /* u32Default */\
+    /* .u32Offset.eType = 0,                       u32Offset */\
     .Norm = floatScale,                                 /* floatScale */\
     .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
     .uParameterSize.sSize.u8CountElements = u8Elements,\
@@ -242,6 +265,39 @@
     .uAccessLevel.sAccessLevel.eReadAccessLevelMin = accessRd, \
     .uAccessLevel.sAccessLevel.bStore = bStorable, \
  }
+#else
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+ { \
+    .u16ParameterIndexID = u16ID,                       /* u16ID */\
+    /* .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                u16Attributes */\
+    .uBitsCount.sBitsCount.u8BitsCount = (u8Bits),      /* uBitsCount.sBitsCount.u8BitsCount; */\
+    .uBitsCount.sBitsCount.u8PaddingByte = (0),         /* uBitsCount.sBitsCount.u8PaddingByte; */\
+    .u32RealAddress = (uint32_t)(u32Address),           /* u32Address */\
+    .au8NameUnit = ZIP_STRING(strName "\t" strUnit),    /* au8NameUnit */\
+    .eDataTypeAttribute = DataTypeAttribute,               /* eDataTypeAttribute */\
+    /* .eVisualTypeAttribute = VisualAttribute,               eVisualTypeAttribute */\
+    .u32Max.eType = (u32Maximum),                       /* u32Maximum */\
+    .u32Min.eType = (u32Minimum),                       /* u32Minimum */\
+    .u32Def.eType = (u32Default),                       /* u32Default */\
+    /* .u32Offset.eType = 0,                       u32Offset */\
+    .Norm = floatScale,                                 /* floatScale */\
+    .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
+    .uParameterSize.sSize.u8CountElements = u8Elements,\
+    .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
+    .uParameterFlags.sFlags.bBitField = bitField, \
+    .uParameterFlags.sFlags.bArray = arrayType,         /* Array Type Register */ \
+    .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
+    .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
+    .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
+    .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
+    .uFunctionCode.sFunctionCode.eDefaultWriteFunctionCode = funcWr, \
+    .uFunctionCode.sFunctionCode.eDefaultReadFunctionCode = funcRd, \
+    .uAccessLevel.sAccessLevel.eWriteAccessLevelMin = accessWr, \
+    .uAccessLevel.sAccessLevel.eReadAccessLevelMin = accessRd, \
+    .uAccessLevel.sAccessLevel.bStore = bStorable, \
+    .u16Dummy = 0, \
+ }
+#endif
 
 #define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
         INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
@@ -290,22 +346,21 @@ typedef struct
 typedef struct
 {
     uint16_t u16ParameterIndexID;
-    uint16_t u16ParamAttributes;
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
+    uint16_t u16ParamAttributes;
 #else
     CSMON_uParameterDefinitionsBitsCount_t uBitsCount;
 #endif
-    uint32_t u32RealAddress;
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     char au8Name[CSMON_SET_PARAMETER_NAME_LENGTH_MAX];
     char au8Unit[CSMON_SET_PARAMETER_UNIT_LENGTH_MAX];
 #else
-    char au8NameUnit[(CSMON_SET_PARAMETER_NAME_LENGTH_MAX + CSMON_SET_PARAMETER_UNIT_LENGTH_MAX)/2];
+    char au8NameUnit[(CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX)/2];
 #endif
     uAnyType32_t u32Max;
     uAnyType32_t u32Min;
     uAnyType32_t u32Def;
-    uAnyType32_t u32Offset;
+    //uAnyType32_t u32Offset;
     float Norm;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     uint_least8_t u8BitCountOrArrayElementSize;
@@ -318,10 +373,16 @@ typedef struct
     CSMON_uRegisterAddressTableFlags uParameterFlags;
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     uint32_t u32ProcessFunc;
-#endif
-    CSMON_eDataType_t eDataTypeAttribute;
     CSMON_eVisualType_t eVisualTypeAttribute;
-    //uint16_t u16Dummy;
+#endif
+#if CSMON_REALADR_16BIT
+    uint16_t u16RealAddress;
+    CSMON_eDataType_t eDataTypeAttribute;
+#else
+    uint32_t u32RealAddress;
+    CSMON_eDataType_t eDataTypeAttribute;
+    uint16_t u16Dummy;
+#endif
 
 }MAIN_sParameterList_t;
 
@@ -779,7 +840,7 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
 #if CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_RECORDER_DEBUG
 
 #if 1
- /*                ID         Attributes       fucnWr, funcRd, accessWr, accessRd, bStorable,  Bits, Offs, uAnyType32_t                               MCU Address                          Name               Unit         Max        Min         Def      Norm */
+ /*                ID         Attributes       fucnWr, funcRd, accessWr, accessRd, bStorable,  Bits, Offs, uAnyType32_t                                               MCU Address                          Name               Unit         Max        Min         Def      Norm */
   INIT_PARAMETER(60000,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16PeriodControl_usec,                  "CtrlLoopPeriod",     "usec",    0x0000FFFF,    0,          0,      1.0F),
   INIT_PARAMETER(60001,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      0.1F),
   INIT_PARAMETER(60002,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayMainLoop_usec,                  "MainLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      1.0F),
@@ -2319,7 +2380,11 @@ void ControlProcess(void)
  **************************************************************************** */
 void ExternalParametersInitialization(void)
 {
+#if CSMON_REALADR_16BIT
+    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+#else
     CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+#endif
     //CSMON_eSetParameterListProcessFunc((uint32_t *)&asParameterList[0].u32ProcessFunc, sizeof(asParameterList[0]));
     CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
     CSMON_eSetParameterListRegisterSize((uint16_t *)&asParameterList[0].uParameterSize.u16Register, sizeof(asParameterList[0]));
@@ -2333,13 +2398,13 @@ void ExternalParametersInitialization(void)
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8NameUnit, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataType((uint16_t *)&asParameterList[0].eDataTypeAttribute, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListVisualType((uint16_t *)&asParameterList[0].eVisualTypeAttribute, sizeof(asParameterList[0]));
+    //CSMON_eSetParameterListVisualType((uint16_t *)&asParameterList[0].eVisualTypeAttribute, sizeof(asParameterList[0]));
 #endif
     CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-    CSMON_eSetParameterListDataOffset((uint32_t *)&asParameterList[0].u32Offset.u32Register, sizeof(asParameterList[0]));
+    //CSMON_eSetParameterListDataOffset((uint32_t *)&asParameterList[0].u32Offset.u32Register, sizeof(asParameterList[0]));
 }
 
 /* *****************************************************************************
@@ -2398,7 +2463,11 @@ void ParameterInitialization(void)
             GPIO_writePin(STAT_LED_A_B_PIN, (u16Index & 1) );     /* Amber LED (middle Led) */
 #endif
 
+#if CSMON_REALADR_16BIT
+            u32ParamRealAddress = asParameterList[u16Index].u16RealAddress;
+#else
             u32ParamRealAddress = asParameterList[u16Index].u32RealAddress;
+#endif
 
             if (asParameterList[u16Index].u16ParameterIndexID == PARAM_ID_MODBUS_MSG_CNT)
             {
@@ -2417,7 +2486,7 @@ void ParameterInitialization(void)
    (uint_least8_t*)&asParameterList[u16Index].au8Name,
    (uint_least8_t*)&asParameterList[u16Index].au8Unit,
 #else
-                   asParameterList[u16Index].u16ParamAttributes,
+                   NULL,
                    NULL,
                    NULL,
 #endif

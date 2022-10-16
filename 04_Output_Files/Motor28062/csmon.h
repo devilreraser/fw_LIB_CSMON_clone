@@ -29,10 +29,19 @@ extern "C"
  **************************************************************************** */
 
 /* used in eSetPrameter Function - combined size must not exceed 63 characters or will be trunked */
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
+#define CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX 32
+#else
 #define CSMON_SET_PARAMETER_NAME_LENGTH_MAX     48
 #define CSMON_SET_PARAMETER_UNIT_LENGTH_MAX     16
-
+#endif
 #define CSMON_NUMERIC_64BIT     0
+
+#ifndef _CSMON_USE_REAL_ADDRESS_16BIT
+#define CSMON_REALADR_16BIT     0       /* Parameter/Variable Value Address */
+#else
+#define CSMON_REALADR_16BIT   _CSMON_USE_REAL_ADDRESS_16BIT
+#endif
 
 
 /* *****************************************************************************
@@ -479,7 +488,11 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
  **************************************************************************** */
 
 /* First Put Real Address (Call this function in application software) to calculate count parameters internally (last index is NULL) */
-CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pu32RealAddress, uint16_t u16Offset);
+#if CSMON_REALADR_16BIT
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint16_t *pRealAddress, uint16_t u16Offset);
+#else
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pRealAddress, uint16_t u16Offset);
+#endif
 //CSMON_eResponseCode_t CSMON_eSetParameterListProcessFunc(uint32_t *pu32ProcessFunc, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListRegisterSize(uint16_t *pu16RegisterSize, uint16_t u16Offset);
