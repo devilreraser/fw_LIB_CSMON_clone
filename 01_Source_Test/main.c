@@ -22,6 +22,8 @@
 #include "device.h"
 #include "boardcfg.h"
 
+#include "csmon_config.h"
+
 #if defined(__TMS320F2806x__)
 
 #include "sci_driver.h"
@@ -130,6 +132,10 @@
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
+
+#if CSMON_CONFIG == 0
+
+
 #define INIT_MAX_MIN_DEF(_type, max, min, def_) \
         .u32Max._type = (max), .u32Min._type = (min), .u32Def._type = (def_)
 
@@ -303,6 +309,7 @@
         INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
 #endif
 
+#endif
 
 /* *****************************************************************************
  * Enumeration Definitions
@@ -311,6 +318,7 @@
 /* *****************************************************************************
  * Type Definitions
  **************************************************************************** */
+#if CSMON_CONFIG == 0
 #ifndef uWord32_t
 typedef union
 {
@@ -328,7 +336,7 @@ typedef union
     uint_least8_t u8Register;
      int_least8_t s8Register;
 } uAnyType32_t;
-
+#endif
 
 
 typedef struct
@@ -342,6 +350,8 @@ typedef struct
     uint_least8_t u8Year;
     uint_least8_t u8Reserved;
 }MAIN_sDateTime_t;
+
+#if CSMON_CONFIG == 0
 
 typedef struct
 {
@@ -386,6 +396,7 @@ typedef struct
 
 }MAIN_sParameterList_t;
 
+#endif
 
 typedef struct
 {
@@ -760,6 +771,10 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_CURRENT_PHASEA_32  29
 #define PARAM_ID_CURRENT_PHASEB_32  30
 #define PARAM_ID_CURRENT_PHASEC_32  31
+
+
+#if CSMON_CONFIG == 0
+
 
 
 volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX] =
@@ -2161,7 +2176,7 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
 
 };
 
-
+#endif
 
 /* *****************************************************************************
  * Prototypes of functions definitions

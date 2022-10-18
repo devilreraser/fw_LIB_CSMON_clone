@@ -68,6 +68,16 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>01_Source_Test/csmon_config.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/csmon_config.c</locationURI>
+		</link>
+		<link>
+			<name>01_Source_Test/csmon_config.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/csmon_config.h</locationURI>
+		</link>
+		<link>
 			<name>01_Source_Test/datetime.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/datetime.h</locationURI>

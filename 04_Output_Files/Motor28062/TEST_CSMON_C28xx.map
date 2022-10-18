@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.0                     
 ******************************************************************************
->> Linked Sun Oct 16 16:31:40 2022
+>> Linked Wed Oct 19 00:08:23 2022
 
 OUTPUT FILE NAME:   <../../../04_Output_Files/Motor28062/TEST_CSMON_C28xx.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 003ec4b5
@@ -723,7 +723,7 @@ csmpasswds
                   00000050    00000380     --HOLE--
 
 .econst    0    003ee0a2    00001e0c     
-                  003ee0a2    00001900     main.obj (.econst:_asParameterList)
+                  003ee0a2    00001900     csmon_config.obj (.econst:_asParameterList)
                   003ef9a2    00000100     CSMON_C28xx.lib : hmmodbus.obj (.econst:.string:_auchCRCHi)
                   003efaa2    00000100                     : hmmodbus.obj (.econst:.string:_auchCRCLo)
                   003efba2    00000100     F2806x_PieVect.obj (.econst:_PieVectTableInit)
@@ -1117,7 +1117,8 @@ MODULE SUMMARY
        Module                           code    initialized data   uninitialized data
        ------                           ----    ----------------   ------------------
     .\01_Source_Test\
-       main.obj                         1149    6809               134               
+       csmon_config.obj                 0       6400               0                 
+       main.obj                         1149    409                134               
     +--+--------------------------------+-------+------------------+--------------------+
        Total:                           1149    6809               134               
                                                                                      
@@ -4881,6 +4882,20 @@ SYMBOL DEFINITIONS BY INPUT FILE
 
 ================================================================================
 
+csmon_config.obj
+
+Run/Load            
+Value     Binding   Name (Section)
+--------  --------  ---------------
+00000000  local     .bss (.bss)
+00000000  local     .data (.data)
+003ee0a2  local     .econst:_asParameterList (.econst:_asParameterList)
+00000000  local     .text (.text)
+003ee0a2  global    _asParameterList (.econst:_asParameterList)
+
+
+================================================================================
+
 main.obj
 
 Run/Load            
@@ -4929,7 +4944,6 @@ Value     Binding   Name (Section)
 00000000  local     .ebss:_au8TestCharArray32 (.ebss:_au8TestCharArray32)
 00000000  local     .ebss:_au8TestCharArray8 (.ebss:_au8TestCharArray8)
 003efe6e  local     .econst (.econst)
-003ee0a2  local     .econst:_asParameterList (.econst:_asParameterList)
 00000000  local     .text (.text)
 003ed36e  local     .text:_CSMON_vGetDateTime (.text:_CSMON_vGetDateTime)
 003ed809  local     .text:_CSMON_vSetDateTime (.text:_CSMON_vSetDateTime)
@@ -4953,7 +4967,6 @@ Value     Binding   Name (Section)
 003eb798  global    _RecordersInitialization (.text:_RecordersInitialization)
 003ecdd4  global    _ScopesInitialization (.text:_ScopesInitialization)
 0000bc4e  global    _aDummyDataTable (.ebss)
-003ee0a2  global    _asParameterList (.econst:_asParameterList)
 00000000  global    _au8TestCharArray16 (.ebss:_au8TestCharArray16)
 00000000  global    _au8TestCharArray32 (.ebss:_au8TestCharArray32)
 00000000  global    _au8TestCharArray8 (.ebss:_au8TestCharArray8)

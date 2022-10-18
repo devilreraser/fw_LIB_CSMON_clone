@@ -241,6 +241,14 @@ typedef enum
 }CSMON_eDataType_t; /* 16 bits - change also HMRECPRM_eVariantType_t */
 
 
+typedef enum
+{
+    CSMON_NA       = 0x0000,   /* No Access         */
+    CSMON_RO       = 0x0001,   /* Read Only         */
+    CSMON_WO       = 0x0002,   /* Write Only        */
+    CSMON_RW       = 0x0003,   /* Read Write        */
+}CSMON_eAccess_t;
+
 
 
 typedef enum
