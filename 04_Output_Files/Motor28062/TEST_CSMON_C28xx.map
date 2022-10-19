@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.0                     
 ******************************************************************************
->> Linked Wed Oct 19 00:08:23 2022
+>> Linked Wed Oct 19 17:11:58 2022
 
 OUTPUT FILE NAME:   <../../../04_Output_Files/Motor28062/TEST_CSMON_C28xx.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 003ec4b5
@@ -1117,10 +1117,9 @@ MODULE SUMMARY
        Module                           code    initialized data   uninitialized data
        ------                           ----    ----------------   ------------------
     .\01_Source_Test\
-       csmon_config.obj                 0       6400               0                 
        main.obj                         1149    409                134               
     +--+--------------------------------+-------+------------------+--------------------+
-       Total:                           1149    6809               134               
+       Total:                           1149    409                134               
                                                                                      
     .\01_Source_Test\peripheral_driver\
        uart_driver.obj                  94      54                 804               
@@ -1157,6 +1156,11 @@ MODULE SUMMARY
        F2806x_GlobalVariableDefs.obj    0       0                  3550              
     +--+--------------------------------+-------+------------------+--------------------+
        Total:                           0       0                  3550              
+                                                                                     
+    .\MotorParam\Generated\
+       csmon_config.obj                 0       6400               0                 
+    +--+--------------------------------+-------+------------------+--------------------+
+       Total:                           0       6400               0                 
                                                                                      
     .\Peripheral\01_Source\TMS320F2806x\
        tmr_drv.obj                      345     35                 46                
@@ -4882,20 +4886,6 @@ SYMBOL DEFINITIONS BY INPUT FILE
 
 ================================================================================
 
-csmon_config.obj
-
-Run/Load            
-Value     Binding   Name (Section)
---------  --------  ---------------
-00000000  local     .bss (.bss)
-00000000  local     .data (.data)
-003ee0a2  local     .econst:_asParameterList (.econst:_asParameterList)
-00000000  local     .text (.text)
-003ee0a2  global    _asParameterList (.econst:_asParameterList)
-
-
-================================================================================
-
 main.obj
 
 Run/Load            
@@ -6735,6 +6725,20 @@ Value     Binding   Name (Section)
 00000985  global    _SysPwrCtrlRegs (SysPwrCtrlRegsFile)
 00004000  global    _Usb0Regs (Usb0RegsFile)
 00007070  global    _XIntruptRegs (XIntruptRegsFile)
+
+
+================================================================================
+
+csmon_config.obj
+
+Run/Load            
+Value     Binding   Name (Section)
+--------  --------  ---------------
+00000000  local     .bss (.bss)
+00000000  local     .data (.data)
+003ee0a2  local     .econst:_asParameterList (.econst:_asParameterList)
+00000000  local     .text (.text)
+003ee0a2  global    _asParameterList (.econst:_asParameterList)
 
 
 ================================================================================
