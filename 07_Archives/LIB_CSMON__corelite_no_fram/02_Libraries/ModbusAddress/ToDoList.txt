@@ -1,3 +1,0 @@
-
--Make Watchdog Handling and Time Measures 	for microchip -> CSMON_bWatchdogCalcNeeded
--Make Automatic Disconnect Device Timeout 	for microchip -> CSMON_bUseDisconnectOnTimeout
