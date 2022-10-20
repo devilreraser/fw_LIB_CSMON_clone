@@ -20,16 +20,18 @@
 
 #include "main.h"
 #include "device.h"
-#include "boardcfg.h"
 
-#include "csmon_config.h"
+
 
 #if defined(__TMS320F2806x__)
-
+#include "boardcfg.h"
+#include "csmon_config.h"
 #include "sci_driver.h"
 #include "uart_driver.h"
 
 #else
+
+#define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 1024
 
 #include "emif_driver.h"
 #if defined(_CS_1107_SCC_R01)
