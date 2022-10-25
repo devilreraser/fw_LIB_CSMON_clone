@@ -87,8 +87,8 @@ cd ..\..
 
 echo.
 echo Process Project:
-git lfs install
-git lfs uninstall
+::git lfs install
+::git lfs uninstall
 rem pause
 git.exe fetch --all -v --progress
 rem pause
@@ -96,14 +96,14 @@ git.exe checkout -f -B master remotes/convesys/master --
 rem pause
 git pull --progress -v --no-rebase "convesys" master
 rem pause
-git lfs install --skip-smudge
+::git lfs install --skip-smudge
 rem git lfs install
 rem pause 
 git.exe checkout -f -B master remotes/github/master --
 rem pause
 git pull --progress -v --no-rebase "github" master
-git lfs pull
-git lfs install --force
+::git lfs pull
+::git lfs install --force
 rem pause
 git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/convesys/master < ConvesysToGithub.in
 IF %ERRORLEVEL% == 0 goto CommitProject
@@ -138,7 +138,7 @@ rem pause
 git push github master
 rem pause
 :EndCommit
-git lfs uninstall
+::git lfs uninstall
 git.exe checkout -f -B master remotes/origin/master --
 git pull --progress -v --no-rebase "origin" master
 
