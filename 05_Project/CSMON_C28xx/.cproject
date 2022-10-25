@@ -483,6 +483,7 @@
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="ReleaseRecorders"/>
 		<configuration configurationName="DebugNoControl"/>
+		<configuration configurationName="ReleaseTestCS1107"/>
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/CSMON_C28xx"/>
 		</configuration>
