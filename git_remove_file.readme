@@ -1,0 +1,12 @@
+
+pip3 install git-filter-repo
+
+git clone https://github.com/newren/git-filter-repo.git
+Run the command git --exec-path to see your Git exe directory.
+From the git-filter-repo repo's root directory, copy the file git-filter-repo (about 160KB) into your Git exe directory.
+
+command to remove file(can execute multiple times)
+git filter-repo --path <path to the file or directory> --invert-paths --force
+
+now force push the repo: 
+git push origin --force --all
