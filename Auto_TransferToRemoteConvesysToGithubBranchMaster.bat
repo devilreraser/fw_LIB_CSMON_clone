@@ -26,7 +26,7 @@ git.exe checkout -f -B %branch% remotes/%src_remote%/%branch% --
 git pull --progress -v --no-rebase "%src_remote%" %branch%
 git.exe checkout -f -B %branch% remotes/%dst_remote%/%branch% --
 git pull --progress -v --no-rebase "%dst_remote%" %branch%
-git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\%src_remote%To%dst_remote%.in
+git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push %dst_remote% %branch%
 git.exe checkout -f -B %branch% remotes/%org_remote%/%branch% --
@@ -41,7 +41,7 @@ git.exe checkout -f -B %branch% remotes/%src_remote%/%branch% --
 git pull --progress -v --no-rebase "%src_remote%" %branch%
 git.exe checkout -f -B %branch% remotes/%dst_remote%/%branch% --
 git pull --progress -v --no-rebase "%dst_remote%" %branch%
-git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\%src_remote%To%dst_remote%.in
+git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push %dst_remote% %branch%
 git.exe checkout -f -B %branch% remotes/%org_remote%/%branch% --
@@ -56,7 +56,7 @@ git.exe checkout -f -B %branch% remotes/%src_remote%/%branch% --
 git pull --progress -v --no-rebase "%src_remote%" %branch%
 git.exe checkout -f -B %branch% remotes/%dst_remote%/%branch% --
 git pull --progress -v --no-rebase "%dst_remote%" %branch%
-git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\%src_remote%To%dst_remote%.in
+git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push %dst_remote% %branch%
 git.exe checkout -f -B %branch% remotes/%org_remote%/%branch% --
@@ -71,7 +71,7 @@ git.exe checkout -f -B %branch% remotes/%src_remote%/%branch% --
 git pull --progress -v --no-rebase "%src_remote%" %branch%
 git.exe checkout -f -B %branch% remotes/%dst_remote%/%branch% --
 git pull --progress -v --no-rebase "%dst_remote%" %branch%
-git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\%src_remote%To%dst_remote%.in
+git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push %dst_remote% %branch%
 git.exe checkout -f -B %branch% remotes/%org_remote%/%branch% --
@@ -86,7 +86,7 @@ git.exe checkout -f -B %branch% remotes/%src_remote%/%branch% --
 git pull --progress -v --no-rebase "%src_remote%" %branch%
 git.exe checkout -f -B %branch% remotes/%dst_remote%/%branch% --
 git pull --progress -v --no-rebase "%dst_remote%" %branch%
-git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\%src_remote%To%dst_remote%.in
+git merge --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ..\..\ConvesysToGithub.in
 git commit -a -m "%_CommitString%"
 git push %dst_remote% %branch%
 git.exe checkout -f -B %branch% remotes/%org_remote%/%branch% --
@@ -113,7 +113,7 @@ git pull --progress -v --no-rebase "%dst_remote%" %branch%
 ::git lfs pull
 ::git lfs install --force
 rem pause
-git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < %src_remote%To%dst_remote%.in
+git merge --no-commit --allow-unrelated-histories -Xrenormalize remotes/%src_remote%/%branch% < ConvesysToGithub.in
 IF %ERRORLEVEL% == 0 goto CommitProject
 IF %ERRORLEVEL% NEQ 0 Echo Error = %ERRORLEVEL%
 echo Printing Conflicts In PROJECT:
