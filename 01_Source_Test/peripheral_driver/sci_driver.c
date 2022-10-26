@@ -75,7 +75,14 @@ void SCI_DRV_vInitFIFO(uint32_t base, uint32_t baud, uint32_t config)
 {
 
     HWREGH(base + SCI_O_CCR) = 0;   /* explicitly clear ADDRIDLE_MODE (in SCI_setConfig not cleared) */
+
+    #if defined(__TMS320F2806x__)
+    SCI_setConfig(base, DEVICE_LSPCLK_FREQ, baud, config);
+    #warning "to do get real LSPCLK frequency"
+    #else
     SCI_setConfig(base, SysCtl_getLowSpeedClock(DEVICE_OSCSRC_FREQ), baud, config);
+    #endif
+
     SCI_enableModule(base);
 
     SCI_disableLoopback(base);
@@ -106,6 +113,7 @@ uint32_t SCI_DRV_u32GetBaseFromModuleIndex(SCI_DRV_eModule_t index)
     return (index * (SCIB_BASE - SCIA_BASE) + SCIA_BASE);
 }
 
+#ifdef SCIA_BASE
 __interrupt void SCIA_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCIA_BASE);
@@ -121,7 +129,9 @@ __interrupt void SCIA_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCIA_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP9);
 }
+#endif
 
+#ifdef SCIB_BASE
 __interrupt void SCIB_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCIB_BASE);
@@ -137,7 +147,9 @@ __interrupt void SCIB_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCIB_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP9);
 }
+#endif
 
+#ifdef SCIC_BASE
 __interrupt void SCIC_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCIC_BASE);
@@ -153,7 +165,9 @@ __interrupt void SCIC_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCIC_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP8);
 }
+#endif
 
+#ifdef SCID_BASE
 __interrupt void SCID_DRV_TXFIFOISR(void)
 {
     UART_DRV_eModule_t index = (UART_DRV_eModule_t)SCI_DRV_eGetModuleIndexFromBase(SCID_BASE);
@@ -169,7 +183,7 @@ __interrupt void SCID_DRV_RXFIFOISR(void)
     SCI_clearInterruptStatus(SCID_BASE, SCI_INT_RXFF);
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP8);
 }
-
+#endif
 
 
 

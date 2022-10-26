@@ -21,8 +21,11 @@
  * Configuration Definitions
  **************************************************************************** */
 
-
-#define PROJECTCFG_FCY_HZ                       200000000.0 	/* Instruction cycle frequency (Hz) for DSPIC and SYSCLK for C2000 */
+#if defined(__TMS320F2806x__)
+#define PROJECTCFG_FCY_HZ                        90000000.0     /* SYSCLK for C2000 */
+#else
+#define PROJECTCFG_FCY_HZ                       200000000.0     /* Instruction cycle frequency (Hz) for DSPIC and SYSCLK for C2000 */
+#endif
 
 #ifndef _USE_CONTROL
 #define USE_CONTROL             0
@@ -90,8 +93,7 @@
 #define UART_C  2   /* SCI_C */
 #define UART_D  3   /* SCI_D */
 
-
-#if defined CPU1
+#if defined(__TMS320F2806x__)
 
 #ifdef _CSMON_USES_SCIA
 
@@ -138,12 +140,70 @@
 
 #ifdef _CSMON_MODBUS_USES_SCIA
 #if _CSMON_MODBUS_USES_SCIA == 1
-define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_A
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_A
 #else
 #define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
 #endif
 #else
-define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
+#endif
+
+
+
+
+#elif defined CPU1
+
+#ifdef _CSMON_USES_SCIA
+
+#if _CSMON_USES_SCIA
+
+#ifndef _CSMON_HEXMON_USES_SCIA
+#define _CSMON_HEXMON_USES_SCIA 1
+#endif
+#ifndef _CSMON_MODBUS_USES_SCIA
+#define _CSMON_MODBUS_USES_SCIA 1
+#endif
+
+#else
+
+#ifndef _CSMON_HEXMON_USES_SCIA
+#define _CSMON_HEXMON_USES_SCIA 0
+#endif
+#ifndef _CSMON_MODBUS_USES_SCIA
+#define _CSMON_MODBUS_USES_SCIA 0
+#endif
+
+#endif
+
+#else
+
+#ifndef _CSMON_HEXMON_USES_SCIA
+#define _CSMON_HEXMON_USES_SCIA 0
+#endif
+#ifndef _CSMON_MODBUS_USES_SCIA
+#define _CSMON_MODBUS_USES_SCIA 0
+#endif
+
+#endif
+
+#ifdef _CSMON_HEXMON_USES_SCIA
+#if _CSMON_HEXMON_USES_SCIA == 1
+#define PROJECTCFG_HMLIB_HEXMON_UART_MODULE     UART_A
+#else
+#define PROJECTCFG_HMLIB_HEXMON_UART_MODULE     UART_B
+#endif
+#else
+#define PROJECTCFG_HMLIB_HEXMON_UART_MODULE     UART_B
+#endif
+
+#ifdef _CSMON_MODBUS_USES_SCIA
+#if _CSMON_MODBUS_USES_SCIA == 1
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_A
+#else
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
+#endif
+#else
+#define PROJECTCFG_HMLIB_MODBUS_UART_MODULE     UART_B
 #endif
 
 #elif defined CPU2

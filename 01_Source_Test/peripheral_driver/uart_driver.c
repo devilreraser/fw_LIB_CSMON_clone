@@ -357,7 +357,9 @@ uint16_t UART_DRV_ReadDataRx(UART_DRV_eModule_t index)
 void UART_DRV_RXInterrupt(UART_DRV_eModule_t index)
 {
     //could use here that Tx Interrupt is disabled
+#ifndef __TMS320F2806x__
     FPGA_SCI_DRV_vProcessFastTD(index);
+#endif
     
     if ((UART_DRV_RxBufferWRCount[index] - UART_DRV_RxBufferRDCount[index]) <= UART_DRV_RX_BUFFER_SIZE)
     {
@@ -397,7 +399,9 @@ void UART_DRV_RXInterrupt(UART_DRV_eModule_t index)
  *****************************************************************************/
 void UART_DRV_TXInterrupt(UART_DRV_eModule_t index)
 {
+#ifndef __TMS320F2806x__
     FPGA_SCI_DRV_vProcessUartTx(index);
+#endif
 }
 
 

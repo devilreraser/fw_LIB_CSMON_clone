@@ -20,14 +20,28 @@
 
 #include "main.h"
 #include "device.h"
-#include "emif_driver.h"
 
-#ifdef _CS_1107_SCC_R01
+
+
+#if defined(__TMS320F2806x__)
+#include "boardcfg.h"
+#include "csmon_config.h"
+#include "sci_driver.h"
+#include "uart_driver.h"
+
+#else
+
+#define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 1024
+
+#include "emif_driver.h"
+#if defined(_CS_1107_SCC_R01)
 #include "fpga_driver.h"
 #else
 #include "sci_driver.h"
 #include "uart_driver.h"
 #include "fpga_sci_driver.h"
+#endif
+
 #endif
 
 #include "csmon.h"
@@ -73,6 +87,9 @@
 #endif
 
 
+#define SCOPE_COUNT                         1
+
+
 /* *****************************************************************************
  * Configuration Parameter Definitions
  **************************************************************************** */
@@ -90,51 +107,211 @@
 #define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_RECORDER_DEBUG
 
 
-
-#define PARAMETER_COUNT_MAX         1024
-
-
 /* Some Pinout */
-#ifdef _LAUNCHXL_F28379D
+#ifdef __TMS320F2806x__
+
+#define STAT_LED_EQEP1I_PIN 23
+#define STAT_LED_EQEP1S_PIN 22
+#define STAT_LED_EQEP1B_PIN 21
+#define STAT_LED_EQEP1A_PIN 20
+
+#elif defined(_LAUNCHXL_F28379D)
 #define STAT_LED_G_PIN      28      /* N/A */
 #define STAT_LED_A_B_PIN    31      /* D10 Blue */
 #define STAT_LED_R_PIN      34      /* D9 */
 #else
+//1038
 #define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */
 #define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
 #define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
+#define CLK_EN_FPGA_PIN     33
 #endif
 
 #define STAT_LED_ENABLE_LEVEL_LOW 0
 #define STAT_LED_DISABLE_LVL_HIGH   (!STAT_LED_ENABLE_LEVEL_LOW)
 
-#define CLK_EN_FPGA_PIN     33
 
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
+
+#if CSMON_CONFIG == 0
+
+
 #define INIT_MAX_MIN_DEF(_type, max, min, def_) \
         .u32Max._type = (max), .u32Min._type = (min), .u32Def._type = (def_)
 
-#define INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, u8BitCount, u8StartBit, eVisualAttribute) \
+
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
+
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
  { \
-    u16ID,                          /* u16ID */\
-    (u16Attributes),                /* u16Attributes */\
-    (uint32_t)(u32Address),         /* u32Address */\
-    {au8Name},                      /* au8Name */\
-    {au8Unit},                      /* au8Unit */\
+    .u16ParameterIndexID = u16ID,                          /* u16ID */\
+    .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                /* u16Attributes */\
+    .u32RealAddress = (uint32_t)(u32Address),         /* u32Address */\
+    .au8Name = {strName},                      /* au8Name */\
+    .au8Unit = {strUnit},                      /* au8Unit */\
     .u32Max.eType = (u32Maximum),   /* u32Maximum */\
     .u32Min.eType = (u32Minimum),   /* u32Minimum */\
     .u32Def.eType = (u32Default),   /* u32Default */\
-    floatScale,                     /* floatScale */\
-    u8BitCount,                     /* u8BitCount */\
-    u8StartBit,                     /* u8StartBit */\
-    eVisualAttribute                /* eVisualAttribute */\
+    .Norm = floatScale,                     /* floatScale */\
+    .u8BitCountOrArrayElementSize = 0,                              /* u8BitCountOrArrayElementSize - can be u8Bits (here used default 0 and generated from type(attribute)) */\
+    .u8StartBitOrArrayElementCount = 0,                              /* u8StartBitOrArrayElementCount - can be u8Offs (here used default 0) */\
+    .eVisualTypeAttribute = VisualAttribute,               /* eVisualTypeAttribute */\
+    .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
+    .uParameterSize.sSize.u8CountElements = u8Elements,\
+    .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
+    .uParameterFlags.sFlags.bBitField = bitField, \
+    .uParameterFlags.sFlags.bArray = arrayType, /* Array Type Register */ \
+    .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
+    .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
+    .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
+    .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
+    .u32ProcessFunc = pFunc \
  }
 
-#define INIT_PARAMETER(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale) \
-        INIT_PARAMFULL(u16ID, u16Attributes,eType,  u32Address, au8Name, au8Unit, u32Maximum, u32Minimum, u32Default, floatScale, 0, 0, CSMON_VISUAL_TYPE_HEX)
+#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
+        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
+#else
 
+
+
+#define STRLENS(a,i)        !a[i] ? i : // repetitive stuff
+#define STRLENPADDED(a)     (STRLENS(a,0) STRLENS(a,1) STRLENS(a,2) STRLENS(a,3) STRLENS(a,4) STRLENS(a,5) STRLENS(a,6) STRLENS(a,7) STRLENS(a,8) STRLENS(a,9) -1)
+#define STRLEN(a)           STRLENPADDED((a "\0\0\0\0\0\0\0\0\0")) // padding required to prevent 'index out of range' issues.
+
+
+
+#define STR_LENGTH(x) sizeof(x)
+
+#if CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX == 64
+#define STR_PADDED(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
+#define ZIP_STRING(x) { \
+    ((uint16_t)STR_PADDED(x)[ 0] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 1] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 2] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 3] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 4] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 5] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 6] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 7] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 8] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 9] << 8), \
+    ((uint16_t)STR_PADDED(x)[10] & 0xFF) | ((uint16_t)STR_PADDED(x)[11] << 8), \
+    ((uint16_t)STR_PADDED(x)[12] & 0xFF) | ((uint16_t)STR_PADDED(x)[13] << 8), \
+    ((uint16_t)STR_PADDED(x)[14] & 0xFF) | ((uint16_t)STR_PADDED(x)[15] << 8), \
+    ((uint16_t)STR_PADDED(x)[16] & 0xFF) | ((uint16_t)STR_PADDED(x)[17] << 8), \
+    ((uint16_t)STR_PADDED(x)[18] & 0xFF) | ((uint16_t)STR_PADDED(x)[19] << 8), \
+    ((uint16_t)STR_PADDED(x)[20] & 0xFF) | ((uint16_t)STR_PADDED(x)[21] << 8), \
+    ((uint16_t)STR_PADDED(x)[22] & 0xFF) | ((uint16_t)STR_PADDED(x)[23] << 8), \
+    ((uint16_t)STR_PADDED(x)[24] & 0xFF) | ((uint16_t)STR_PADDED(x)[25] << 8), \
+    ((uint16_t)STR_PADDED(x)[26] & 0xFF) | ((uint16_t)STR_PADDED(x)[27] << 8), \
+    ((uint16_t)STR_PADDED(x)[28] & 0xFF) | ((uint16_t)STR_PADDED(x)[29] << 8), \
+    ((uint16_t)STR_PADDED(x)[30] & 0xFF) | ((uint16_t)STR_PADDED(x)[31] << 8), \
+    ((uint16_t)STR_PADDED(x)[32] & 0xFF) | ((uint16_t)STR_PADDED(x)[33] << 8), \
+    ((uint16_t)STR_PADDED(x)[34] & 0xFF) | ((uint16_t)STR_PADDED(x)[35] << 8), \
+    ((uint16_t)STR_PADDED(x)[36] & 0xFF) | ((uint16_t)STR_PADDED(x)[37] << 8), \
+    ((uint16_t)STR_PADDED(x)[38] & 0xFF) | ((uint16_t)STR_PADDED(x)[39] << 8), \
+    ((uint16_t)STR_PADDED(x)[40] & 0xFF) | ((uint16_t)STR_PADDED(x)[41] << 8), \
+    ((uint16_t)STR_PADDED(x)[42] & 0xFF) | ((uint16_t)STR_PADDED(x)[43] << 8), \
+    ((uint16_t)STR_PADDED(x)[44] & 0xFF) | ((uint16_t)STR_PADDED(x)[45] << 8), \
+    ((uint16_t)STR_PADDED(x)[46] & 0xFF) | ((uint16_t)STR_PADDED(x)[47] << 8), \
+    ((uint16_t)STR_PADDED(x)[48] & 0xFF) | ((uint16_t)STR_PADDED(x)[49] << 8), \
+    ((uint16_t)STR_PADDED(x)[50] & 0xFF) | ((uint16_t)STR_PADDED(x)[51] << 8), \
+    ((uint16_t)STR_PADDED(x)[52] & 0xFF) | ((uint16_t)STR_PADDED(x)[53] << 8), \
+    ((uint16_t)STR_PADDED(x)[54] & 0xFF) | ((uint16_t)STR_PADDED(x)[55] << 8), \
+    ((uint16_t)STR_PADDED(x)[56] & 0xFF) | ((uint16_t)STR_PADDED(x)[57] << 8), \
+    ((uint16_t)STR_PADDED(x)[58] & 0xFF) | ((uint16_t)STR_PADDED(x)[59] << 8), \
+    ((uint16_t)STR_PADDED(x)[60] & 0xFF) | ((uint16_t)STR_PADDED(x)[61] << 8), \
+    ((uint16_t)STR_PADDED(x)[62] & 0xFF) | ((uint16_t)STR_PADDED(x)[63] << 8), \
+    }
+#elif CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX == 32
+#define STR_PADDED(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
+#define ZIP_STRING(x) { \
+    ((uint16_t)STR_PADDED(x)[ 0] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 1] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 2] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 3] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 4] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 5] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 6] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 7] << 8), \
+    ((uint16_t)STR_PADDED(x)[ 8] & 0xFF) | ((uint16_t)STR_PADDED(x)[ 9] << 8), \
+    ((uint16_t)STR_PADDED(x)[10] & 0xFF) | ((uint16_t)STR_PADDED(x)[11] << 8), \
+    ((uint16_t)STR_PADDED(x)[12] & 0xFF) | ((uint16_t)STR_PADDED(x)[13] << 8), \
+    ((uint16_t)STR_PADDED(x)[14] & 0xFF) | ((uint16_t)STR_PADDED(x)[15] << 8), \
+    ((uint16_t)STR_PADDED(x)[16] & 0xFF) | ((uint16_t)STR_PADDED(x)[17] << 8), \
+    ((uint16_t)STR_PADDED(x)[18] & 0xFF) | ((uint16_t)STR_PADDED(x)[19] << 8), \
+    ((uint16_t)STR_PADDED(x)[20] & 0xFF) | ((uint16_t)STR_PADDED(x)[21] << 8), \
+    ((uint16_t)STR_PADDED(x)[22] & 0xFF) | ((uint16_t)STR_PADDED(x)[23] << 8), \
+    ((uint16_t)STR_PADDED(x)[24] & 0xFF) | ((uint16_t)STR_PADDED(x)[25] << 8), \
+    ((uint16_t)STR_PADDED(x)[26] & 0xFF) | ((uint16_t)STR_PADDED(x)[27] << 8), \
+    ((uint16_t)STR_PADDED(x)[28] & 0xFF) | ((uint16_t)STR_PADDED(x)[29] << 8), \
+    ((uint16_t)STR_PADDED(x)[30] & 0xFF) | ((uint16_t)STR_PADDED(x)[31] << 8), \
+    }
+#endif
+
+#if CSMON_REALADR_16BIT
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+ { \
+    .u16ParameterIndexID = u16ID,                       /* u16ID */\
+    /* .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                u16Attributes */\
+    .uBitsCount.sBitsCount.u8BitsCount = (u8Bits),      /* uBitsCount.sBitsCount.u8BitsCount; */\
+    .uBitsCount.sBitsCount.u8PaddingByte = (0),         /* uBitsCount.sBitsCount.u8PaddingByte; */\
+    .u16RealAddress = (uint16_t)((uint32_t)((uint32_t*)(u32Address))),           /* u32Address */\
+    .au8NameUnit = ZIP_STRING(strName "\t" strUnit),    /* au8NameUnit */\
+    .eDataTypeAttribute = DataTypeAttribute,               /* eDataTypeAttribute */\
+    /* .eVisualTypeAttribute = VisualAttribute,               eVisualTypeAttribute */\
+    .u32Max.eType = (u32Maximum),                       /* u32Maximum */\
+    .u32Min.eType = (u32Minimum),                       /* u32Minimum */\
+    .u32Def.eType = (u32Default),                       /* u32Default */\
+    /* .u32Offset.eType = 0,                       u32Offset */\
+    .Norm = floatScale,                                 /* floatScale */\
+    .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
+    .uParameterSize.sSize.u8CountElements = u8Elements,\
+    .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
+    .uParameterFlags.sFlags.bBitField = bitField, \
+    .uParameterFlags.sFlags.bArray = arrayType,         /* Array Type Register */ \
+    .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
+    .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
+    .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
+    .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
+    .uFunctionCode.sFunctionCode.eDefaultWriteFunctionCode = funcWr, \
+    .uFunctionCode.sFunctionCode.eDefaultReadFunctionCode = funcRd, \
+    .uAccessLevel.sAccessLevel.eWriteAccessLevelMin = accessWr, \
+    .uAccessLevel.sAccessLevel.eReadAccessLevelMin = accessRd, \
+    .uAccessLevel.sAccessLevel.bStore = bStorable, \
+ }
+#else
+#define INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+ { \
+    .u16ParameterIndexID = u16ID,                       /* u16ID */\
+    /* .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                u16Attributes */\
+    .uBitsCount.sBitsCount.u8BitsCount = (u8Bits),      /* uBitsCount.sBitsCount.u8BitsCount; */\
+    .uBitsCount.sBitsCount.u8PaddingByte = (0),         /* uBitsCount.sBitsCount.u8PaddingByte; */\
+    .u32RealAddress = (uint32_t)(u32Address),           /* u32Address */\
+    .au8NameUnit = ZIP_STRING(strName "\t" strUnit),    /* au8NameUnit */\
+    .eDataTypeAttribute = DataTypeAttribute,               /* eDataTypeAttribute */\
+    /* .eVisualTypeAttribute = VisualAttribute,               eVisualTypeAttribute */\
+    .u32Max.eType = (u32Maximum),                       /* u32Maximum */\
+    .u32Min.eType = (u32Minimum),                       /* u32Minimum */\
+    .u32Def.eType = (u32Default),                       /* u32Default */\
+    /* .u32Offset.eType = 0,                       u32Offset */\
+    .Norm = floatScale,                                 /* floatScale */\
+    .uParameterSize.sSize.u8SizeElement = u8Bits / 8, \
+    .uParameterSize.sSize.u8CountElements = u8Elements,\
+    .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
+    .uParameterFlags.sFlags.bBitField = bitField, \
+    .uParameterFlags.sFlags.bArray = arrayType,         /* Array Type Register */ \
+    .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
+    .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
+    .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
+    .uParameterFlags.sFlags.bWriteDenySkipCSMON = bNW, \
+    .uFunctionCode.sFunctionCode.eDefaultWriteFunctionCode = funcWr, \
+    .uFunctionCode.sFunctionCode.eDefaultReadFunctionCode = funcRd, \
+    .uAccessLevel.sAccessLevel.eWriteAccessLevelMin = accessWr, \
+    .uAccessLevel.sAccessLevel.eReadAccessLevelMin = accessRd, \
+    .uAccessLevel.sAccessLevel.bStore = bStorable, \
+    .u16Dummy = 0, \
+ }
+#endif
+
+#define INIT_PARAMETER(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale) \
+        INIT_PARAMFULL(u16ID, paramType, paramAccess, paramPass, funcWr, funcRd, accessWr, accessRd, bStorable, u8Bits, u8Offs, eType,  DataTypeAttribute, u32Address, strName, strUnit, u32Maximum, u32Minimum, u32Default, floatScale, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
+#endif
+
+#endif
 
 /* *****************************************************************************
  * Enumeration Definitions
@@ -143,6 +320,7 @@
 /* *****************************************************************************
  * Type Definitions
  **************************************************************************** */
+#if CSMON_CONFIG == 0
 #ifndef uWord32_t
 typedef union
 {
@@ -160,7 +338,7 @@ typedef union
     uint_least8_t u8Register;
      int_least8_t s8Register;
 } uAnyType32_t;
-
+#endif
 
 
 typedef struct
@@ -175,23 +353,52 @@ typedef struct
     uint_least8_t u8Reserved;
 }MAIN_sDateTime_t;
 
+#if CSMON_CONFIG == 0
+
 typedef struct
 {
     uint16_t u16ParameterIndexID;
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     uint16_t u16ParamAttributes;
-    uint32_t u32RealAddress;
+#else
+    CSMON_uParameterDefinitionsBitsCount_t uBitsCount;
+#endif
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     char au8Name[CSMON_SET_PARAMETER_NAME_LENGTH_MAX];
     char au8Unit[CSMON_SET_PARAMETER_UNIT_LENGTH_MAX];
+#else
+    char au8NameUnit[(CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX)/2];
+#endif
     uAnyType32_t u32Max;
     uAnyType32_t u32Min;
     uAnyType32_t u32Def;
+    //uAnyType32_t u32Offset;
     float Norm;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
     uint_least8_t u8BitCountOrArrayElementSize;
     uint_least8_t u8StartBitOrArrayElementCount;
-    CSMON_eVisualType_t eVisualAttribute;
+#else
+    CSMON_uParameterDefinitionsFunctionCode_t uFunctionCode;
+    CSMON_uParameterDefinitionsAccessLevel_t uAccessLevel;
+#endif
+    CSMON_uRegisterAddressTableSize uParameterSize;
+    CSMON_uRegisterAddressTableFlags uParameterFlags;
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
+    uint32_t u32ProcessFunc;
+    CSMON_eVisualType_t eVisualTypeAttribute;
+#endif
+#if CSMON_REALADR_16BIT
+    uint16_t u16RealAddress;
+    CSMON_eDataType_t eDataTypeAttribute;
+#else
+    uint32_t u32RealAddress;
+    CSMON_eDataType_t eDataTypeAttribute;
+    uint16_t u16Dummy;
+#endif
 
 }MAIN_sParameterList_t;
 
+#endif
 
 typedef struct
 {
@@ -225,6 +432,85 @@ typedef struct
 #define GPIO_PIN_MODE_GPIO(_pin_) STRING_CONCAT(GPIO_, STRING_CONCAT(_pin_, STRING_CONCAT(_GPIO, _pin_)))
 #endif
 #ifndef IO_DRV_H
+
+#if defined(__TMS320F2806x__)
+
+//moved to gpio.c / gpio.h
+//void GPIO_writePin_2806x(uint32_t pin, uint32_t level)
+//{
+//    if (level == 1)
+//    {
+//        if (pin < 32)
+//        {
+//            GpioDataRegs.GPASET.all |= ((uint32_t)1 << pin);
+//        }
+//        else
+//        {
+//            GpioDataRegs.GPBSET.all |= ((uint32_t)1 << (pin-32));
+//        }
+//
+//    }
+//    else
+//    {
+//        if (pin < 32)
+//        {
+//            GpioDataRegs.GPACLEAR.all |= ((uint32_t)1 << pin);
+//        }
+//        else
+//        {
+//            GpioDataRegs.GPBCLEAR.all |= ((uint32_t)1 << (pin-32));
+//        }
+//    }
+//}
+
+
+//void GPIO_setPinConfigOutput(uint32_t PinNumber)
+//{
+//    Uint32 mask;
+//
+//    // Before calling the Toggle Test, we must setup
+//    // the MUX and DIR registers.
+//
+//    //led_pin_write(PinNumber, 1);
+//
+//    if(PinNumber > (Uint16)47)
+//    {
+//        asm("    ESTOP0");  // Stop here. Invalid option.
+//        for(;;);
+//    }
+//
+//    // Pins GPIO32-GPIO47
+//    else if(PinNumber >= 32)
+//    {
+//        EALLOW;
+//        mask = ~( ((Uint32)1 << (PinNumber-32)*2) | ((Uint32)1 << (PinNumber-32)*2+1) );
+//        GpioCtrlRegs.GPBMUX1.all &= mask;
+//        GpioCtrlRegs.GPBDIR.all = GpioCtrlRegs.GPBDIR.all | ((Uint32)1 << (PinNumber-32) );
+//        EDIS;
+//    }
+//
+//    // Pins GPIO16-GPIO31
+//    else if(PinNumber >= 16)
+//    {
+//        EALLOW;
+//        mask = ~( ((Uint32)1 << (PinNumber-16)*2) | ((Uint32)1 << (PinNumber-16)*2+1) );
+//        GpioCtrlRegs.GPAMUX2.all &= mask;
+//        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
+//        EDIS;
+//    }
+//
+//    // Pins GPIO0-GPIO15
+//    else
+//    {
+//        EALLOW;
+//        mask = ~( ((Uint32)1 << PinNumber*2) | ((Uint32)1 << PinNumber*2+1 ));
+//        GpioCtrlRegs.GPAMUX1.all &= mask;
+//        GpioCtrlRegs.GPADIR.all = GpioCtrlRegs.GPADIR.all | ((Uint32)1 << PinNumber);
+//        EDIS;
+//    }
+//
+//}
+#else
 #define GPIO_setPinConfigInput(_pin_) \
         GPIO_setPinConfig(GPIO_PIN_MODE_GPIO(_pin_));\
         GPIO_setDirectionMode(_pin_, GPIO_DIR_MODE_IN);\
@@ -239,6 +525,9 @@ typedef struct
         GPIO_setQualificationMode(_pin_, GPIO_QUAL_ASYNC);\
         GPIO_writePin(_pin_, 0);\
         GPIO_setMasterCore(_pin_, GPIO_CORE_CPU1)
+
+
+#endif
 #endif
 
 /* *****************************************************************************
@@ -261,10 +550,16 @@ MAIN_sDateTime_t MAIN_sDateTimeSet =
     /* 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 2001-01-01-Mon-00:00:00 */
 };
 
+#if EXTERNAL_RECORDERS == 1
 
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
+#define RAM_BUFFER_SIZE_0   8192
+uint16_t u16RecorderBufferRam[RAM_BUFFER_SIZE_0] = {0};
+#endif
 
 MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
 {
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
  {
   {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
   NULL,                                     /* u32StartAddressFirstDataSample */
@@ -274,6 +569,17 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
   0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
   0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
  },
+#else
+ {
+  {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
+  NULL,                                     /* u32StartAddressFirstDataSample */
+  RAM_BUFFER_SIZE_0/(4+8),             /* u32CircleBufferSampleCount */
+  (uint32_t)u16RecorderBufferRam,                                 /* u32CircleBufferStartAddress - EMIF */
+  CSMON_TIME_MICRO_SECONDS,                 /* eTriggerSubSecondMode */
+  0,                                        /* u32TriggerMicrosecondsOrRollingTimerTicks */
+  0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01  /* 2001-01-01-Mon-00:00:00 */
+ },
+#endif
 #if RECORDER0_ONLY_TEST == 0
  {
   {.bTriggered = 0, .bReady = 0, .bWrongConfig = 0, .bNotRunning = 1, .bInit = 1, }, /* sStatus */
@@ -297,7 +603,7 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
 };
 
 
-
+#endif  /* #if EXTERNAL_RECORDERS == 1 */
 
 
 
@@ -386,31 +692,32 @@ uint16_t u16DelayMainLoop_usec = 0;
 uint16_t u16DelayMainLoopOld_usec = 0;
 
 uint16_t u16PeriodControl_usec = 50;            /* Default Initialization Value for ISR Period */
-uint16_t u16PeriodControlOld_usec;
+uint16_t u16PeriodControlOld_usec = 0;
 
 uint32_t u32DelayCtrlLoop_Ticks = 1;
 uint32_t u32DelayMainLoop_Ticks = 1;
 
+uint16_t u16CountSetParameterFree = 0;
 uint16_t u16CountSetParameterFail = 0;
-uint16_t u16CountMaxParameterTest = PARAMETER_COUNT_MAX;/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
+uint16_t u16CountMaxParameterTest = BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX;/* Parameter 9 was independent RD and WR --> to be fixed depending on test configuration */
 
 bool bResetAllTimeMeasures = 0;
 
-uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks;
-uint32_t u32TimeMainLoopProcessCSMON_End_Ticks;
-uint32_t u32TimeMainLoopProcessCSMON_Now_Ticks;
-uint32_t u32TimeMainLoopProcessCSMON_Max_Ticks;
+uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks = 0;
+uint32_t u32TimeMainLoopProcessCSMON_End_Ticks = 0;
+uint32_t u32TimeMainLoopProcessCSMON_Now_Ticks = 0;
+uint32_t u32TimeMainLoopProcessCSMON_Max_Ticks = 0;
 
-uint32_t u32TimeMainLoopCycle_Bgn_Ticks;
-uint32_t u32TimeMainLoopCycle_End_Ticks;
-uint32_t u32TimeMainLoopCycle_Now_Ticks;
-uint32_t u32TimeMainLoopCycle_Max_Ticks;
+uint32_t u32TimeMainLoopCycle_Bgn_Ticks = 0;
+uint32_t u32TimeMainLoopCycle_End_Ticks = 0;
+uint32_t u32TimeMainLoopCycle_Now_Ticks = 0;
+uint32_t u32TimeMainLoopCycle_Max_Ticks = 0;
 
 
-uint32_t u32TimeCSMON_ISR_Ticks;
-uint32_t u32TimeCSMON_ISR_Max_Ticks;
-uint32_t u32TimeCtrlLoop_Ticks;
-uint32_t u32TimeCtrlLoopMax_Ticks;
+uint32_t u32TimeCSMON_ISR_Ticks = 0;
+uint32_t u32TimeCSMON_ISR_Max_Ticks = 0;
+uint32_t u32TimeCtrlLoop_Ticks = 0;
+uint32_t u32TimeCtrlLoopMax_Ticks = 0;
 
 
 uint32_t u32ParamTime_Ticks;
@@ -435,10 +742,10 @@ uint32_t u32GetBaudError_PPM = 0;
 
 
 /* Parameter Table Version, DateTime, Checksum */
-#define PARAM_TABLE_VERSION                 (uint32_t)0
+#define PARAM_TABLE_VERSION                 (uint32_t)1
 #define PARAM_TABLE_DATETIME                (uint32_t)DATETIME_BUILD
 
-
+#ifndef __TMS320F2806x__
 #define EMIF_AUX_PARAM_TABLE_VER_ADDRESS    0x00120006      /* This address here I put only for the example. You should use your memory space address */
 #define EMIF_AUX_BUILD_DATE_TIME_ADDRESS    0x00120008      /* This address here I put only for the example. You should use your memory space address */
 #define EMIF_AUX_BACKUP_CHECKSUM_ADDRESS    0x0012000A      /* This address here I put only for the example. You should use your memory space address */
@@ -448,7 +755,7 @@ volatile uint16_t* EMIF_AUX_pu16ParamVerBackupInEmif = (uint16_t*)(EMIF_AUX_PARA
 volatile uint16_t* EMIF_AUX_pu16DateTimeBackupInEmif = (uint16_t*)(EMIF_AUX_BUILD_DATE_TIME_ADDRESS);
 volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACKUP_CHECKSUM_ADDRESS);
 
-
+#endif
 
 
 
@@ -467,69 +774,146 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #define PARAM_ID_CURRENT_PHASEB_32  30
 #define PARAM_ID_CURRENT_PHASEC_32  31
 
-volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
+
+#if CSMON_CONFIG == 0
+
+
+
+volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX] =
 {
+
+#if 0
+
+
+
+ /*                ID         Attributes      Bits, Offs, uAnyType32_t         MCU Address                          Name \t Unit                   Max        Min         Def      Norm */
+  INIT_PARAMETER(60000, PAR(_UINT16,_RW,_NO),   16,    0, u16Register, &u16PeriodControl_usec,                  "CtrlLoopPeriod\tusec",         0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60001, PAR(_UINT16,_RW,_NO),   16,    0, u16Register, &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay\tusec",       0x0000FFFF,    0,          0,      0.1F),
+  INIT_PARAMETER(60002, PAR(_UINT16,_RW,_NO),   16,    0, u16Register, &u16DelayMainLoop_usec,                  "MainLoopAddDelay\tusec",       0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60003, PAR(_UINT16,_RW,_NO),   16,    0, u16Register, &u16CountSetParameterFail,               "Parameters_Fail\tunit",        0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60004, PAR(_UINT32,_RO,_NO),   32,    0, u32Register, &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON\tusec",          0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60005, PAR(_UINT32,_RO,_NO),   32,    0, u32Register, &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON\tusec",          0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60006, PAR(_UINT32,_RO,_NO),   32,    0, u32Register, &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax\tusec",        0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60007, PAR(_UINT32,_RO,_NO),   32,    0, u32Register, &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax\tusec",        0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60008, PAR(_UINT32,_RO,_NO),   32,    0, u32Register, &u32ParamTime_Ticks,                     "ParamInitMeas\tusec",          0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO),    8,    0, u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset\tunit",          true,          false,      false,  1.0F),
+
+  INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO),   16,    0, u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr\tunit",          0x0000FFFF,    0,          0,      0.0F),
+  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR),    8,    0, u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning\tboolean",       true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+  INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO),    8,    0, u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning\tboolean",       true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+  INIT_PARAMETER(    1, PAR(_SINT16,_RW,_NO),   16,    0, s16Register, &s16ScaleDataTst,                        "ReadWriteScale\t*3.1415",      10000,         -10000,     0,      3.1415F),
+  INIT_PARAMETER(    2, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyIncrementLoop,                  "IncLoopTest\tA(0.5V)",         10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    3, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA\tA",                10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    4, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB\tA",                10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    5, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC\tA",                10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR),   32,    0, u32Register, &u32GetBaudError_PPM,                    "BaudError\t%",                 10000,         0,          0,      0.0001F),
+  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR),   16,    0, u16Register, &u16WatchdogPrescalerTime,               "WatchdogTime\tmsec",           64,            1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+
+  INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyVoltageDCLink,                  "VoltageBus\tV",                10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA\tA",                10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB\tA",                10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC\tA",                10000,         -10000,     0,      1.0F),
+
+  INIT_PARAMETER(   28, PAR(_SINT32,_RW,_WR),   32,    0, s32Register, &s32DummyVoltageDCLink,                  "VoltageBus32\tV",              1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   29, PAR(_SINT32,_RW,_WR),   32,    0, s32Register, &s32DummyCurrentPhaseA,                  "CurrentPhA32\tA",              1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   30, PAR(_SINT32,_RW,_WR),   32,    0, s32Register, &s32DummyCurrentPhaseB,                  "CurrentPhB32\tA",              1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   31, PAR(_SINT32,_RW,_WR),   32,    0, s32Register, &s32DummyCurrentPhaseC,                  "CurrentPhC32\tA",              1000000000,    -1000000000,0,      0.000001F),
+
+  INIT_PARAMETER(  108, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyVoltageDCLinkStartup,           "VoltageBusStart\tV",           10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  109, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseAStartup,           "CurrentPhAStart\tA",           10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  110, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseBStartup,           "CurrentPhBStart\tA",           10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  111, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseCStartup,           "CurrentPhCStart\tA",           10000,         -10000,     0,      1.0F),
+
+  INIT_PARAMETER(  208, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyVoltageDCLinkStop,              "VoltageBusStop\tV",            10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  209, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseAStop,              "CurrentPhAStop\tA",            10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  210, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseBStop,              "CurrentPhBStop\tA",            10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  211, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseCStop,              "CurrentPhCStop\tA",            10000,         -10000,     0,      1.0F),
+
+  INIT_PARAMETER(  308, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyVoltageDCLinkIdle,              "VoltageBusIdle\tV",            10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  309, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseAIdle,              "CurrentPhAIdle\tA",            10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  310, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseBIdle,              "CurrentPhBIdle\tA",            10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  311, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyCurrentPhaseCIdle,              "CurrentPhCIdle\tA",            10000,         -10000,     0,      1.0F),
+
+  INIT_PARAMETER(  408, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyIncrementLoopA,                 "IncLoopTestA\tA",              10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  409, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyIncrementLoopB,                 "IncLoopTestB\tA",              10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  410, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyIncrementLoopC,                 "IncLoopTestC\tA",              10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  411, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyIncrementLoopV,                 "IncLoopTestV\tV",              10000,         -10000,     0,      1.0F),
+
+  INIT_PARAMETER(  412, PAR(_SINT16,_RW,_WR),   16,    0, s16Register, &s16DummyIncrementLoopCDiff,             "IncLoopTestCDiff\tA",          10000,         -10000,     0,      1.0F),
+
+
+
+
+#else /* #if _CSMON_USE_EXTERNAL_PARAMETER_LIST */
+
+
+
 /* u16ParameterIndexID;                 u32RealAddress;           u16ParamAttributes;     pu8Name;            pu8Unit;            u32Max;                 u32Min;              u32Def;             Norm; */
 /*                                                                   Type Access Pass                                                                                                                    */
 
+
+//  INIT_PARAMETER(60000,   _UINT16, _RW, _NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, &u16PeriodControl_usec,                  "CtrlLoopPeriod",     "usec",    0x0000FFFF,    0,          0,      1.0F),
+
 #if CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_RECORDER_DEBUG
 
+#if 1
+ /*                ID         Attributes       fucnWr, funcRd, accessWr, accessRd, bStorable,  Bits, Offs, uAnyType32_t                                               MCU Address                          Name               Unit         Max        Min         Def      Norm */
+  INIT_PARAMETER(60000,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16PeriodControl_usec,                  "CtrlLoopPeriod",     "usec",    0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60001,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      0.1F),
+  INIT_PARAMETER(60002,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DelayMainLoop_usec,                  "MainLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60003,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16CountSetParameterFail,               "Parameters_Fail",    "unit",    0x0000FFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60004,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60005,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60006,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60007,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60008,     _UINT32,_RO,_NO,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
+  INIT_PARAMETER(60009,     _UINT08,_RW,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8,   &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
 
- /*                ID         Attributes      uAnyType32_t         MCU Address                          Name               Unit         Max        Min         Def      Norm */
-  INIT_PARAMETER(60000, PAR(_UINT16,_RW,_NO), u16Register, &u16PeriodControl_usec,                  "CtrlLoopPeriod",     "usec",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60001, PAR(_UINT16,_RW,_NO), u16Register, &u16DelayCtrlLoop_100nsec,               "CtrlLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      0.1F),
-  INIT_PARAMETER(60002, PAR(_UINT16,_RW,_NO), u16Register, &u16DelayMainLoop_usec,                  "MainLoopAddDelay",   "usec",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60003, PAR(_UINT16,_RW,_NO), u16Register, &u16CountSetParameterFail,               "Parameters_Fail",    "unit",    0x0000FFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60004, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeMainLoopProcessCSMON_Max_Ticks,  "MainLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60005, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeCSMON_ISR_Max_Ticks,             "CtrlLoopCSMON",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60006, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeMainLoopCycle_Max_Ticks,         "MainLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60007, PAR(_UINT32,_RO,_NO), u32Register, &u32TimeCtrlLoopMax_Ticks,               "CtrlLoopMeasMax",    "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60008, PAR(_UINT32,_RO,_NO), u32Register, &u32ParamTime_Ticks,                     "ParamInitMeas",      "usec",    0xFFFFFFFF,    0,          0,      1.0F),
-  INIT_PARAMETER(60009, PAR(_UINT08,_RW,_NO), u8Register,  &bResetAllTimeMeasures,                  "MeasuresReset",      "unit",    true,          false,      false,  1.0F),
+  INIT_PARAMETER(65534,     _UINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0F),
+  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x10,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+//  INIT_PARAMETER(    0,     _UINT08,_WO,_WR,     0x10,   0x00,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
+//  INIT_PARAMETER(    0,     _UINT08,_RO,_NO,     0x00,   0x03,        4,        1,         1,     8,    0, u8Register,  CSMON_DATA_TYPE_U8 ,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
+  INIT_PARAMETER(    1,     _SINT16,_RW,_NO,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16ScaleDataTst,                        "ReadWriteScale",     "*3.1415", 10000,         -10000,     0,      3.1415F),
+  INIT_PARAMETER(    2,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoop,                  "IncLoopTest",        "A(0.5V)", 10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    3,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    4,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    5,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    6,     _UINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, u32Register, CSMON_DATA_TYPE_U32,  &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001F),
+  INIT_PARAMETER(    7,     _UINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, u16Register, CSMON_DATA_TYPE_U16,  &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,            1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
 
-  INIT_PARAMETER(65534, PAR(_UINT16,_RW,_NO), u16Register, &u16DummyDataCnt,                        "ModbusMsgCntr",      "unit",    0x0000FFFF,    0,          0,      0.0F),
-  INIT_PARAMETER(    0, PAR(_UINT08,_WO,_WR), u8Register,  &bDummyReqstDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Wr Addr */
-  INIT_PARAMETER(    0, PAR(_UINT08,_RO,_NO), u8Register,  &bDummyStatsDevRunning,                  "DeviceRunning",      "boolean", true,          false,      false,  1.0F),    /* Parameter ID 0 - Rd Addr */
-  INIT_PARAMETER(    1, PAR(_SINT16,_RW,_NO), s16Register, &s16ScaleDataTst,                        "ReadWriteScale",     "*3.1415", 10000,         -10000,     0,      3.1415F),
-  INIT_PARAMETER(    2, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyIncrementLoop,                  "IncLoopTest",        "A(0.5V)", 10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    3, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    4, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    5, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    6, PAR(_UINT32,_RW,_WR), u32Register, &u32GetBaudError_PPM,                    "BaudError",          "%",       10000,         0,          0,      0.0001F),
-  INIT_PARAMETER(    7, PAR(_UINT16,_RW,_WR), u16Register, &u16WatchdogPrescalerTime,               "WatchdogTime",       "msec",    64,            1,          0,      ((1000.0*512*256)/10000000.0)),  /* 1msec; 512WatchdogDiv; 256WatchdogCnt; 10MHz INTOSC */
+  INIT_PARAMETER(    8,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(    9,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   10,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   11,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(    8, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLink,                  "VoltageBus",         "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(    9, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseA,                  "CurrentPhA",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(   10, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseB,                  "CurrentPhB",         "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(   11, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseC,                  "CurrentPhC",         "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(   28,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyVoltageDCLink,                  "VoltageBus32",       "V",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   29,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyCurrentPhaseA,                  "CurrentPhA32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   30,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyCurrentPhaseB,                  "CurrentPhB32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(   31,     _SINT32,_RW,_WR,     0x10,   0x03,        4,        1,         1,    32,    0, s32Register, CSMON_DATA_TYPE_S32,  &s32DummyCurrentPhaseC,                  "CurrentPhC32",       "A",       1000000000,    -1000000000,0,      0.000001F),
 
-  INIT_PARAMETER(   28, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyVoltageDCLink,                  "VoltageBus32",       "V",       1000000000,    -1000000000,0,      0.000001F),
-  INIT_PARAMETER(   29, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseA,                  "CurrentPhA32",       "A",       1000000000,    -1000000000,0,      0.000001F),
-  INIT_PARAMETER(   30, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseB,                  "CurrentPhB32",       "A",       1000000000,    -1000000000,0,      0.000001F),
-  INIT_PARAMETER(   31, PAR(_SINT32,_RW,_WR), s32Register, &s32DummyCurrentPhaseC,                  "CurrentPhC32",       "A",       1000000000,    -1000000000,0,      0.000001F),
+  INIT_PARAMETER(  108,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLinkStartup,           "VoltageBusStart",    "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  109,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseAStartup,           "CurrentPhAStart",    "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  110,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseBStartup,           "CurrentPhBStart",    "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  111,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseCStartup,           "CurrentPhCStart",    "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  108, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLinkStartup,           "VoltageBusStart",    "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  109, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseAStartup,           "CurrentPhAStart",    "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  110, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseBStartup,           "CurrentPhBStart",    "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  111, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseCStartup,           "CurrentPhCStart",    "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  208,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLinkStop,              "VoltageBusStop",     "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  209,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseAStop,              "CurrentPhAStop",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  210,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseBStop,              "CurrentPhBStop",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  211,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseCStop,              "CurrentPhCStop",     "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  208, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLinkStop,              "VoltageBusStop",     "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  209, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseAStop,              "CurrentPhAStop",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  210, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseBStop,              "CurrentPhBStop",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  211, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseCStop,              "CurrentPhCStop",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  308,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyVoltageDCLinkIdle,              "VoltageBusIdle",     "V",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  309,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseAIdle,              "CurrentPhAIdle",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  310,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseBIdle,              "CurrentPhBIdle",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  311,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyCurrentPhaseCIdle,              "CurrentPhCIdle",     "A",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  308, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyVoltageDCLinkIdle,              "VoltageBusIdle",     "V",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  309, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseAIdle,              "CurrentPhAIdle",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  310, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseBIdle,              "CurrentPhBIdle",     "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  311, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyCurrentPhaseCIdle,              "CurrentPhCIdle",     "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  408,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopA,                 "IncLoopTestA",       "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  409,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopB,                 "IncLoopTestB",       "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  410,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopC,                 "IncLoopTestC",       "A",       10000,         -10000,     0,      1.0F),
+  INIT_PARAMETER(  411,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopV,                 "IncLoopTestV",       "V",       10000,         -10000,     0,      1.0F),
 
-  INIT_PARAMETER(  408, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyIncrementLoopA,                 "IncLoopTestA",       "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  409, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyIncrementLoopB,                 "IncLoopTestB",       "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  410, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyIncrementLoopC,                 "IncLoopTestC",       "A",       10000,         -10000,     0,      1.0F),
-  INIT_PARAMETER(  411, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyIncrementLoopV,                 "IncLoopTestV",       "V",       10000,         -10000,     0,      1.0F),
-
-  INIT_PARAMETER(  412, PAR(_SINT16,_RW,_WR), s16Register, &s16DummyIncrementLoopCDiff,             "IncLoopTestCDiff",   "A",       10000,         -10000,     0,      1.0F),
-
+  INIT_PARAMETER(  412,     _SINT16,_RW,_WR,     0x10,   0x03,        4,        1,         1,    16,    0, s16Register, CSMON_DATA_TYPE_S16,  &s16DummyIncrementLoopCDiff,             "IncLoopTestCDiff",   "A",       10000,         -10000,     0,      1.0F),
+#endif
 
 
 #elif CSMON_PARAMETER_LIST_TEST == CSMON_PAR_LIST_MINIMUM_COUNT
@@ -1789,10 +2173,12 @@ volatile const MAIN_sParameterList_t asParameterList[PARAMETER_COUNT_MAX] =
 
 #endif
 
+#endif /* #if _CSMON_USE_EXTERNAL_PARAMETER_LIST */
+
 
 };
 
-
+#endif
 
 /* *****************************************************************************
  * Prototypes of functions definitions
@@ -1857,7 +2243,12 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
     u32TimeCtrlLoop_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-#ifdef _CS_1107_SCC_R01
+
+
+
+#ifdef _CS_1291
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
@@ -1966,8 +2357,11 @@ void ControlProcess(void)
     //
     // Artificial Delay Control Loop
     //
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+
     SysCtl_delay(u32DelayCtrlLoop_Ticks);
 
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
 
     u32TimeCSMON_ISR_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
     //
@@ -1981,26 +2375,61 @@ void ControlProcess(void)
         u32TimeCSMON_ISR_Max_Ticks = u32TimeCSMON_ISR_Ticks;
     }
 
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+    //GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
 
     u32TimeCtrlLoop_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32TimeCtrlLoop_Ticks);//down count
     if (u32TimeCtrlLoop_Ticks > u32TimeCtrlLoopMax_Ticks)
     {
         u32TimeCtrlLoopMax_Ticks = u32TimeCtrlLoop_Ticks;
     }
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_DISABLE_LVL_HIGH);    /* Red LED (closest to the Debug Header) */
 #endif
 }
 
+/* *****************************************************************************
+ * ExternalParametersInitialization
+ **************************************************************************** */
+void ExternalParametersInitialization(void)
+{
+#if CSMON_REALADR_16BIT
+    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+#else
+    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+#endif
+    //CSMON_eSetParameterListProcessFunc((uint32_t *)&asParameterList[0].u32ProcessFunc, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListRegisterSize((uint16_t *)&asParameterList[0].uParameterSize.u16Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListRegisterFlags((uint16_t *)&asParameterList[0].uParameterFlags.u16Register, sizeof(asParameterList[0]));
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
+    CSMON_eSetParameterListFunctionCode((uint16_t *)&asParameterList[0].uFunctionCode, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListAccessLevel((uint16_t *)&asParameterList[0].uAccessLevel, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListBitsCount((uint16_t *)&asParameterList[0].uBitsCount, sizeof(asParameterList[0]));
+#endif
+    //CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
+    CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8NameUnit, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataType((uint16_t *)&asParameterList[0].eDataTypeAttribute, sizeof(asParameterList[0]));
+    //CSMON_eSetParameterListVisualType((uint16_t *)&asParameterList[0].eVisualTypeAttribute, sizeof(asParameterList[0]));
+#endif
+    CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
+    CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+    //CSMON_eSetParameterListDataOffset((uint32_t *)&asParameterList[0].u32Offset.u32Register, sizeof(asParameterList[0]));
+}
 
 /* *****************************************************************************
  * ParameterInitialization
  **************************************************************************** */
 void ParameterInitialization(void)
 {
-    uint16_t u16Index;
+    volatile uint16_t u16Index;
 
     uint32_t u32ParamRealAddress;
 
@@ -2012,6 +2441,7 @@ void ParameterInitialization(void)
     uWord32_t uDateTimeBackup;
     uWord32_t uCheckSumBackup;
 
+#ifndef __TMS320F2806x__
     /* Note: with current EMIF board configuration 32Bit Writes Are not working - need use 16-bit writes */
     uParamVerBackup.au16Word[0] = EMIF_AUX_pu16ParamVerBackupInEmif[0];              /* Get Stored In MRAM TableVer Backup */
     uParamVerBackup.au16Word[1] = EMIF_AUX_pu16ParamVerBackupInEmif[1];              /* Get Stored In MRAM TableVer Backup */
@@ -2019,12 +2449,17 @@ void ParameterInitialization(void)
     uDateTimeBackup.au16Word[1] = EMIF_AUX_pu16DateTimeBackupInEmif[1];              /* Get Stored In MRAM DateTime Backup */
     uCheckSumBackup.au16Word[0] = EMIF_AUX_pu16CheckSumBackupInEmif[0];              /* Get Stored In MRAM CheckSum Backup */
     uCheckSumBackup.au16Word[1] = EMIF_AUX_pu16CheckSumBackupInEmif[1];              /* Get Stored In MRAM CheckSum Backup */
-
+#else
+    uParamVerBackup.u32Register = 0xFFFFFFFF;
+    uDateTimeBackup.u32Register = 0xFFFFFFFF;
+    uCheckSumBackup.u32Register = 0xAA561234;
+#endif
     u32ParamVer = PARAM_TABLE_VERSION;
     u32DateTime = PARAM_TABLE_DATETIME;
     u32CheckSum = CSMON_u32GetParameterCheckSum();                        /* Get Checksum From CSMON */
 
     u16CountSetParameterFail = 0;
+    u16CountSetParameterFree = 0;
 
     if ( (uParamVerBackup.u32Register != u32ParamVer)
       || (uDateTimeBackup.u32Register != u32DateTime)
@@ -2035,42 +2470,67 @@ void ParameterInitialization(void)
 
 
         /* Add Parameters */
-        for (u16Index = 0; u16Index < PARAMETER_COUNT_MAX; u16Index++)
+        for (u16Index = 0; u16Index < BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX; u16Index++)
         {
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
             GPIO_writePin(STAT_LED_A_B_PIN, (u16Index & 1) );     /* Amber LED (middle Led) */
 #endif
 
+#if CSMON_REALADR_16BIT
+            u32ParamRealAddress = asParameterList[u16Index].u16RealAddress;
+#else
             u32ParamRealAddress = asParameterList[u16Index].u32RealAddress;
+#endif
 
             if (asParameterList[u16Index].u16ParameterIndexID == PARAM_ID_MODBUS_MSG_CNT)
             {
+                CSMON_vSetModbusMessageCounterRegisterRealAddress((uint32_t)&u16DummyDataCnt);
                 pu16ModbusMessageCounter = (uint16_t*)CSMON_u32GetModbusMessageCounterRegisterRealAddress();
                 u32ParamRealAddress = (uint32_t)pu16ModbusMessageCounter;
             }
+
 
             eResponseCode_CSMON_eSetParameter =
                 CSMON_eSetParameter (
                     asParameterList[u16Index].u16ParameterIndexID,
                     u32ParamRealAddress,
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
                     asParameterList[u16Index].u16ParamAttributes,
    (uint_least8_t*)&asParameterList[u16Index].au8Name,
    (uint_least8_t*)&asParameterList[u16Index].au8Unit,
+#else
+                   NULL,
+                   NULL,
+                   NULL,
+#endif
                     asParameterList[u16Index].u32Max.u32Register,
                     asParameterList[u16Index].u32Min.u32Register,
                     asParameterList[u16Index].u32Def.u32Register,
                     asParameterList[u16Index].Norm,
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
                     asParameterList[u16Index].u8BitCountOrArrayElementSize,
                     asParameterList[u16Index].u8StartBitOrArrayElementCount
+#else
+                    0,
+                    0
+#endif
                     );
+            if (u32ParamRealAddress == NULL)
+            {
+                u16CountSetParameterFree++;
+            }
+            else
             if(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK)
             {
                 u16CountSetParameterFail++;
             }
         }
 
+#ifndef __TMS320F2806x__
         /* Backup ParamVer */
         uParamVerBackup.u32Register = u32ParamVer;
         EMIF_AUX_pu16ParamVerBackupInEmif[0] = uParamVerBackup.au16Word[0];
@@ -2083,9 +2543,11 @@ void ParameterInitialization(void)
         uCheckSumBackup.u32Register = CSMON_u32GetParameterCheckSum();
         EMIF_AUX_pu16CheckSumBackupInEmif[0] = uCheckSumBackup.au16Word[0];
         EMIF_AUX_pu16CheckSumBackupInEmif[1] = uCheckSumBackup.au16Word[1];
+#endif
 
+#ifdef _CS_1291
 
-#ifdef _CS_1107_SCC_R01
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW);         /* Amber LED (middle Led) */
@@ -2093,7 +2555,9 @@ void ParameterInitialization(void)
 
         CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
@@ -2111,6 +2575,9 @@ void ParameterInitialization(void)
 
 
 }
+
+
+
 
 /* *****************************************************************************
  * RecordersInitialization
@@ -2338,6 +2805,7 @@ void RecordersInitialization(void)
  **************************************************************************** */
 void ScopesInitialization(void)
 {
+#if SCOPE_COUNT >= 1
     /* Scope 0 */
     eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
             CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
@@ -2349,7 +2817,9 @@ void ScopesInitialization(void)
             CSMON_SCOPE_0, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
     eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
             CSMON_SCOPE_0, CSMON_COUNT_PARAMETERS_4);
+#endif
 
+#if SCOPE_COUNT >= 2
     /* Scope 1 */
     eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
             CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
@@ -2361,7 +2831,9 @@ void ScopesInitialization(void)
             CSMON_SCOPE_1, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
     eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
             CSMON_SCOPE_1, CSMON_COUNT_PARAMETERS_4);
+#endif
 
+#if SCOPE_COUNT >= 3
     /* Scope 2 */
     eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
             CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
@@ -2373,12 +2845,67 @@ void ScopesInitialization(void)
             CSMON_SCOPE_2, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
     eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
             CSMON_SCOPE_2, CSMON_COUNT_PARAMETERS_4);
-
+#endif
 }
 
 
+void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
+{
+#if 1
+    if ((u16Prescaler >= SYSCTL_WD_PRESCALE_1) && (u16Prescaler <= SYSCTL_WD_PRESCALE_64))
+    {
+        u16WatchdogPrescalerTime = (1 << (u16Prescaler-1));
+    }
+    else
+    {
+        u16WatchdogPrescalerTime = 1;
+    }
+
+
+#else
+    switch(u16Prescaler)
+    {
+    case SYSCTL_WD_PRESCALE_1:
+        u16WatchdogPrescalerTime = 1;
+        break;
+    case SYSCTL_WD_PRESCALE_2:
+        u16WatchdogPrescalerTime = 2;
+        break;
+    case SYSCTL_WD_PRESCALE_4:
+        u16WatchdogPrescalerTime = 4;
+        break;
+    case SYSCTL_WD_PRESCALE_8:
+        u16WatchdogPrescalerTime = 8;
+        break;
+    case SYSCTL_WD_PRESCALE_16:
+        u16WatchdogPrescalerTime = 16;
+        break;
+    case SYSCTL_WD_PRESCALE_32:
+        u16WatchdogPrescalerTime = 32;
+        break;
+    case SYSCTL_WD_PRESCALE_64:
+        u16WatchdogPrescalerTime = 64;
+        break;
+    default:
+        u16WatchdogPrescalerTime = 1;
+        break;
+
+    }
+#endif
+}
+
 void vGetWatchdogPrescaler(uint16_t u16TimeDiv)
 {
+#if 1
+    u16WatchdogPrescaler = 1;
+    while (u16TimeDiv > 1)
+    {
+        u16TimeDiv >>= 1;
+        u16WatchdogPrescaler++;
+    }
+    vSetWatchdogPrescalerTimeDiv(u16WatchdogPrescaler);
+    u16WatchdogPrescalerTimeOld = u16WatchdogPrescalerTime;
+#else
     if(u16TimeDiv >= 64)
     {
         u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_64;
@@ -2414,52 +2941,25 @@ void vGetWatchdogPrescaler(uint16_t u16TimeDiv)
         u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_1;
         u16WatchdogPrescalerTime = u16WatchdogPrescalerTimeOld = 1;
     }
-}
-
-void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
-{
-    switch(u16Prescaler)
-    {
-    case SYSCTL_WD_PRESCALE_1:
-        u16WatchdogPrescalerTime = 1;
-        break;
-    case SYSCTL_WD_PRESCALE_2:
-        u16WatchdogPrescalerTime = 2;
-        break;
-    case SYSCTL_WD_PRESCALE_4:
-        u16WatchdogPrescalerTime = 4;
-        break;
-    case SYSCTL_WD_PRESCALE_8:
-        u16WatchdogPrescalerTime = 8;
-        break;
-    case SYSCTL_WD_PRESCALE_16:
-        u16WatchdogPrescalerTime = 16;
-        break;
-    case SYSCTL_WD_PRESCALE_32:
-        u16WatchdogPrescalerTime = 32;
-        break;
-    case SYSCTL_WD_PRESCALE_64:
-        u16WatchdogPrescalerTime = 64;
-        break;
-    default:
-        u16WatchdogPrescalerTime = 1;
-        break;
-
-    }
+#endif
 }
 
 CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParameterElement_t eElement, uint16_t* pu16Len, void* pData, uint16_t u16NoStore, uint16_t u16DataMode, uint16_t u16Password)
 {
     CSMON_eReturnCodeParameter_t eResult = CSMON_RC_PARA_OK;
 
-    uint32_t u32Data = *((uint32_t*)pData);
-    uint16_t u16Data = *((uint16_t*)pData);
-    uint16_t u16Len = *((uint16_t*)pu16Len);
+    //uint32_t u32Data = *((uint32_t*)pData);
+    //uint16_t u16Data = *((uint16_t*)pData);
+    //uint16_t u16Len = *((uint16_t*)pu16Len);
+
+
 
     return eResult;
 }
 
 
+uint16_t u16FreeRunningTimerTicksPerMicroSecond;
+uint16_t u16FreeRunningTimerPrescaller;
 
 
 /* *****************************************************************************
@@ -2467,8 +2967,6 @@ CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParamete
  **************************************************************************** */
 void main(void)
 {
-    uint16_t u16FreeRunningTimerTicksPerMicroSecond;
-    uint16_t u16FreeRunningTimerPrescaller;
 
 
 
@@ -2482,29 +2980,36 @@ void main(void)
     //
     Device_initGPIO();
 
-
+#ifndef __TMS320F2806x__
     //
     // EMIF
     //
     EMIF_DRV_vInit();
-
+#endif
 
     //
     // Clear all interrupts and initialize PIE vector table:
     // Disable CPU interrupts
     // Initialize interrupt controller and vector table.
     //
+#ifndef __TMS320F2806x__
     Interrupt_initModule();
     Interrupt_initVectorTable();
+#endif
 
 
+    //
+    // LEDs or debug GPIO
+    //
+#ifdef _CS_1291
+    /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+    GPIO_setPinConfigOutput(STAT_LED_EQEP1I_PIN);
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);
 
-#ifdef _CS_1107_SCC_R01
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
-    //
-    // LEDs
-    //
     // STAT_LED_G_PIN is the LED STATUS pin. - Init and Main Loop CSMON CPU Load -> Green LED (closest to the MCU Led)
     GPIO_setPinConfigOutput(STAT_LED_G_PIN);
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW);
@@ -2556,7 +3061,9 @@ void main(void)
     }
 
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     //
@@ -2599,7 +3106,9 @@ void main(void)
     //RecordersInitialization();
 
 
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
@@ -2615,7 +3124,14 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
         ASSERT(u32GetBaudError_PPM >= CSMON_u32PercentToPPM(3.0));
     }
-#ifdef _CS_1107_SCC_R01
+    else
+    {
+        u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
+    }
+
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
     GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
@@ -2632,7 +3148,13 @@ void main(void)
     // CSMON Parameter, Recorder, Scope Test Initialization
     //
     u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     ParameterInitialization();
+    ExternalParametersInitialization();
+#else
+    ParameterInitialization();
+#endif
     u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
 
 
@@ -2742,6 +3264,11 @@ void main(void)
     EINT;
     ERTM;
 
+#define TEST_UART_SEND 0
+#if TEST_UART_SEND
+    uint32_t u32TestSendCounter = 0;
+#endif
+
     for (;;)
     {
         //
@@ -2772,7 +3299,7 @@ void main(void)
         //
         u32TimeMainLoopCycle_Bgn_Ticks = u32TimeMainLoopCycle_End_Ticks;
         u32TimeMainLoopCycle_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-        u32TimeMainLoopCycle_Now_Ticks = 0 - (u32TimeMainLoopCycle_End_Ticks - u32TimeMainLoopCycle_Bgn_Ticks);//down count
+        u32TimeMainLoopCycle_Now_Ticks = u32TimeMainLoopCycle_Bgn_Ticks - u32TimeMainLoopCycle_End_Ticks;//down count
         if (u32TimeMainLoopCycle_Now_Ticks > u32TimeMainLoopCycle_Max_Ticks)
         {
             u32TimeMainLoopCycle_Max_Ticks = u32TimeMainLoopCycle_Now_Ticks;
@@ -2836,9 +3363,17 @@ void main(void)
                 u32DelayMainLoop_Ticks = 1;
             }
         }
-
-
-
+#if TEST_UART_SEND
+        u32TestSendCounter++;
+        if (u32TestSendCounter >= 100000)
+        {
+            u32TestSendCounter = 0;
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x55);
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x56);
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x57);
+            SCI_writeCharBlockingFIFO(SCIA_BASE, 0x58);
+        }
+#endif
 
 
 
@@ -2847,7 +3382,9 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_ENABLE_LEVEL_LOW); /* Green LED (closest to the MCU Led) */
@@ -2864,7 +3401,9 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+#elif defined(_CS_1107_SCC_R01)
 
 #else
         GPIO_writePin(STAT_LED_G_PIN, STAT_LED_DISABLE_LVL_HIGH); /* Green LED (closest to the MCU Led) */
@@ -2887,7 +3426,12 @@ void main(void)
         //
         // RTC Process
         //
-#ifdef _CS_1107_SCC_R01
+#ifdef _CS_1291
+
+        //TBD!!!
+
+#elif defined(_CS_1107_SCC_R01)
+
         if (MAIN_bDateTimeSet)
         {
             FPGA_DRV_vSetDateTime (
