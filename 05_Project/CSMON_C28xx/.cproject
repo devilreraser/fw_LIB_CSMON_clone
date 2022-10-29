@@ -667,7 +667,8 @@
 									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CS_1211"/>
-									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_TABLE=1"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1067078359" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
@@ -678,6 +679,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1140896758" name="Specify floating point support (--float_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.1281839558" name="Place each function in a separate subsection (--gen_func_subsections, -mo)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS.864326355" name="Place structs and arrays in separate subsections (--gen_data_subsections)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS.on" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.library.release.715885119" name="Optimization level (--opt_level, -O)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.library.release" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.1" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS.1046600336" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS.1154821735" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS.1411089798" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS"/>
@@ -704,6 +706,7 @@
 		<configuration configurationName="ReleaseRecorders"/>
 		<configuration configurationName="DebugNoControl"/>
 		<configuration configurationName="Motor28062"/>
+		<configuration configurationName="ReleaseCS1211"/>
 		<configuration configurationName="ReleaseTestCS1107"/>
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/CSMON_C28xx"/>

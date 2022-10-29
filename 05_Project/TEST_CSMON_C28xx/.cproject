@@ -46,7 +46,6 @@
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/common/include"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/MWare/driverlib"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../04_Output_Files/Motor28062"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.497705031" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${INHERITED_SYMBOLS}"/>
@@ -59,7 +58,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.1786193020" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.351810097" name="Option deprecated, set by default (--large_memory_model, -ml)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.1506333986" name="Unified memory (--unified_memory, -mt)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.release.1891312024" name="Optimization level (--opt_level, -O)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.release" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.4" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.release.1891312024" name="Optimization level (--opt_level, -O)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.release" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.off" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE.1260483429" name="Provide advice on optimization techniques (--advice:performance)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE" useByScannerDiscovery="false" value="--advice:performance=none" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1338086206" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
@@ -98,7 +97,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -151,7 +150,6 @@
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/common/include"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/MWare/driverlib"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../04_Output_Files/Motor28062"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.196915374" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${INHERITED_SYMBOLS}"/>
@@ -172,7 +170,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.1509737876" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.2010194148" name="Emit diagnostic identifier numbers (--display_error_number, -pden)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1171268959" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.coffabi" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1212605353" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1212605353" name="Specify floating point support (--float_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS.565030511" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS.1685565697" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS.853141558" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS"/>
@@ -203,7 +201,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -256,7 +254,6 @@
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/common/include"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/MWare/driverlib"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../04_Output_Files/Motor28062"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.102358354" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${INHERITED_SYMBOLS}"/>
@@ -278,7 +275,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.1458960828" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.2102471756" name="Emit diagnostic identifier numbers (--display_error_number, -pden)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1101112362" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.coffabi" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1331408860" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1331408860" name="Specify floating point support (--float_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS.40288948" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS.215768406" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS.50827837" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS"/>
@@ -309,7 +306,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -430,12 +427,121 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
 				<externalSettings containerId="CSMON_C28xx;com.ti.ccstudio.buildDefinitions.C2000.Release.256598538.322292092.830260717" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
+		</cconfiguration>
+		<cconfiguration id="com.ti.ccstudio.buildDefinitions.C2000.Release.1531998533.1646647899">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C2000.Release.1531998533.1646647899" moduleId="org.eclipse.cdt.core.settings" name="ReleaseCS1211">
+				<externalSettings/>
+				<extensions>
+					<extension id="com.ti.ccstudio.binaryparser.CoffParser" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.ti.ccstudio.errorparser.CoffErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.ti.ccstudio.errorparser.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.ti.ccstudio.errorparser.LinkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="out" artifactName="../../../04_Output_Files/${ConfigName}/${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="Test Library for EnerDrive Implementation with CS1211/1287" id="com.ti.ccstudio.buildDefinitions.C2000.Release.1531998533.1646647899" name="ReleaseCS1211" parent="com.ti.ccstudio.buildDefinitions.C2000.Release" postbuildStep="..\..\..\02_Libraries\FreeMASTER_Control\FreeMasterUtilXA59.bat TI 04_Output_Files ${ProjName} ${ConfigName}">
+					<folderInfo id="com.ti.ccstudio.buildDefinitions.C2000.Release.1531998533.1646647899." name="/" resourcePath="">
+						<toolChain id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.ReleaseToolchain.490394397" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerRelease.1534146533">
+							<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.174779569" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+								<listOptionValue builtIn="false" value="DEVICE_CONFIGURATION_ID=com.ti.ccstudio.deviceModel.C2000.GenericC28xxDevice"/>
+								<listOptionValue builtIn="false" value="DEVICE_CORE_ID="/>
+								<listOptionValue builtIn="false" value="DEVICE_ENDIANNESS=little"/>
+								<listOptionValue builtIn="false" value="OUTPUT_FORMAT=COFF"/>
+								<listOptionValue builtIn="false" value="LINKER_COMMAND_FILE=AFE_F28374.cmd"/>
+								<listOptionValue builtIn="false" value="RUNTIME_SUPPORT_LIBRARY=libc.a"/>
+								<listOptionValue builtIn="false" value="PRODUCTS=${INHERITED}:0.0;"/>
+								<listOptionValue builtIn="false" value="PRODUCT_MACRO_IMPORTS={&quot;${INHERITED}&quot;:[&quot;${INHERITED_INCLUDE_PATH}&quot;,&quot;${INHERITED_LIBRARY_PATH}&quot;,&quot;${INHERITED_LIBRARIES}&quot;,&quot;${INHERITED_SYMBOLS}&quot;,&quot;${INHERITED_SYSCONFIG_MANIFESTS}&quot;]}"/>
+								<listOptionValue builtIn="false" value="CCS_MBS_VERSION=6.1.3"/>
+								<listOptionValue builtIn="false" value="OUTPUT_TYPE=executable"/>
+							</option>
+							<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.362520857" name="Compiler version" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="22.6.0.LTS" valueType="string"/>
+							<targetPlatform id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformRelease.291673236" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformRelease"/>
+							<builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderRelease.1949277136" keepEnvironmentInBuildfile="false" name="GNU Make" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderRelease"/>
+							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerRelease.66406790" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerRelease">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.671031576" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
+									<listOptionValue builtIn="false" value="${INHERITED_INCLUDE_PATH}"/>
+									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/driverlib/f2837xd/driverlib"/>
+									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/driverlib/f2837xd/driverlib/inc"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../01_Source_Test"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/C2000Ware_Device"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../01_Source_Test/peripheral_driver"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/ModbusAddress/01_Source"/>
+									<listOptionValue builtIn="false" value="${CG_TOOL_ROOT}/include"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../04_Output_Files/ReleaseCS1211"/>
+									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/common/include"/>
+									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/MWare/driverlib"/>
+									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
+								</option>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.1345188740" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="${INHERITED_SYMBOLS}"/>
+									<listOptionValue builtIn="false" value="WD_DISABLE=1"/>
+									<listOptionValue builtIn="false" value="_FLASH"/>
+									<listOptionValue builtIn="false" value="CPU1"/>
+									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
+									<listOptionValue builtIn="false" value="EXTERNAL_RECORDERS=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_TABLE=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=0"/>
+									<listOptionValue builtIn="false" value="_CS_1211"/>
+								</option>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.594575350" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.1064339777" name="Option deprecated, set by default (--large_memory_model, -ml)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.1804471655" name="Unified memory (--unified_memory, -mt)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" value="true" valueType="boolean"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1363657044" name="Specify floating point support (--float_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.release.1313738365" name="Optimization level (--opt_level, -O)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.release" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.4" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE.867456113" name="Provide advice on optimization techniques (--advice:performance)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE" value="--advice:performance=none" valueType="string"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1429217126" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" valueType="stringList">
+									<listOptionValue builtIn="false" value="225"/>
+								</option>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.550896188" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.180662044" name="Emit diagnostic identifier numbers (--display_error_number, -pden)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1162929119" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.coffabi" valueType="enumerated"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS.1776080790" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS.1585972941" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS.219633340" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM2_SRCS.999961604" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM2_SRCS"/>
+							</tool>
+							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerRelease.1534146533" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerRelease">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH.141567950" name="Add &lt;dir&gt; to library search path (--search_path, -i)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH" valueType="libPaths">
+									<listOptionValue builtIn="false" value="${INHERITED_LIBRARY_PATH}"/>
+									<listOptionValue builtIn="false" value="${CG_TOOL_ROOT}/lib"/>
+									<listOptionValue builtIn="false" value="${CG_TOOL_ROOT}/include"/>
+								</option>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY.1943534744" name="Include library file or command file as input (--library, -l)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY" valueType="libs">
+									<listOptionValue builtIn="false" value="${INHERITED_LIBRARIES}"/>
+									<listOptionValue builtIn="false" value="libc.a"/>
+								</option>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE.1202507286" name="Link information (map) listed into &lt;file&gt; (--map_file, -m)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE" value="../../../04_Output_Files/${ConfigName}/${ProjName}.map" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE.1623547307" name="Specify output file name (--output_file, -o)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE" value="../../../04_Output_Files/${ConfigName}/${ProjName}.out" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.126278348" name="Set C system stack size (--stack_size, -stack)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" value="0x380" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.2057860445" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER.1761152244" name="Emit diagnostic identifier numbers (--display_error_number)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAPFILE_CONTENTS.1399194847" name="Display attribute settings in map file (--mapfile_contents)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAPFILE_CONTENTS" value="all" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO.936556547" name="Detailed link information data-base into &lt;file&gt; (--xml_link_info, -xml_link_info)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD_SRCS.1198112717" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD_SRCS"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD2_SRCS.1423977852" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__CMD2_SRCS"/>
+								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__GEN_CMDS.1734677495" name="Generated Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exeLinker.inputType__GEN_CMDS"/>
+							</tool>
+							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex.5401749" name="C2000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="CSMON_LIB/Release|AFE_F28374.cmd|2837x_FLASH_lnk_cpu1.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="CSMON_C28xx;com.ti.ccstudio.buildDefinitions.C2000.Release.256598538.1064397038" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 			</storageModule>
 		</cconfiguration>
 	</storageModule>
@@ -448,6 +554,7 @@
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="ReleaseRecorders"/>
 		<configuration configurationName="Motor28062"/>
+		<configuration configurationName="ReleaseCS1211"/>
 		<configuration configurationName="ReleaseTestCS1107">
 			<resource resourceType="PROJECT" workspacePath="/TEST_CSMON_C28xx"/>
 		</configuration>

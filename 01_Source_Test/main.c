@@ -33,13 +33,18 @@
 
 #define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 1024
 
+#ifndef _CS_1211
 #include "emif_driver.h"
+#endif
+
 #if defined(_CS_1107_SCC_R01)
 #include "fpga_driver.h"
 #else
 #include "sci_driver.h"
 #include "uart_driver.h"
+#ifndef _CS_1211
 #include "fpga_sci_driver.h"
+#endif
 #endif
 
 #endif
@@ -778,6 +783,653 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 #if CSMON_CONFIG == 0
 
 
+#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE
+
+/* *****************************************************************************
+ * EnerDrive Definitions
+ **************************************************************************** */
+#define STRING_PARAMS
+
+#define LANGUAGE_ENGLISH    1
+//#define  LANGUAGE_GERMAN 1
+
+#define PROJECT_NAME        "Convesys DFIG"
+#define DEVICE_TYPE     "Convesys DFIG CPU1"
+#define HW_VERSION      "1"
+#define SW_VERSION      "600"
+#define SW_BUILD_NUM        "0"
+#define SW_BUILD_DATE   __DATE__
+#define SW_TOOL_VERSION "9.30"
+
+
+/********************************************************************************
+ *  macros                                                                                                                                          *
+ ********************************************************************************/
+//#define SPIE2P_TEST       1
+
+
+#define MAX_NAME_LEN    60             // must be even value!
+#define MAX_EVENTSTRING_LEN MAX_NAME_LEN
+#define MAX_UNIT_LEN    10
+#if SERIELL_NV_MEM
+   #define SIZE_OF_EEP_SHADOW 5000     // 128kB EEPROM = 8192 word max.
+#elif PARALLEL_NV_MEM
+   #define SIZE_OF_EEP_SHADOW 5000
+#else
+   #define SIZE_OF_EEP_SHADOW 0
+#endif
+
+#define PAR_TYPES   0x000f          // Maske für Typencodierung im Parameterattribut
+
+#define _UINT16         0x0001          // UINT16
+#define _INT16          0x0002          // INT16
+#define _UINT32         0x0003          // UINT32
+#define _INT32          0x0004          // INT32
+#define _WORD               0x0005          // WORD
+#define _DWORD          0x0006          // DWORD
+#define _A_UINT16       0x0007          // Array of UINT16
+#define _A_INT16        0x0008          // Array of INT16
+#define _A_UINT32       0x0009          // Array of UINT32
+#define _A_INT32        0x000a          // Array of INT32
+#define _A_WORD         0x000b          // Array of WORD
+#define _A_DWORD        0x000c          // Array of DWORD
+#define _UINT8          0x000d          //!< byte
+#define _A_UINT8        0x000e          //!< string
+
+#define PAR_ACCESS  0x0030          // Maske für Zugriffscodierung im Parameterattribut
+#define PAR_NA          0x0000          // kein Zugriff möglich
+#define PAR_RO          0x0010          // ReadOnly
+#define PAR_WO          0x0020          // WriteOnly
+#define PAR_RW          0x0030          // ReadWrite
+
+#define PAR_STATE       0x0040          // verbietet Schreibzugriffe in bestimmten Zuständen
+#define PAR_PASS_PR     0x0080          // Zugriff nur mit Passcode, Parameter hidden
+#define PAR_PASS_PW     0x0100          // Zugriff nur mit Passcode, read erlaubt
+
+#define PAR_A_BIT      0x0200           // bit array
+
+#define PAR_WRITE       0x0c00          // Schreib modi
+#define PAR_WR_DIR  0x0400          // direkter Schreibzugriff möglich
+#define PAR_WR_FKT  0x0800          // Schreibzugriff nur über spezielle Behandlungsfunktion
+
+#define PAR_STORE_EE    0x4000          // Parameter for storing in EEPROM
+#define PAR_STORE       0x8000          // Parameter for storing in Parameterfile
+
+#define PAR_MENUE       0x1000          // Parameter beschreibt Parametergruppe
+#define PAR_HIDE        0x2000          // Parameter erscheint nicht im Menübaum
+
+#define PAR_UPDATE  0x0001          // Kennung eines Parameters im RAM-Spiegel des EEPROM zum Speichern
+#define PAR_EQUAL       0x0002          // Kennung .... Speichern nicht nötig
+
+#define PAR_READY       0x0000          // keine Parameter nv-mem aktion aktiv
+#define PAR_BUSY        0x0001          // eine Parameter nv-mem aktion ist aktiv
+
+#define PASSCODE        8005
+
+
+
+#define LAST_PAR_INDEX      1999            //RS für TSP Kanalauswahlbegrenzung
+
+
+//! return codes des Parameterinterfaces
+typedef enum
+{
+    RC_PARA_OK,                                     //!< 0, fehlerfreier Zugriff
+    RC_PARA_NOT_EXIST,                      //!< 1, Parameter existiert nicht
+    RC_ELEM_NOT_EXIST,                      //!< 2, Element existiert nicht
+    RC_ATTR_NOT_EXIST,                      //!< 3, Attribut existiert nicht
+    RC_NULL_POINTER,                            //!< 4, es wurde ein NULL-Pointer übergeben
+    RC_WRONG_TYPE,                              //!< 5, falscher Typ
+    RC_WRONG_SIZE,                              //!< 6, falsche Größe
+    RC_VALUE_HIGH,                              //!< 7, Wert zu groß
+    RC_VALUE_LOW,                                   //!< 8, Wert zu klein
+    RC_READ_ONLY,                                   //!< 9, Schreibversuch auf Read-only
+    RC_WRITE_ONLY,                              //!< 10, Leseversuch auf Write-only
+    RC_PERM_DENIED,                             //!< 11, keine Zugriffsberechtigung
+    RC_PAR_WRONG_CMD,                           //!< 12, falscher Kommandocode
+    RC_PAR_WRONG_FRAME,                     //!< 13, Gesamtframe header + Daten hat falsche Länge
+    RC_PAR_WRONG_STATE_WRITE,           //!< 14, Schreiben im aktuellen Zustand nicht erlaubt
+    RC_PAR_UNVALID_DATA                     //!< 15, ungültige Daten
+} RC_PAR_T;
+
+
+//! Sprachen
+typedef enum
+{
+    LANG_GERMAN,                                    //!< Deutsch
+    LANG_ENGLISH                                    //!< Englisch
+} LANGUAGE_T;
+
+#ifndef NULL
+  #define NULL  ((void *)0)
+#endif
+
+   typedef unsigned int     UINT16;
+   typedef unsigned char    BOOL;
+   typedef signed int       INT16;
+   typedef signed long      INT32;
+    typedef signed long long INT64;
+   typedef char             INT8;
+   typedef char                 UINT8;
+   typedef unsigned long    UINT32;
+   typedef unsigned long long UINT64;
+    typedef unsigned int    WORD;
+    typedef unsigned long   DWORD;
+
+
+//*******************************************************************************
+//  Beschreibungsstruktur für einen U16-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                       //!< El. 1, Attribute des Parameters
+  //INT8*   Name;                                       //!< El. 2, Name
+  UINT8*    Name;                                       //!< El. 2, Name
+  UINT8*    Unit;                                       //!< El. 3, Einheit
+  UINT16    Max;                                        //!< El. 4, Maximalwert
+  UINT16    Min;                                        //!< El. 5, Minimalwert
+  UINT16    Def;                                        //!< El. 6, Defaultwert
+  float     Norm;                                       //!< El. 7, Normierungsfaktor nur für Darstellung auf Anzeigegerät
+  UINT16*   pVal;                                       //!< El. 8, Zeiger auf Wert
+  RC_PAR_T (*pfFct) (UINT16);           //!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_U16_T;
+//*******************************************************************************
+
+//  Beschreibungsstruktur für einen I16-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
+  UINT8*    Name;                                   //!< El. 2, Name
+  UINT8*    Unit;                                   //!< El. 3, Einheit
+  INT16     Max;                                    //!< El. 4, Maximalwert
+  INT16     Min;                                    //!< El. 5, Minimalwert
+  INT16     Def;                                    //!< El. 6, Defaultwert
+  float     Norm;                                   //!< El. 7, Normierungsfaktor nur für Darstellung auf Anzeigegerät
+  INT16*    pVal;                                   //!< El. 8, Zeiger auf Wert
+  RC_PAR_T (*pfFct) (INT16);        //!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_I16_T;
+
+//  Beschreibungsstruktur für einen U32-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                       //!< El. 1, Attribute des Parameters
+  UINT8*    Name;                                       //!< El. 2, Name
+  UINT8*    Unit;                                       //!< El. 3, Einheit
+  UINT32    Max;                                        //!< El. 4, Maximalwert
+  UINT32    Min;                                        //!< El. 5, Minimalwert
+  UINT32    Def;                                        //!< El. 6, Defaultwert
+  float     Norm;                                       //!< El. 7, Normierungsfaktor nur für Darstellung auf Anzeigegerät
+  UINT32*   pVal;                                       //!< El. 8, Zeiger auf Wert
+  RC_PAR_T (*pfFct) (UINT32);           //!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_U32_T;
+
+// Beschreibungsstruktur für einen I32-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
+  UINT8*    Name;                                   //!< El. 2, Name
+  UINT8*    Unit;                                   //!< El. 3, Einheit
+  INT32     Max;                                    //!< El. 4, Maximalwert
+  INT32     Min;                                    //!< El. 5, Minimalwert
+  INT32     Def;                                    //!< El. 6, Defaultwert
+  float     Norm;                                   //!< El. 7, Normierungsfaktor nur für Darstellung auf Anzeigegerät
+  INT32*    pVal;                                   //!< El. 8, Zeiger auf Wert
+  RC_PAR_T (*pfFct) (INT32);        //!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_I32_T;
+
+// Beschreibungsstruktur für einen WORD-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
+  UINT8*    Name;                                   //!< El. 2, Name
+  WORD      Max;                                    //!< El. 4, Maximalwert
+  WORD      Min;                                    //!< El. 5, Minimalwert
+  WORD      Def;                                    //!< El. 6, Defaultwert
+  WORD* pVal;                                       //!< El. 8, Zeiger auf Wert
+  RC_PAR_T (*pfFct) (WORD);         //!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_WORD_T;
+
+// Beschreibungsstruktur für einen DWORD-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
+  UINT8*    Name;                                   //!< El. 2, Name
+  DWORD     Max;                                    //!< El. 4, Maximalwert
+  DWORD     Min;                                    //!< El. 5, Minimalwert
+  DWORD     Def;                                    //!< El. 6, Defaultwert
+  DWORD*    pVal;                                   //!< El. 8, Zeiger auf Wert
+  RC_PAR_T (*pfFct) (DWORD);        //!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_DWORD_T;
+
+//! Beschreibungsstruktur für einen UINT8-Feld-Parameter
+typedef const struct
+{
+  UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
+  UINT8*    Name;                                   //!< El. 2, Name
+  UINT16    size;                                   //!< El. 3, Größe des Felds
+  UINT8*    pVal;                                   //!< El. 4, Zeiger auf Wert
+  RC_PAR_T (/*far*/ *pfFct)(const UINT8*, UINT16);//!< Zeiger auf spezielle Behandlungsfunktion
+} PAR_DES_A_UINT8_T;
+
+
+
+// Parameter-Variable MaxParams
+//#pragma DATA_SECTION(ParVal_MaxParams,".extram");
+UINT16 ParVal_MaxParams;
+
+// größte unterstützte Parameternummer
+// Parameter-Beschreibung MaxParams
+PAR_DES_U16_T ParDes_MaxParams =
+{
+    PAR_RO | _UINT16,                                   // ReadOnly, UINT16-Parameter
+#ifdef LANGUAGE_GERMAN
+    "groesste Parameter-Nr.",                   // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "Maximum parameter number",             // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    0xFFFF,                                                     // Maximum
+    0x0000,                                                     // Minimum
+    LAST_PAR_INDEX,                                                     // Default
+    1.0,                                                            // Faktor
+    &ParVal_MaxParams,                              // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+#ifdef STRING_PARAMS
+
+// Dieser Parameter enthält den PROJEKTNAMEN der Applikation.
+// Damit er als solcher erkannt wird, muß dieser Parameter
+// der ERSTE PARAMETER IN DER PARAMETER-LISTE sein, der das Attribut PAR_MENUE hat!
+PAR_DES_WORD_T ParDes_PROJECT_NAME =
+{
+  PAR_RO | _WORD | PAR_MENUE,       // Attribut
+  PROJECT_NAME,                     // Name: aus Version_info.h
+  0xFFFF,                           // Maximum
+  0x0000,                           // Minimum
+  0x0000,                           // Default
+  NULL,                             // Parameter
+  NULL                              // Behandlungsfunktion
+};
+
+// GruppenParameter-Geräteidentifikation
+// Geräteidentifikation
+
+// Parameter-Beschreibung GruppenParameter Geräteidentifikation
+PAR_DES_WORD_T ParDes_GROUP_DEVICEIDENT =
+{
+    PAR_MENUE | PAR_RO | _WORD,     // Attribut
+    "Device Identification",        // Name
+    0xFFFF,                         // Maximum
+    0x0000,                         // Minimum
+    0x0000,                         // Default
+    NULL,                           // Parameter
+    NULL                            // Behandlungsfunktion
+};
+
+
+// Parameter-Variable Geräte-Identifikation
+//#pragma DATA_SECTION(ParVal_DeviceType,".extram");
+UINT8 ParVal_DeviceType[MAX_NAME_LEN];
+
+// Gerätetyp
+// Parameter-Beschreibung DeviceIdent
+PAR_DES_A_UINT8_T ParDes_DeviceType =
+{
+    PAR_STORE | PAR_RO | _A_UINT8,                                      // ReadOnly, UINT8-Parameter
+#ifdef LANGUAGE_GERMAN
+    "device type",                                          // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "device type",              // Name
+#endif
+#endif
+    MAX_NAME_LEN,                                           // Maximum
+    ParVal_DeviceType,                                  // Parameter
+    NULL                                                    // Behandlungsfunktion
+};
+
+// Parameter-Variable HW-Version
+//#pragma DATA_SECTION(ParVal_HWVersion,".extram");
+UINT8 ParVal_HWVersion[MAX_NAME_LEN];
+
+// HW-Version
+// Parameter-Beschreibung HW-Version
+PAR_DES_A_UINT8_T ParDes_HWVersion =
+{
+    PAR_STORE | PAR_RO | _A_UINT8,                                      // ReadOnly, UINT8-Parameter
+#ifdef LANGUAGE_GERMAN
+    "hardware version",                                         // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "hardware version",             // Name
+#endif
+#endif
+    MAX_NAME_LEN,                                           // Maximum
+    ParVal_HWVersion,                                   // Parameter
+    NULL                                                    // Behandlungsfunktion
+};
+
+// Parameter-Variable SW-Version
+//#pragma DATA_SECTION(ParVal_SWVersion,".extram");
+UINT8 ParVal_SWVersion[MAX_NAME_LEN];
+
+// SW-Version
+// Parameter-Beschreibung SW-Version
+PAR_DES_A_UINT8_T ParDes_SWVersion =
+{
+    PAR_STORE | PAR_RO | _A_UINT8,                                      // ReadOnly, UINT8-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software version",                                         // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software version",             // Name
+#endif
+#endif
+    MAX_NAME_LEN,                                           // Maximum
+    ParVal_SWVersion,                                   // Parameter
+    NULL                                                    // Behandlungsfunktion
+};
+
+// Parameter-Variable SWBuildNum
+// build nummer, automatisch generiert
+//#pragma DATA_SECTION(ParVal_SWBuildNum,".extram");
+UINT8 ParVal_SWBuildNum[MAX_NAME_LEN];
+
+// SWBuildNum
+// Parameter-Beschreibung SWBuildNum
+PAR_DES_A_UINT8_T ParDes_SWBuildNum =
+{
+    PAR_STORE | PAR_RO | _A_UINT8,                                      // ReadOnly, UINT8-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software build number",                                            // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software build number",                // Name
+#endif
+#endif
+    MAX_NAME_LEN,                                           // Maximum
+    ParVal_SWBuildNum,                                  // Parameter
+    NULL                                                    // Behandlungsfunktion
+};
+
+// Parameter-Variable SWBuildDate
+//#pragma DATA_SECTION(ParVal_SWBuildDate,".extram");
+UINT8 ParVal_SWBuildDate[MAX_NAME_LEN];
+
+// SWBuildDate
+// Parameter-Beschreibung SWBuildDate
+PAR_DES_A_UINT8_T ParDes_SWBuildDate =
+{
+    PAR_STORE | PAR_RO | _A_UINT8,                                      // ReadOnly, UINT8-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software build date",                                          // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software build date",              // Name
+#endif
+#endif
+    MAX_NAME_LEN,                                           // Maximum
+    ParVal_SWBuildDate,                                 // Parameter
+    NULL                                                    // Behandlungsfunktion
+};
+
+// Parameter-Variable SWToolVersion
+// tool chain version, automatisch generiert
+//#pragma DATA_SECTION(ParVal_SWToolVersion,".extram");
+UINT8 ParVal_SWToolVersion[MAX_NAME_LEN];
+
+// SWToolVersion
+// Parameter-Beschreibung SWToolVersion
+PAR_DES_A_UINT8_T ParDes_SWToolVersion =
+{
+    PAR_STORE | PAR_RO | _A_UINT8,                                      // ReadOnly, UINT8-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software tool version",                                            // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software tool version",                // Name
+#endif
+#endif
+    MAX_NAME_LEN,                                           // Maximum
+    ParVal_SWToolVersion,                                   // Parameter
+    NULL                                                    // Behandlungsfunktion
+};
+
+#else /* STRING_PARAMS */
+
+// Parameter-Variable Geräte-Identifikation
+//#pragma DATA_SECTION(ParVal_DeviceIdent,".extram");
+//WORD ParVal_DeviceIdent;
+
+// Gerätetyp
+// Parameter-Beschreibung DeviceIdent
+PAR_DES_WORD_T ParDes_DeviceIdent =
+{
+    PAR_MENUE | PAR_RO | _WORD,                                     // ReadOnly, WORD-Parameter
+#ifdef LANGUAGE_GERMAN
+    "ISUVOC",                                           // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "ISUVOC",               // Name
+#endif
+#endif
+    0xFFFF,                                                     // Maximum
+    0x0000,                                                     // Minimum
+    DEVICE_TYPE,                                            // Default
+    NULL/*ParVal_DeviceIdent*/,                         // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+// Parameter-Variable HWVersion
+// hardware version
+//#pragma DATA_SECTION(ParVal_HWVersion,".extram");
+//UINT16 ParVal_HWVersion;
+
+// Parameter-Beschreibung HWVersion
+PAR_DES_U16_T ParDes_HWVersion =
+{
+    PAR_MENUE | PAR_RO | _UINT16,                                   // ReadOnly, UINT16-Parameter
+#ifdef LANGUAGE_GERMAN
+    "Version",                              // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "Version",                              // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    0xFFFF,                                                     // Maximum
+    0x0000,                                                     // Minimum
+    HW_VERSION,                                             // Default
+    1.0,                                                            // Faktor
+    NULL/*ParVal_HWVersion*/,                               // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+
+
+// Parameter-Variable SWVersion
+// software version
+//#pragma DATA_SECTION(ParVal_SWVersion,".extram");
+UINT16 ParVal_SWVersion;
+
+// Parameter-Beschreibung SWVersion
+PAR_DES_U16_T ParDes_SWVersion =
+{
+    PAR_STORE | PAR_RO | _UINT16,                                   // ReadOnly, UINT16-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software version",                             // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software version",                             // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    0xFFFF,                                                     // Maximum
+    0x0000,                                                     // Minimum
+    SW_VERSION,                                             // Default
+    1.0,                                                            // Faktor
+    &ParVal_SWVersion,                              // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+
+
+// Parameter-Variable SWBuildNum
+// build nummer, automatisch generiert
+//#pragma DATA_SECTION(ParVal_SWBuildNum,".extram");
+UINT16 ParVal_SWBuildNum;
+
+// Parameter-Beschreibung SWBuildNum
+PAR_DES_U16_T ParDes_SWBuildNum =
+{
+    PAR_STORE | PAR_RO | _UINT16,                                   // ReadOnly, UINT16-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software build number",                    // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software build number",                    // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    0xFFFF,                                                     // Maximum
+    0x0000,                                                     // Minimum
+    SW_BUILD_NUM,                                           // Default
+    1.0,                                                            // Faktor
+    &ParVal_SWBuildNum,                             // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+
+
+// Parameter-Variable SWBuildDate
+// build date, automatisch generiert
+//#pragma DATA_SECTION(ParVal_SWBuildDate,".extram");
+UINT32 ParVal_SWBuildDate;
+
+// Parameter-Beschreibung SWBuildDate
+PAR_DES_U32_T ParDes_SWBuildDate =
+{
+    PAR_STORE | PAR_RO | _UINT32,                                   // ReadOnly, UINT16-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software build date",                      // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software build date",                      // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    0xFFFFFFFF,                                                     // Maximum
+    0x00000000,                                                     // Minimum
+    SW_BUILD_DATE,                                      // Default
+    1.0,                                                            // Faktor
+    &ParVal_SWBuildDate,                            // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+// Parameter-Variable SWToolVersion
+// tool chain version, automatisch generiert
+//#pragma DATA_SECTION(ParVal_SWToolVersion,".extram");
+UINT16 ParVal_SWToolVersion;
+
+// Parameter-Beschreibung SWToolVersion
+PAR_DES_U16_T ParDes_SWToolVersion =
+{
+
+     PAR_STORE | PAR_RO | _UINT16,                                  // ReadOnly, UINT16-Parameter
+#ifdef LANGUAGE_GERMAN
+    "software tool version",                    // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "software tool version",                    // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    0xFFFF,                                                     // Maximum
+    0x0000,                                                     // Minimum
+    SW_TOOL_VERSION,                                    // Default
+    1.0,                                                            // Faktor
+    &ParVal_SWToolVersion,                      // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+#endif /* STRING_PARAMS */
+
+
+// Parameter-Variable Passcode
+//#pragma DATA_SECTION(ParVal_Passcode,".extram");
+UINT16 ParVal_Passcode;
+
+PAR_DES_U16_T ParDes_Passcode =
+{
+    PAR_RW | _UINT16,
+#ifdef LANGUAGE_GERMAN
+    "Passcode",                 // Name
+#else
+#ifdef LANGUAGE_ENGLISH
+    "Passcode",                             // Name
+#endif
+#endif
+    NULL,                                                           // Einheit
+    65535,                                              // Maximum
+    0,                                                              // Minimum
+    0,                                                              // Default
+    1.0,                      // Faktor
+    &ParVal_Passcode,                                       // Parameter
+    NULL                                                            // Behandlungsfunktion
+};
+
+
+
+
+
+
+
+// Eintrag in Parametertabelle für einen Parameter
+typedef const struct
+{
+    UINT16 index;                       //!< El. 0, ParameterNr.
+    //const UINT16* Attr;       //!< El. 1, Attribut des Parameters
+    void* ParDes;                       //!< Zeiger auf Beschreibungsstruktur
+} PAR_TAB_ENTRY_T;
+
+
+PAR_TAB_ENTRY_T ParTable[/*MAX_PAR*/] =  // {Par.-Nr. , Par.-Attribut, Zeiger auf Beschreibungsstruktur}
+{
+//------Geräteidentifikation
+{0,     (void*)&ParDes_MaxParams},
+#ifdef STRING_PARAMS
+{1,     (void*)&ParDes_PROJECT_NAME},
+//------Geräteidentifikation
+{2,     (void*)&ParDes_GROUP_DEVICEIDENT},
+{3,     (void*)&ParDes_DeviceType},
+{4,     (void*)&ParDes_HWVersion},
+{5,     (void*)&ParDes_SWVersion},
+{6,     (void*)&ParDes_SWBuildNum},
+{7,     (void*)&ParDes_SWBuildDate},
+{8,     (void*)&ParDes_SWToolVersion},
+#else
+{1,     (void*)&ParDes_DeviceIdent},
+{2,     (void*)&ParDes_HWVersion},
+{3,     (void*)&ParDes_SWVersion},
+{4,     (void*)&ParDes_SWBuildNum},
+{5,     (void*)&ParDes_SWBuildDate},
+{6,     (void*)&ParDes_SWToolVersion},
+//{7,     (void*)&ParDes_NVmemControl},
+#endif
+{9,     (void*)&ParDes_Passcode},
+
+};
+
+
+UINT16 GetNumberOfParams(void)
+{
+    return sizeof(ParTable)/sizeof(PAR_TAB_ENTRY_T);
+}
+
+
+#else
 
 volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX] =
 {
@@ -2178,7 +2830,11 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
 
 };
 
-#endif
+#endif  /* #if _CSMON_USE_EXTERNAL_PARAMETER_TABLE */
+
+#endif  /* #if CSMON_CONFIG == 0 */
+
+
 
 /* *****************************************************************************
  * Prototypes of functions definitions
@@ -2392,6 +3048,9 @@ void ControlProcess(void)
 #endif
 }
 
+
+
+#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE == 0
 /* *****************************************************************************
  * ExternalParametersInitialization
  **************************************************************************** */
@@ -2575,7 +3234,7 @@ void ParameterInitialization(void)
 
 
 }
-
+#endif
 
 
 
@@ -2958,6 +3617,9 @@ CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParamete
 }
 
 
+
+
+
 uint16_t u16FreeRunningTimerTicksPerMicroSecond;
 uint16_t u16FreeRunningTimerPrescaller;
 
@@ -2980,7 +3642,11 @@ void main(void)
     //
     Device_initGPIO();
 
-#ifndef __TMS320F2806x__
+
+
+#ifdef _CS_1211
+
+#elif !defined(__TMS320F2806x__)
     //
     // EMIF
     //
@@ -2992,11 +3658,13 @@ void main(void)
     // Disable CPU interrupts
     // Initialize interrupt controller and vector table.
     //
-#ifndef __TMS320F2806x__
+
+#if defined(__TMS320F2806x__)
+    //for __TMS320F2806x__ Interrupts fixed in Device Init?
+#else
     Interrupt_initModule();
     Interrupt_initVectorTable();
 #endif
-
 
     //
     // LEDs or debug GPIO
@@ -3060,8 +3728,9 @@ void main(void)
         u16FreeRunningTimerTicksPerMicroSecond = 1;
     }
 
+#ifdef _CS_1211
 
-#ifdef _CS_1291
+#elif defined(_CS_1291)
 
 #elif defined(_CS_1107_SCC_R01)
 
@@ -3106,7 +3775,9 @@ void main(void)
     //RecordersInitialization();
 
 
-#ifdef _CS_1291
+#ifdef _CS_1211
+
+#elif defined(_CS_1291)
 
 #elif defined(_CS_1107_SCC_R01)
 
@@ -3129,7 +3800,9 @@ void main(void)
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
     }
 
-#ifdef _CS_1291
+#ifdef _CS_1211
+
+#elif defined(_CS_1291)
 
 #elif defined(_CS_1107_SCC_R01)
 
@@ -3149,12 +3822,21 @@ void main(void)
     //
     u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
 
-#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
+#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE
+
+    CSMON_eSetParameterTableIndex((uint16_t *)&ParTable[0].index, (uint16_t)((uint32_t)(&ParTable[1].index) - (uint32_t)(&ParTable[0].index)), (uint16_t)GetNumberOfParams());
+    CSMON_eSetParameterTableDescr((void *)&ParTable[0].ParDes, (uint16_t)((uint32_t)(&ParTable[1].ParDes) - (uint32_t)(&ParTable[0].ParDes)));
+    /* Recorder And Scope Initialization Made Once after parameter initialized */
+    RecordersInitialization();
+    ScopesInitialization();
+
+#elif _CSMON_USE_EXTERNAL_PARAMETER_LIST
     ParameterInitialization();
     ExternalParametersInitialization();
 #else
     ParameterInitialization();
 #endif
+
     u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
 
 
@@ -3382,7 +4064,9 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
-#ifdef _CS_1291
+#ifdef _CS_1211
+
+#elif defined(_CS_1291)
 
 #elif defined(_CS_1107_SCC_R01)
 
@@ -3401,7 +4085,9 @@ void main(void)
         //
         // CSMON Process In Main Loop Delay Measure
         //
-#ifdef _CS_1291
+#ifdef _CS_1211
+
+#elif defined(_CS_1291)
 
 #elif defined(_CS_1107_SCC_R01)
 
@@ -3426,7 +4112,9 @@ void main(void)
         //
         // RTC Process
         //
-#ifdef _CS_1291
+#ifdef _CS_1211
+
+#elif defined(_CS_1291)
 
         //TBD!!!
 
