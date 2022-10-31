@@ -573,8 +573,6 @@ typedef struct
                        uint16_t u16Attr;
                  uint_least8_t* pName;
                        uint16_t u16Size;
-                       uint32_t u32Minimum;
-                       uint32_t u32Default;
                  uint_least8_t* pu8Value;
    CSMON_eReturnCodeParameter_t (*pfFct) (const uint_least8_t*, uint16_t);
 } CSMON_sDescriptorAU8;

@@ -1098,7 +1098,7 @@ PAR_DES_WORD_T ParDes_GROUP_DEVICEIDENT =
 
 // Parameter-Variable Geräte-Identifikation
 //#pragma DATA_SECTION(ParVal_DeviceType,".extram");
-UINT8 ParVal_DeviceType[MAX_NAME_LEN];
+UINT8 ParVal_DeviceType[MAX_NAME_LEN] = "alabala Device";
 
 // Gerätetyp
 // Parameter-Beschreibung DeviceIdent
@@ -1119,7 +1119,7 @@ PAR_DES_A_UINT8_T ParDes_DeviceType =
 
 // Parameter-Variable HW-Version
 //#pragma DATA_SECTION(ParVal_HWVersion,".extram");
-UINT8 ParVal_HWVersion[MAX_NAME_LEN];
+UINT8 ParVal_HWVersion[MAX_NAME_LEN] = "alabala HW ver";
 
 // HW-Version
 // Parameter-Beschreibung HW-Version
@@ -1140,7 +1140,7 @@ PAR_DES_A_UINT8_T ParDes_HWVersion =
 
 // Parameter-Variable SW-Version
 //#pragma DATA_SECTION(ParVal_SWVersion,".extram");
-UINT8 ParVal_SWVersion[MAX_NAME_LEN];
+UINT8 ParVal_SWVersion[MAX_NAME_LEN] = "alabala SW ver";
 
 // SW-Version
 // Parameter-Beschreibung SW-Version
@@ -1162,7 +1162,7 @@ PAR_DES_A_UINT8_T ParDes_SWVersion =
 // Parameter-Variable SWBuildNum
 // build nummer, automatisch generiert
 //#pragma DATA_SECTION(ParVal_SWBuildNum,".extram");
-UINT8 ParVal_SWBuildNum[MAX_NAME_LEN];
+UINT8 ParVal_SWBuildNum[MAX_NAME_LEN] = "alabala Build";
 
 // SWBuildNum
 // Parameter-Beschreibung SWBuildNum
@@ -1183,7 +1183,7 @@ PAR_DES_A_UINT8_T ParDes_SWBuildNum =
 
 // Parameter-Variable SWBuildDate
 //#pragma DATA_SECTION(ParVal_SWBuildDate,".extram");
-UINT8 ParVal_SWBuildDate[MAX_NAME_LEN];
+UINT8 ParVal_SWBuildDate[MAX_NAME_LEN] = "alabala Date";
 
 // SWBuildDate
 // Parameter-Beschreibung SWBuildDate
@@ -1205,7 +1205,7 @@ PAR_DES_A_UINT8_T ParDes_SWBuildDate =
 // Parameter-Variable SWToolVersion
 // tool chain version, automatisch generiert
 //#pragma DATA_SECTION(ParVal_SWToolVersion,".extram");
-UINT8 ParVal_SWToolVersion[MAX_NAME_LEN];
+UINT8 ParVal_SWToolVersion[MAX_NAME_LEN] = "alabala SW Tool";
 
 // SWToolVersion
 // Parameter-Beschreibung SWToolVersion
@@ -17884,7 +17884,7 @@ volatile const MAIN_sParameterList_t asParameterList[BOARDCFG_CSMON_FILE_PARAMET
 
 #endif  /* #if CSMON_CONFIG == 0 */
 
-
+uint16_t limit_count_params = 100;
 volatile uint16_t maximum_count_params = 0;
 
 /* *****************************************************************************
@@ -18879,7 +18879,7 @@ void main(void)
 
     uint16_t count_params;
     #if 1
-    count_params = 100;
+    count_params = limit_count_params;
     if (count_params > (uint16_t)GetNumberOfParams())
     {
         count_params = (uint16_t)GetNumberOfParams();
