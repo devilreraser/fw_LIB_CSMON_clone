@@ -486,6 +486,108 @@ CSMON_eResponseCode_t CSMON_eSetTimerPeriodISRFunctionRegister (CSMON_pfVoid_t p
 
 
 
+
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+}CSMON_sDescriptorCommonFields;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                 uint_least8_t* pUnit;
+                       uint16_t u16Maximum;
+                       uint16_t u16Minimum;
+                       uint16_t u16Default;
+                          float Norm;
+                      uint16_t* pu16Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (uint16_t);
+} CSMON_sDescriptorU16;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                 uint_least8_t* pUnit;
+                        int16_t s16Maximum;
+                        int16_t s16Minimum;
+                        int16_t s16Default;
+                          float Norm;
+                       int16_t* ps16Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (int16_t);
+} CSMON_sDescriptorI16;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                 uint_least8_t* pUnit;
+                       uint32_t u32Maximum;
+                       uint32_t u32Minimum;
+                       uint32_t u32Default;
+                          float Norm;
+                      uint32_t* pu32Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (uint32_t);
+} CSMON_sDescriptorU32;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                 uint_least8_t* pUnit;
+                        int32_t s32Maximum;
+                        int32_t s32Minimum;
+                        int32_t s32Default;
+                          float Norm;
+                       int32_t* ps32Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (int32_t);
+} CSMON_sDescriptorI32;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                       uint16_t u16Maximum;
+                       uint16_t u16Minimum;
+                       uint16_t u16Default;
+                      uint16_t* pu16Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (uint16_t);
+} CSMON_sDescriptorWORD;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                       uint32_t u32Maximum;
+                       uint32_t u32Minimum;
+                       uint32_t u32Default;
+                      uint32_t* pu32Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (uint32_t);
+} CSMON_sDescriptorDWORD;
+
+typedef struct
+{
+                       uint16_t u16Attr;
+                 uint_least8_t* pName;
+                       uint16_t u16Size;
+                 uint_least8_t* pu8Value;
+   CSMON_eReturnCodeParameter_t (*pfFct) (const uint_least8_t*, uint16_t);
+} CSMON_sDescriptorAU8;
+
+/* *****************************************************************************
+ * CSMON_eSetParameterTable Interfaces
+ *
+ * Input:
+ *      xxxxxx_t *pxxxxxxx - First Input is pointer to  external resource
+ *      uint16_t u16Offset - Offset between elements
+ *
+ **************************************************************************** */
+CSMON_eResponseCode_t CSMON_eSetParameterTableIndex(uint16_t *pIndex, uint16_t u16Offset, uint16_t u16Count);
+CSMON_eResponseCode_t CSMON_eSetParameterTableDescr(void *pDescr, uint16_t u16Offset);
+
 /* *****************************************************************************
  * CSMON_eSetParameterList Interfaces
  *

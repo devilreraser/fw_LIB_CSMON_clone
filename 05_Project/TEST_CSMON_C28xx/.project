@@ -128,6 +128,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/ReleaseCS1211</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/ReleaseRecorders</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -159,6 +164,11 @@
 		</link>
 		<link>
 			<name>Release/TEST_CSMON_C28xx.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
+			<name>ReleaseCS1211/TEST_CSMON_C28xx.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
@@ -661,6 +671,16 @@
 			<name>CSMON_LIB/Release/csmon.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/csmon.h</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ReleaseCS1211/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseCS1211/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ReleaseCS1211/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseCS1211/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib</name>
