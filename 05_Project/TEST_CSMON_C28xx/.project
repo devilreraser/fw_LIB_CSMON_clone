@@ -83,6 +83,31 @@
 			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/main.h</locationURI>
 		</link>
 		<link>
+			<name>01_Source_Test/parameter2_table.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/parameter2_table.c</locationURI>
+		</link>
+		<link>
+			<name>01_Source_Test/parameter2_table.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/parameter2_table.h</locationURI>
+		</link>
+		<link>
+			<name>01_Source_Test/parameter_common.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/parameter_common.h</locationURI>
+		</link>
+		<link>
+			<name>01_Source_Test/parameter_table.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/parameter_table.c</locationURI>
+		</link>
+		<link>
+			<name>01_Source_Test/parameter_table.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/01_Source_Test/parameter_table.h</locationURI>
+		</link>
+		<link>
 			<name>01_Source_Test/peripheral_driver</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
