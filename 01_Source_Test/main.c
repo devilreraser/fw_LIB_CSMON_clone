@@ -2992,8 +2992,6 @@ uint16_t u16FreeRunningTimerPrescaller;
 void main(void)
 {
 
-
-
     //
     // Configure PLL, disable WD, enable peripheral clocks.
     //
