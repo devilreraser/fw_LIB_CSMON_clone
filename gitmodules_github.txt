@@ -1,4 +1,22 @@
 #repo GitHub
 
-.gitmodules merge=ours
-.gitattributes merge=ours
+[submodule "02_Libraries/ModbusAddress"]
+	path = 02_Libraries/ModbusAddress
+	url = https://github.com/devilreraser/uw_LIB_ModbusAddress.git
+	
+[submodule "02_Libraries/Peripheral"]
+	path = 02_Libraries/Peripheral
+	url = https://github.com/devilreraser/fw_LIB_Peripheral.git
+	
+[submodule "02_Libraries/MathAndControl"]
+	path = 02_Libraries/MathAndControl
+	url = https://github.com/devilreraser/fw_LIB_MathAndControl.git
+	
+[submodule "02_Libraries/HexMonitor"]
+	path = 02_Libraries/HexMonitor
+	url = https://github.com/devilreraser/fw_LIB_HexMonitor.git
+	
+[submodule "02_Libraries/TestControl"]
+	path = 02_Libraries/TestControl
+	url = https://github.com/devilreraser/fw_LIB_TestControl.git
+	
