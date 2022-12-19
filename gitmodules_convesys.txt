@@ -1,3 +1,5 @@
+#repo Convesys
+
 [submodule "02_Libraries/HexMonitor"]
 	path = 02_Libraries/HexMonitor
 	url = //192.168.1.102/repo_git/fw_LIB_HexMonitor.git
