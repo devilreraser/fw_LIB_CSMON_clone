@@ -1,1 +1,2 @@
-copy /Y gitattributes_convesys.txt            	.gitattributes
+copy /Y "gitattributes_convesys.txt" ".gitattributes"
+::pause
