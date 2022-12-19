@@ -135,12 +135,19 @@ SET /P _CommitAck= Please enter "y" for Commit to %dst_remote%. Any other symbol
 IF "%_CommitAck%"=="y" goto Commit_dst_remote
 goto EndCommit
 :Commit_dst_remote
-rem pause
+echo Before fix gitattributes and gitmodules for GithubToConvesys commit
+::pause
 git reset HEAD .gitattributes
 git checkout remotes/%dst_remote%/%branch% -- .gitattributes
 git reset HEAD .gitmodules
 git checkout remotes/%dst_remote%/%branch% -- .gitmodules
-rem pause
+echo After fix gitattributes and gitmodules for GithubToConvesys commit
+::pause
+call fix_convesys_modules.bat
+call fix_convesys_attributes.bat
+echo After forced fix gitattributes and gitmodules for GithubToConvesys commit
+::pause
+
 git commit -a -m "%_CommitString%"
 rem pause
 git push %dst_remote% %branch%
