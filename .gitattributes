@@ -1,3 +1,4 @@
-#convesys repo
+#repo Convesys
+
 .gitmodules merge=ours
 .gitattributes merge=ours
