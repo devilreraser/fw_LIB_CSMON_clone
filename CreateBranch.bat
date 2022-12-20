@@ -21,25 +21,31 @@ set Module5Path=02_Libraries/TestControl
 set RetRootPath=..\..
 
 git.exe checkout -b %BranchString% --
+git.exe checkout %BranchString% --
 echo. Create '%BranchString%' path '%ProjectName%'
 cd %Module1Path%
 git.exe checkout -b %BranchString% --
+git.exe checkout %BranchString% --
 echo. Create '%BranchString%' path '%Module1Name%'
 cd %RetRootPath%
 cd %Module2Path%
 git.exe checkout -b %BranchString% --
+git.exe checkout %BranchString% --
 echo. Create '%BranchString%' path '%Module2Name%'
 cd %RetRootPath%
 cd %Module3Path%
 git.exe checkout -b %BranchString% --
+git.exe checkout %BranchString% --
 echo. Create '%BranchString%' path '%Module3Name%'
 cd %RetRootPath%
 cd %Module4Path%
 git.exe checkout -b %BranchString% --
+git.exe checkout %BranchString% --
 echo. Create '%BranchString%' path '%Module4Name%'
 cd %RetRootPath%
 cd %Module5Path%
 git.exe checkout -b %BranchString% --
+git.exe checkout %BranchString% --
 echo. Create '%BranchString%' path '%Module5Name%'
 cd %RetRootPath%
 pause
