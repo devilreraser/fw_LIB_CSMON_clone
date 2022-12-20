@@ -23,17 +23,18 @@ echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module1Name%'
 cd %RetRootPath%
 cd %Module2Path%
 git.exe checkout -f -B %BranchString% remotes/%RemoteString%/%BranchString% --
-echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module1Name%'
+echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module2Name%'
 cd %RetRootPath%
 cd %Module3Path%
 git.exe checkout -f -B %BranchString% remotes/%RemoteString%/%BranchString% --
-echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module1Name%'
+echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module3Name%'
 cd %RetRootPath%
 cd %Module4Path%
 git.exe checkout -f -B %BranchString% remotes/%RemoteString%/%BranchString% --
-echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module1Name%'
+echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module4Name%'
 cd %RetRootPath%
+cd %Module5Path%
 git.exe checkout -f -B %BranchString% remotes/%RemoteString%/%BranchString% --
-echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module1Name%'
+echo. Checkout '%RemoteString%/%BranchString%' path '%RemotePath%%Module5Name%'
 cd %RetRootPath%
 pause
