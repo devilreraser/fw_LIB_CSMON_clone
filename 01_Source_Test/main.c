@@ -768,16 +768,28 @@ volatile uint16_t* EMIF_AUX_pu16CheckSumBackupInEmif = (uint16_t*)(EMIF_AUX_BACK
 
 #define PARAM_ID_MODBUS_MSG_CNT    65534
 
-#define PARAM_ID_STARUNNINGMODE     0
-#define PARAM_ID_VOLTAGE_DCLINK     8
-#define PARAM_ID_CURRENT_PHASEA     9
-#define PARAM_ID_CURRENT_PHASEB     10
-#define PARAM_ID_CURRENT_PHASEC     11
+#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE
+    #define PARAM_ID_STARUNNINGMODE     131
+    #define PARAM_ID_VOLTAGE_DCLINK     132
+    #define PARAM_ID_CURRENT_PHASEA     133
+    #define PARAM_ID_CURRENT_PHASEB     134
+    #define PARAM_ID_CURRENT_PHASEC     135
+    #define PARAM_ID_VOLTAGE_DCLINK_32  136
+    #define PARAM_ID_CURRENT_PHASEA_32  137
+    #define PARAM_ID_CURRENT_PHASEB_32  138
+    #define PARAM_ID_CURRENT_PHASEC_32  139
+#else
+    #define PARAM_ID_STARUNNINGMODE     0
+    #define PARAM_ID_VOLTAGE_DCLINK     8
+    #define PARAM_ID_CURRENT_PHASEA     9
+    #define PARAM_ID_CURRENT_PHASEB     10
+    #define PARAM_ID_CURRENT_PHASEC     11
 
-#define PARAM_ID_VOLTAGE_DCLINK_32  28
-#define PARAM_ID_CURRENT_PHASEA_32  29
-#define PARAM_ID_CURRENT_PHASEB_32  30
-#define PARAM_ID_CURRENT_PHASEC_32  31
+    #define PARAM_ID_VOLTAGE_DCLINK_32  28
+    #define PARAM_ID_CURRENT_PHASEA_32  29
+    #define PARAM_ID_CURRENT_PHASEB_32  30
+    #define PARAM_ID_CURRENT_PHASEC_32  31
+#endif
 
 
 #if CSMON_CONFIG == 0
@@ -2254,6 +2266,24 @@ void CSMON_vGetDateTime (
 }
 
 
+void Parameter132IncreaseValue( void )
+{
+    //        ((PAR_DES_I16_T*)(ParTable[132].ParDes))->pVal[0]++;
+    int parIndex;
+
+    for ( parIndex = 0; parIndex < GetNumberOfParams(); parIndex++ )
+    {
+        if ( ParTable[parIndex].index == 132 )
+        {
+            break;
+        }
+    }
+
+    if ( parIndex < GetNumberOfParams() )
+    {
+        ((PAR_DES_I16_T*)(ParTable[parIndex].ParDes))->pVal[0]++;
+    }
+}
 
 /* *****************************************************************************
  * ControlProcess
@@ -2261,6 +2291,7 @@ void CSMON_vGetDateTime (
 void ControlProcess(void)
 {
     u32TimeCtrlLoop_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
+
 
 
 
@@ -2272,6 +2303,20 @@ void ControlProcess(void)
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
 #endif
 
+//    typedef const struct
+//    {
+//      UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
+//      UINT8*    Name;                                   //!< El. 2, Name
+//      UINT8*    Unit;                                   //!< El. 3, Einheit
+//      INT16     Max;                                    //!< El. 4, Maximalwert
+//      INT16     Min;                                    //!< El. 5, Minimalwert
+//      INT16     Def;                                    //!< El. 6, Defaultwert
+//      float     Norm;                                   //!< El. 7, Normierungsfaktor nur für Darstellung auf Anzeigegerät
+//      INT16*    pVal;                                   //!< El. 8, Zeiger auf Wert
+//      RC_PAR_T (*pfFct) (INT16);        //!< Zeiger auf spezielle Behandlungsfunktion
+//    } PAR_DES_I16_T;
+
+    Parameter132IncreaseValue();
 
 
     //
@@ -3328,6 +3373,7 @@ void main(void)
 
     for (;;)
     {
+
         //
         // Reset the WatchDog counter
         //
