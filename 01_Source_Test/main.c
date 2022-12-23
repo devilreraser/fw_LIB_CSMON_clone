@@ -112,25 +112,39 @@
 #define CSMON_PARAMETER_LIST_TEST   CSMON_PAR_LIST_RECORDER_DEBUG
 
 
+
+
 /* Some Pinout */
-#ifdef __TMS320F2806x__
+#ifdef _CS_1211
+//    #define LED1_PIN     16
+//    #define LED2_PIN     17
+//    #define LED3_PIN     18
+//    #define LED4_PIN     19
+    #define STAT_LED_G_PIN      16      /* Green LED (closest to the MCU Led) */
+    #define STAT_LED_A_B_PIN    17      /* Amber LED (middle Led) */
+    #define STAT_LED_R_PIN      18      /* Red LED (closest to the Debug Header) */
+    #define CLK_EN_FPGA_PIN     19
 
-#define STAT_LED_EQEP1I_PIN 23
-#define STAT_LED_EQEP1S_PIN 22
-#define STAT_LED_EQEP1B_PIN 21
-#define STAT_LED_EQEP1A_PIN 20
+#elif __TMS320F2806x__
 
-#elif defined(_LAUNCHXL_F28379D)
-#define STAT_LED_G_PIN      28      /* N/A */
-#define STAT_LED_A_B_PIN    31      /* D10 Blue */
-#define STAT_LED_R_PIN      34      /* D9 */
+    #define STAT_LED_EQEP1I_PIN 23
+    #define STAT_LED_EQEP1S_PIN 22
+    #define STAT_LED_EQEP1B_PIN 21
+    #define STAT_LED_EQEP1A_PIN 20
+
+    #elif defined(_LAUNCHXL_F28379D)
+    #define STAT_LED_G_PIN      28      /* N/A */
+    #define STAT_LED_A_B_PIN    31      /* D10 Blue */
+    #define STAT_LED_R_PIN      34      /* D9 */
 #else
-//1038
-#define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */
-#define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
-#define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
-#define CLK_EN_FPGA_PIN     33
+    //1038
+    #define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */
+    #define STAT_LED_A_B_PIN    30      /* Amber LED (middle Led) */
+    #define STAT_LED_R_PIN      32      /* Red LED (closest to the Debug Header) */
+    #define CLK_EN_FPGA_PIN     33
 #endif
+
+
 
 #define STAT_LED_ENABLE_LEVEL_LOW 0
 #define STAT_LED_DISABLE_LVL_HIGH   (!STAT_LED_ENABLE_LEVEL_LOW)
@@ -2266,24 +2280,119 @@ void CSMON_vGetDateTime (
 }
 
 
-void Parameter132IncreaseValue( void )
-{
-    //        ((PAR_DES_I16_T*)(ParTable[132].ParDes))->pVal[0]++;
-    int parIndex;
+//void Parameter132IncreaseValue( void )
+//{
+//    int parIndex;
+//    int nParams = GetNumberOfParams();
+//
+//    for ( parIndex = 0; parIndex < nParams; parIndex++ )
+//    {
+//        if ( ParTable[parIndex].index == 132 )
+//        {
+//            break;
+//        }
+//    }
+//
+//    if ( parIndex < nParams )
+//    {
+//        ((PAR_DES_I16_T*)(ParTable[parIndex].ParDes))->pVal[0]++;
+//    }
+//}
 
-    for ( parIndex = 0; parIndex < GetNumberOfParams(); parIndex++ )
+
+
+uint16_t indexTable[BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX];
+
+//typedef const struct
+//{
+//    uint16_t index;                       //!< El. 0, ParameterNr.
+//    void* ParDes;                       //!< Zeiger auf Beschreibungsstruktur
+//} PARAMETER_TABLE_ENTRY_T;
+//PARAMETER_TABLE_ENTRY_T ParTable
+
+int paramIndex;
+uint16_t newIndex = 0;
+int dummyIndex = 0;
+uint16_t nParams;
+
+void IndexTableInitialization( void )
+{
+//    int parIndex;
+//    int newIndex = 0;
+//    int nParams = GetNumberOfParams();
+//    nParams = BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX;
+    nParams = GetNumberOfParams();
+
+    for ( paramIndex = 0; paramIndex < BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX; paramIndex++ )
     {
-        if ( ParTable[parIndex].index == 132 )
+        indexTable[paramIndex] = 65535;
+    }
+
+    for ( paramIndex = 0; paramIndex < nParams; paramIndex++ )
+    {
+        newIndex = ParTable[paramIndex].index;
+        if ( newIndex <= nParams )
+        {
+            indexTable[newIndex] = paramIndex;
+        }
+    }
+}
+
+
+void SetParameterDummyValue( uint16_t parameter, INT16 value )
+{
+    uint16_t parIndex;
+
+    parIndex = indexTable[parameter];
+
+    if ( parIndex < nParams )
+    {
+        ((PAR_DES_I16_T*)(ParTable[parIndex].ParDes))->pVal[0] = value;
+    }
+}
+
+//void SetParameterDummyValue( uint16_t parameter, INT16 value )
+//{
+//    int parIndex;
+//    int nParams = GetNumberOfParams();
+//
+//    for ( parIndex = 0; parIndex < nParams; parIndex++ )
+//    {
+//        if ( ParTable[parIndex].index == parameter )
+//        {
+//            break;
+//        }
+//    }
+//
+//    if ( parIndex < nParams )
+//    {
+//        ((PAR_DES_I16_T*)(ParTable[parIndex].ParDes))->pVal[0] = value;
+//    }
+//}
+
+
+INT16 GetParameterValue( uint16_t parameter )
+{
+    INT16 value;
+    int parIndex;
+    int nParams = GetNumberOfParams();
+
+    for ( parIndex = 0; parIndex < nParams; parIndex++ )
+    {
+        if ( ParTable[parIndex].index == parameter )
         {
             break;
         }
     }
 
-    if ( parIndex < GetNumberOfParams() )
+    if ( parIndex < nParams )
     {
-        ((PAR_DES_I16_T*)(ParTable[parIndex].ParDes))->pVal[0]++;
+        value = ((PAR_DES_I16_T*)(ParTable[parIndex].ParDes))->pVal[0];
     }
+    return value;
 }
+
+INT16 v = 9;
 
 /* *****************************************************************************
  * ControlProcess
@@ -2316,7 +2425,15 @@ void ControlProcess(void)
 //      RC_PAR_T (*pfFct) (INT16);        //!< Zeiger auf spezielle Behandlungsfunktion
 //    } PAR_DES_I16_T;
 
-    Parameter132IncreaseValue();
+//    Parameter132IncreaseValue();
+    v++;
+    GPIO_writePin( STAT_LED_A_B_PIN, STAT_LED_ENABLE_LEVEL_LOW );
+    SetParameterDummyValue( 131, v );
+    GPIO_writePin( STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH );  //13us
+
+//    SetParameterDummyValue( 132, v );
+//    SetParameterDummyValue( 133, v );
+//    SetParameterDummyValue( 134, v );
 
 
     //
@@ -2642,6 +2759,8 @@ void ParameterInitialization(void)
 
 }
 #endif
+
+
 
 
 
@@ -3177,8 +3296,6 @@ void main(void)
 #endif
 
 
-    //RecordersInitialization();
-
 
 #ifdef _CS_1211
 
@@ -3248,6 +3365,7 @@ void main(void)
     /* Recorder And Scope Initialization Made Once after parameter initialized */
     RecordersInitialization();
     ScopesInitialization();
+    IndexTableInitialization();
 
 #elif _CSMON_USE_EXTERNAL_PARAMETER_LIST
     ParameterInitialization();
