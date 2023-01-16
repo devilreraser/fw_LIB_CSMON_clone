@@ -24,30 +24,29 @@
 
 
 #if defined(__TMS320F2806x__)
-#include "boardcfg.h"
-#include "csmon_config.h"
-#include "sci_driver.h"
-#include "uart_driver.h"
-
+    #include "boardcfg.h"
+    #include "csmon_config.h"
+    #include "sci_driver.h"
+    #include "uart_driver.h"
 #else
 
-#define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 1024
+    #define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 1024
 
-#ifndef _CS_1211
-#include "emif_driver.h"
-#endif
+    #ifndef _CS_1211
+    #include "emif_driver.h"
+    #endif
 
-#if defined(_CS_1107_SCC_R01)
-#include "fpga_driver.h"
-#else
-#include "sci_driver.h"
-#include "uart_driver.h"
-#ifndef _CS_1211
-#include "fpga_sci_driver.h"
-#endif
-#endif
+    #if defined(_CS_1107_SCC_R01)
+    #include "fpga_driver.h"
+    #else
+    #include "sci_driver.h"
+    #include "uart_driver.h"
+    #ifndef _CS_1211
+    #include "fpga_sci_driver.h"
+    #endif
+    #endif
 
-#endif
+#endif  //defined(__TMS320F2806x__)
 
 #include "csmon.h"
 #include "parameter.h"
@@ -2279,7 +2278,7 @@ void CSMON_vGetDateTime (
         *pu8BCDYear     = MAIN_sDateTimeGet.u8Year;
 }
 
-
+#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE
 //void Parameter132IncreaseValue( void )
 //{
 //    int parIndex;
@@ -2393,6 +2392,8 @@ INT16 GetParameterValue( uint16_t parameter )
 }
 
 INT16 v = 9;
+#endif
+
 
 /* *****************************************************************************
  * ControlProcess
@@ -2412,6 +2413,7 @@ void ControlProcess(void)
     GPIO_writePin(STAT_LED_R_PIN, STAT_LED_ENABLE_LEVEL_LOW);     /* Red LED (closest to the Debug Header) */
 #endif
 
+#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE
 //    typedef const struct
 //    {
 //      UINT16    Attr;                                   //!< El. 1, Attribute des Parameters
@@ -2434,7 +2436,7 @@ void ControlProcess(void)
 //    SetParameterDummyValue( 132, v );
 //    SetParameterDummyValue( 133, v );
 //    SetParameterDummyValue( 134, v );
-
+#endif
 
     //
     // Test For Data Consistency and Control Emulation
