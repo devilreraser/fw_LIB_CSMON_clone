@@ -516,21 +516,6 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>C2806x_LIB/driverlib/.ccsproject</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/.ccsproject</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/driverlib/.cproject</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/.cproject</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/driverlib/.project</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/.project</locationURI>
-		</link>
-		<link>
 			<name>C2806x_LIB/driverlib/Debug</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -538,82 +523,82 @@
 		<link>
 			<name>C2806x_LIB/driverlib/debug.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/debug.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/debug.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/interrupt.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/interrupt.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/interrupt.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/interrupt.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/interrupt.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/interrupt.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/rom.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/rom.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/rom.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/rom_map.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/rom_map.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/rom_map.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/rtos_bindings.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/rtos_bindings.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/rtos_bindings.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/sysctl.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/sysctl.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/sysctl.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/sysctl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/sysctl.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/sysctl.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/systick.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/systick.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/systick.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/systick.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/systick.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/systick.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/uart.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/uart.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/uart.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/uart.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/uart.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/uart.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/usb.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/usb.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/usb.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/usb.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/usb_hal.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/usb_hal.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb_hal.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/usb_hal.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/usb_hal.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb_hal.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/cmd</name>
@@ -633,27 +618,27 @@
 		<link>
 			<name>C2806x_LIB/inc/hw_ints.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/inc/hw_ints.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_ints.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/inc/hw_memmap.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/inc/hw_memmap.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_memmap.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/inc/hw_types.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/inc/hw_types.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_types.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/inc/hw_uart.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/inc/hw_uart.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_uart.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/inc/hw_usb.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/inc/hw_usb.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_usb.h</locationURI>
 		</link>
 		<link>
 			<name>HexMonitor/01_Source/TI</name>
@@ -881,19 +866,9 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>C2000Ware_LIB/driverlib/ccs/.ccsproject</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/ccs/.ccsproject</locationURI>
-		</link>
-		<link>
-			<name>C2000Ware_LIB/driverlib/ccs/.cproject</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/ccs/.cproject</locationURI>
-		</link>
-		<link>
-			<name>C2000Ware_LIB/driverlib/ccs/.project</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/ccs/.project</locationURI>
+			<name>Peripheral/01_Source/TMS320F2806x</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/Debug</name>
@@ -1088,327 +1063,327 @@
 		<link>
 			<name>C2806x_LIB/common/include/DSP28x_Project.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/DSP28x_Project.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/DSP28x_Project.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_Cla_defines.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_Cla_defines.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_Cla_defines.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_Cla_typedefs.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_Cla_typedefs.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_Cla_typedefs.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_DefaultISR.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_DefaultISR.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_DefaultISR.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_Dma_defines.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_Dma_defines.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_Dma_defines.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_EPwm_defines.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_EPwm_defines.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_EPwm_defines.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_Examples.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_Examples.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_Examples.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_GlobalPrototypes.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_GlobalPrototypes.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_GlobalPrototypes.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_I2c_defines.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_I2c_defines.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_I2c_defines.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/F2806x_SWPrioritizedIsrLevels.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/include/F2806x_SWPrioritizedIsrLevels.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/include/F2806x_SWPrioritizedIsrLevels.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Adc.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Adc.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Adc.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_CSMPasswords.asm</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_CSMPasswords.asm</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_CSMPasswords.asm</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_CodeStartBranch.asm</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_CodeStartBranch.asm</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_CodeStartBranch.asm</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Comp.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Comp.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Comp.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_CpuTimers.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_CpuTimers.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_CpuTimers.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_DBGIER.asm</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_DBGIER.asm</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_DBGIER.asm</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_DefaultIsr.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_DefaultIsr.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_DefaultIsr.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_DisInt.asm</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_DisInt.asm</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_DisInt.asm</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Dma.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Dma.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Dma.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_ECan.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_ECan.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_ECan.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_ECap.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_ECap.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_ECap.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_EPwm.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_EPwm.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_EPwm.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_EQep.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_EQep.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_EQep.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Gpio.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Gpio.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Gpio.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_HRCap.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_HRCap.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_HRCap.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_I2C.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_I2C.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_I2C.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Mcbsp.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Mcbsp.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Mcbsp.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_OscComp.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_OscComp.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_OscComp.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_PieCtrl.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_PieCtrl.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_PieCtrl.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_PieVect.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_PieVect.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_PieVect.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_SWPrioritizedDefaultIsr.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_SWPrioritizedDefaultIsr.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_SWPrioritizedPieVect.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_SWPrioritizedPieVect.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Sci.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Sci.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Sci.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_Spi.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_Spi.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Spi.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_SysCtrl.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_SysCtrl.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_SysCtrl.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_TempSensorConv.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_TempSensorConv.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_TempSensorConv.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/source/F2806x_usDelay.asm</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/common/source/F2806x_usDelay.asm</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_usDelay.asm</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/Debug/driverlib.lib</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/MWare/driverlib/Debug/driverlib.lib</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/Debug/driverlib.lib</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/cmd/F2806x_Headers_BIOS.cmd</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/cmd/F2806x_Headers_BIOS.cmd</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/cmd/F2806x_Headers_nonBIOS.cmd</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/cmd/F2806x_Headers_nonBIOS.cmd</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Adc.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Adc.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Adc.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_BootVars.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_BootVars.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_BootVars.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Cla.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Cla.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Cla.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Comp.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Comp.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Comp.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_CpuTimers.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_CpuTimers.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_CpuTimers.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_DevEmu.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_DevEmu.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_DevEmu.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Device.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Device.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Device.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Dma.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Dma.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Dma.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_ECan.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_ECan.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_ECan.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_ECap.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_ECap.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_ECap.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_EPwm.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_EPwm.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_EPwm.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_EQep.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_EQep.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_EQep.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Gpio.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Gpio.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Gpio.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_HRCap.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_HRCap.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_HRCap.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_I2c.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_I2c.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_I2c.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Mcbsp.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Mcbsp.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Mcbsp.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_NmiIntrupt.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_NmiIntrupt.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_NmiIntrupt.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_PieCtrl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_PieCtrl.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_PieCtrl.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_PieVect.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_PieVect.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_PieVect.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Sci.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Sci.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Sci.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Spi.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Spi.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Spi.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_SysCtrl.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_SysCtrl.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_SysCtrl.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_Usb.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_Usb.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_Usb.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/include/F2806x_XIntrupt.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/include/F2806x_XIntrupt.h</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/include/F2806x_XIntrupt.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/source/F2806x_GlobalVariableDefs.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/c2000/C2000Ware_2_00_00_02/device_support/f2806x/headers/source/F2806x_GlobalVariableDefs.c</locationURI>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/source/F2806x_GlobalVariableDefs.c</locationURI>
 		</link>
 		<link>
 			<name>HexMonitor/01_Source/TI/hmdrv.c</name>
@@ -1659,6 +1634,211 @@
 			<name>Peripheral/01_Source/TI/uart_drv.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TI/uart_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/boardcfg.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/boardcfg.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/cpu.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/cpu.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/cputimer.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/cputimer.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/cputimer.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/cputimer.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/datetime.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/datetime.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/gpio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/gpio.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/gpio.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/gpio.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hmcfg.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hmcfg.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_cputimer.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_cputimer.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_epwmxbar.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_epwmxbar.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_gpio.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_gpio.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_inputxbar.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_inputxbar.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_ints_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_ints_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_memmap_local.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_memmap_local.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_nmi.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_nmi.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_outputxbar.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_outputxbar.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_pie.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_pie.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_sci.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_sci.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_sysctl.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_sysctl.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_xbar.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_xbar.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/hw_xint.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/hw_xint.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/int_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/int_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/int_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/int_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/pin_map.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/pin_map.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/rtc_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/rtc_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/rtc_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/rtc_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sci.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sci.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sci.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sci.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sci_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sci_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sci_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sci_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/stdextend.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/stdextend.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sys_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sys_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sys_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sys_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sysctl_2806x.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sysctl_2806x.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/sysctl_2806x.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/sysctl_2806x.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/timer.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/timer.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/timer.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/timer.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/tmr_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/tmr_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/tmr_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/tmr_drv.h</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/uart_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/uart_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Peripheral/01_Source/TMS320F2806x/uart_drv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/Peripheral/01_Source/TMS320F2806x/uart_drv.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib</name>

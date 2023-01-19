@@ -22,6 +22,7 @@ extern "C"
  * Header Includes
  **************************************************************************** */
 #include <stdint.h>
+#include "parameter_common.h"
     
 /* *****************************************************************************
  * Configuration Definitions
