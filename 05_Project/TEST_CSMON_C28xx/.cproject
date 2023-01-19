@@ -97,7 +97,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -201,7 +201,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -306,8 +306,17 @@
 							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex.259180529" name="C2000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.ti.ccstudio.buildDefinitions.C2000.Release.1531998533.874587866.800542254.1170008998" name="2837x_FLASH_lnk_cpu1.cmd" rcbsApplicability="disable" resourcePath="2837x_FLASH_lnk_cpu1.cmd" toolsToInvoke="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerRelease.994918778.453751369">
+						<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerRelease.994918778.453751369" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerRelease.994918778"/>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1132023119" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.657439421" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1475002174" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -428,7 +437,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|2837x_FLASH_lnk_cpu1.cmd|01_Source_Test/peripheral_driver/fpga_sci_driver.c|01_Source_Test/peripheral_driver/emif_driver.c|C2000Ware_LIB|CSMON_LIB/ReleaseRecorders|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -537,7 +546,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="AFE_F28374.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter2_table.c|CSMON_LIB/Release|2837x_FLASH_lnk_cpu1.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|AFE_F28374.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter2_table.c|CSMON_LIB/Release|2837x_FLASH_lnk_cpu1.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -643,7 +652,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseTestCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|CSMON_LIB/ReleaseTestCS1211|CSMON_LIB/ReleaseTestCS1107|01_Source_Test/parameter_table.c|01_Source_Test/parameter2_table.c|CSMON_LIB/ReleaseCS1211|28374_FLASH_lnk_cpu1.cmd|AFE_F28374.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/uart_driver.c|01_Source_Test/peripheral_driver/sci_driver.c|01_Source_Test/peripheral_driver/fpga_sci_driver.c|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/Release/CSMON_C28xx.lib|CSMON_LIB/ReleaseRecorders|CSMON_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -753,7 +762,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="AFE_F28374.cmd|CSMON_LIB/ReleaseCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter2_table.c|CSMON_LIB/Release|2837x_FLASH_lnk_cpu1.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="AFE_F28384.cmd|AFE_F28374.cmd|CSMON_LIB/ReleaseCS1211|CSMON_LIB/ReleaseCS1107|01_Source_Test/parameter2_table.c|CSMON_LIB/Release|2837x_FLASH_lnk_cpu1.cmd|MotorParam/Generated/csmon_config.c|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2806x_Device|C2806x_LIB|CSMON_LIB/Motor28062|lnk_F2806x.cmd|lnk_F2806x_for_Bootloader.cmd|01_Source_Test/peripheral_driver/fpga_driver.c|PERIPHERAL_LIB/Release|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|CSMON_LIB/ReleaseTestCS1107|CSMON_LIB/ReleaseRecorders|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|CSMON_LIB/ReleaseRecorders/CSMON_C28xx.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -778,6 +787,7 @@
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/TEST_CSMON_C28xx"/>
 		</configuration>
+		<configuration configurationName="ReleaseTestCS1211"/>
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/TEST_CSMON_C28xx"/>
 		</configuration>

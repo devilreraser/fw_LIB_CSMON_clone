@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.0                     
 ******************************************************************************
->> Linked Tue Jan 17 16:15:01 2023
+>> Linked Thu Jan 19 21:37:37 2023
 
 OUTPUT FILE NAME:   <../../../04_Output_Files/Motor28062/TEST_CSMON_C28xx.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 003ecb66
@@ -1164,6 +1164,27 @@ MODULE SUMMARY
     +--+--------------------------------+-------+------------------+--------------------+
        Total:                           0       6400               0                 
                                                                                      
+    C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/Motor28062/CSMON_C28xx.lib
+       hmmodbus.obj                     8638    1050               1585              
+       modbusreg.obj                    2349    306                2242              
+       csmon.obj                        3076    702                1008              
+       hmrecparam.obj                   1227    41                 2220              
+       uart_drv.obj                     267     76                 3121              
+       hmrec.obj                        489     0                  2137              
+       hmdrv.obj                        1183    20                 10                
+       hmserial.obj                     537     9                  135               
+       hmprotocol.obj                   420     32                 6                 
+       tmr_drv.obj                      345     35                 46                
+       hmscopeparam.obj                 154     9                  67                
+       hmscope.obj                      113     0                  63                
+       sci_drv.obj                      162     0                  0                 
+       hmlib.obj                        131     8                  2                 
+       sci.obj                          113     0                  0                 
+       gpio.obj                         90      0                  0                 
+       cputimer.obj                     6       0                  0                 
+    +--+--------------------------------+-------+------------------+--------------------+
+       Total:                           19300   2288               12642             
+                                                                                     
     C:\ti\ccs1210\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_ml.lib
        k_rem_pio2.c.obj                 1688    212                0                 
        s_sinf.c.obj                     276     24                 0                 
@@ -1214,27 +1235,6 @@ MODULE SUMMARY
        startup.c.obj                    1       0                  0                 
     +--+--------------------------------+-------+------------------+--------------------+
        Total:                           4668    404                11                
-                                                                                     
-    D:/Conv.git_Yana/fw_LIB_CSMON/04_Output_Files/Motor28062/CSMON_C28xx.lib
-       hmmodbus.obj                     8638    1050               1585              
-       modbusreg.obj                    2349    306                2242              
-       csmon.obj                        3076    702                1008              
-       hmrecparam.obj                   1227    41                 2220              
-       uart_drv.obj                     267     76                 3121              
-       hmrec.obj                        489     0                  2137              
-       hmdrv.obj                        1183    20                 10                
-       hmserial.obj                     537     9                  135               
-       hmprotocol.obj                   420     32                 6                 
-       tmr_drv.obj                      345     35                 46                
-       hmscopeparam.obj                 154     9                  67                
-       hmscope.obj                      113     0                  63                
-       sci_drv.obj                      162     0                  0                 
-       hmlib.obj                        131     8                  2                 
-       sci.obj                          113     0                  0                 
-       gpio.obj                         90      0                  0                 
-       cputimer.obj                     6       0                  0                 
-    +--+--------------------------------+-------+------------------+--------------------+
-       Total:                           19300   2288               12642             
                                                                                      
        Stack:                           0       0                  896               
     +--+--------------------------------+-------+------------------+--------------------+
