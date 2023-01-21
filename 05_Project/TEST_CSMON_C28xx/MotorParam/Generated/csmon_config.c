@@ -3,7 +3,11 @@
  * Author: Dimitar Lilov
  *
  * Created on 2019 08 14 12:51
- * 
+ *
+ * Generated on 01/21/2023 12:44:05 UTC
+ * Generator version: 1.04
+ * Generator template: C:\repo_github\fw_BasicAFE\02_Libraries\LIB_CSMON\05_Project\TEST_CSMON_C28xx\MotorParam\Template\
+ *
  * Description: ...
  * 
  **************************************************************************** */
@@ -164,10 +168,13 @@ extern int16_t s16DummyIncrementLoopC;
 extern int16_t s16DummyIncrementLoopV;
 extern int16_t s16DummyIncrementLoopCDiff;
 
+#pragma diag_push
+#pragma diag_suppress 70
+/* XXXXX warning generator */
 
 volatile const MAIN_sParameterList_t asParameterList[CSMON_CONFIG_PARAMETER_COUNT_MAX] =
 {
-/*                ID,        Attrib,   fucnWr, funcRd, accessWr, accessRd, bStorable, Offs,     CSMON_DATA_TYPE,  MCU Address                             Name               Unit,              Max,         Min,   Def,    Norm*/
+/*                ID,        Attrib,   fucnWr, funcRd, accessWr, accessRd, bStorable, Offs,     CSMON_DATA_TYPE,  MCU Address,                         Name,               Unit,             Max,         Min,   Def,    Norm*/
 INIT_PARAMETER(60000,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 U16,  &u16PeriodControl_usec,                 "CtrlLoopPeriod",   "usec",         65535,           0,     0,    1.0F),
 INIT_PARAMETER(60001,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 U16,  &u16DelayCtrlLoop_100nsec,              "CtrlLoopAddDelay", "usec",         65535,           0,     0,    0.100000001490116F),
 INIT_PARAMETER(60002,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 U16,  &u16DelayMainLoop_usec,                 "MainLoopAddDelay", "usec",         65535,           0,     0,    1.0F),
@@ -215,6 +222,9 @@ INIT_PARAMETER(  411,      CSMON_RW,     0x10,   0x03,        4,        1,      
 INIT_PARAMETER(  412,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyIncrementLoopCDiff,            "IncLoopTestCDiff", "A",            10000,      -10000,     0,    1.0F),
 
 };
+
+#pragma diag_pop
+
 /* *****************************************************************************
  * Prototype of functions definitions
  **************************************************************************** */

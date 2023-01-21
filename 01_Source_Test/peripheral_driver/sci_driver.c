@@ -77,8 +77,19 @@ void SCI_DRV_vInitFIFO(uint32_t base, uint32_t baud, uint32_t config)
     HWREGH(base + SCI_O_CCR) = 0;   /* explicitly clear ADDRIDLE_MODE (in SCI_setConfig not cleared) */
 
     #if defined(__TMS320F2806x__)
-    SCI_setConfig(base, DEVICE_LSPCLK_FREQ, baud, config);
-    #warning "to do get real LSPCLK frequency"
+
+
+    //#warning "to do get real LSPCLK frequency"
+    //SCI_setConfig(base, DEVICE_LSPCLK_FREQ, baud, config);
+
+    int dividerSYSCLK = SysCtrlRegs.PLLCR.bit.DIV;
+    uint32_t u32DeviceSYSCLKFreq = DEVICE_OSCSRC_FREQ * dividerSYSCLK / 2;
+
+    int dividerLSPCLK = SysCtrlRegs.PLLSTS.bit.DIVSEL;
+    uint32_t u32DeviceLSPCLKFreq = u32DeviceSYSCLKFreq / dividerLSPCLK;
+    SCI_setConfig(base, u32DeviceLSPCLKFreq, baud, config);
+
+
     #else
     SCI_setConfig(base, SysCtl_getLowSpeedClock(DEVICE_OSCSRC_FREQ), baud, config);
     #endif

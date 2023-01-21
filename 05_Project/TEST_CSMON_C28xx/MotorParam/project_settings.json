@@ -1,4 +1,6 @@
 {
+  "FormatVersion": 2,
+  "TemplateFolderPath": "Template\\",
   "IncludeNameUnit": true,
   "StructFieldNameUnit": "au8NameUnit",
   "IncludeFuncCode": true,
