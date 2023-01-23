@@ -2748,14 +2748,6 @@ void ParameterInitialization(void)
         GPIO_writePin(STAT_LED_A_B_PIN, STAT_LED_DISABLE_LVL_HIGH);        /* Amber LED (middle Led) */
 #endif
 
-
-        /* Recorder And Scope Initialization Made Once after parameter initialized */
-        RecordersInitialization();
-        ScopesInitialization();
-
-
-
-
     }
 
 
@@ -3367,13 +3359,22 @@ void main(void)
     /* Recorder And Scope Initialization Made Once after parameter initialized */
     RecordersInitialization();
     ScopesInitialization();
+
     IndexTableInitialization();
 
 #elif _CSMON_USE_EXTERNAL_PARAMETER_LIST
     ParameterInitialization();
     ExternalParametersInitialization();
+    /* Recorder And Scope Initialization Made Once after parameter initialized */
+    RecordersInitialization();
+    ScopesInitialization();
+
 #else
     ParameterInitialization();
+    /* Recorder And Scope Initialization Made Once after parameter initialized */
+    RecordersInitialization();
+    ScopesInitialization();
+
 #endif
 
     u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
