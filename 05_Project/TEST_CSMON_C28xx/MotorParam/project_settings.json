@@ -1,6 +1,6 @@
 {
   "FormatVersion": 2,
-  "TemplateFolderPath": "..\\..\\..\\..\\05_Project\\TEST_CSMON_C28xx\\MotorParam\\Template\\",
+  "TemplateFolderPath": "Template\\",
   "IncludeNameUnit": true,
   "StructFieldNameUnit": "au8NameUnit",
   "IncludeFuncCode": true,
