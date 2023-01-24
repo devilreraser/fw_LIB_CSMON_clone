@@ -61,6 +61,17 @@
  **************************************************************************** */
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
 
+
+#if defined(__TMS320F2806x__)
+
+#define RECORDER0_ONLY_TEST                 1
+#define RECORDER0_TOTAL_SAMPLE_COUNT        64
+#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   (RECORDER0_TOTAL_SAMPLE_COUNT-8)
+#define RECORDER_COUNT                      1
+
+#else
+
+
 #define RECORDER0_ONLY_TEST                             1
 
 #if RECORDER0_ONLY_TEST
@@ -77,6 +88,9 @@
 #define RECORDER2_TOTAL_SAMPLE_COUNT        6000
 #define RECORDER_COUNT                      CSMON_RECORDER_COUNT_MAX
 #endif
+
+#endif
+
 
 #define RECORDER_SAMPLE_TIME_FIX_1MS        0       /* If 1kHz sample frequency in CSMON PC Application 1ms equals 1sample */
 
@@ -3160,7 +3174,13 @@ void main(void)
     //
     Device_initGPIO();
 
+#ifdef _CS_1309
+    #define POWER_SAVE_MODE_PIN  97
+    uint16_t u16_POWER_SAVE_MODE = 1;
 
+    GPIO_setPinConfigOutput( POWER_SAVE_MODE_PIN );
+    GPIO_writePin( POWER_SAVE_MODE_PIN, u16_POWER_SAVE_MODE );
+#endif
 
 #ifdef _CS_1211
 

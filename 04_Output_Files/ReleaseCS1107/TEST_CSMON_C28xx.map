@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.0                     
 ******************************************************************************
->> Linked Thu Jan 19 21:32:43 2023
+>> Linked Tue Jan 24 13:27:33 2023
 
 OUTPUT FILE NAME:   <../../../04_Output_Files/ReleaseCS1107/TEST_CSMON_C28xx.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 000898d1
@@ -2214,7 +2214,7 @@ abs   ffffffff  .text
 0     0008ae1a  _MODBUSREG_vSetParamStringAddress                                                                
 0     0008ab78  _PERIPHERAL_vInit                                                                                
 0     0008ab73  _PERIPHERAL_vProcess                                                                             
-0     00085a2e  _ParameterInitialization                                                                         
+0     0008596e  _ParameterInitialization                                                                         
 0     00086062  _RamfuncsLoadEnd                                                                                 
 abs   00000062  _RamfuncsLoadSize                                                                                
 0     00086000  _RamfuncsLoadStart                                                                               
@@ -2223,7 +2223,7 @@ abs   00000062  _RamfuncsRunSize
 0     00008000  _RamfuncsRunStart                                                                                
 0     0008a1f6  _RecorderDateFromLocalDateTime                                                                   
 0     0008a2ea  _RecorderTimeFromLocalDateTime                                                                   
-0     0008596e  _RecordersInitialization                                                                         
+0     00085a34  _RecordersInitialization                                                                         
 0     00089c02  _SCIA_RXFIFOISR                                                                                  
 0     00089c40  _SCIA_TXFIFOISR                                                                                  
 0     00089c7e  _SCIB_RXFIFOISR                                                                                  
@@ -2241,7 +2241,7 @@ abs   00000062  _RamfuncsRunSize
 0     000881d1  _SCI_setConfig                                                                                   
 0     0008acbe  _SCI_u32GetBaseFromModuleIndex                                                                   
 0     000881af  _SCI_writeCharArray                                                                              
-0     00085a06  _ScopesInitialization                                                                            
+0     00085acc  _ScopesInitialization                                                                            
 0     0000805e  _SysCtl_delay                                                                            0008605e
 0     00086463  _SysCtl_getAuxClock                                                                              
 0     000863c4  _SysCtl_getClock                                                                                 
@@ -2391,7 +2391,7 @@ abs   ffffffff  ___text__
 0     00083f20  _i2cRWProcess                                                                                    
 0     00083edd  _initI2C                                                                                         
 1     0000e93d  _limit_count_params                                                                              
-0     00085af8  _main                                                                                            
+0     00085af4  _main                                                                                            
 1     0000e93e  _maximum_count_params                                                                            
 0     0008a5aa  _memcpy                                                                                          
 1     0000ed29  _minutes                                                                                         
@@ -2692,10 +2692,10 @@ page  address   name
 0     00085412  _CSMON_eSetParameter                                                                             
 0     00085941  _vSetWatchdogPrescalerTimeDiv                                                                    
 0     00085952  _vGetWatchdogPrescaler                                                                           
-0     0008596e  _RecordersInitialization                                                                         
-0     00085a06  _ScopesInitialization                                                                            
-0     00085a2e  _ParameterInitialization                                                                         
-0     00085af8  _main                                                                                            
+0     0008596e  _ParameterInitialization                                                                         
+0     00085a34  _RecordersInitialization                                                                         
+0     00085acc  _ScopesInitialization                                                                            
+0     00085af4  _main                                                                                            
 0     00085cda  _eWriteParElement                                                                                
 0     00085cdc  _ExternalParametersInitialization                                                                
 0     00085d08  _ControlProcess                                                                                  
@@ -3818,7 +3818,7 @@ Value     Binding   Name (Section)
 00090284  local     $C$FL3 (.econst)
 00090288  local     $C$FL4 (.econst)
 0008594d  local     $C$L1 (.text)
-00085af3  local     $C$L10 (.text)
+00085a2f  local     $C$L10 (.text)
 00085bc8  local     $C$L11 (.text)
 00085be1  local     $C$L12 (.text)
 00085bf8  local     $C$L13 (.text)
@@ -3836,12 +3836,12 @@ Value     Binding   Name (Section)
 00085dba  local     $C$L24 (.text)
 00085dc3  local     $C$L25 (.text)
 00085968  local     $C$L3 (.text)
-00085a67  local     $C$L4 (.text)
-00085a71  local     $C$L5 (.text)
-00085a8a  local     $C$L6 (.text)
-00085ace  local     $C$L7 (.text)
-00085acf  local     $C$L8 (.text)
-00085ad3  local     $C$L9 (.text)
+000859a7  local     $C$L4 (.text)
+000859b1  local     $C$L5 (.text)
+000859ca  local     $C$L6 (.text)
+00085a0e  local     $C$L7 (.text)
+00085a0f  local     $C$L8 (.text)
+00085a13  local     $C$L9 (.text)
 00000000  local     .bss (.bss)
 000821d1  local     .cinit (.cinit)
 00000000  local     .cinit:_au8TestCharArray16 (.cinit:_au8TestCharArray16)
@@ -3865,9 +3865,9 @@ Value     Binding   Name (Section)
 0000e900  global    _MAIN_bDateTimeSet (.ebss)
 0000e980  global    _MAIN_sDateTimeGet (.ebss)
 0000e988  global    _MAIN_sDateTimeSet (.ebss)
-00085a2e  global    _ParameterInitialization (.text)
-0008596e  global    _RecordersInitialization (.text)
-00085a06  global    _ScopesInitialization (.text)
+0008596e  global    _ParameterInitialization (.text)
+00085a34  global    _RecordersInitialization (.text)
+00085acc  global    _ScopesInitialization (.text)
 0000e950  global    _aDummyDataTable (.ebss)
 000a0000  global    _asParameterList (.econst:_asParameterList)
 00000000  global    _au8TestCharArray16 (.ebss:_au8TestCharArray16)
@@ -3886,7 +3886,7 @@ Value     Binding   Name (Section)
 0000e93b  global    _eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister (.ebss)
 00085cda  global    _eWriteParElement (.text)
 0000e93d  global    _limit_count_params (.ebss)
-00085af8  global    _main (.text)
+00085af4  global    _main (.text)
 0000e93e  global    _maximum_count_params (.ebss)
 0000e94e  global    _pu16ModbusMessageCounter (.ebss)
 0000e914  global    _s16DummyCurrentPhaseA (.ebss)
