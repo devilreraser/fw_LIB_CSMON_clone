@@ -3174,7 +3174,13 @@ void main(void)
     //
     Device_initGPIO();
 
+#ifdef _CS_1309
+    #define POWER_SAVE_MODE_PIN  97
+    uint16_t u16_POWER_SAVE_MODE = 1;
 
+    GPIO_setPinConfigOutput( POWER_SAVE_MODE_PIN );
+    GPIO_writePin( POWER_SAVE_MODE_PIN, u16_POWER_SAVE_MODE );
+#endif
 
 #ifdef _CS_1211
 
