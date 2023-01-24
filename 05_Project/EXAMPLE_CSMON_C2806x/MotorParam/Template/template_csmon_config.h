@@ -4,9 +4,9 @@
  *
  * Created on 2019 08 14 12:51
  *
- * Generated on 01/24/2023 13:16:37 UTC
- * Generator version: 1.06
- * Generator template: D:\Conv.git_GitHub\fw_BasicAFE\02_Libraries\LIB_CSMON\05_Project\TEST_CSMON_C28xx\MotorParam\Template\
+ * Generated on $genTime$
+ * Generator version: $genVer$
+ * Generator template: $genTemplate$
  *
  * Description: ...
  * 
@@ -77,17 +77,17 @@ typedef struct
 {
     uint16_t u16ParameterIndexID;
     CSMON_uParameterDefinitionsBitsCount_t uBitsCount;
-    char au8NameUnit[(CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX)/2];
-    uAnyType32_t u32Max;
-    uAnyType32_t u32Min;
-    uAnyType32_t u32Def;
+    char $au8NameUnit$[(CSMON_SET_PARAMETER_NAMEUNIT_LENGTH_MAX)/2];
+    uAnyType32_t $u32Max$;
+    uAnyType32_t $u32Min$;
+    uAnyType32_t $u32Def$;
     //uAnyType32_t u32Offset;
-    float Norm;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-    CSMON_uParameterDefinitionsFunctionCode_t uFunctionCode;
-    CSMON_uParameterDefinitionsAccessLevel_t uAccessLevel;
+    float $Norm$;                 /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+    CSMON_uParameterDefinitionsFunctionCode_t $uFunctionCode$;
+    CSMON_uParameterDefinitionsAccessLevel_t $uAccessLevel$;
     CSMON_uRegisterAddressTableSize uParameterSize;
     CSMON_uRegisterAddressTableFlags uParameterFlags;
-    uint16_t u16RealAddress;
+    $realAddrType$ u16RealAddress;
     CSMON_eDataType_t eDataTypeAttribute;
 }MAIN_sParameterList_t;
 

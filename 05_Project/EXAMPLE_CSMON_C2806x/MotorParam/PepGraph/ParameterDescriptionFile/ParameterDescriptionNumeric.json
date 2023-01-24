@@ -1,0 +1,1370 @@
+{
+  "Version": 1,
+  "Numerics": [
+    {
+      "Key": {
+        "StorageId": 60000,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60000,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 65535,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60001,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60001,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 65535,
+        "Multiplier": 0.10000000149011612,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60002,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60002,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 65535,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60003,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60003,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 65535,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60004,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60004,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 2,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 4294967295,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60005,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60005,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 2,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 4294967295,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60006,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60006,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 2,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 4294967295,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60007,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60007,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 2,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 4294967295,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60008,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60008,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 2,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 4294967295,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60009,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 60009,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 0,
+        "BitsCount": 8,
+        "MSBitMask": 128,
+        "NumberBitsMask": 255,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 65534,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 65534,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 65535,
+        "Multiplier": 0.0,
+        "Offset": 0,
+        "IsArithmetic": false,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 0,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 0,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 0,
+        "BitsCount": 8,
+        "MSBitMask": 128,
+        "NumberBitsMask": 255,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 1,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 1,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 3.1414999961853027,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 2,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 2,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 3,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 3,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 4,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 4,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 5,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 5,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 6,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 6,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 2,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 10000,
+        "Multiplier": 9.9999997473787516E-05,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 7,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 7,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 1,
+        "Maximum": 64,
+        "Multiplier": 13.107199668884277,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 8,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 8,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 9,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 9,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 10,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 10,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 11,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 11,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 28,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 28,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 130,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -1000000000,
+        "Maximum": 1000000000,
+        "Multiplier": 9.9999999747524271E-07,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 29,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 29,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 130,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -1000000000,
+        "Maximum": 1000000000,
+        "Multiplier": 9.9999999747524271E-07,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 30,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 30,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 130,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -1000000000,
+        "Maximum": 1000000000,
+        "Multiplier": 9.9999999747524271E-07,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 31,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 31,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 130,
+        "BitsCount": 32,
+        "MSBitMask": 2147483648,
+        "NumberBitsMask": 4294967295,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -1000000000,
+        "Maximum": 1000000000,
+        "Multiplier": 9.9999999747524271E-07,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 108,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 108,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 109,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 109,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 110,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 110,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 111,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 111,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 208,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 208,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 209,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 209,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 210,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 210,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 211,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 211,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 308,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 308,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 309,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 309,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 310,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 310,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 311,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 311,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 408,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 408,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 409,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 409,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 410,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 410,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 411,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 411,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 412,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 412,
+          "StartBitIndexOrElementCount": 0,
+          "IsBitField": false,
+          "IsArray": false,
+          "StorageType": 0
+        },
+        "IsBitField": false,
+        "DataType": 129,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": -10000,
+        "Maximum": 10000,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    }
+  ],
+  "HashCode": -1387726493
+}
