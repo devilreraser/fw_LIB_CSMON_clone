@@ -156,30 +156,35 @@ void Example_MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr
 void Device_init(void)
 {
     //
+    // Step 3. Clear all interrupts and initialize PIE vector table:
+    // Disable CPU interrupts
+    //
+    DINT;
+
+    //
+    // Disable the watchdog
+    //
+    SysCtl_disableWatchdog();
+
+
+    //
     // Step 1. Initialize System Control:
     // PLL, WatchDog, enable Peripheral Clocks
     // This example function is found in the F2806x_SysCtrl.c file.
     //
     InitSysCtrl();
 
-    EALLOW;
-
-    SysCtrlRegs.LOSPCP.all = 0x0000;
-
-    EDIS;
+    //force low speed clock no prescaller
+    //EALLOW;
+    //SysCtrlRegs.LOSPCP.all = 0x0000;
+    //EDIS;
 
     //
     // Step 2. Initalize GPIO:
     // This example function is found in the F2806x_Gpio.c file and
     // illustrates how to set the GPIO to it's default state.
     //
-    InitGpio();
-
-    //
-    // Step 3. Clear all interrupts and initialize PIE vector table:
-    // Disable CPU interrupts
-    //
-    DINT;
+    //InitGpio();
 
     //
     // Initialize the PIE control registers to their default state.
@@ -223,13 +228,14 @@ void Device_init(void)
        If the flash API functions are executed from secure memory
        (L0-L3) then this step is not required.
    ------------------------------------------------------------------*/
-
+#if 0
       uint16_t Status = Device_CsmUnlock();
 
       if(Status != STATUS_SUCCESS)
       {
           ESTOP0;
       }
+#endif
 
 
    /*------------------------------------------------------------------
@@ -259,7 +265,8 @@ void Device_init(void)
 #ifdef _FLASH
     #if 1
     // We must copy required user interface functions to RAM.
-    Example_MemCopy(&RamfuncsLoadStart, &RamfuncsLoadEnd, &RamfuncsRunStart);
+    //Example_MemCopy(&RamfuncsLoadStart, &RamfuncsLoadEnd, &RamfuncsRunStart);
+    memcpy(&RamfuncsRunStart, &RamfuncsLoadStart, (Uint32)&RamfuncsLoadSize);
     #else
     memcpy(&RamfuncsRunStart, &RamfuncsLoadStart, (Uint32)&RamfuncsLoadSize);
     #endif
@@ -289,10 +296,11 @@ void Device_init(void)
          This value is calculated during the compile based on the CPU
          rate, in nanoseconds, at which the algorithums will be run.
     ------------------------------------------------------------------*/
-
+#if 0
      EALLOW;
      Flash_CPUScaleFactor = SCALE_FACTOR;
      EDIS;
+#endif
 
 
     /*------------------------------------------------------------------
@@ -304,20 +312,17 @@ void Device_init(void)
          NULL is defined in <stdio.h>.
     ------------------------------------------------------------------*/
 
+#if 0
      EALLOW;
      Flash_CallbackPtr = &MyCallbackFunction;
      EDIS;
+#endif
 
 
 
 
 
 #if 0
-    //
-    // Disable the watchdog
-    //
-    SysCtl_disableWatchdog();
-
 #ifdef _FLASH
     //
     // Copy time critical code and flash setup code to RAM. This includes the

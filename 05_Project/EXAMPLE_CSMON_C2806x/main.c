@@ -399,11 +399,38 @@ void CSMON_vGetDateTime (
  **************************************************************************** */
 void main(void)
 {
+    DINT;
+
+    //
+    // Disable the watchdog
+    //
+    SysCtl_disableWatchdog();
+
+#ifdef _2806x_ISO_CONTROL_CARD
+    EALLOW;
+    //  LED2 - red led (the middle led between LED3 and the power Supply green Led)
+    GpioCtrlRegs.GPAPUD.bit.GPIO31 = 0;   // Enable pullup on GPIO31
+    GpioCtrlRegs.GPAMUX2.bit.GPIO31 = 0;  // GPIO31 = GPIO
+    GpioCtrlRegs.GPADIR.bit.GPIO31 = 1;  // GPIO31 = output
+    GpioDataRegs.GPADAT.bit.GPIO31 = 0; // level
+
+    //  LED3 - red led nearest to the micro USB
+    GpioCtrlRegs.GPBPUD.bit.GPIO34 = 0;  // Enable pullup on GPIO34
+    GpioCtrlRegs.GPBMUX1.bit.GPIO34 = 0; // GPIO34 = GPIO34
+    GpioCtrlRegs.GPBDIR.bit.GPIO34 = 1;  // GPIO34 = output
+    GpioDataRegs.GPBDAT.bit.GPIO34 = 0; // level
+    EDIS;
+
+#endif
+
+    //while(1);
+
     // Configure PLL, disable WD, enable peripheral clocks.
     Device_init();
 
     // Disable pin locks and enable internal PullUps.
     Device_initGPIO();
+
 
     // CSMON Initialization -> ~ 2.25ms
     eResponseCode_CSMON_eInit = CSMON_eInit();
@@ -430,13 +457,19 @@ void main(void)
     // CSMON Internal Recorders Setup with Already Made Configuration
     CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
 
+
+    //
+    // Disable the watchdog
+    //
+    SysCtl_enableWatchdog();
+
     EINT;
     ERTM;
 
     for (;;)
     {
         // Reset the WatchDog counter
-        //SysCtl_serviceWatchdog();
+        SysCtl_serviceWatchdog();
 
         // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
         eResponseCode_CSMON_eProcess = CSMON_eProcess();
