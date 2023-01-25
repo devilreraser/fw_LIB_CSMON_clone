@@ -138,6 +138,11 @@
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/DemoBoard28069</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/Motor28062</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -696,6 +701,16 @@
 			<name>C2806x_LIB/headers/source</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/DemoBoard28069/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/DemoBoard28069/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062/CSMON_C28xx.lib</name>
