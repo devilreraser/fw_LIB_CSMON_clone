@@ -90,8 +90,6 @@
 #endif
 
 
-#define SCOPE_COUNT                         1
-
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
@@ -237,7 +235,6 @@ uint16_t u16WatchdogPrescalerOld = 0;
  * Functions
  **************************************************************************** */
 
-#if _CSMON_USE_EXTERNAL_PARAMETER_TABLE == 0
 /* *****************************************************************************
  * ExternalParametersInitialization
  **************************************************************************** */
@@ -248,121 +245,24 @@ void ExternalParametersInitialization(void)
 #else
     CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
 #endif
-    //CSMON_eSetParameterListProcessFunc((uint32_t *)&asParameterList[0].u32ProcessFunc, sizeof(asParameterList[0]));
+
     CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
     CSMON_eSetParameterListRegisterSize((uint16_t *)&asParameterList[0].uParameterSize.u16Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListRegisterFlags((uint16_t *)&asParameterList[0].uParameterFlags.u16Register, sizeof(asParameterList[0]));
+
 #if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     CSMON_eSetParameterListFunctionCode((uint16_t *)&asParameterList[0].uFunctionCode, sizeof(asParameterList[0]));
     CSMON_eSetParameterListAccessLevel((uint16_t *)&asParameterList[0].uAccessLevel, sizeof(asParameterList[0]));
     CSMON_eSetParameterListBitsCount((uint16_t *)&asParameterList[0].uBitsCount, sizeof(asParameterList[0]));
-#endif
-    //CSMON_eSetParameterListParamAttrib((uint16_t *)&asParameterList[0].u16ParamAttributes, sizeof(asParameterList[0]));
-#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
     CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8NameUnit, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataType((uint16_t *)&asParameterList[0].eDataTypeAttribute, sizeof(asParameterList[0]));
-    //CSMON_eSetParameterListVisualType((uint16_t *)&asParameterList[0].eVisualTypeAttribute, sizeof(asParameterList[0]));
 #endif
+
     CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
     CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-    //CSMON_eSetParameterListDataOffset((uint32_t *)&asParameterList[0].u32Offset.u32Register, sizeof(asParameterList[0]));
 }
-
-void ParameterInitialization(void)
-{
-    volatile uint16_t u16Index;
-
-    uint32_t u32ParamRealAddress;
-
-    volatile uint32_t u32ParamVer;
-    volatile uint32_t u32DateTime;
-    volatile uint32_t u32CheckSum;
-
-    uWord32_t uParamVerBackup;
-    uWord32_t uDateTimeBackup;
-    uWord32_t uCheckSumBackup;
-
-
-    uParamVerBackup.u32Register = 0xFFFFFFFF;
-    uDateTimeBackup.u32Register = 0xFFFFFFFF;
-    uCheckSumBackup.u32Register = 0xAA561234;
-
-    u32ParamVer = PARAM_TABLE_VERSION;
-    u32DateTime = PARAM_TABLE_DATETIME;
-    u32CheckSum = CSMON_u32GetParameterCheckSum();                        /* Get Checksum From CSMON */
-
-    u16CountSetParameterFail = 0;
-    u16CountSetParameterFree = 0;
-
-    if ( (uParamVerBackup.u32Register != u32ParamVer)
-      || (uDateTimeBackup.u32Register != u32DateTime)
-      || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
-    {
-        /* Invalid Table - Reset Parameter Table */
-        CSMON_eResetParameterTable();                                   /* Reset Internal Used Parameters Count */
-
-        /* Add Parameters */
-        for (u16Index = 0; u16Index < BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX; u16Index++)
-        {
-
-#if CSMON_REALADR_16BIT
-            u32ParamRealAddress = asParameterList[u16Index].u16RealAddress;
-#else
-            u32ParamRealAddress = asParameterList[u16Index].u32RealAddress;
-#endif
-
-            if (asParameterList[u16Index].u16ParameterIndexID == PARAM_ID_MODBUS_MSG_CNT)
-            {
-                CSMON_vSetModbusMessageCounterRegisterRealAddress((uint32_t)&u16DummyDataCnt);
-                pu16ModbusMessageCounter = (uint16_t*)CSMON_u32GetModbusMessageCounterRegisterRealAddress();
-                u32ParamRealAddress = (uint32_t)pu16ModbusMessageCounter;
-            }
-
-
-            eResponseCode_CSMON_eSetParameter =
-                CSMON_eSetParameter (
-                    asParameterList[u16Index].u16ParameterIndexID,
-                    u32ParamRealAddress,
-#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
-                    asParameterList[u16Index].u16ParamAttributes,
-   (uint_least8_t*)&asParameterList[u16Index].au8Name,
-   (uint_least8_t*)&asParameterList[u16Index].au8Unit,
-#else
-                   NULL,
-                   NULL,
-                   NULL,
-#endif
-                    asParameterList[u16Index].u32Max.u32Register,
-                    asParameterList[u16Index].u32Min.u32Register,
-                    asParameterList[u16Index].u32Def.u32Register,
-                    asParameterList[u16Index].Norm,
-#if _CSMON_USE_EXTERNAL_PARAMETER_LIST == 0
-                    asParameterList[u16Index].u8BitCountOrArrayElementSize,
-                    asParameterList[u16Index].u8StartBitOrArrayElementCount
-#else
-                    0,
-                    0
-#endif
-                    );
-            if (u32ParamRealAddress == NULL)
-            {
-                u16CountSetParameterFree++;
-            }
-            else
-            if(eResponseCode_CSMON_eSetParameter != CSMON_RESPONSE_CODE_OK)
-            {
-                u16CountSetParameterFail++;
-            }
-        }
-
-
-        CSMON_eApplyParameterChanges();                         /* Internal Library Apply Written Parameters */
-    }
-}
-#endif
-
 
 /* *****************************************************************************
  * RecordersInitialization
@@ -426,34 +326,6 @@ void RecordersInitialization(void)
             CSMON_RECORDER_0, u16ValidParameters);
 
 
-    #if RECORDER0_ONLY_TEST == 0
-
-    /* Recorder 1 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEA_32, CSMON_POSITION_IN_RECORDER_0);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEB_32, CSMON_POSITION_IN_RECORDER_1);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_CURRENT_PHASEC_32, CSMON_POSITION_IN_RECORDER_2);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_1, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
-            CSMON_RECORDER_1, CSMON_COUNT_PARAMETERS_4);
-
-    /* Recorder 2 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_2, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_RECORDER_0);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_2, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_RECORDER_1);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_2, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_RECORDER_2);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_2, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_RECORDER_3);
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
-            CSMON_RECORDER_2, CSMON_COUNT_PARAMETERS_4);
-
-    #endif
-
 
     /* Recorder 0 Configuration */
     eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfigurationSkipSamples (
@@ -463,22 +335,6 @@ void RecordersInitialization(void)
             RECORDER0_SAMPLE_FREQUENCY_HZ / 3.0); /* Sample Frequency in Hz */
 
 
-    #if RECORDER0_ONLY_TEST == 0
-
-    /* Recorder 1 Configuration */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
-            CSMON_RECORDER_1,
-            RECORDER1_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
-            RECORDER1_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            RECORDER1_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
-
-    /* Recorder 2 Configuration */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfiguration (
-            CSMON_RECORDER_2,
-            RECORDER2_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
-            RECORDER2_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            RECORDER2_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
-    #endif
 
     /* Note !!! CSMON_eSetRecorderTriggerAtPosition call after CSMON_eSetRecorderConfiguration */
 
@@ -490,165 +346,11 @@ void RecordersInitialization(void)
             (uint32_t)true,
             (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
 
-    #if RECORDER0_ONLY_TEST == 0
-
-    /* Trigger Recorder 1 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_1,
-            PARAM_ID_STARUNNINGMODE,
-            (uint32_t)true,
-            (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
-
-    /* Trigger Recorder 2 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
-            CSMON_RECORDER_2,
-            (uint16_t)0,
-            (uint32_t)0,
-            (uint16_t)CSMON_TRIGGER_MODE_NONE);
-    #endif
 
 
-    #if EXTERNAL_RECORDERS == 1
-    //
-    // CSMON External Recorder Usage Setup
-    //
-    CSMON_eSetExternalRecorderUsage
-    (
-                                    CSMON_RECORDER_0,
-    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].sStatus,
-    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_0].u32StartAddressFirstDataSample,
-             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferSampleCount,
-             sExternalRecoderHandle[CSMON_RECORDER_0].u32CircleBufferStartAddress,
-             sExternalRecoderHandle[CSMON_RECORDER_0].eTriggerSubSecondMode,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u32TriggerMicrosecondsOrRollingTimerTicks,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDSeconds,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMinutes,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDHours,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDWeekdays,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDDay,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDMonth,
-            &sExternalRecoderHandle[CSMON_RECORDER_0].u8TriggerBCDYear
-    );
-    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
 
-    #if RECORDER0_ONLY_TEST == 0
-    CSMON_eSetExternalRecorderUsage
-    (
-                                    CSMON_RECORDER_1,
-    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].sStatus,
-    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_1].u32StartAddressFirstDataSample,
-             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferSampleCount,
-             sExternalRecoderHandle[CSMON_RECORDER_1].u32CircleBufferStartAddress,
-             sExternalRecoderHandle[CSMON_RECORDER_1].eTriggerSubSecondMode,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u32TriggerMicrosecondsOrRollingTimerTicks,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDSeconds,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMinutes,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDHours,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDWeekdays,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDDay,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDMonth,
-            &sExternalRecoderHandle[CSMON_RECORDER_1].u8TriggerBCDYear
-    );
-    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_1);
-
-    CSMON_eSetExternalRecorderUsage
-    (
-                                    CSMON_RECORDER_2,
-    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].sStatus,
-    (uint16_t*)&sExternalRecoderHandle[CSMON_RECORDER_2].u32StartAddressFirstDataSample,
-             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferSampleCount,
-             sExternalRecoderHandle[CSMON_RECORDER_2].u32CircleBufferStartAddress,
-             sExternalRecoderHandle[CSMON_RECORDER_2].eTriggerSubSecondMode,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u32TriggerMicrosecondsOrRollingTimerTicks,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDSeconds,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMinutes,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDHours,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDWeekdays,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDDay,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDMonth,
-            &sExternalRecoderHandle[CSMON_RECORDER_2].u8TriggerBCDYear
-    );
-    CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_2);
-    #endif
-
-#endif
 }
 
-
-
-/* *****************************************************************************
- * ScopesInitialization
- **************************************************************************** */
-void ScopesInitialization(void)
-{
-#if SCOPE_COUNT >= 1
-    /* Scope 0 */
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_SCOPE_1);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_0, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_SCOPE_2);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_0, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
-            CSMON_SCOPE_0, CSMON_COUNT_PARAMETERS_4);
-#endif
-
-#if SCOPE_COUNT >= 2
-    /* Scope 1 */
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_SCOPE_1);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_1, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_SCOPE_2);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_1, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
-            CSMON_SCOPE_1, CSMON_COUNT_PARAMETERS_4);
-#endif
-
-#if SCOPE_COUNT >= 3
-    /* Scope 2 */
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEA, CSMON_POSITION_IN_SCOPE_0);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEB, CSMON_POSITION_IN_SCOPE_1);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_2, PARAM_ID_CURRENT_PHASEC, CSMON_POSITION_IN_SCOPE_2);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterInScopeAtPosition (
-            CSMON_SCOPE_2, PARAM_ID_VOLTAGE_DCLINK, CSMON_POSITION_IN_SCOPE_3);
-    eResponseCode_CSMON_eSetScope = CSMON_eSetParameterCountInScope (
-            CSMON_SCOPE_2, CSMON_COUNT_PARAMETERS_4);
-#endif
-}
-
-
-
-CSMON_eReturnCodeParameter_t eWriteParElement(uint16_t u16Index, CSMON_eParameterElement_t eElement, uint16_t* pu16Len, void* pData, uint16_t u16NoStore, uint16_t u16DataMode, uint16_t u16Password)
-{
-    CSMON_eReturnCodeParameter_t eResult = CSMON_RC_PARA_OK;
-
-    //uint32_t u32Data = *((uint32_t*)pData);
-    //uint16_t u16Data = *((uint16_t*)pData);
-    //uint16_t u16Len = *((uint16_t*)pu16Len);
-
-    return eResult;
-}
-
-
-void vSetWatchdogPrescalerTimeDiv(uint16_t u16Prescaler)
-{
-    if ((u16Prescaler >= SYSCTL_WD_PRESCALE_1) && (u16Prescaler <= SYSCTL_WD_PRESCALE_64))
-    {
-        u16WatchdogPrescalerTime = (1 << (u16Prescaler-1));
-    }
-    else
-    {
-        u16WatchdogPrescalerTime = 1;
-    }
-}
 
 
 void CSMON_vSetDateTime (
@@ -703,27 +405,6 @@ void main(void)
     // Disable pin locks and enable internal PullUps.
     Device_initGPIO();
 
-    // Clear all interrupts and initialize PIE vector table: Disable CPU interrupts
-    // Initialize interrupt controller and vector table. for __TMS320F2806x__ Interrupts fixed in Device Init?
-
-#define CPUTIMER1_PRESCALLER_VALUE      ((DEVICE_SYSCLK_FREQ /   1000000)-1)    /* Timer Tick 1.0 microseconds */
-    //#define CPUTIMER1_PRESCALLER_VALUE      ((DEVICE_SYSCLK_FREQ / 200000000)-1)    /* Timer Tick 5.0 nanoseconds */
-    //
-    CPUTimer_setPeriod( CPUTIMER1_BASE, 0xFFFFFFFF );
-    CPUTimer_setPreScaler( CPUTIMER1_BASE, CPUTIMER1_PRESCALLER_VALUE );
-    CPUTimer_stopTimer( CPUTIMER1_BASE );
-    CPUTimer_reloadTimerCounter( CPUTIMER1_BASE );
-    CPUTimer_enableInterrupt( CPUTIMER1_BASE );
-    CPUTimer_startTimer( CPUTIMER1_BASE );
-
-    //  Calculate Free Running Timer Ticks Per microsecond
-    u16FreeRunningTimerPrescaller = (HWREGH(CPUTIMER1_BASE + CPUTIMER_O_TPRH) << 8U) + (HWREGH(CPUTIMER1_BASE + CPUTIMER_O_TPR) & CPUTIMER_TPR_TDDR_M);
-    u16FreeRunningTimerTicksPerMicroSecond = ((DEVICE_SYSCLK_FREQ / 1000000) / (u16FreeRunningTimerPrescaller+1));
-    if (u16FreeRunningTimerTicksPerMicroSecond == 0)
-    {
-        u16FreeRunningTimerTicksPerMicroSecond = 1;
-    }
-
     // CSMON Initialization -> ~ 2.25ms
     eResponseCode_CSMON_eInit = CSMON_eInit();
     // Check CSMON Response Code if needed
@@ -741,113 +422,26 @@ void main(void)
     // Firmware Application Version Set to CSMON
     (void)CSMON_eSetFirmwareApplicationVersion(TEST_CSMON_APPLICATION_VERSION);
 
-    // CSMON Parameter, Recorder, Scope Test Initialization
-    u32ParamTime_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-
-    ParameterInitialization();
     ExternalParametersInitialization();
+
     /* Recorder And Scope Initialization Made Once after parameter initialized */
     RecordersInitialization();
-    ScopesInitialization();
-
-    u32ParamTime_Ticks = 0 - (CPUTimer_getTimerCount(CPUTIMER1_BASE) - u32ParamTime_Ticks);//down count
 
     // CSMON Internal Recorders Setup with Already Made Configuration
     CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
 
-    // Register Function Call In CSMON Timer Period ISR (default Timer Period is 50 usec)
-    // For Debug and Control Process Emulation here is registered the ControlProcess Function
-//    eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_eSetTimerPeriodISRFunctionRegister( ControlProcess );
-//    ASSERT(eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister != CSMON_RESPONSE_CODE_OK);
-
-    // Information For CSMON for the CPU Load
-    CSMON_eSetMaxTimeInISR(u16PeriodControl_usec - 10);  /* SetMaxTimeInISR in usec */
-    CSMON_eSetMinGuaranteedTimeBetweenTwoISRs(10);       /* SetMinGuaranteedTimeBetweenTwoISRs in usec */
-
-
-    // Reset the WatchDog counter
-    SysCtl_serviceWatchdog();
-
-    SysCtl_setWatchdogPrescaler(SYSCTL_WD_PRESCALE_1);        /*  1 * 512 * 256 @ 10Mhz -> ~ 13ms */
-    u16WatchdogPrescalerOld = u16WatchdogPrescaler = SYSCTL_WD_PRESCALE_1;
-    vSetWatchdogPrescalerTimeDiv( u16WatchdogPrescaler );
-
-    // CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop
-    (void)CSMON_eSetAutoServiceWatchdogInternalSlowCalculationsInMainLoop(true);
-
-    // Register Write Parameter Element Function
-    (void)CSMON_eRegisterWriteParElementCallbackFunction( eWriteParElement );
-
-    bResetAllTimeMeasures = 0;
-    u32TimeMainLoopProcessCSMON_Now_Ticks = 0;
-    u32TimeMainLoopProcessCSMON_Max_Ticks = 0;
-    u32TimeMainLoopCycle_Now_Ticks = 0;
-    u32TimeMainLoopCycle_Max_Ticks = 0;
-
-    u32TimeCSMON_ISR_Max_Ticks = 0;
-    u32TimeCtrlLoopMax_Ticks = 0;
-    u32TimeMainLoopCycle_Bgn_Ticks = u32TimeMainLoopCycle_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-
-
-    // Enable the WatchDog
-    SysCtl_serviceWatchdog();
-    SysCtl_enableWatchdog();
-
-    // Enable Global Interrupt (INTM) and RealTime interrupt (DBGM)
     EINT;
     ERTM;
-
 
     for (;;)
     {
         // Reset the WatchDog counter
-        SysCtl_serviceWatchdog();
+        //SysCtl_serviceWatchdog();
 
-
-        // Artificial Delay Main Loop
-        SysCtl_delay( u32DelayMainLoop_Ticks );
-
-        // Artificial Delay Setup
-        if ( u16DelayCtrlLoop_100nsec != u16DelayCtrlLoopOld_100nsec )
-        {
-            u16DelayCtrlLoopOld_100nsec = u16DelayCtrlLoop_100nsec;
-            u32DelayCtrlLoop_Ticks = (uint32_t)(((((long double)(u16DelayCtrlLoop_100nsec) * 0.1L) / (1000000.0L / (long double)DEVICE_SYSCLK_FREQ)) - 9.0L) / 5.0L);
-            if (u32DelayCtrlLoop_Ticks == 0)
-            {
-                u32DelayCtrlLoop_Ticks = 1;
-            }
-        }
-        if ( u16DelayMainLoop_usec != u16DelayMainLoopOld_usec )
-        {
-            u16DelayMainLoopOld_usec = u16DelayMainLoop_usec;
-            u32DelayMainLoop_Ticks = (uint32_t)(((((long double)(u16DelayMainLoop_usec)) / (1000000.0L / (long double)DEVICE_SYSCLK_FREQ)) - 9.0L) / 5.0L);
-            if (u32DelayMainLoop_Ticks == 0)
-            {
-                u32DelayMainLoop_Ticks = 1;
-            }
-        }
-
-
-                // CSMON Process In Main Loop Delay Measure
-                u32TimeMainLoopProcessCSMON_Bgn_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-
-                // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
-                eResponseCode_CSMON_eProcess = CSMON_eProcess();
-                // Check CSMON Response Code if needed
-                ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
-
-                // CSMON Process In Main Loop Delay Measure
-                u32TimeMainLoopProcessCSMON_End_Ticks = CPUTimer_getTimerCount(CPUTIMER1_BASE);
-                u32TimeMainLoopProcessCSMON_Now_Ticks = 0 - (u32TimeMainLoopProcessCSMON_End_Ticks - u32TimeMainLoopProcessCSMON_Bgn_Ticks);//down count
-                if (u32TimeMainLoopProcessCSMON_Now_Ticks > u32TimeMainLoopProcessCSMON_Max_Ticks)
-                {
-                    u32TimeMainLoopProcessCSMON_Max_Ticks = u32TimeMainLoopProcessCSMON_Now_Ticks;
-                }
-
-                // Device Running Control Indication - Set on Enter/Exit Run Mode
-                eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
-                // Check CSMON Response Code if needed
-                ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
+        // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
+        eResponseCode_CSMON_eProcess = CSMON_eProcess();
+        // Check CSMON Response Code if needed
+        ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
 
     }
 }

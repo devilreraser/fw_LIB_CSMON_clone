@@ -97,7 +97,17 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/DemoBoard28069_Example</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/Motor28062</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/Motor28062_Example</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -257,14 +267,34 @@
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/csmon.h</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/DemoBoard28069_Example/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/DemoBoard28069_Example/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/csmon.h</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/Motor28062/CSMON_C28xx.lib</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/CSMON_C28xx.lib</locationURI>
+			<location>C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/Motor28062/CSMON_C28xx.lib</location>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062/csmon.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/csmon.h</locationURI>
+			<location>C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/Motor28062/csmon.h</location>
+		</link>
+		<link>
+			<name>CSMON_LIB/Motor28062_Example/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062_Example/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/Motor28062_Example/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062_Example/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/cmd/28062_RAM_lnk.cmd</name>
