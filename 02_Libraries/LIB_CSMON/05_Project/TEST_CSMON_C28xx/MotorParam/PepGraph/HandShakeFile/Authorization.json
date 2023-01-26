@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Accounts": {
+    "Free": null,
+    "Operator": null,
+    "Engineer": null,
+    "Service": null,
+    "Programmer": null,
+    "NoAccess": null
+  }
+}

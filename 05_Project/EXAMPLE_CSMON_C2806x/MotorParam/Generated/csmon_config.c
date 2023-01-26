@@ -4,7 +4,7 @@
  *
  * Created on 2019 08 14 12:51
  *
- * Generated on 01/26/2023 07:09:19 UTC
+ * Generated on 01/26/2023 13:28:15 UTC
  * Generator version: 1.06
  * Generator template: C:\repo_github\fw_BasicAFE\02_Libraries\LIB_CSMON\05_Project\EXAMPLE_CSMON_C2806x\MotorParam\Template\
  *
@@ -188,12 +188,12 @@ INIT_PARAMETER(60009,      CSMON_RW,     0x10,   0x03,        4,        1,      
 INIT_PARAMETER(65534,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 U16,  &u16DummyDataCnt,                       "ModbusMsgCntr",    "unit",         65535,           0,     0,    0.0F),
 INIT_PARAMETER(    0,      CSMON_RO,     0x10,   0x03,        4,        1,         1,    0,                  U8,  &bDummyStatsDevRunning,                 "DeviceRunning",    "boolean",          1,           0,     0,    1.0F),
 INIT_PARAMETER(    0,      CSMON_WO,     0x10,   0x03,        4,        1,         1,    0,                  U8,  &bDummyReqstDevRunning,                 "DeviceRunning",    "boolean",          1,           0,     0,    1.0F),
-INIT_PARAMETER(    1,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16ScaleDataTst,                       "ReadWriteScale",   "*3.1415",      10000,      -10000,     0,    3.1414999961853F),
-INIT_PARAMETER(    2,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyIncrementLoop,                 "IncLoopTest",      "A(0.5V)",      10000,      -10000,     0,    1.0F),
-INIT_PARAMETER(    3,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyCurrentPhaseA,                 "CurrentPhA_0",     "A",            10000,      -10000,     0,    1.0F),
-INIT_PARAMETER(    4,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyCurrentPhaseB,                 "CurrentPhB_0",     "A",            10000,      -10000,     0,    1.0F),
-INIT_PARAMETER(    5,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyCurrentPhaseC,                 "CurrentPhC_0",     "A",            10000,      -10000,     0,    1.0F),
-INIT_PARAMETER(    6,      CSMON_RO,     0x00,   0x03,        4,        1,         1,    0,                 U32,  &u32GetBaudError_PPM,                   "BaudError",        "%",            10000,           0,     0,    9.99999974737875E-05F),
+INIT_PARAMETER(    1,      CSMON_RW,     0x10,   0x03,        4,        0,         1,    0,                 S16,  &s16ScaleDataTst,                       "ReadWriteScale",   "*3.1415",      10000,      -10000,     0,    3.1414999961853F),
+INIT_PARAMETER(    2,      CSMON_RW,     0x10,   0x03,        4,        0,         1,    0,                 S16,  &s16DummyIncrementLoop,                 "IncLoopTest",      "A(0.5V)",      10000,      -10000,     0,    1.0F),
+INIT_PARAMETER(    3,      CSMON_RW,     0x10,   0x03,        4,        0,         1,    0,                 S16,  &s16DummyCurrentPhaseA,                 "CurrentPhA_0",     "A",            10000,      -10000,     0,    1.0F),
+INIT_PARAMETER(    4,      CSMON_RW,     0x10,   0x03,        4,        0,         1,    0,                 S16,  &s16DummyCurrentPhaseB,                 "CurrentPhB_0",     "A",            10000,      -10000,     0,    1.0F),
+INIT_PARAMETER(    5,      CSMON_RW,     0x10,   0x03,        4,        0,         1,    0,                 S16,  &s16DummyCurrentPhaseC,                 "CurrentPhC_0",     "A",            10000,      -10000,     0,    1.0F),
+INIT_PARAMETER(    6,      CSMON_RO,     0x00,   0x03,        4,        0,         1,    0,                 U32,  &u32GetBaudError_PPM,                   "BaudError",        "%",            10000,           0,     0,    9.99999974737875E-05F),
 INIT_PARAMETER(    7,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 U16,  &u16WatchdogPrescalerTime,              "WatchdogTime",     "msec",            64,           1,     0,    13.1071996688843F),
 INIT_PARAMETER(    8,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyVoltageDCLink,                 "VoltageBus",       "V",            10000,      -10000,     0,    1.0F),
 INIT_PARAMETER(    9,      CSMON_RW,     0x10,   0x03,        4,        1,         1,    0,                 S16,  &s16DummyCurrentPhaseA,                 "CurrentPhA",       "A",            10000,      -10000,     0,    1.0F),

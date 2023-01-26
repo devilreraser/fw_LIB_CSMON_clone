@@ -1,0 +1,21 @@
+{
+  "FormatVersion": 2,
+  "TemplateFolderPath": null,
+  "IncludeNameUnit": true,
+  "StructFieldNameUnit": "au8NameUnit",
+  "IncludeFuncCode": true,
+  "StructFieldFuncCode": "uFunctionCode",
+  "IncludeAccessLevel": true,
+  "StructFieldAccessLevel": "uAccessLevel",
+  "IncludeMax": true,
+  "StructFieldMax": "u32Max",
+  "IncludeMin": true,
+  "StructFieldMin": "u32Min",
+  "IncludeDef": true,
+  "StructFieldDef": "u32Def",
+  "IncludeNorm": true,
+  "StructFieldNorm": "Norm",
+  "RealAddressBitsCount": 16,
+  "AdditionalParamFields": [],
+  "GeneratedFilesNames": "csmon_config"
+}

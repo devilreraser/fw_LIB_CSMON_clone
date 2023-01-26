@@ -85,7 +85,7 @@ u16ModbusMinMessToMess_usec                                                     
 u32ModbusMaxByteToByteExact                                                                0x0001652C     4    
 u32ModbusMaxMessToMessExact                                                                0x00016530     4    
 u32ModbusTimeout                                                                           0x00016534     4    
-u32ModbusTimeoutPing                                                                       0x00016538     4    
+u32ModbusTimeoutOnInit                                                                     0x00016538     4    
 u32WrongElementSizeTable                                                                   0x0001653C     4    
 u32ElementSizeTableD384_0                                                                  0x00016540     4    
 u32ElementSizeTableB326_0                                                                  0x00016544     4    

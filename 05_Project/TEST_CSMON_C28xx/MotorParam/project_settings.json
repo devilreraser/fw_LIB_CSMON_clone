@@ -171,7 +171,7 @@
       },
       "RealAddrRead": "s16ScaleDataTst",
       "RealAddrWrite": "s16ScaleDataTst",
-      "RealAddrType": null
+      "RealAddrType": ""
     },
     {
       "ParamId": {
@@ -183,7 +183,7 @@
       },
       "RealAddrRead": "s16DummyIncrementLoop",
       "RealAddrWrite": "s16DummyIncrementLoop",
-      "RealAddrType": null
+      "RealAddrType": ""
     },
     {
       "ParamId": {
@@ -195,7 +195,7 @@
       },
       "RealAddrRead": "s16DummyCurrentPhaseA",
       "RealAddrWrite": "s16DummyCurrentPhaseA",
-      "RealAddrType": null
+      "RealAddrType": ""
     },
     {
       "ParamId": {
@@ -207,7 +207,7 @@
       },
       "RealAddrRead": "s16DummyCurrentPhaseB",
       "RealAddrWrite": "s16DummyCurrentPhaseB",
-      "RealAddrType": null
+      "RealAddrType": ""
     },
     {
       "ParamId": {
@@ -219,7 +219,7 @@
       },
       "RealAddrRead": "s16DummyCurrentPhaseC",
       "RealAddrWrite": "s16DummyCurrentPhaseC",
-      "RealAddrType": null
+      "RealAddrType": ""
     },
     {
       "ParamId": {
@@ -231,7 +231,7 @@
       },
       "RealAddrRead": "u32GetBaudError_PPM",
       "RealAddrWrite": "u32GetBaudError_PPM",
-      "RealAddrType": null
+      "RealAddrType": ""
     },
     {
       "ParamId": {

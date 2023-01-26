@@ -1,0 +1,11 @@
+Diagnostic Read Counter Modbus Messages: 01 08 00 0E 00 00 81 C8
+Handshake Free       Access Level: 01 15 1B 06 00 01 00 00 00 01 00 00 06 00 01 00 01 00 01 00 00 06 00 01 00 02 00 01 00 00 8A 98
+Handshake Operator   Access Level: 01 15 1B 06 00 01 00 00 00 01 00 01 06 00 01 00 01 00 01 30 31 06 00 01 00 02 00 01 00 01 D8 9E
+Handshake Programmer Access Level: 01 15 1F 06 00 01 00 00 00 01 00 04 06 00 01 00 01 00 03 30 31 32 33 34 00 06 00 01 00 02 00 01 00 04 E4 4F
+Handshake Deny       Access Level: 01 15 1B 06 00 01 00 00 00 01 00 00 06 00 01 00 01 00 01 FF 00 06 00 01 00 02 00 01 00 00 B9 8F
+Read Register 0					 : 01 03 00 00 00 01 84 0A 	
+Read Register 980 RTC Seconds    : 01 03 03 D4 00 01 C4 76 	
+Read Register 471 Analog Input 0 : 01 03 01 D7 00 01 35 CE
+
+
+

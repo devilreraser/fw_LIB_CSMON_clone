@@ -462,7 +462,7 @@
             "IsArray": false,
             "StorageType": 0
           },
-          "ReadAccessLevelMin": 1,
+          "ReadAccessLevelMin": 0,
           "WriteAccessLevelMin": 4,
           "IsStorable": true,
           "BitsCount": 16,
@@ -499,7 +499,7 @@
             "IsArray": false,
             "StorageType": 0
           },
-          "ReadAccessLevelMin": 1,
+          "ReadAccessLevelMin": 0,
           "WriteAccessLevelMin": 4,
           "IsStorable": true,
           "BitsCount": 16,
@@ -536,7 +536,7 @@
             "IsArray": false,
             "StorageType": 0
           },
-          "ReadAccessLevelMin": 1,
+          "ReadAccessLevelMin": 0,
           "WriteAccessLevelMin": 4,
           "IsStorable": true,
           "BitsCount": 16,
@@ -573,7 +573,7 @@
             "IsArray": false,
             "StorageType": 0
           },
-          "ReadAccessLevelMin": 1,
+          "ReadAccessLevelMin": 0,
           "WriteAccessLevelMin": 4,
           "IsStorable": true,
           "BitsCount": 16,
@@ -610,7 +610,7 @@
             "IsArray": false,
             "StorageType": 0
           },
-          "ReadAccessLevelMin": 1,
+          "ReadAccessLevelMin": 0,
           "WriteAccessLevelMin": 4,
           "IsStorable": true,
           "BitsCount": 16,
@@ -647,7 +647,7 @@
             "IsArray": false,
             "StorageType": 0
           },
-          "ReadAccessLevelMin": 1,
+          "ReadAccessLevelMin": 0,
           "WriteAccessLevelMin": 4,
           "IsStorable": true,
           "BitsCount": 32,
@@ -1630,5 +1630,5 @@
       }
     }
   ],
-  "HashCode": 898019575
+  "HashCode": 899025605
 }
