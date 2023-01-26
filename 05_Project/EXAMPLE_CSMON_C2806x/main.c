@@ -63,8 +63,8 @@
 #define RECORDER0_ONLY_TEST                             1
 
 #if RECORDER0_ONLY_TEST
-#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   9000
-#define RECORDER0_TOTAL_SAMPLE_COUNT        10000
+#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   56
+#define RECORDER0_TOTAL_SAMPLE_COUNT        64
 //#define RECORDER_COUNT                      3
 #define RECORDER_COUNT                      1
 #else
@@ -88,6 +88,13 @@
 #define RECORDER1_SAMPLE_FREQUENCY_HZ      20000.0
 #define RECORDER2_SAMPLE_FREQUENCY_HZ      20000.0
 #endif
+
+
+#define STAT_LED_EQEP1I_PIN 23
+#define STAT_LED_EQEP1S_PIN 22
+#define STAT_LED_EQEP1B_PIN 21
+#define STAT_LED_EQEP1A_PIN 20
+
 
 
 /* *****************************************************************************
@@ -138,36 +145,36 @@ uint32_t u32TimeCtrlLoopMax_Ticks;
 uint32_t u32ParamTime_Ticks;
 bool bResetAllTimeMeasures;
 uint16_t u16DummyDataCnt;
-bool bDummyStatsDevRunning;
-bool bDummyReqstDevRunning;
+bool bDummyStatsDevRunning = false;
+bool bDummyReqstDevRunning = false;
 int16_t s16ScaleDataTst;
 int16_t s16DummyIncrementLoop;
-int16_t s16DummyCurrentPhaseA;
-int16_t s16DummyCurrentPhaseB;
-int16_t s16DummyCurrentPhaseC;
+int16_t s16DummyCurrentPhaseA = 0;
+int16_t s16DummyCurrentPhaseB = 0;
+int16_t s16DummyCurrentPhaseC = 0;
 uint32_t u32GetBaudError_PPM;
 uint16_t u16WatchdogPrescalerTime;
 int16_t s16DummyVoltageDCLink;
-int32_t s32DummyVoltageDCLink;
-int32_t s32DummyCurrentPhaseA;
-int32_t s32DummyCurrentPhaseB;
-int32_t s32DummyCurrentPhaseC;
-int16_t s16DummyVoltageDCLinkStartup;
-int16_t s16DummyCurrentPhaseAStartup;
-int16_t s16DummyCurrentPhaseBStartup;
-int16_t s16DummyCurrentPhaseCStartup;
-int16_t s16DummyVoltageDCLinkStop;
-int16_t s16DummyCurrentPhaseAStop;
-int16_t s16DummyCurrentPhaseBStop;
-int16_t s16DummyCurrentPhaseCStop;
-int16_t s16DummyVoltageDCLinkIdle;
-int16_t s16DummyCurrentPhaseAIdle;
-int16_t s16DummyCurrentPhaseBIdle;
-int16_t s16DummyCurrentPhaseCIdle;
-int16_t s16DummyIncrementLoopA;
-int16_t s16DummyIncrementLoopB;
-int16_t s16DummyIncrementLoopC;
-int16_t s16DummyIncrementLoopV;
+int32_t s32DummyVoltageDCLink = 0;
+int32_t s32DummyCurrentPhaseA = 0;
+int32_t s32DummyCurrentPhaseB = 0;
+int32_t s32DummyCurrentPhaseC = 0;
+int16_t s16DummyVoltageDCLinkStartup = 0;
+int16_t s16DummyCurrentPhaseAStartup = 10;
+int16_t s16DummyCurrentPhaseBStartup = 20;
+int16_t s16DummyCurrentPhaseCStartup = 30;
+int16_t s16DummyVoltageDCLinkStop = -1;
+int16_t s16DummyCurrentPhaseAStop = -1;
+int16_t s16DummyCurrentPhaseBStop = -1;
+int16_t s16DummyCurrentPhaseCStop = -1;
+int16_t s16DummyVoltageDCLinkIdle = -1;
+int16_t s16DummyCurrentPhaseAIdle = -1;
+int16_t s16DummyCurrentPhaseBIdle = -1;
+int16_t s16DummyCurrentPhaseCIdle = -1;
+int16_t s16DummyIncrementLoopA = 1;
+int16_t s16DummyIncrementLoopB = 1;
+int16_t s16DummyIncrementLoopC = 1;
+int16_t s16DummyIncrementLoopV = 1;
 int16_t s16DummyIncrementLoopCDiff;
 
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
@@ -177,7 +184,7 @@ CSMON_eResponseCode_t eResponseCode_CSMON_eSetParameter = CSMON_RESPONSE_CODE_OK
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetRecorder = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetScope = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_RESPONSE_CODE_OK;
-//CSMON_eResponseCode_t eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_RESPONSE_CODE_OK;
+CSMON_eResponseCode_t eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_RESPONSE_CODE_OK;
 uint32_t u32GetBaudError_PPM = 0;
 
 uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks = 0;
@@ -395,6 +402,106 @@ void CSMON_vGetDateTime (
 
 
 /* *****************************************************************************
+ * ControlProcess
+ **************************************************************************** */
+void ControlProcess(void)
+{
+#ifdef _CS_1291
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+#endif
+
+    //
+    // Test For Data Consistency and Control Emulation
+    //
+    if (bDummyReqstDevRunning)
+    {
+        if (bDummyStatsDevRunning == false)
+        {
+            bDummyStatsDevRunning = true;
+
+            CSMON_vSetStartRecorderParameterMask(CSMON_MASK_RECORDER_0);
+
+            s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStartup;
+            s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStartup;
+            s16DummyCurrentPhaseC = s16DummyCurrentPhaseCStartup;
+            s16DummyVoltageDCLink = s16DummyVoltageDCLinkStartup;
+
+            s32DummyCurrentPhaseA = (int32_t)s16DummyCurrentPhaseAStartup;
+            s32DummyCurrentPhaseB = (int32_t)s16DummyCurrentPhaseBStartup;
+            s32DummyCurrentPhaseC = (int32_t)s16DummyCurrentPhaseCStartup;
+            s32DummyVoltageDCLink = (int32_t)s16DummyVoltageDCLinkStartup;
+        }
+        else
+        {
+            s16DummyCurrentPhaseA += s16DummyIncrementLoopA;
+            s16DummyCurrentPhaseB += s16DummyIncrementLoopB;
+            s16DummyCurrentPhaseC += s16DummyIncrementLoopC;
+            s16DummyVoltageDCLink += s16DummyIncrementLoopV;
+
+            s32DummyCurrentPhaseA += (int32_t)s16DummyIncrementLoopA;
+            s32DummyCurrentPhaseB += (int32_t)s16DummyIncrementLoopB;
+            s32DummyCurrentPhaseC += (int32_t)s16DummyIncrementLoopC;
+            s32DummyVoltageDCLink += (int32_t)s16DummyIncrementLoopV;
+
+
+
+            //s16DummyCurrentPhaseC += s16DummyIncrementLoopCDiff;
+            //s16DummyIncrementLoopCDiff = 0 - s16DummyIncrementLoopCDiff;
+        }
+
+    }
+    else
+    {
+        if (bDummyStatsDevRunning == true)
+        {
+            bDummyStatsDevRunning = false;
+            CSMON_vSetStopRecorderParameterMask(CSMON_MASK_RECORDER_0);
+
+//            s16DummyCurrentPhaseAIdle = s16DummyCurrentPhaseA;
+//            s16DummyCurrentPhaseBIdle = s16DummyCurrentPhaseB;
+//            s16DummyCurrentPhaseCIdle = s16DummyCurrentPhaseC;
+//            s16DummyVoltageDCLinkIdle = s16DummyVoltageDCLink;
+//
+            s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStop;
+            s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStop;
+            s16DummyCurrentPhaseC = s16DummyCurrentPhaseCStop;
+            s16DummyVoltageDCLink = s16DummyVoltageDCLinkStop;
+
+            s32DummyCurrentPhaseA = (int32_t)s16DummyCurrentPhaseAStop;
+            s32DummyCurrentPhaseB = (int32_t)s16DummyCurrentPhaseBStop;
+            s32DummyCurrentPhaseC = (int32_t)s16DummyCurrentPhaseCStop;
+            s32DummyVoltageDCLink = (int32_t)s16DummyVoltageDCLinkStop;
+        }
+        else
+        {
+//            s16DummyCurrentPhaseA = s16DummyCurrentPhaseAIdle;
+//            s16DummyCurrentPhaseB = s16DummyCurrentPhaseBIdle;
+//            s16DummyCurrentPhaseC = s16DummyCurrentPhaseCIdle;
+//            s16DummyVoltageDCLink = s16DummyVoltageDCLinkIdle;
+        }
+
+    }
+
+    //
+    // Artificial Delay Control Loop
+    //
+    SysCtl_delay(u32DelayCtrlLoop_Ticks);
+
+    // Process Passed Flag Set - Need to be called from Processes with higher priority level in order CSMON to be able to get meaning-full (consistent) data
+    eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY);
+    ASSERT(eResponseCode_CSMON_eSetFlagProcessPassed != CSMON_RESPONSE_CODE_OK);
+    // Check CSMON Response Code (... or Embed Assert For Debug) if needed
+
+#ifdef _CS_1291
+    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
+#endif
+}
+
+
+
+
+
+/* *****************************************************************************
  * main
  **************************************************************************** */
 void main(void)
@@ -459,12 +566,18 @@ void main(void)
 
 
     //
-    // Disable the watchdog
+    // Enable the WatchDog
     //
+    SysCtl_serviceWatchdog();
     SysCtl_enableWatchdog();
+    //SysCtl_disableWatchdog();
 
     EINT;
     ERTM;
+
+
+    int controlPrescaler = 10;
+    int controlPrescalerCounter = 10;
 
     for (;;)
     {
@@ -475,6 +588,21 @@ void main(void)
         eResponseCode_CSMON_eProcess = CSMON_eProcess();
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
+
+        controlPrescalerCounter++;
+        if (controlPrescalerCounter >= controlPrescaler)
+        {
+            controlPrescalerCounter = 0;
+            ControlProcess();
+        }
+
+        //
+        // Device Running Control Indication - Set on Enter/Exit Run Mode
+        //
+        eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
+        // Check CSMON Response Code if needed
+        ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
+
 
     }
 }
