@@ -426,10 +426,10 @@ void ControlProcess(void)
             s16DummyCurrentPhaseC = s16DummyCurrentPhaseCStartup;
             s16DummyVoltageDCLink = s16DummyVoltageDCLinkStartup;
 
-            s32DummyCurrentPhaseA = (int32_t)s16DummyCurrentPhaseAStartup;
-            s32DummyCurrentPhaseB = (int32_t)s16DummyCurrentPhaseBStartup;
-            s32DummyCurrentPhaseC = (int32_t)s16DummyCurrentPhaseCStartup;
-            s32DummyVoltageDCLink = (int32_t)s16DummyVoltageDCLinkStartup;
+            s32DummyCurrentPhaseA = (int32_t)s16DummyCurrentPhaseAStartup * 10000;
+            s32DummyCurrentPhaseB = (int32_t)s16DummyCurrentPhaseBStartup * 10000;
+            s32DummyCurrentPhaseC = (int32_t)s16DummyCurrentPhaseCStartup * 10000;
+            s32DummyVoltageDCLink = (int32_t)s16DummyVoltageDCLinkStartup * 10000;
         }
         else
         {
@@ -438,12 +438,10 @@ void ControlProcess(void)
             s16DummyCurrentPhaseC += s16DummyIncrementLoopC;
             s16DummyVoltageDCLink += s16DummyIncrementLoopV;
 
-            s32DummyCurrentPhaseA += (int32_t)s16DummyIncrementLoopA;
-            s32DummyCurrentPhaseB += (int32_t)s16DummyIncrementLoopB;
-            s32DummyCurrentPhaseC += (int32_t)s16DummyIncrementLoopC;
-            s32DummyVoltageDCLink += (int32_t)s16DummyIncrementLoopV;
-
-
+            s32DummyCurrentPhaseA += (int32_t)s16DummyIncrementLoopA * 10000;
+            s32DummyCurrentPhaseB += (int32_t)s16DummyIncrementLoopB * 10000;
+            s32DummyCurrentPhaseC += (int32_t)s16DummyIncrementLoopC * 10000;
+            s32DummyVoltageDCLink += (int32_t)s16DummyIncrementLoopV * 10000;
 
             //s16DummyCurrentPhaseC += s16DummyIncrementLoopCDiff;
             //s16DummyIncrementLoopCDiff = 0 - s16DummyIncrementLoopCDiff;
@@ -462,15 +460,15 @@ void ControlProcess(void)
 //            s16DummyCurrentPhaseCIdle = s16DummyCurrentPhaseC;
 //            s16DummyVoltageDCLinkIdle = s16DummyVoltageDCLink;
 //
-            s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStop;
-            s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStop;
-            s16DummyCurrentPhaseC = s16DummyCurrentPhaseCStop;
-            s16DummyVoltageDCLink = s16DummyVoltageDCLinkStop;
-
-            s32DummyCurrentPhaseA = (int32_t)s16DummyCurrentPhaseAStop;
-            s32DummyCurrentPhaseB = (int32_t)s16DummyCurrentPhaseBStop;
-            s32DummyCurrentPhaseC = (int32_t)s16DummyCurrentPhaseCStop;
-            s32DummyVoltageDCLink = (int32_t)s16DummyVoltageDCLinkStop;
+//            s16DummyCurrentPhaseA = s16DummyCurrentPhaseAStop;
+//            s16DummyCurrentPhaseB = s16DummyCurrentPhaseBStop;
+//            s16DummyCurrentPhaseC = s16DummyCurrentPhaseCStop;
+//            s16DummyVoltageDCLink = s16DummyVoltageDCLinkStop;
+//
+//            s32DummyCurrentPhaseA = (int32_t)s16DummyCurrentPhaseAStop;
+//            s32DummyCurrentPhaseB = (int32_t)s16DummyCurrentPhaseBStop;
+//            s32DummyCurrentPhaseC = (int32_t)s16DummyCurrentPhaseCStop;
+//            s32DummyVoltageDCLink = (int32_t)s16DummyVoltageDCLinkStop;
         }
         else
         {
