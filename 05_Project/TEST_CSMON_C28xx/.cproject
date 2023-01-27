@@ -871,6 +871,7 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="DemoBoard28069"/>
 		<configuration configurationName="ReleaseRecorders"/>
 		<configuration configurationName="Motor28062"/>
 		<configuration configurationName="ReleaseCS1211"/>

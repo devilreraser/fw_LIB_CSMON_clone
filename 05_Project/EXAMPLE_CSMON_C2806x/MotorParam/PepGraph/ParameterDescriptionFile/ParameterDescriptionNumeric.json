@@ -1364,7 +1364,38 @@
         "IsArithmetic": true,
         "IsValid": true
       }
+    },
+    {
+      "Key": {
+        "StorageId": 32,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 32,
+          "StartBitIndexOrElementCount": 16,
+          "IsBitField": false,
+          "IsArray": true,
+          "StorageType": 64
+        },
+        "IsBitField": false,
+        "DataType": 0,
+        "BitsCount": 8,
+        "MSBitMask": 128,
+        "NumberBitsMask": 255,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 255,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
     }
   ],
-  "HashCode": -701011281
+  "HashCode": -1929548426
 }

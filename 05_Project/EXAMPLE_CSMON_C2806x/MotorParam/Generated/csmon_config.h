@@ -4,8 +4,8 @@
  *
  * Created on 2019 08 14 12:51
  *
- * Generated on 01/27/2023 08:01:41 UTC
- * Generator version: 1.06
+ * Generated on 01/27/2023 10:29:59 UTC
+ * Generator version: 1.07
  * Generator template: C:\repo_github\fw_BasicAFE\02_Libraries\LIB_CSMON\05_Project\EXAMPLE_CSMON_C2806x\MotorParam\Template\
  *
  * Description: ...
@@ -68,6 +68,7 @@ typedef union
      uint16_t regU16;
       int16_t regS16;
      uint_least8_t regU8;
+     uint_least8_t regAU8;
       int_least8_t regS8;
 } uAnyType32_t;
 

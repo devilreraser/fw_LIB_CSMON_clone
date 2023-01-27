@@ -544,6 +544,18 @@
       "RealAddrRead": "s16DummyIncrementLoopCDiff",
       "RealAddrWrite": "s16DummyIncrementLoopCDiff",
       "RealAddrType": ""
+    },
+    {
+      "ParamId": {
+        "StorageId": 32,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserStringConfiguration",
+      "RealAddrWrite": "UserStringConfiguration",
+      "RealAddrType": "char"
     }
   ],
   "GeneratedFilesNames": "csmon_config"

@@ -177,6 +177,39 @@ int16_t s16DummyIncrementLoopC = 1;
 int16_t s16DummyIncrementLoopV = 1;
 int16_t s16DummyIncrementLoopCDiff;
 
+
+
+#if 1
+char UserStringConfiguration[16] = "Blabala Nica";
+#else
+#define STR_PADDED1(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
+#define ZIP_STRING1(x) { \
+    ((uint16_t)STR_PADDED1(x)[ 0] & 0xFF) | ((uint16_t)STR_PADDED1(x)[ 1] << 8), \
+    ((uint16_t)STR_PADDED1(x)[ 2] & 0xFF) | ((uint16_t)STR_PADDED1(x)[ 3] << 8), \
+    ((uint16_t)STR_PADDED1(x)[ 4] & 0xFF) | ((uint16_t)STR_PADDED1(x)[ 5] << 8), \
+    ((uint16_t)STR_PADDED1(x)[ 6] & 0xFF) | ((uint16_t)STR_PADDED1(x)[ 7] << 8), \
+    ((uint16_t)STR_PADDED1(x)[ 8] & 0xFF) | ((uint16_t)STR_PADDED1(x)[ 9] << 8), \
+    ((uint16_t)STR_PADDED1(x)[10] & 0xFF) | ((uint16_t)STR_PADDED1(x)[11] << 8), \
+    ((uint16_t)STR_PADDED1(x)[12] & 0xFF) | ((uint16_t)STR_PADDED1(x)[13] << 8), \
+    ((uint16_t)STR_PADDED1(x)[14] & 0xFF) | ((uint16_t)STR_PADDED1(x)[15] << 8), \
+    ((uint16_t)STR_PADDED1(x)[16] & 0xFF) | ((uint16_t)STR_PADDED1(x)[17] << 8), \
+    ((uint16_t)STR_PADDED1(x)[18] & 0xFF) | ((uint16_t)STR_PADDED1(x)[19] << 8), \
+    ((uint16_t)STR_PADDED1(x)[20] & 0xFF) | ((uint16_t)STR_PADDED1(x)[21] << 8), \
+    ((uint16_t)STR_PADDED1(x)[22] & 0xFF) | ((uint16_t)STR_PADDED1(x)[23] << 8), \
+    ((uint16_t)STR_PADDED1(x)[24] & 0xFF) | ((uint16_t)STR_PADDED1(x)[25] << 8), \
+    ((uint16_t)STR_PADDED1(x)[26] & 0xFF) | ((uint16_t)STR_PADDED1(x)[27] << 8), \
+    ((uint16_t)STR_PADDED1(x)[28] & 0xFF) | ((uint16_t)STR_PADDED1(x)[29] << 8), \
+    ((uint16_t)STR_PADDED1(x)[30] & 0xFF) | ((uint16_t)STR_PADDED1(x)[31] << 8), \
+    }
+char UserStringConfiguration[16] = ZIP_STRING1("Blabala Nica1");
+??? not working with this line in csmon_config:
+        .uParameterSize.sSize.u8SizeElement = BYTES_COUNT(DataTypeAttribute), /* String Encoded also by using the high part of the 16-bit word (u8Elements > 1) u8SizeElement = 1 */\
+
+#endif
+
+
+
+
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetServerOnStatus = CSMON_RESPONSE_CODE_OK;
