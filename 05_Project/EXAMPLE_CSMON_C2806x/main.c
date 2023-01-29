@@ -179,9 +179,9 @@ int16_t s16DummyIncrementLoopCDiff;
 
 
 
-#if 1
-char UserStringConfiguration[16] = "Blabala Nica";
-#else
+
+char charUserStringConfiguration[16] = "chrBlabalaNica";
+
 #define STR_PADDED1(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
 #define ZIP_STRING1(x) { \
     ((uint16_t)STR_PADDED1(x)[ 0] & 0xFF) | ((uint16_t)STR_PADDED1(x)[ 1] << 8), \
@@ -201,12 +201,11 @@ char UserStringConfiguration[16] = "Blabala Nica";
     ((uint16_t)STR_PADDED1(x)[28] & 0xFF) | ((uint16_t)STR_PADDED1(x)[29] << 8), \
     ((uint16_t)STR_PADDED1(x)[30] & 0xFF) | ((uint16_t)STR_PADDED1(x)[31] << 8), \
     }
-char UserStringConfiguration[16] = ZIP_STRING1("Blabala Nica1");
-??? not working with this line in csmon_config:
-        .uParameterSize.sSize.u8SizeElement = BYTES_COUNT(DataTypeAttribute), /* String Encoded also by using the high part of the 16-bit word (u8Elements > 1) u8SizeElement = 1 */\
 
-#endif
+uint_least8_t au8UserStringConfiguration[16] = ZIP_STRING1("au8AlabalaNica");
 
+uint16_t au16UserStringConfiguration[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 'N', 'i', 'c', 'a', '\0'};
+uint16_t au16UserStringConfiguration2[32] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 'N', 'i', 'c', 'a', '\0'};
 
 
 
