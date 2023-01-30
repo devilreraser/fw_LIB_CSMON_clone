@@ -37,7 +37,7 @@ extern "C"
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
-#define CSMON_CONFIG_PARAMETER_COUNT_MAX    200
+#define CSMON_CONFIG_PARAMETER_COUNT_MAX    $paramsCount$
 
 /* *****************************************************************************
  * Enumeration Definitions
@@ -56,19 +56,22 @@ typedef union
 
 typedef union
 {
-    uint32_t u32Register;
-     int32_t s32Register;
-    uint16_t u16Register;
-     int16_t s16Register;
+         uint32_t u32Register;
+          int32_t s32Register;
+         uint16_t u16Register;
+          int16_t s16Register;
     uint_least8_t u8Register;
      int_least8_t s8Register;
 
-     uint32_t regU32;
-      int32_t regS32;
-     uint16_t regU16;
-      int16_t regS16;
-     uint_least8_t regU8;
-      int_least8_t regS8;
+         uint32_t regU32;
+          int32_t regS32;
+         uint16_t regU16;
+         uint16_t regAU16;
+          int16_t regS16;
+    uint_least8_t regU8;
+    uint_least8_t regAU8;
+             char regCHAR;
+     int_least8_t regS8;
 } uAnyType32_t;
 
 

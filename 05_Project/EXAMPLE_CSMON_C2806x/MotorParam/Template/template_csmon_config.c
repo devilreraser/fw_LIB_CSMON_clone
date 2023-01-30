@@ -72,7 +72,7 @@
 
 //#define PAR(eType,eAccess,ePass) (uint16_t)(STRING_CONCAT(PAR_TYPE,eType) | (STRING_CONCAT(PAR_ACCESS,eAccess) << PAR_ACCESS_SHIFT) | (STRING_CONCAT(PAR_PASSRW,ePass) << PAR_PASSRW_SHIFT))
 
-#define CSMON_DATA_TYPE(DataTypeAttribute) STRING_CONCAT(CSMON_DATA_TYPE_,DataTypeAttribute)  /* U8, S8, U16, S16, U32, S32 */
+#define CSMON_DATA_TYPE(DataTypeAttribute) STRING_CONCAT(CSMON_DATA_TYPE_,DataTypeAttribute)  /* U8, S8, U16, S16, U32, S32, AU8 */
 
 //#define xstr(s) str(s)
 //#define str(s) #s
@@ -82,11 +82,12 @@
 
 
 #define FIELD_TYPE(DataTypeAttribute) STRING_CONCAT(reg, DataTypeAttribute)
+#define BYTES_COUNT_HMMODBUS(DataTypeAttribute) ((1 << (CSMON_DATA_TYPE(DataTypeAttribute) & 0x3)) * (CSMON_DATA_TYPE(DataTypeAttribute) != CSMON_DATA_TYPE_CHAR))
 #define BYTES_COUNT(DataTypeAttribute) (1 << (CSMON_DATA_TYPE(DataTypeAttribute) & 0x3))
 #define BITS_COUNT(DataTypeAttribute) (BYTES_COUNT(DataTypeAttribute) << 3)
 
 
-#define INIT_PARAMFULL(u16ID, paramAccess, $funcWr$, $funcRd$, $accessWr$, $accessRd$, $bStorable$, u8Offs, DataTypeAttribute, u32Address, $strName$, $strUnit$, $u32Maximum$, $u32Minimum$, $u32Default$, $floatScale$, VisualAttribute, u8Elements, bitField, arrayType, bNR, bNW, pFunc) \
+#define INIT_PARAMFULL(u16ID, paramAccess, $funcWr$, $funcRd$, $accessWr$, $accessRd$, $bStorable$, u8Offs, u8Elements, DataTypeAttribute, u32Address, $strName$, $strUnit$, $u32Maximum$, $u32Minimum$, $u32Default$, $floatScale$, VisualAttribute, bitField, arrayType, bNR, bNW, pFunc) \
  { \
     .u16ParameterIndexID = u16ID,                       /* u16ID */\
     /* .u16ParamAttributes = (PAR(paramType, paramAccess, paramPass)),                u16Attributes */\
@@ -101,11 +102,12 @@
     .$u32Def$.FIELD_TYPE(DataTypeAttribute) = (u32Default),                       /* u32Default */\
     /* .u32Offset.eType = 0,                       u32Offset */\
     .$Norm$ = floatScale,                                 /* floatScale */\
-    .uParameterSize.sSize.u8SizeElement = BYTES_COUNT(DataTypeAttribute), /*  */\
+    /* .uParameterSize.sSize.u8SizeElement = (u8Elements > 1) * 0 + (u8Elements == 1) * BYTES_COUNT_HMMODBUS(DataTypeAttribute), String Encoded Normal (u8Elements > 1) u8SizeElement = 0 */\
+    .uParameterSize.sSize.u8SizeElement = BYTES_COUNT_HMMODBUS(DataTypeAttribute), /* String Encoded also by using the high part of the 16-bit word (u8Elements > 1) u8SizeElement = 1 */\
     .uParameterSize.sSize.u8CountElements = u8Elements,\
-    .uParameterFlags.sFlags.u8BitOffset = u8Offs, \
+    .uParameterFlags.sFlags.u8BitOffset = (u8Elements > 1) * u8Elements + (u8Elements == 1) * u8Offs, \
     .uParameterFlags.sFlags.bBitField = bitField, \
-    .uParameterFlags.sFlags.bArray = arrayType,         /* Array Type Register */ \
+    .uParameterFlags.sFlags.bArray = (u8Elements > 1),         /* Array Type Register */ \
     .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
     .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
     .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
@@ -117,9 +119,8 @@
     .$uAccessLevel$.sAccessLevel.bStore = bStorable, \
  }
 
-#define INIT_PARAMETER(u16ID, paramAccess, $funcWr$, $funcRd$, $accessWr$, $accessRd$, $bStorable$, u8Offs, DataTypeAttribute, u32Address, $strName$, $strUnit$, $u32Maximum$, $u32Minimum$, $u32Default$, $floatScale$) \
-        INIT_PARAMFULL(u16ID, paramAccess, $funcWr$, $funcRd$, $accessWr$, $accessRd$, $bStorable$, u8Offs, DataTypeAttribute, u32Address, $strName$, $strUnit$, $u32Maximum$, $u32Minimum$, $u32Default$, $floatScale$, CSMON_VISUAL_TYPE_HEX, 1, 0, 0, 0, 0, NULL)
-
+#define INIT_PARAMETER(u16ID, paramAccess, $funcWr$, $funcRd$, $accessWr$, $accessRd$, $bStorable$, u8Offs, u8Elements, DataTypeAttribute, u32Address, $strName$, $strUnit$, $u32Maximum$, $u32Minimum$, $u32Default$, $floatScale$) \
+        INIT_PARAMFULL(u16ID, paramAccess, $funcWr$, $funcRd$, $accessWr$, $accessRd$, $bStorable$, u8Offs, u8Elements, DataTypeAttribute, u32Address, $strName$, $strUnit$, $u32Maximum$, $u32Minimum$, $u32Default$, $floatScale$, CSMON_VISUAL_TYPE_HEX, 0, 0, 0, 0, NULL)
 
 /* *****************************************************************************
  * Variables Definitions

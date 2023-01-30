@@ -1662,10 +1662,84 @@
           "IsWriteable": false
         },
         "Index": 44,
-        "ShortName": "ConfigName",
+        "ShortName": "ConfigNameNormal",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 33,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 33,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 255,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 16,
+          "RegisterCountCeil": 8,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 33,
+          "DefaultReadFunctionCode": 20,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 45,
+        "ShortName": "ConfigNameZipped",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 34,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 34,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 255,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 32,
+          "RegisterCountCeil": 16,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 34,
+          "DefaultReadFunctionCode": 20,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 46,
+        "ShortName": "ConfigNameUnicode",
         "DefaultUnits": null
       }
     }
   ],
-  "HashCode": 873391050
+  "HashCode": 852478679
 }

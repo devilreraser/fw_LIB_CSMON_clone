@@ -180,7 +180,7 @@ int16_t s16DummyIncrementLoopCDiff;
 
 
 
-char charUserStringConfiguration[16] = "chrBlabalaNica";
+char UserStringConfiguration[16] = "charAlabalaNica";
 
 #define STR_PADDED1(x) (x "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
 #define ZIP_STRING1(x) { \
@@ -202,10 +202,9 @@ char charUserStringConfiguration[16] = "chrBlabalaNica";
     ((uint16_t)STR_PADDED1(x)[30] & 0xFF) | ((uint16_t)STR_PADDED1(x)[31] << 8), \
     }
 
-uint_least8_t au8UserStringConfiguration[16] = ZIP_STRING1("au8AlabalaNica");
+char UserZippedString[16] = ZIP_STRING1("au8AlabalaNica");
 
-uint16_t au16UserStringConfiguration[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 'N', 'i', 'c', 'a', '\0'};
-uint16_t au16UserStringConfiguration2[32] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 'N', 'i', 'c', 'a', '\0'};
+char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 'N', 'i', 'c', 'a', '\0'};
 
 
 
@@ -280,9 +279,9 @@ uint16_t u16WatchdogPrescalerOld = 0;
 void ExternalParametersInitialization(void)
 {
 #if CSMON_REALADR_16BIT
-    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]), CSMON_CONFIG_PARAMETER_COUNT_MAX);                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
 #else
-    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]), CSMON_CONFIG_PARAMETER_COUNT_MAX);                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
 #endif
 
     CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));

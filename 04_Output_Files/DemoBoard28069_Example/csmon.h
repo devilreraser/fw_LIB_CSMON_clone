@@ -610,9 +610,9 @@ CSMON_eResponseCode_t CSMON_eSetParameterTableDescr(void *pDescr, uint16_t u16Of
 
 /* First Put Real Address (Call this function in application software) to calculate count parameters internally (last index is NULL) */
 #if CSMON_REALADR_16BIT
-CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint16_t *pRealAddress, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint16_t *pRealAddress, uint16_t u16Offset, uint16_t u16MaxParameterCount);
 #else
-CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pRealAddress, uint16_t u16Offset);
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pRealAddress, uint16_t u16Offset, uint16_t u16MaxParameterCount);
 #endif
 //CSMON_eResponseCode_t CSMON_eSetParameterListProcessFunc(uint32_t *pu32ProcessFunc, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);

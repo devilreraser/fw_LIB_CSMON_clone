@@ -4,8 +4,8 @@
  *
  * Created on 2019 08 14 12:51
  *
- * Generated on 01/27/2023 10:29:59 UTC
- * Generator version: 1.07
+ * Generated on 01/30/2023 14:30:50 UTC
+ * Generator version: 1.09
  * Generator template: C:\repo_github\fw_BasicAFE\02_Libraries\LIB_CSMON\05_Project\EXAMPLE_CSMON_C2806x\MotorParam\Template\
  *
  * Description: ...
@@ -37,7 +37,7 @@ extern "C"
 /* *****************************************************************************
  * Constants and Macros Definitions
  **************************************************************************** */
-#define CSMON_CONFIG_PARAMETER_COUNT_MAX    4
+#define CSMON_CONFIG_PARAMETER_COUNT_MAX    48
 
 /* *****************************************************************************
  * Enumeration Definitions
@@ -63,15 +63,15 @@ typedef union
     uint_least8_t u8Register;
      int_least8_t s8Register;
 
-          uint32_t regU32;
-           int32_t regS32;
-           uint16_t regU16;
-           uint16_t regAU16;
-           int16_t regS16;
-     uint_least8_t regU8;
-     uint_least8_t regAU8;
-              char regCHAR;
-      int_least8_t regS8;
+         uint32_t regU32;
+          int32_t regS32;
+         uint16_t regU16;
+         uint16_t regAU16;
+          int16_t regS16;
+    uint_least8_t regU8;
+    uint_least8_t regAU8;
+             char regCHAR;
+     int_least8_t regS8;
 } uAnyType32_t;
 
 

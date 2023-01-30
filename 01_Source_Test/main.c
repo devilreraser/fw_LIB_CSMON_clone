@@ -2597,9 +2597,9 @@ void ControlProcess(void)
 void ExternalParametersInitialization(void)
 {
 #if CSMON_REALADR_16BIT
-    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]), CSMON_CONFIG_PARAMETER_COUNT_MAX);                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
 #else
-    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]));                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]), CSMON_CONFIG_PARAMETER_COUNT_MAX);                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
 #endif
     //CSMON_eSetParameterListProcessFunc((uint32_t *)&asParameterList[0].u32ProcessFunc, sizeof(asParameterList[0]));
     CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
