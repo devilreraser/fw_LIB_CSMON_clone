@@ -1,0 +1,633 @@
+{
+  "FormatVersion": 2,
+  "TemplateFolderPath": "Template\\",
+  "IncludeNameUnit": true,
+  "StructFieldNameUnit": "au8NameUnit",
+  "IncludeFuncCode": true,
+  "StructFieldFuncCode": "uFunctionCode",
+  "IncludeAccessLevel": true,
+  "StructFieldAccessLevel": "uAccessLevel",
+  "IncludeMax": true,
+  "StructFieldMax": "u32Max",
+  "IncludeMin": true,
+  "StructFieldMin": "u32Min",
+  "IncludeDef": true,
+  "StructFieldDef": "u32Def",
+  "IncludeNorm": true,
+  "StructFieldNorm": "Norm",
+  "RealAddressBitsCount": 16,
+  "AdditionalParamFields": [
+    {
+      "ParamId": {
+        "StorageId": 60000,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u16PeriodControl_usec",
+      "RealAddrWrite": "u16PeriodControl_usec",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60001,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u16DelayCtrlLoop_100nsec",
+      "RealAddrWrite": "u16DelayCtrlLoop_100nsec",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60002,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u16DelayMainLoop_usec",
+      "RealAddrWrite": "u16DelayMainLoop_usec",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60003,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u16CountSetParameterFail",
+      "RealAddrWrite": "u16CountSetParameterFail",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60004,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u32TimeMainLoopProcessCSMON_Max_Ticks",
+      "RealAddrWrite": "u32TimeMainLoopProcessCSMON_Max_Ticks",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60005,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u32TimeCSMON_ISR_Max_Ticks",
+      "RealAddrWrite": "u32TimeCSMON_ISR_Max_Ticks",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60006,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u32TimeMainLoopCycle_Max_Ticks",
+      "RealAddrWrite": "u32TimeMainLoopCycle_Max_Ticks",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60007,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u32TimeCtrlLoopMax_Ticks",
+      "RealAddrWrite": "u32TimeCtrlLoopMax_Ticks",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60008,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u32ParamTime_Ticks",
+      "RealAddrWrite": "u32ParamTime_Ticks",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 60009,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "bResetAllTimeMeasures",
+      "RealAddrWrite": "bResetAllTimeMeasures",
+      "RealAddrType": "bool",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 65534,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u16DummyDataCnt",
+      "RealAddrWrite": "u16DummyDataCnt",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 0,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "bDummyStatsDevRunning",
+      "RealAddrWrite": "bDummyReqstDevRunning",
+      "RealAddrType": "bool",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 1,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16ScaleDataTst",
+      "RealAddrWrite": "s16ScaleDataTst",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 2,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyIncrementLoop",
+      "RealAddrWrite": "s16DummyIncrementLoop",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 3,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseA",
+      "RealAddrWrite": "s16DummyCurrentPhaseA",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 4,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseB",
+      "RealAddrWrite": "s16DummyCurrentPhaseB",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 5,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseC",
+      "RealAddrWrite": "s16DummyCurrentPhaseC",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 6,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u32GetBaudError_PPM",
+      "RealAddrWrite": "u32GetBaudError_PPM",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 7,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "u16WatchdogPrescalerTime",
+      "RealAddrWrite": "u16WatchdogPrescalerTime",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 8,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyVoltageDCLink",
+      "RealAddrWrite": "s16DummyVoltageDCLink",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 9,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseA",
+      "RealAddrWrite": "s16DummyCurrentPhaseA",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 10,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseB",
+      "RealAddrWrite": "s16DummyCurrentPhaseB",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 11,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseC",
+      "RealAddrWrite": "s16DummyCurrentPhaseC",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 28,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s32DummyVoltageDCLink",
+      "RealAddrWrite": "s32DummyVoltageDCLink",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 29,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s32DummyCurrentPhaseA",
+      "RealAddrWrite": "s32DummyCurrentPhaseA",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 30,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s32DummyCurrentPhaseB",
+      "RealAddrWrite": "s32DummyCurrentPhaseB",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 31,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s32DummyCurrentPhaseC",
+      "RealAddrWrite": "s32DummyCurrentPhaseC",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 108,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyVoltageDCLinkStartup",
+      "RealAddrWrite": "s16DummyVoltageDCLinkStartup",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 109,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseAStartup",
+      "RealAddrWrite": "s16DummyCurrentPhaseAStartup",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 110,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseBStartup",
+      "RealAddrWrite": "s16DummyCurrentPhaseBStartup",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 111,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseCStartup",
+      "RealAddrWrite": "s16DummyCurrentPhaseCStartup",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 208,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyVoltageDCLinkStop",
+      "RealAddrWrite": "s16DummyVoltageDCLinkStop",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 209,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseAStop",
+      "RealAddrWrite": "s16DummyCurrentPhaseAStop",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 210,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseBStop",
+      "RealAddrWrite": "s16DummyCurrentPhaseBStop",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 211,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseCStop",
+      "RealAddrWrite": "s16DummyCurrentPhaseCStop",
+      "RealAddrType": null,
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 308,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyVoltageDCLinkIdle",
+      "RealAddrWrite": "s16DummyVoltageDCLinkIdle",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 309,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseAIdle",
+      "RealAddrWrite": "s16DummyCurrentPhaseAIdle",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 310,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseBIdle",
+      "RealAddrWrite": "s16DummyCurrentPhaseBIdle",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 311,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyCurrentPhaseCIdle",
+      "RealAddrWrite": "s16DummyCurrentPhaseCIdle",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 408,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyIncrementLoopA",
+      "RealAddrWrite": "s16DummyIncrementLoopA",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 409,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyIncrementLoopB",
+      "RealAddrWrite": "s16DummyIncrementLoopB",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 410,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyIncrementLoopC",
+      "RealAddrWrite": "s16DummyIncrementLoopC",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 411,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyIncrementLoopV",
+      "RealAddrWrite": "s16DummyIncrementLoopV",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 412,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "s16DummyIncrementLoopCDiff",
+      "RealAddrWrite": "s16DummyIncrementLoopCDiff",
+      "RealAddrType": "",
+      "ParamValueType": null
+    },
+    {
+      "ParamId": {
+        "StorageId": 32,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserStringConfiguration",
+      "RealAddrWrite": "UserStringConfiguration",
+      "RealAddrType": "char",
+      "ParamValueType": "CHAR"
+    },
+    {
+      "ParamId": {
+        "StorageId": 33,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserZippedString",
+      "RealAddrWrite": "UserZippedString",
+      "RealAddrType": "char",
+      "ParamValueType": ""
+    },
+    {
+      "ParamId": {
+        "StorageId": 34,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserUnicodeString",
+      "RealAddrWrite": "UserUnicodeString",
+      "RealAddrType": "char",
+      "ParamValueType": ""
+    }
+  ],
+  "GeneratedFilesNames": "csmon_config"
+}
