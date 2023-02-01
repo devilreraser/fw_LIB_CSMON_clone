@@ -3,6 +3,117 @@
   "Items": [
     {
       "Key": {
+        "StorageId": 35,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 35,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 0,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 16,
+          "RegisterCountCeil": 8,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 35,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 0,
+        "ShortName": "ConfigNameNormalReg",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 36,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 36,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 0,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 16,
+          "RegisterCountCeil": 8,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 36,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 1,
+        "ShortName": "ConfigNameZippedReg",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 37,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 37,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 0,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 32,
+          "RegisterCountCeil": 16,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 37,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 2,
+        "ShortName": "ConfigNameUnicodeReg",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
         "StorageId": 32,
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
@@ -33,7 +144,7 @@
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 0,
+        "Index": 3,
         "ShortName": "ConfigNameNormal",
         "DefaultUnits": null
       }
@@ -70,7 +181,7 @@
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 1,
+        "Index": 4,
         "ShortName": "ConfigNameZipped",
         "DefaultUnits": null
       }
@@ -107,11 +218,11 @@
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 2,
+        "Index": 5,
         "ShortName": "ConfigNameUnicode",
         "DefaultUnits": null
       }
     }
   ],
-  "HashCode": 898457905
+  "HashCode": 881231656
 }

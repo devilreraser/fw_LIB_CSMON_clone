@@ -4,7 +4,7 @@
  *
  * Created on 2019 08 14 12:51
  *
- * Generated on 01/31/2023 12:32:22 UTC
+ * Generated on 02/01/2023 14:23:05 UTC
  * Generator version: 1.09
  * Generator template: C:\repo_github\fw_BasicAFE\02_Libraries\LIB_CSMON\05_Project\EXAMPLE_CSMON_C2806x\MotorParam\Template\
  *
@@ -136,10 +136,13 @@ extern char UserUnicodeString[16];
 
 volatile const MAIN_sParameterList_t asParameterList[CSMON_CONFIG_PARAMETER_COUNT_MAX] =
 {
-/*                ID,        Attrib,   fucnWr, funcRd, accessWr, accessRd, bStorable, Offs, Elements, CSMON_DATA_TYPE,  MCU Address,              Name,                Unit,        Max,         Min,   Def,    Norm*/
-INIT_PARAMETER(   32,      CSMON_RW,     0x15,   0x14,        0,        0,         1,    0,       16,            CHAR,  &UserStringConfiguration, "ConfigNameNormal",  "",        255,           0,     0,    1.0F),
-INIT_PARAMETER(   33,      CSMON_RW,     0x15,   0x14,        0,        0,         1,    0,       16,             AU8,  &UserZippedString,        "ConfigNameZipped",  "",        255,           0,     0,    1.0F),
-INIT_PARAMETER(   34,      CSMON_RW,     0x15,   0x14,        0,        0,         1,    0,       16,            AU16,  &UserUnicodeString,       "ConfigNameUnicode", "",      65535,           0,     0,    1.0F),
+/*                ID,        Attrib,   fucnWr, funcRd, accessWr, accessRd, bStorable, Offs, Elements, CSMON_DATA_TYPE,  MCU Address,              Name,                   Unit,        Max,         Min,   Def,    Norm*/
+INIT_PARAMETER(   35,      CSMON_RW,     0x10,   0x03,        0,        0,         1,    0,       16,            CHAR,  &UserStringConfiguration, "ConfigNameNormalReg",  "",        255,           0,     0,    1.0F),
+INIT_PARAMETER(   36,      CSMON_RW,     0x10,   0x03,        0,        0,         1,    0,       16,             AU8,  &UserZippedString,        "ConfigNameZippedReg",  "",        255,           0,     0,    1.0F),
+INIT_PARAMETER(   37,      CSMON_RW,     0x10,   0x03,        0,        0,         1,    0,       16,            AU16,  &UserUnicodeString,       "ConfigNameUnicodeReg", "",      65535,           0,     0,    1.0F),
+INIT_PARAMETER(   32,      CSMON_RW,     0x15,   0x14,        0,        0,         1,    0,       16,            CHAR,  &UserStringConfiguration, "ConfigNameNormal",     "",        255,           0,     0,    1.0F),
+INIT_PARAMETER(   33,      CSMON_RW,     0x15,   0x14,        0,        0,         1,    0,       16,             AU8,  &UserZippedString,        "ConfigNameZipped",     "",        255,           0,     0,    1.0F),
+INIT_PARAMETER(   34,      CSMON_RW,     0x15,   0x14,        0,        0,         1,    0,       16,            AU16,  &UserUnicodeString,       "ConfigNameUnicode",    "",      65535,           0,     0,    1.0F),
 
 };
 
