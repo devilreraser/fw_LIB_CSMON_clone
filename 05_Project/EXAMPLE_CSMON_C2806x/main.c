@@ -11,9 +11,10 @@
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
+#include "MAIN_sDateTime_t.h"
+
 #include "device.h"
 #include "csmon_config.h"
-#include "boardcfg.h"
 #include "datetime.h"
 
 
@@ -37,6 +38,7 @@
     #define PARAM_ID_CURRENT_PHASEA     133
     #define PARAM_ID_CURRENT_PHASEB     134
     #define PARAM_ID_CURRENT_PHASEC     135
+
     #define PARAM_ID_VOLTAGE_DCLINK_32  136
     #define PARAM_ID_CURRENT_PHASEA_32  137
     #define PARAM_ID_CURRENT_PHASEB_32  138
@@ -58,18 +60,22 @@
 
 #define RECORDER0_ONLY_TEST                             1
 
+
 #if RECORDER0_ONLY_TEST
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   56
 #define RECORDER0_TOTAL_SAMPLE_COUNT        64
-//#define RECORDER_COUNT                      3
+
 #define RECORDER_COUNT                      1
 #else
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   5900
 #define RECORDER0_TOTAL_SAMPLE_COUNT        6000
+
 #define RECORDER1_PRETRIGGER_SAMPLE_COUNT   5900
 #define RECORDER1_TOTAL_SAMPLE_COUNT        6000
+
 #define RECORDER2_PRETRIGGER_SAMPLE_COUNT   5900
 #define RECORDER2_TOTAL_SAMPLE_COUNT        6000
+
 #define RECORDER_COUNT                      CSMON_RECORDER_COUNT_MAX
 #endif
 
@@ -87,9 +93,6 @@
 
 
 #define STAT_LED_EQEP1I_PIN 23
-#define STAT_LED_EQEP1S_PIN 22
-#define STAT_LED_EQEP1B_PIN 21
-#define STAT_LED_EQEP1A_PIN 20
 
 
 
@@ -108,17 +111,6 @@
 /* *****************************************************************************
  * Type Definitions
  **************************************************************************** */
-typedef struct
-{
-    uint_least8_t u8Seconds;
-    uint_least8_t u8Minutes;
-    uint_least8_t u8Hours;
-    uint_least8_t u8Weekdays;
-    uint_least8_t u8Day;
-    uint_least8_t u8Month;
-    uint_least8_t u8Year;
-    uint_least8_t u8Reserved;
-}MAIN_sDateTime_t;
 
 
 /* *****************************************************************************
