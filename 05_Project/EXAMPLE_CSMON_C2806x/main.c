@@ -199,17 +199,13 @@ char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 
 CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetServerOnStatus = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eSetParameter = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetRecorder = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eSetScope = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eSetTimerPeriodISRFunctionRegister = CSMON_RESPONSE_CODE_OK;
 CSMON_eResponseCode_t eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_RESPONSE_CODE_OK;
 uint32_t u32GetBaudError_PPM = 0;
 
 uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks = 0;
 uint32_t u32TimeMainLoopProcessCSMON_End_Ticks = 0;
 uint32_t u32TimeMainLoopProcessCSMON_Now_Ticks = 0;
-//uint32_t u32TimeMainLoopProcessCSMON_Max_Ticks = 0;
 
 uint32_t u32DelayCtrlLoop_Ticks = 1;
 uint32_t u32DelayMainLoop_Ticks = 1;
