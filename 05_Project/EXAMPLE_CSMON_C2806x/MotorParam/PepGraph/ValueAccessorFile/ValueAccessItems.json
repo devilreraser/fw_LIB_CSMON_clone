@@ -3,117 +3,6 @@
   "Items": [
     {
       "Key": {
-        "StorageId": 35,
-        "StartBitIndexOrElementCount": 16,
-        "IsBitField": false,
-        "IsArray": true,
-        "StorageType": 64
-      },
-      "Value": {
-        "AccessDescriptor": {
-          "ValueAccessKey": {
-            "StorageId": 35,
-            "StartBitIndexOrElementCount": 16,
-            "IsBitField": false,
-            "IsArray": true,
-            "StorageType": 64
-          },
-          "ReadAccessLevelMin": 0,
-          "WriteAccessLevelMin": 0,
-          "IsStorable": true,
-          "BitsCount": 8,
-          "CheckSum": 0,
-          "ElementBytesCountCeil": 1,
-          "BytesCountCeil": 16,
-          "RegisterCountCeil": 8,
-          "ElementRegisterCountCeil": 1,
-          "ModbusAddress": 35,
-          "DefaultReadFunctionCode": 3,
-          "DefaultWriteFunctionCode": 16,
-          "IsReadable": true,
-          "IsWriteable": true
-        },
-        "Index": 0,
-        "ShortName": "ConfigNameNormalReg",
-        "DefaultUnits": null
-      }
-    },
-    {
-      "Key": {
-        "StorageId": 36,
-        "StartBitIndexOrElementCount": 16,
-        "IsBitField": false,
-        "IsArray": true,
-        "StorageType": 64
-      },
-      "Value": {
-        "AccessDescriptor": {
-          "ValueAccessKey": {
-            "StorageId": 36,
-            "StartBitIndexOrElementCount": 16,
-            "IsBitField": false,
-            "IsArray": true,
-            "StorageType": 64
-          },
-          "ReadAccessLevelMin": 0,
-          "WriteAccessLevelMin": 0,
-          "IsStorable": true,
-          "BitsCount": 8,
-          "CheckSum": 0,
-          "ElementBytesCountCeil": 1,
-          "BytesCountCeil": 16,
-          "RegisterCountCeil": 8,
-          "ElementRegisterCountCeil": 1,
-          "ModbusAddress": 36,
-          "DefaultReadFunctionCode": 3,
-          "DefaultWriteFunctionCode": 16,
-          "IsReadable": true,
-          "IsWriteable": true
-        },
-        "Index": 1,
-        "ShortName": "ConfigNameZippedReg",
-        "DefaultUnits": null
-      }
-    },
-    {
-      "Key": {
-        "StorageId": 37,
-        "StartBitIndexOrElementCount": 16,
-        "IsBitField": false,
-        "IsArray": true,
-        "StorageType": 64
-      },
-      "Value": {
-        "AccessDescriptor": {
-          "ValueAccessKey": {
-            "StorageId": 37,
-            "StartBitIndexOrElementCount": 16,
-            "IsBitField": false,
-            "IsArray": true,
-            "StorageType": 64
-          },
-          "ReadAccessLevelMin": 0,
-          "WriteAccessLevelMin": 0,
-          "IsStorable": true,
-          "BitsCount": 16,
-          "CheckSum": 0,
-          "ElementBytesCountCeil": 2,
-          "BytesCountCeil": 32,
-          "RegisterCountCeil": 16,
-          "ElementRegisterCountCeil": 1,
-          "ModbusAddress": 37,
-          "DefaultReadFunctionCode": 3,
-          "DefaultWriteFunctionCode": 16,
-          "IsReadable": true,
-          "IsWriteable": true
-        },
-        "Index": 2,
-        "ShortName": "ConfigNameUnicodeReg",
-        "DefaultUnits": null
-      }
-    },
-    {
-      "Key": {
         "StorageId": 32,
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
@@ -144,7 +33,7 @@
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 3,
+        "Index": 0,
         "ShortName": "ConfigNameNormal",
         "DefaultUnits": null
       }
@@ -181,7 +70,7 @@
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 4,
+        "Index": 1,
         "ShortName": "ConfigNameZipped",
         "DefaultUnits": null
       }
@@ -218,11 +107,1750 @@
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 5,
+        "Index": 2,
         "ShortName": "ConfigNameUnicode",
         "DefaultUnits": null
       }
+    },
+    {
+      "Key": {
+        "StorageId": 35,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 35,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 0,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 16,
+          "RegisterCountCeil": 8,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 35,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 3,
+        "ShortName": "ConfigNameNormalReg",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 36,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 36,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 0,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 16,
+          "RegisterCountCeil": 8,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 36,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 4,
+        "ShortName": "ConfigNameZippedReg",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 37,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 37,
+            "StartBitIndexOrElementCount": 16,
+            "IsBitField": false,
+            "IsArray": true,
+            "StorageType": 64
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 0,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 32,
+          "RegisterCountCeil": 16,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 37,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 5,
+        "ShortName": "ConfigNameUnicodeReg",
+        "DefaultUnits": null
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60000,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60000,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 60000,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 6,
+        "ShortName": "CtrlLoopPeriod",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60001,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60001,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 60001,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 7,
+        "ShortName": "CtrlLoopAddDelay",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60002,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60002,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 60002,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 8,
+        "ShortName": "MainLoopAddDelay",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60003,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60003,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 60003,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 9,
+        "ShortName": "Parameters_Fail",
+        "DefaultUnits": "unit"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60004,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60004,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 60004,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 10,
+        "ShortName": "MainLoopCSMON",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60005,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60005,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 60005,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 11,
+        "ShortName": "CtrlLoopCSMON",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60006,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60006,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 60006,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 12,
+        "ShortName": "MainLoopMeasMax",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60007,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60007,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 60007,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 13,
+        "ShortName": "CtrlLoopMeasMax",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60008,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60008,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 60008,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 14,
+        "ShortName": "ParamInitMeas",
+        "DefaultUnits": "usec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 60009,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 60009,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 1,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 60009,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 15,
+        "ShortName": "MeasuresReset",
+        "DefaultUnits": "boolean"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 65534,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 65534,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 65534,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 16,
+        "ShortName": "ModbusMsgCntr",
+        "DefaultUnits": "unit"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 0,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 0,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 1,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 0,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 17,
+        "ShortName": "DeviceRunning",
+        "DefaultUnits": "boolean"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 1,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 1,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 1,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 18,
+        "ShortName": "ReadWriteScale",
+        "DefaultUnits": "*3.1415"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 2,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 2,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 2,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 19,
+        "ShortName": "IncLoopTest",
+        "DefaultUnits": "A(0.5V)"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 3,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 3,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 3,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 20,
+        "ShortName": "CurrentPhA_0",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 4,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 4,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 4,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 21,
+        "ShortName": "CurrentPhB_0",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 5,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 5,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 5,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 22,
+        "ShortName": "CurrentPhC_0",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 6,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 6,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 0,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 6,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 0,
+          "IsReadable": true,
+          "IsWriteable": false
+        },
+        "Index": 23,
+        "ShortName": "BaudError",
+        "DefaultUnits": "%"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 7,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 7,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 7,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 24,
+        "ShortName": "WatchdogTime",
+        "DefaultUnits": "msec"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 8,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 8,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 8,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 25,
+        "ShortName": "VoltageBus",
+        "DefaultUnits": "V"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 9,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 9,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 9,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 26,
+        "ShortName": "CurrentPhA",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 10,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 10,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 10,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 27,
+        "ShortName": "CurrentPhB",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 11,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 11,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 11,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 28,
+        "ShortName": "CurrentPhC",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 28,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 28,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 28,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 29,
+        "ShortName": "VoltageBus32",
+        "DefaultUnits": "V"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 29,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 29,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 29,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 30,
+        "ShortName": "CurrentPhA32",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 30,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 30,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 30,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 31,
+        "ShortName": "CurrentPhB32",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 31,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 31,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 4,
+          "RegisterCountCeil": 2,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 31,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 32,
+        "ShortName": "CurrentPhC32",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 108,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 108,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 108,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 33,
+        "ShortName": "VoltageBusStart",
+        "DefaultUnits": "V"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 109,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 109,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 109,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 34,
+        "ShortName": "CurrentPhAStart",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 110,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 110,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 110,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 35,
+        "ShortName": "CurrentPhBStart",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 111,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 111,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 111,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 36,
+        "ShortName": "CurrentPhCStart",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 208,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 208,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 208,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 37,
+        "ShortName": "VoltageBusStop",
+        "DefaultUnits": "V"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 209,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 209,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 209,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 38,
+        "ShortName": "CurrentPhAStop",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 210,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 210,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 210,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 39,
+        "ShortName": "CurrentPhBStop",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 211,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 211,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 211,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 40,
+        "ShortName": "CurrentPhCStop",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 308,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 308,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 308,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 41,
+        "ShortName": "VoltageBusIdle",
+        "DefaultUnits": "V"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 309,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 309,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 309,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 42,
+        "ShortName": "CurrentPhAIdle",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 310,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 310,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 310,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 43,
+        "ShortName": "CurrentPhBIdle",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 311,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 311,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 311,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 44,
+        "ShortName": "CurrentPhCIdle",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 408,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 408,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 408,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 45,
+        "ShortName": "IncLoopTestA",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 409,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 409,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 409,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 46,
+        "ShortName": "IncLoopTestB",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 410,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 410,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 410,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 47,
+        "ShortName": "IncLoopTestC",
+        "DefaultUnits": "A"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 411,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 411,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 411,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 48,
+        "ShortName": "IncLoopTestV",
+        "DefaultUnits": "V"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 412,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 412,
+            "StartBitIndexOrElementCount": 0,
+            "IsBitField": false,
+            "IsArray": false,
+            "StorageType": 0
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 16,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 2,
+          "BytesCountCeil": 2,
+          "RegisterCountCeil": 1,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 412,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 49,
+        "ShortName": "IncLoopTestCDiff",
+        "DefaultUnits": "A"
+      }
     }
   ],
-  "HashCode": 881231656
+  "HashCode": 873114690
 }
