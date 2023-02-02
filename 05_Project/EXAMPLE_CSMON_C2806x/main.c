@@ -7,15 +7,11 @@
  * Description: Example for CSMON_C28xx library integration.
  * 
  **************************************************************************** */
-#ifdef _WIN32
-#pragma once
-#endif /* _WIN32 */
  
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
 #include "device.h"
-#include "csmon.h"  // in "csmon_config.h"
 #include "csmon_config.h"
 #include "boardcfg.h"
 #include "datetime.h"
@@ -527,21 +523,11 @@ void ControlProcess(void)
 }
 
 
-
-
-
 /* *****************************************************************************
- * main
+ * Board_init
  **************************************************************************** */
-void main(void)
+static void Board_init(void)
 {
-    DINT;
-
-    //
-    // Disable the watchdog
-    //
-    SysCtl_disableWatchdog();
-
 #ifdef _2806x_ISO_CONTROL_CARD
     EALLOW;
     //  LED2 - red led (the middle led between LED3 and the power Supply green Led)
@@ -558,18 +544,18 @@ void main(void)
     EDIS;
 
 #endif
+}
 
-    //while(1);
 
-    // Configure PLL, disable WD, enable peripheral clocks.
-    Device_init();
-
-    // Disable pin locks and enable internal PullUps.
-    Device_initGPIO();
-
+/* *****************************************************************************
+ * CsMon_init
+ **************************************************************************** */
+void CsMon_init(void)
+{
 
     // CSMON Initialization -> ~ 2.25ms
     eResponseCode_CSMON_eInit = CSMON_eInit();
+
     // Check CSMON Response Code if needed
     if (eResponseCode_CSMON_eInit != CSMON_RESPONSE_CODE_OK)
     {
@@ -592,7 +578,23 @@ void main(void)
 
     // CSMON Internal Recorders Setup with Already Made Configuration
     CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
+}
 
+
+/* *****************************************************************************
+ * init
+ **************************************************************************** */
+void init(void)
+{
+    // Configure PLL, disable WD, enable peripheral clocks.
+    Device_init();
+
+    // Disable pin locks and enable internal PullUps.
+    Device_initGPIO();
+
+    Board_init();
+
+    CsMon_init();
 
     //
     // Enable the WatchDog
@@ -603,7 +605,15 @@ void main(void)
 
     EINT;
     ERTM;
+}
 
+
+/* *****************************************************************************
+ * main
+ **************************************************************************** */
+void main(void)
+{
+    init();
 
     int controlPrescaler = 10;
     int controlPrescalerCounter = 10;
@@ -631,10 +641,6 @@ void main(void)
         eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
         // Check CSMON Response Code if needed
         ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
-
-
     }
 }
-
-
 
