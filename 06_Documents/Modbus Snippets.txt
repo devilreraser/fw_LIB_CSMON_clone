@@ -7,5 +7,14 @@ Read Register 0					 : 01 03 00 00 00 01 84 0A
 Read Register 980 RTC Seconds    : 01 03 03 D4 00 01 C4 76 	
 Read Register 471 Analog Input 0 : 01 03 01 D7 00 01 35 CE
 
+Read Parameter32 Through File Req: 01 14 07 06 00 0B 00 20 00 08 5C E9
+Read Parameter32 Through File Rsp: 01 14 12 11 06 63 68 61 72 41 6C 61 62 61 6C 61 4E 69 63 61 00 FA 21
 
+WriteParameter32 Through File Req: 01 15 17 06 00 0B 00 20 00 08 63 68 61 72 41 6C 61 62 61 6C 61 4E 69 63 62 00 40 04
+WriteParameter32 Through File Req: 01 15 17 06 00 0B 00 20 00 08 63 68 61 72 41 6C 61 62 61 6C 61 4E 69 60 62 00 B0 F4
 
+WriteParameter33 Through File Req: 01 15 17 06 00 0B 00 21 00 08 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46 00 6F C3
+
+WriteParameter33 Through File Req: 01 15 25 06 00 0B 00 22 00 0F 01 31 02 32 03 33 04 34 05 35 06 36 07 37 08 38 09 39 11 41 12 42 13 43 14 44 15 45 16 46 F8 C2
+
+File Numeric 					 : 01 14 07 06 00 08 00 00 00 78 18 C7 	
