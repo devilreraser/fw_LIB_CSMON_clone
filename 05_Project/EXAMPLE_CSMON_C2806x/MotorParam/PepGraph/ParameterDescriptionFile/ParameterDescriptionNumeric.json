@@ -1457,7 +1457,100 @@
         "IsArithmetic": true,
         "IsValid": true
       }
+    },
+    {
+      "Key": {
+        "StorageId": 35,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 35,
+          "StartBitIndexOrElementCount": 16,
+          "IsBitField": false,
+          "IsArray": true,
+          "StorageType": 64
+        },
+        "IsBitField": false,
+        "DataType": 0,
+        "BitsCount": 8,
+        "MSBitMask": 128,
+        "NumberBitsMask": 255,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 255,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 36,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 36,
+          "StartBitIndexOrElementCount": 16,
+          "IsBitField": false,
+          "IsArray": true,
+          "StorageType": 64
+        },
+        "IsBitField": false,
+        "DataType": 0,
+        "BitsCount": 8,
+        "MSBitMask": 128,
+        "NumberBitsMask": 255,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 255,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 37,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "Value": {
+        "ValueAccessKey": {
+          "StorageId": 37,
+          "StartBitIndexOrElementCount": 16,
+          "IsBitField": false,
+          "IsArray": true,
+          "StorageType": 64
+        },
+        "IsBitField": false,
+        "DataType": 1,
+        "BitsCount": 16,
+        "MSBitMask": 32768,
+        "NumberBitsMask": 65535,
+        "VisualType": 0,
+        "DefaultValue": 0,
+        "Minimum": 0,
+        "Maximum": 65535,
+        "Multiplier": 1.0,
+        "Offset": 0,
+        "IsArithmetic": true,
+        "IsValid": true
+      }
     }
   ],
-  "HashCode": 8055921
+  "HashCode": -827566899
 }

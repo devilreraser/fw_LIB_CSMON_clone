@@ -627,6 +627,45 @@
       "RealAddrWrite": "UserUnicodeString",
       "RealAddrType": "char",
       "ParamValueType": ""
+    },
+    {
+      "ParamId": {
+        "StorageId": 35,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserStringConfiguration",
+      "RealAddrWrite": "UserStringConfiguration",
+      "RealAddrType": "char",
+      "ParamValueType": "CHAR"
+    },
+    {
+      "ParamId": {
+        "StorageId": 36,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserZippedString",
+      "RealAddrWrite": "UserZippedString",
+      "RealAddrType": "char",
+      "ParamValueType": ""
+    },
+    {
+      "ParamId": {
+        "StorageId": 37,
+        "StartBitIndexOrElementCount": 16,
+        "IsBitField": false,
+        "IsArray": true,
+        "StorageType": 64
+      },
+      "RealAddrRead": "UserUnicodeString",
+      "RealAddrWrite": "UserUnicodeString",
+      "RealAddrType": "char",
+      "ParamValueType": ""
     }
   ],
   "GeneratedFilesNames": "csmon_config"
