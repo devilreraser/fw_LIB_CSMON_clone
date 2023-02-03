@@ -11,11 +11,11 @@
 /* *****************************************************************************
  * Header Includes
  **************************************************************************** */
-#include "MAIN_sDateTime_t.h"
+#include "csmon_lib_support.h"
+#include "csmon_responses.h"
 
 #include "device.h"
 #include "csmon_config.h"
-#include "datetime.h"
 
 
 /* *****************************************************************************
@@ -25,10 +25,6 @@
 #define TEST_CSMON_APPLICATION_VERSION_LO    0
 
 #define TEST_CSMON_APPLICATION_VERSION       (uint16_t)(((uint16_t)((uint_least8_t)(TEST_CSMON_APPLICATION_VERSION_HI & 0x00FF)) << 8) | ((uint_least8_t)(TEST_CSMON_APPLICATION_VERSION_LO & 0x00FF)))
-
-/* Parameter Table Version, DateTime, Checksum */
-#define PARAM_TABLE_VERSION                 (uint32_t)1
-#define PARAM_TABLE_DATETIME                (uint32_t)DATETIME_BUILD
 
 /* Dummy Parameter List */
 #define PARAM_ID_MODBUS_MSG_CNT    65534
@@ -196,11 +192,8 @@ char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 
 
 
 
-CSMON_eResponseCode_t eResponseCode_CSMON_eInit = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eProcess = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eSetServerOnStatus = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eSetRecorder = CSMON_RESPONSE_CODE_OK;
-CSMON_eResponseCode_t eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_RESPONSE_CODE_OK;
+CSMON_Responses_t csMonResponses;
+
 uint32_t u32GetBaudError_PPM = 0;
 
 uint32_t u32TimeMainLoopProcessCSMON_Bgn_Ticks = 0;
@@ -212,25 +205,6 @@ uint32_t u32DelayMainLoop_Ticks = 1;
 
 uint16_t u16DelayCtrlLoopOld_100nsec = 0;
 uint16_t u16DelayMainLoopOld_usec = 0;
-
-bool MAIN_bDateTimeSet = false;
-
-MAIN_sDateTime_t MAIN_sDateTimeGet =
-{
-    0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 /* 2001-01-01-Mon-00:00:00 */
-};
-MAIN_sDateTime_t MAIN_sDateTimeSet =
-{
-    BUILD_RTC_SEC,
-    BUILD_RTC_MIN,
-    BUILD_RTC_HOUR,
-    0x00,
-    BUILD_RTC_DAY,
-    BUILD_RTC_MONTH,
-    BUILD_RTC_YEAR,
-    0x00,
-    /* 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00 2001-01-01-Mon-00:00:00 */
-};
 
 uint16_t u16FreeRunningTimerTicksPerMicroSecond;
 uint16_t u16FreeRunningTimerPrescaller;
@@ -296,61 +270,66 @@ void RecordersInitialization(void)
     /* Recorder 0 */
     u16ValidParameters = CSMON_POSITION_IN_RECORDER_0;
 
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_STARUNNINGMODE, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA_32, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB_32, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC_32, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
             CSMON_RECORDER_0, PARAM_ID_VOLTAGE_DCLINK_32, u16ValidParameters);
-    if (eResponseCode_CSMON_eSetRecorder == CSMON_RESPONSE_CODE_OK)
+
+    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
     {
         u16ValidParameters++;
     }
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetParameterCountInRecorder (
+    csMonResponses.eSetRecorder = CSMON_eSetParameterCountInRecorder (
             CSMON_RECORDER_0, u16ValidParameters);
 
 
 
     /* Recorder 0 Configuration */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderConfigurationSkipSamples (
+    csMonResponses.eSetRecorder = CSMON_eSetRecorderConfigurationSkipSamples (
             CSMON_RECORDER_0,
             RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
@@ -362,58 +341,13 @@ void RecordersInitialization(void)
 
 
     /* Trigger Recorder 0 */
-    eResponseCode_CSMON_eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
+    csMonResponses.eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
             CSMON_RECORDER_0,
             PARAM_ID_STARUNNINGMODE,
             (uint32_t)true,
             (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
-
-
-
-
 }
 
-
-
-void CSMON_vSetDateTime (
-        uint_least8_t u8BCDSeconds,
-        uint_least8_t u8BCDMinutes,
-        uint_least8_t u8BCDHours,
-        uint_least8_t u8BCDWeekdays,
-        uint_least8_t u8BCDDay,
-        uint_least8_t u8BCDMonth,
-        uint_least8_t u8BCDYear)
-{
-    MAIN_sDateTimeSet.u8Seconds    = u8BCDSeconds;
-    MAIN_sDateTimeSet.u8Minutes    = u8BCDMinutes;
-    MAIN_sDateTimeSet.u8Hours      = u8BCDHours;
-    MAIN_sDateTimeSet.u8Weekdays   = u8BCDWeekdays;
-    MAIN_sDateTimeSet.u8Day        = u8BCDDay;
-    MAIN_sDateTimeSet.u8Month      = u8BCDMonth;
-    MAIN_sDateTimeSet.u8Year       = u8BCDYear;
-    MAIN_bDateTimeSet = true;
-}
-
-/* *****************************************************************************
- * CSMON_vGetDateTime - Get RTC Value - called from CSMON library
- **************************************************************************** */
-void CSMON_vGetDateTime (
-        uint_least8_t* pu8BCDSeconds,
-        uint_least8_t* pu8BCDMinutes,
-        uint_least8_t* pu8BCDHours,
-        uint_least8_t* pu8BCDWeekdays,
-        uint_least8_t* pu8BCDDay,
-        uint_least8_t* pu8BCDMonth,
-        uint_least8_t* pu8BCDYear)
-{
-        *pu8BCDSeconds  = MAIN_sDateTimeGet.u8Seconds;
-        *pu8BCDMinutes  = MAIN_sDateTimeGet.u8Minutes;
-        *pu8BCDHours    = MAIN_sDateTimeGet.u8Hours;
-        *pu8BCDWeekdays = MAIN_sDateTimeGet.u8Weekdays;
-        *pu8BCDDay      = MAIN_sDateTimeGet.u8Day;
-        *pu8BCDMonth    = MAIN_sDateTimeGet.u8Month;
-        *pu8BCDYear     = MAIN_sDateTimeGet.u8Year;
-}
 
 
 /* *****************************************************************************
@@ -501,8 +435,8 @@ void ControlProcess(void)
     SysCtl_delay(u32DelayCtrlLoop_Ticks);
 
     // Process Passed Flag Set - Need to be called from Processes with higher priority level in order CSMON to be able to get meaning-full (consistent) data
-    eResponseCode_CSMON_eSetFlagProcessPassed = CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY);
-    ASSERT(eResponseCode_CSMON_eSetFlagProcessPassed != CSMON_RESPONSE_CODE_OK);
+    csMonResponses.eSetFlagProcessPassed = CSMON_eSetFlagProcessPassed (CSMON_ID_PROCESS_CONTROL_PRIMARY);
+    ASSERT(eSetFlagProcessPassed != CSMON_RESPONSE_CODE_OK);
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
 
 #ifdef _CS_1291
@@ -540,12 +474,13 @@ static void Board_init(void)
  **************************************************************************** */
 void CsMon_init(void)
 {
+    CSMON_Responses_init(&csMonResponses);
 
     // CSMON Initialization -> ~ 2.25ms
-    eResponseCode_CSMON_eInit = CSMON_eInit();
+    csMonResponses.eInit = CSMON_eInit();
 
     // Check CSMON Response Code if needed
-    if (eResponseCode_CSMON_eInit != CSMON_RESPONSE_CODE_OK)
+    if (csMonResponses.eInit != CSMON_RESPONSE_CODE_OK)
     {
         /* If enters here - Fix Peripheral Frequency for Better Performance and Stability (DEVICE_LSPCLK_FREQ) */
         u32GetBaudError_PPM = CSMON_u32GetBaudError_PPM(CSMON_ID_PERIPHERAL_SCI_MODBUS);
@@ -612,9 +547,9 @@ void main(void)
         SysCtl_serviceWatchdog();
 
         // CSMON Process In Main Loop - Big Delays On Disconnect 4-5ms; On Connect 12-35ms If Not Interrupted (EMIF Checksum PC Application)
-        eResponseCode_CSMON_eProcess = CSMON_eProcess();
+        csMonResponses.eProcess = CSMON_eProcess();
         // Check CSMON Response Code if needed
-        ASSERT(eResponseCode_CSMON_eProcess != CSMON_RESPONSE_CODE_OK);
+        ASSERT(csMonResponses.eProcess != CSMON_RESPONSE_CODE_OK);
 
         controlPrescalerCounter++;
         if (controlPrescalerCounter >= controlPrescaler)
@@ -626,9 +561,9 @@ void main(void)
         //
         // Device Running Control Indication - Set on Enter/Exit Run Mode
         //
-        eResponseCode_CSMON_eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
+        csMonResponses.eSetServerOnStatus = CSMON_eSetServerOnStatus(bDummyStatsDevRunning);
         // Check CSMON Response Code if needed
-        ASSERT(eResponseCode_CSMON_eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
+        ASSERT(csMonResponses.eSetServerOnStatus != CSMON_RESPONSE_CODE_OK);
     }
 }
 
