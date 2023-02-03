@@ -104,6 +104,8 @@ typedef struct
  **************************************************************************** */ 
 extern volatile const MAIN_sParameterList_t asParameterList[CSMON_CONFIG_PARAMETER_COUNT_MAX];
 
+$extern_real_addrs_definitions$
+
 /* *****************************************************************************
  * Function Prototypes
  **************************************************************************** */

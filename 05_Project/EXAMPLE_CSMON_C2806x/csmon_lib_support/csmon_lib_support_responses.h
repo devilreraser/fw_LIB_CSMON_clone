@@ -4,29 +4,30 @@ extern "C"
 #endif /* __cplusplus */
 
 
-#ifndef _CSMON_RESPONSES_H_
-#define _CSMON_RESPONSES_H_
+#ifndef _CSMON_LIB_SUPPORT_RESPONSES_H_
+#define _CSMON_LIB_SUPPORT_RESPONSES_H_
 
 
 #include "csmon.h"
 
-typedef struct _CSMON_Responses_t_
+
+typedef struct _CSMON_LIB_SUPPORT_Responses_t_
 {
     CSMON_eResponseCode_t eInit;
     CSMON_eResponseCode_t eProcess;
     CSMON_eResponseCode_t eSetServerOnStatus;
     CSMON_eResponseCode_t eSetRecorder;
     CSMON_eResponseCode_t eSetFlagProcessPassed;
-} CSMON_Responses_t;
+} CSMON_LIB_SUPPORT_Responses_t;
 
 
-typedef CSMON_Responses_t* CSMON_Responses_Handle;
-typedef const CSMON_Responses_t* CSMON_Responses_CHandle;
+typedef CSMON_LIB_SUPPORT_Responses_t* CSMON_LIB_SUPPORT_Responses_Handle;
+typedef const CSMON_LIB_SUPPORT_Responses_t* CSMON_LIB_SUPPORT_Responses_CHandle;
 
 
-static inline void CSMON_Responses_init(const CSMON_Responses_Handle handle)
+static inline void CSMON_Responses_init(const CSMON_LIB_SUPPORT_Responses_Handle handle)
 {
-    CSMON_Responses_t* const obj = (CSMON_Responses_t*)handle;
+    CSMON_LIB_SUPPORT_Responses_t* const obj = (CSMON_LIB_SUPPORT_Responses_t*)handle;
 
     obj->eInit = CSMON_RESPONSE_CODE_OK;
     obj->eProcess = CSMON_RESPONSE_CODE_OK;
