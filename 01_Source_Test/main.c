@@ -61,6 +61,8 @@
  **************************************************************************** */
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
 
+#define USE_EXTERNAL_MB_MSG_COUNTER 1
+
 
 #if defined(__TMS320F2806x__)
 
@@ -2591,6 +2593,12 @@ void ControlProcess(void)
 
 
 #if _CSMON_USE_EXTERNAL_PARAMETER_TABLE == 0
+
+
+#ifndef CSMON_CONFIG_PARAMETER_COUNT_MAX
+//#define CSMON_CONFIG_PARAMETER_COUNT_MAX 0  /* Use Auto size of the array (last element must be NULL) */
+#define CSMON_CONFIG_PARAMETER_COUNT_MAX (uint16_t)(sizeof(asParameterList)/sizeof(asParameterList[0]))  /* Use Maximum size of the array (last element must be NULL for autosize) */
+#endif
 /* *****************************************************************************
  * ExternalParametersInitialization
  **************************************************************************** */
@@ -2660,6 +2668,10 @@ void ParameterInitialization(void)
     u16CountSetParameterFail = 0;
     u16CountSetParameterFree = 0;
 
+    #if USE_EXTERNAL_MB_MSG_COUNTER
+    CSMON_vSetModbusMessageCounterRegisterRealAddress((uint32_t)&u16DummyDataCnt);
+    #endif
+
     if ( (uParamVerBackup.u32Register != u32ParamVer)
       || (uDateTimeBackup.u32Register != u32DateTime)
       || (uCheckSumBackup.u32Register != u32CheckSum) )                /* ParamVer or DateTime or Checksum MisMatch */
@@ -2687,7 +2699,9 @@ void ParameterInitialization(void)
 
             if (asParameterList[u16Index].u16ParameterIndexID == PARAM_ID_MODBUS_MSG_CNT)
             {
+                #if USE_EXTERNAL_MB_MSG_COUNTER
                 CSMON_vSetModbusMessageCounterRegisterRealAddress((uint32_t)&u16DummyDataCnt);
+                #endif
                 pu16ModbusMessageCounter = (uint16_t*)CSMON_u32GetModbusMessageCounterRegisterRealAddress();
                 u32ParamRealAddress = (uint32_t)pu16ModbusMessageCounter;
             }
