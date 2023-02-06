@@ -117,6 +117,11 @@
 			<location>D:/Conv.git_GitHub/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/Motor28062/EXAMPLE_CSMON_C2806x.out</location>
 		</link>
 		<link>
+			<name>TestBoard28069/EXAMPLE_CSMON_C2806x.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
 			<name>C2806x_LIB/common/cmd</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
