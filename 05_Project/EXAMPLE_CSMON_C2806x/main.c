@@ -14,6 +14,8 @@
 #include "MotorParam/Generated/csmon_config.h"
 
 #include "csmon_lib_support/csmon_lib_support.h"
+#include "dev/dbg/ctrl/dbg_ctrl.h"
+#include "hal.h"
 
 #include "device.h"
 #include "csmon_config.h"
@@ -22,9 +24,6 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
-
-#define STAT_LED_EQEP1I_PIN 23
-
 
 
 /* *****************************************************************************
@@ -70,9 +69,7 @@ static const uint32_t u32DelayCtrlLoop_Ticks = 1;
  **************************************************************************** */
 void ControlProcess(void)
 {
-#ifdef _CS_1291
-    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 1);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
-#endif
+    DBG_CTRL_ControlProcessOnEnter();
 
     //
     // Test For Data Consistency and Control Emulation
@@ -129,33 +126,8 @@ void ControlProcess(void)
     ASSERT(eSetFlagProcessPassed != CSMON_RESPONSE_CODE_OK);
     // Check CSMON Response Code (... or Embed Assert For Debug) if needed
 
-#ifdef _CS_1291
-    GPIO_writePin_2806x(STAT_LED_EQEP1I_PIN, 0);     /* J17 at board corner before ground (pin 13 - second outside pin corner to middle) */
-#endif
-}
 
-
-/* *****************************************************************************
- * Board_init
- **************************************************************************** */
-static void Board_init(void)
-{
-#ifdef _2806x_ISO_CONTROL_CARD
-    EALLOW;
-    //  LED2 - red led (the middle led between LED3 and the power Supply green Led)
-    GpioCtrlRegs.GPAPUD.bit.GPIO31 = 0;   // Enable pullup on GPIO31
-    GpioCtrlRegs.GPAMUX2.bit.GPIO31 = 0;  // GPIO31 = GPIO
-    GpioCtrlRegs.GPADIR.bit.GPIO31 = 1;  // GPIO31 = output
-    GpioDataRegs.GPADAT.bit.GPIO31 = 0; // level
-
-    //  LED3 - red led nearest to the micro USB
-    GpioCtrlRegs.GPBPUD.bit.GPIO34 = 0;  // Enable pullup on GPIO34
-    GpioCtrlRegs.GPBMUX1.bit.GPIO34 = 0; // GPIO34 = GPIO34
-    GpioCtrlRegs.GPBDIR.bit.GPIO34 = 1;  // GPIO34 = output
-    GpioDataRegs.GPBDAT.bit.GPIO34 = 0; // level
-    EDIS;
-
-#endif
+    DBG_CTRL_ControlProcessOnExit();
 }
 
 
@@ -170,7 +142,7 @@ void init(void)
     // Disable pin locks and enable internal PullUps.
     Device_initGPIO();
 
-    Board_init();
+    HAL_GPIO_setup();
 
     CSMON_LIB_SUPPORT_init();
 
