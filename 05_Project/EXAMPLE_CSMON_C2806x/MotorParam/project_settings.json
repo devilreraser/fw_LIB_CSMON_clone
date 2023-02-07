@@ -666,6 +666,19 @@
       "RealAddrWrite": "UserUnicodeString",
       "RealAddrType": "char",
       "ParamValueType": ""
+    },
+    {
+      "ParamId": {
+        "StorageId": 312,
+        "StartBitIndexOrElementCount": 0,
+        "IsBitField": false,
+        "IsArray": false,
+        "StorageType": 0
+      },
+      "RealAddrRead": "str.CurrentPhCIdle",
+      "RealAddrWrite": "str.CurrentPhCIdle",
+      "RealAddrType": "",
+      "ParamValueType": ""
     }
   ],
   "GeneratedFilesNames": "csmon_config"

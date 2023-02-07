@@ -39,6 +39,7 @@
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/common/include"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/hal/boards/cs1277_r00/f28x/f2806x/src"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/MotorParam/Generated"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/C2806x_Device"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/Peripheral/01_Source/TMS320F2806x"/>
@@ -109,7 +110,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/DemoBoard28069_Example|CSMON_LIB/Motor28062|CSMON_LIB/DemoBoard28069|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="hal/boards/2806x_ISO_CONTROL_CARD|CSMON_LIB/DemoBoard28069_Example|CSMON_LIB/Motor28062|CSMON_LIB/DemoBoard28069|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -156,6 +157,7 @@
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/common/include"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/hal/boards/2806x_ISO_CONTROL_CARD/f28x/f2806x/src"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/MotorParam/Generated"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/C2806x_Device"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/Peripheral/01_Source/TMS320F2806x"/>
@@ -227,7 +229,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/Motor28062_Example|CSMON_LIB/DemoBoard28069|CSMON_LIB/Motor28062|lnk_F2806x_for_Bootloader.cmd|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="hal/boards/cs1277_r00|CSMON_LIB/Motor28062_Example|CSMON_LIB/DemoBoard28069|CSMON_LIB/Motor28062|lnk_F2806x_for_Bootloader.cmd|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
