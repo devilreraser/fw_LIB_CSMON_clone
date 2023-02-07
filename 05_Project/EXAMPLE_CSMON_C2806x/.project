@@ -279,12 +279,12 @@
 		<link>
 			<name>CSMON_LIB/Motor28062/CSMON_C28xx.lib</name>
 			<type>1</type>
-			<location>C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/Motor28062/CSMON_C28xx.lib</location>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/CSMON_C28xx.lib</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062/csmon.h</name>
 			<type>1</type>
-			<location>C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/Motor28062/csmon.h</location>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062_Example/CSMON_C28xx.lib</name>
@@ -777,10 +777,4 @@
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/headers/source/F2806x_GlobalVariableDefs.c</locationURI>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>file:/D:/Conv.git_GitHub/fw_BasicAFE/02_Libraries/LIB_CSMON/05_Project/EXAMPLE_CSMON_C2806x</value>
-		</variable>
-	</variableList>
 </projectDescription>

@@ -220,18 +220,11 @@ typedef enum
 
 typedef enum
 {
-    CSMON_DATA_TYPE_STRING_FLAG = 0x0800,   /* Max Compression String */
-    CSMON_DATA_TYPE_ARRAY_FLAG = 0x0400,
     CSMON_DATA_TYPE_BOOL_FLAG = 0x0200,
     CSMON_DATA_TYPE_ENUM_FLAG = 0x0100,
     CSMON_DATA_TYPE_SIGNED_FLAG = 0x0080,
     CSMON_DATA_TYPE_FLOAT_FLAG = 0x0040,
     CSMON_DATA_TYPE_SIZE_MASK = 0x0003,
-
-    CSMON_DATA_TYPE_CHAR = 0x0800,
-
-    CSMON_DATA_TYPE_AU8  = 0x0400,
-    CSMON_DATA_TYPE_AU16 = 0x0401,
 
     CSMON_DATA_TYPE_U8  = 0x0000,
     CSMON_DATA_TYPE_U16 = 0x0001,
@@ -610,9 +603,9 @@ CSMON_eResponseCode_t CSMON_eSetParameterTableDescr(void *pDescr, uint16_t u16Of
 
 /* First Put Real Address (Call this function in application software) to calculate count parameters internally (last index is NULL) */
 #if CSMON_REALADR_16BIT
-CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint16_t *pRealAddress, uint16_t u16Offset, uint16_t u16MaxParameterCount);
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint16_t *pRealAddress, uint16_t u16Offset);
 #else
-CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pRealAddress, uint16_t u16Offset, uint16_t u16MaxParameterCount);
+CSMON_eResponseCode_t CSMON_eSetParameterListRealAddress(uint32_t *pRealAddress, uint16_t u16Offset);
 #endif
 //CSMON_eResponseCode_t CSMON_eSetParameterListProcessFunc(uint32_t *pu32ProcessFunc, uint16_t u16Offset);
 CSMON_eResponseCode_t CSMON_eSetParameterListParameterID(uint16_t *pu16ParameterIndexID, uint16_t u16Offset);
