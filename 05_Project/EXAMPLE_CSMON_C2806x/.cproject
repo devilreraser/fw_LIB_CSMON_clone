@@ -40,7 +40,7 @@
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/headers/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/hal/boards/cs1277_r00/f28x/f2806x/src"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/MotorParam/Generated"/>
+									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/C2806x_Device"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../02_Libraries/Peripheral/01_Source/TMS320F2806x"/>
 									<listOptionValue builtIn="false" value="${PROJECT_LOC}/../../04_Output_Files/Motor28062_Example"/>

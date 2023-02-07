@@ -18,7 +18,7 @@
 #include "hal.h"
 
 #include "device.h"
-#include "csmon_config.h"
+#include "MotorParam/Generated/csmon_config.h"
 
 
 /* *****************************************************************************
