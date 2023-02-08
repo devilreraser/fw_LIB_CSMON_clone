@@ -442,6 +442,19 @@ typedef union
 }CSMON_uParameterDefinitionsAccessLevel_t;
 
 
+typedef struct _CSMON_sInitDynamicParams_v0_t_
+{
+    size_t size; // set to size of this structure
+} CSMON_sInitDynamicParams_v0_t;
+
+
+typedef struct _CSMON_sInitDynamicParams_v1_t_
+{
+    size_t size; // set to size of this structure
+    const void* pHMLIB_sInitDynamicParams;
+} CSMON_sInitDynamicParams_v1_t;
+
+
 /* *****************************************************************************
  * Function-Like Macro
  **************************************************************************** */
@@ -462,6 +475,10 @@ typedef union
  * calculate properly the baud rate.
  **************************************************************************** */
 CSMON_eResponseCode_t CSMON_eInit(void);
+
+CSMON_eResponseCode_t CSMON_eInitDynamic(
+    const void* pCSMON_eInitDynamicParams
+);
 
 /* *****************************************************************************
  * CSMON_eProcess   -   Call in main loop
