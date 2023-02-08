@@ -1,8 +1,13 @@
 #include "csmon_lib_support.h"
 
-#include "csmon_config.h"
 #include "datetime.h"
+
+#include "MotorParam/Generated/csmon_config.h"
 #include "app_settings/manifest.h"
+#include "app_settings/projectcfg.h"
+
+#include "HexMonitor/01_Source/TI/hmdrv_init_dynamic_params.h"
+#include "HexMonitor/01_Source/hmlib_init_dynamic_params.h"
 
 #include "debug.h"
 
@@ -78,8 +83,29 @@ extern void CSMON_LIB_SUPPORT_init(void)
 {
     CSMON_Responses_init(&csMonResponses);
 
-    // CSMON Initialization -> ~ 2.25ms
-    csMonResponses.eInit = CSMON_eInit();
+    {
+        const HMDRV_sInitDynamicParams_v1_t hmdrvInitDynamicParams =
+        {
+         .size = sizeof(HMDRV_sInitDynamicParams_v1_t),
+         .SCI_baud = EXAMPLE_CSMON_C2806x_HMDRV_MODBUS_BAUD,
+         .SCI_config = SCI_CONFIG_WLEN_8 | EXAMPLE_CSMON_C2806x_STOP_BITS | EXAMPLE_CSMON_C2806x_UART_PARITY_MODBUS
+        };
+
+        const HMLIB_sInitDynamicParams_v1_t hmlibInitDynamicParams =
+        {
+         .size = sizeof(HMLIB_sInitDynamicParams_v1_t),
+         .pHMDRV_sInitDynamicParams = &hmdrvInitDynamicParams
+        };
+
+        const CSMON_sInitDynamicParams_v1_t csmonInitDynamicParams =
+        {
+         .size = sizeof(CSMON_sInitDynamicParams_v1_t),
+         .pHMLIB_sInitDynamicParams = &hmlibInitDynamicParams
+        };
+
+        // CSMON Initialization -> ~ 2.25ms
+        csMonResponses.eInit = CSMON_eInitDynamic(&csmonInitDynamicParams);
+    }
 
     // Check CSMON Response Code if needed
     if (csMonResponses.eInit != CSMON_RESPONSE_CODE_OK)
