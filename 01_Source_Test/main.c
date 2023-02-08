@@ -30,7 +30,11 @@
     #include "uart_driver.h"
 #else
 
+    #ifdef _CS_1211
+    #define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 200
+    #else
     #define BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX 1024
+    #endif
 
     #ifndef _CS_1211
     #include "emif_driver.h"
@@ -2591,6 +2595,16 @@ void ControlProcess(void)
 
 
 #if _CSMON_USE_EXTERNAL_PARAMETER_TABLE == 0
+
+#ifndef CSMON_CONFIG_PARAMETER_COUNT_MAX
+#ifdef BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX
+//#define CSMON_CONFIG_PARAMETER_COUNT_MAX BOARDCFG_CSMON_FILE_PARAMETER_COUNT_MAX
+#define CSMON_CONFIG_PARAMETER_COUNT_MAX (uint16_t)(sizeof(asParameterList)/sizeof(asParameterList[0]))
+#else
+#define CSMON_CONFIG_PARAMETER_COUNT_MAX 0
+#endif
+#endif
+
 /* *****************************************************************************
  * ExternalParametersInitialization
  **************************************************************************** */
