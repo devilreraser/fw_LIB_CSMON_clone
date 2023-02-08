@@ -643,8 +643,8 @@
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_EVEN_PARITY=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_SCIA_ON_USB_CONNECTOR=1"/>
-									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=0"/>
-									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=1"/>
 									<listOptionValue builtIn="false" value="NO_FREEMASTER"/>
 									<listOptionValue builtIn="false" value="_CSMON_EXTERNAL_RECORDERS_TEST_REDIRECT_TO_INTERNAL_RECORDERS=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
@@ -937,8 +937,8 @@
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_EVEN_PARITY=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_SCIA_ON_USB_CONNECTOR=1"/>
-									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=0"/>
-									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=1"/>
 									<listOptionValue builtIn="false" value="NO_FREEMASTER"/>
 									<listOptionValue builtIn="false" value="_CSMON_EXTERNAL_RECORDERS_TEST_REDIRECT_TO_INTERNAL_RECORDERS=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
@@ -946,7 +946,8 @@
 									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CS_1211"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=0"/>
-									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_TABLE=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_TABLE=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1182741031" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
@@ -1037,8 +1038,8 @@
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_EVEN_PARITY=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_SCIA_ON_USB_CONNECTOR=1"/>
-									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=0"/>
-									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=0"/>
+									<listOptionValue builtIn="false" value="_CSMON_USES_SCIA=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_HEXMON_USES_SCIA=1"/>
 									<listOptionValue builtIn="false" value="NO_FREEMASTER"/>
 									<listOptionValue builtIn="false" value="_CSMON_EXTERNAL_RECORDERS_TEST_REDIRECT_TO_INTERNAL_RECORDERS=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
