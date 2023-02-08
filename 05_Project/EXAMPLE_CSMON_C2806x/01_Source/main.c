@@ -14,11 +14,11 @@
 #include "MotorParam/Generated/csmon_config.h"
 
 #include "csmon_lib_support/csmon_lib_support.h"
+#include "MotorParam/Generated/csmon_config.h"
 #include "dev/dbg/ctrl/dbg_ctrl.h"
 #include "hal.h"
 
 #include "device.h"
-#include "csmon_config.h"
 
 
 /* *****************************************************************************

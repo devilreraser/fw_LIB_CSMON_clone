@@ -1,7 +1,7 @@
 #include "csmon_lib_support.h"
 
-#include "csmon_config.h"
 #include "datetime.h"
+#include "MotorParam/Generated/csmon_config.h"
 #include "app_settings/manifest.h"
 
 #include "debug.h"

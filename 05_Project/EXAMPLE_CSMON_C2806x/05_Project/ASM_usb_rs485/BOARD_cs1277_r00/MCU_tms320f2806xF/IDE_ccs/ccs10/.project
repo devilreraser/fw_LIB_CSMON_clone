@@ -27,6 +27,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>01_Source</name>
+			<type>2</type>
+			<location>D:/repos/github_cs/fw_LIB_CSMON/05_Project/EXAMPLE_CSMON_C2806x/01_Source</location>
+		</link>
+		<link>
 			<name>C2806x_Device</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -42,34 +47,39 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>lnk_F2806x.cmd</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/cmd/lnk_F2806x.cmd</locationURI>
+		</link>
+		<link>
 			<name>C2806x_Device/Example_Flash2806x_CsmKeys.asm</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/Example_Flash2806x_CsmKeys.asm</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/02_Libraries/C2806x_Device/Example_Flash2806x_CsmKeys.asm</locationURI>
 		</link>
 		<link>
 			<name>C2806x_Device/F2806x_Examples_Local.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/F2806x_Examples_Local.h</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/02_Libraries/C2806x_Device/F2806x_Examples_Local.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_Device/Flash2806x_API_Library.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/Flash2806x_API_Library.h</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/02_Libraries/C2806x_Device/Flash2806x_API_Library.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_Device/device.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/device.c</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/02_Libraries/C2806x_Device/device.c</locationURI>
 		</link>
 		<link>
 			<name>C2806x_Device/device.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/device.h</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/02_Libraries/C2806x_Device/device.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_Device/driverlib.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/driverlib.h</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/02_Libraries/C2806x_Device/driverlib.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common</name>
@@ -92,17 +102,7 @@
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/DemoBoard28069</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>CSMON_LIB/DemoBoard28069_Example</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/Motor28062</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -252,44 +252,24 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/DemoBoard28069/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/DemoBoard28069/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/csmon.h</locationURI>
-		</link>
-		<link>
 			<name>CSMON_LIB/DemoBoard28069_Example/CSMON_C28xx.lib</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/CSMON_C28xx.lib</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/CSMON_C28xx.lib</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/DemoBoard28069_Example/csmon.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/csmon.h</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/Motor28062/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/Motor28062/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/csmon.h</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062_Example/CSMON_C28xx.lib</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062_Example/CSMON_C28xx.lib</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/04_Output_Files/Motor28062_Example/CSMON_C28xx.lib</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062_Example/csmon.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062_Example/csmon.h</locationURI>
+			<locationURI>PARENT-8-PROJECT_LOC/04_Output_Files/Motor28062_Example/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/cmd/28062_RAM_lnk.cmd</name>
