@@ -1,11 +1,6 @@
-/Release/
-/ReleaseRecorders/
-.settings
-/ReleaseTestCS1107
+/Release*/
+/04_Output_Files/
 /Motor28062/
-/ReleaseCS1211/
-/ReleaseCS1107/
-/ReleaseTestCS1211/
-/ReleaseCS1107_F28384/
 /TestBoard28069/
+.settings
 *.launch
