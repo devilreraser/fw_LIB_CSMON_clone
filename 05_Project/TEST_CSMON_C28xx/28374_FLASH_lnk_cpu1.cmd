@@ -47,7 +47,7 @@ PAGE 1 : /* Data Memory */
 
 
 //   RAMLSGS_DATA    : origin = 0x008800, length = 0x005800
-   RAMLSGS_DATA    : origin = 0x008800, length = 0x007800
+   RAMLSGS_DATA    : origin = 0x008800, length = 0x00F800
 
 //   RAMLS5      : origin = 0x00A800, length = 0x000800
 
