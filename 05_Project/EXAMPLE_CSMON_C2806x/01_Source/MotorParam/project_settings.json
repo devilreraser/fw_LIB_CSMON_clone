@@ -23,6 +23,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u16PeriodControl_usec",
@@ -36,6 +37,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u16DelayCtrlLoop_100nsec",
@@ -49,6 +51,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u16DelayMainLoop_usec",
@@ -62,6 +65,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u16CountSetParameterFail",
@@ -75,6 +79,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u32TimeMainLoopProcessCSMON_Max_Ticks",
@@ -88,6 +93,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u32TimeCSMON_ISR_Max_Ticks",
@@ -101,6 +107,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u32TimeMainLoopCycle_Max_Ticks",
@@ -114,6 +121,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u32TimeCtrlLoopMax_Ticks",
@@ -127,6 +135,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u32ParamTime_Ticks",
@@ -140,6 +149,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "bResetAllTimeMeasures",
@@ -153,6 +163,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u16DummyDataCnt",
@@ -166,6 +177,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "bDummyStatsDevRunning",
@@ -179,6 +191,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16ScaleDataTst",
@@ -192,6 +205,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyIncrementLoop",
@@ -205,12 +219,13 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
-      "RealAddrRead": "s16DummyCurrentPhaseA",
-      "RealAddrWrite": "s16DummyCurrentPhaseA",
-      "RealAddrType": "",
-      "ParamValueType": null
+      "RealAddrRead": "gCurrents.PhA",
+      "RealAddrWrite": "gCurrents.PhA",
+      "RealAddrType": "Currents_t",
+      "ParamValueType": ""
     },
     {
       "ParamId": {
@@ -218,12 +233,13 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
-      "RealAddrRead": "s16DummyCurrentPhaseB",
-      "RealAddrWrite": "s16DummyCurrentPhaseB",
-      "RealAddrType": "",
-      "ParamValueType": null
+      "RealAddrRead": "Currents.PhB",
+      "RealAddrWrite": "Currents.PhB",
+      "RealAddrType": "Currents_t",
+      "ParamValueType": ""
     },
     {
       "ParamId": {
@@ -231,12 +247,13 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
-      "RealAddrRead": "s16DummyCurrentPhaseC",
-      "RealAddrWrite": "s16DummyCurrentPhaseC",
-      "RealAddrType": "",
-      "ParamValueType": null
+      "RealAddrRead": "Current.PhC",
+      "RealAddrWrite": "Current.PhC",
+      "RealAddrType": "Currents_t",
+      "ParamValueType": ""
     },
     {
       "ParamId": {
@@ -244,6 +261,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u32GetBaudError_PPM",
@@ -257,6 +275,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "u16WatchdogPrescalerTime",
@@ -270,6 +289,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyVoltageDCLink",
@@ -283,6 +303,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseA",
@@ -296,6 +317,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseB",
@@ -309,6 +331,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseC",
@@ -322,6 +345,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s32DummyVoltageDCLink",
@@ -335,6 +359,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s32DummyCurrentPhaseA",
@@ -348,6 +373,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s32DummyCurrentPhaseB",
@@ -361,6 +387,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s32DummyCurrentPhaseC",
@@ -374,6 +401,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyVoltageDCLinkStartup",
@@ -387,6 +415,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseAStartup",
@@ -400,6 +429,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseBStartup",
@@ -413,6 +443,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseCStartup",
@@ -426,6 +457,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyVoltageDCLinkStop",
@@ -439,6 +471,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseAStop",
@@ -452,6 +485,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseBStop",
@@ -465,6 +499,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseCStop",
@@ -478,6 +513,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyVoltageDCLinkIdle",
@@ -491,6 +527,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseAIdle",
@@ -504,6 +541,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseBIdle",
@@ -517,6 +555,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyCurrentPhaseCIdle",
@@ -530,6 +569,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyIncrementLoopA",
@@ -543,6 +583,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyIncrementLoopB",
@@ -556,6 +597,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyIncrementLoopC",
@@ -569,6 +611,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyIncrementLoopV",
@@ -582,6 +625,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "s16DummyIncrementLoopCDiff",
@@ -595,6 +639,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "RealAddrRead": "UserStringConfiguration",
@@ -608,6 +653,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "RealAddrRead": "UserZippedString",
@@ -621,6 +667,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "RealAddrRead": "UserUnicodeString",
@@ -634,6 +681,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "RealAddrRead": "UserStringConfiguration",
@@ -647,6 +695,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "RealAddrRead": "UserZippedString",
@@ -660,6 +709,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "RealAddrRead": "UserUnicodeString",
@@ -673,6 +723,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "RealAddrRead": "str.CurrentPhCIdle",
