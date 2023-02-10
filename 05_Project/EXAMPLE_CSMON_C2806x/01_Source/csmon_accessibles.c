@@ -94,6 +94,8 @@ int16_t s16DummyIncrementLoopC = 1;
 int16_t s16DummyIncrementLoopV = 1;
 int16_t s16DummyIncrementLoopCDiff;
 
+Currents_t gCurrents = {-1, -1, -1};
+
 
 
 
@@ -104,37 +106,6 @@ char UserZippedString[16] = ZIP_STRING("au8AlabalaNica");
 char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 'N', 'i', 'c', 'a', '\0'};
 
 
-
-
-/* *****************************************************************************
- * CsMonExternalParametersInitialization
- * declared in csmon_lib_support.h
- **************************************************************************** */
-extern void CsMonExternalParametersInitialization(void)
-{
-#if CSMON_REALADR_16BIT
-    CSMON_eSetParameterListRealAddress((uint16_t *)&asParameterList[0].u16RealAddress, sizeof(asParameterList[0]), CSMON_CONFIG_PARAMETER_COUNT_MAX);                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
-#else
-    CSMON_eSetParameterListRealAddress((uint32_t *)&asParameterList[0].u32RealAddress, sizeof(asParameterList[0]), CSMON_CONFIG_PARAMETER_COUNT_MAX);                     /* First Put Real Address to calculate count parameters internally (last index is NULL) */
-#endif
-
-    CSMON_eSetParameterListParameterID((uint16_t *)&asParameterList[0].u16ParameterIndexID, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListRegisterSize((uint16_t *)&asParameterList[0].uParameterSize.u16Register, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListRegisterFlags((uint16_t *)&asParameterList[0].uParameterFlags.u16Register, sizeof(asParameterList[0]));
-
-#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
-    CSMON_eSetParameterListFunctionCode((uint16_t *)&asParameterList[0].uFunctionCode, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListAccessLevel((uint16_t *)&asParameterList[0].uAccessLevel, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListBitsCount((uint16_t *)&asParameterList[0].uBitsCount, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListShortNaming((uint_least8_t *)&asParameterList[0].au8NameUnit, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListDataType((uint16_t *)&asParameterList[0].eDataTypeAttribute, sizeof(asParameterList[0]));
-#endif
-
-    CSMON_eSetParameterListDataMaximum((uint32_t *)&asParameterList[0].u32Max.u32Register, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListDataMinimum((uint32_t *)&asParameterList[0].u32Min.u32Register, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListDataDefault((uint32_t *)&asParameterList[0].u32Def.u32Register, sizeof(asParameterList[0]));
-    CSMON_eSetParameterListValueFormat((float *)&asParameterList[0].Norm, sizeof(asParameterList[0]));                               /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
-}
 
 
 /* *****************************************************************************

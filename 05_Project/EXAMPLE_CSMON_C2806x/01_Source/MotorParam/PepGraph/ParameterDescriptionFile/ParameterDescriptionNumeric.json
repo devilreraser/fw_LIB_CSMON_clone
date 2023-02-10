@@ -7,6 +7,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "Value": {
@@ -15,6 +16,7 @@
           "StartBitIndexOrElementCount": 16,
           "IsBitField": false,
           "IsArray": true,
+          "IsNumberArray": false,
           "StorageType": 64
         },
         "IsBitField": false,
@@ -38,6 +40,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "Value": {
@@ -46,6 +49,7 @@
           "StartBitIndexOrElementCount": 16,
           "IsBitField": false,
           "IsArray": true,
+          "IsNumberArray": false,
           "StorageType": 64
         },
         "IsBitField": false,
@@ -69,6 +73,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "Value": {
@@ -77,6 +82,7 @@
           "StartBitIndexOrElementCount": 16,
           "IsBitField": false,
           "IsArray": true,
+          "IsNumberArray": false,
           "StorageType": 64
         },
         "IsBitField": false,
@@ -100,6 +106,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "Value": {
@@ -108,6 +115,7 @@
           "StartBitIndexOrElementCount": 16,
           "IsBitField": false,
           "IsArray": true,
+          "IsNumberArray": false,
           "StorageType": 64
         },
         "IsBitField": false,
@@ -131,6 +139,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "Value": {
@@ -139,6 +148,7 @@
           "StartBitIndexOrElementCount": 16,
           "IsBitField": false,
           "IsArray": true,
+          "IsNumberArray": false,
           "StorageType": 64
         },
         "IsBitField": false,
@@ -162,6 +172,7 @@
         "StartBitIndexOrElementCount": 16,
         "IsBitField": false,
         "IsArray": true,
+        "IsNumberArray": false,
         "StorageType": 64
       },
       "Value": {
@@ -170,6 +181,7 @@
           "StartBitIndexOrElementCount": 16,
           "IsBitField": false,
           "IsArray": true,
+          "IsNumberArray": false,
           "StorageType": 64
         },
         "IsBitField": false,
@@ -193,6 +205,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -201,6 +214,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -224,6 +238,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -232,6 +247,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -255,6 +271,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -263,6 +280,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -286,6 +304,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -294,6 +313,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -317,6 +337,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -325,6 +346,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -348,6 +370,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -356,6 +379,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -379,6 +403,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -387,6 +412,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -410,6 +436,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -418,6 +445,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -441,6 +469,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -449,6 +478,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -472,6 +502,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -480,6 +511,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -503,6 +535,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -511,6 +544,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -534,6 +568,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -542,6 +577,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -565,6 +601,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -573,6 +610,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -596,6 +634,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -604,6 +643,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -627,6 +667,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -635,6 +676,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -658,6 +700,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -666,6 +709,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -689,6 +733,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -697,6 +742,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -720,6 +766,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -728,6 +775,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -751,6 +799,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -759,6 +808,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -782,6 +832,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -790,6 +841,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -813,6 +865,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -821,6 +874,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -844,6 +898,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -852,6 +907,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -875,6 +931,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -883,6 +940,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -906,6 +964,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -914,6 +973,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -937,6 +997,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -945,6 +1006,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -968,6 +1030,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -976,6 +1039,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -999,6 +1063,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1007,6 +1072,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1030,6 +1096,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1038,6 +1105,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1061,6 +1129,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1069,6 +1138,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1092,6 +1162,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1100,6 +1171,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1123,6 +1195,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1131,6 +1204,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1154,6 +1228,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1162,6 +1237,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1185,6 +1261,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1193,6 +1270,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1216,6 +1294,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1224,6 +1303,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1247,6 +1327,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1255,6 +1336,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1278,6 +1360,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1286,6 +1369,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1309,6 +1393,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1317,6 +1402,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1340,6 +1426,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1348,6 +1435,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1371,6 +1459,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1379,6 +1468,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1402,6 +1492,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1410,6 +1501,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1433,6 +1525,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1441,6 +1534,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1464,6 +1558,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1472,6 +1567,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1495,6 +1591,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1503,6 +1600,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1526,6 +1624,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1534,6 +1633,7 @@
           "StartBitIndexOrElementCount": 0,
           "IsBitField": false,
           "IsArray": false,
+          "IsNumberArray": false,
           "StorageType": 0
         },
         "IsBitField": false,
@@ -1552,5 +1652,5 @@
       }
     }
   ],
-  "HashCode": 681442171
+  "HashCode": -550344286
 }

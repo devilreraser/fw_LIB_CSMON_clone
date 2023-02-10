@@ -125,11 +125,35 @@ extern void CSMON_LIB_SUPPORT_init(void)
         (void)CSMON_eSetFirmwareApplicationVersion(applicationVersion);
     }
 
-    CsMonExternalParametersInitialization();
+    CSMON_LIB_SUPPORT_eSetParameterList(asParameterList, CSMON_CONFIG_PARAMETER_COUNT_MAX);
 
     /* Recorder And Scope Initialization Made Once after parameter initialized */
     CsMonRecordersInitialization();
 
     // CSMON Internal Recorders Setup with Already Made Configuration
     CSMON_vAddSetupRecorderParameterMask(CSMON_MASK_RECORDER_0);
+}
+
+
+extern void CSMON_LIB_SUPPORT_eSetParameterListCommon(
+        const volatile MAIN_sParameterList_t* const pParameterList,
+        const size_t maxParameterCount
+        )
+{
+    const uint16_t u16Offset = sizeof(pParameterList[0]);
+    const uint16_t u16MaxParameterCount = (uint16_t)maxParameterCount;
+
+    /* First Put Real Address to calculate count parameters internally (last index is NULL) */
+    CSMON_LIB_SUPPORT_eSetParameterListRealAddress(&pParameterList[0].u16RealAddress, u16Offset, u16MaxParameterCount);
+
+    CSMON_eSetParameterListParameterID((uint16_t *)&pParameterList[0].u16ParameterIndexID, u16Offset);
+    CSMON_eSetParameterListRegisterSize((uint16_t *)&pParameterList[0].uParameterSize.u16Register, u16Offset);
+    CSMON_eSetParameterListRegisterFlags((uint16_t *)&pParameterList[0].uParameterFlags.u16Register, u16Offset);
+
+    CSMON_eSetParameterListDataMaximum((uint32_t *)&pParameterList[0].u32Max.u32Register, u16Offset);
+    CSMON_eSetParameterListDataMinimum((uint32_t *)&pParameterList[0].u32Min.u32Register, u16Offset);
+    CSMON_eSetParameterListDataDefault((uint32_t *)&pParameterList[0].u32Def.u32Register, u16Offset);
+
+    /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
+    CSMON_eSetParameterListValueFormat((float *)&pParameterList[0].Norm, sizeof(asParameterList[0]));
 }

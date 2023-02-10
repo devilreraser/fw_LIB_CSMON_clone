@@ -34,6 +34,7 @@
 							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerRelease.1816032489" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerRelease">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.145901950" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${CS_PROJECT_SRC}/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x"/>
+									<listOptionValue builtIn="false" value="${CS_PROJECT_SRC}/csmon_lib_support/params_external"/>
 									<listOptionValue builtIn="false" value="${CS_PROJECT_SRC}"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
 									<listOptionValue builtIn="false" value="${CS_LIB_CSMON_LIBRARIES}/Peripheral/01_Source/TMS320F2806x"/>
@@ -111,7 +112,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CSMON_LIB/DemoBoard28069_Example|01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD|01_Source/MotorParam/Template|01_Source/hal/asms/usb_rs485/boards/2806x_ISO_CONTROL_CARD|hal/boards/2806x_ISO_CONTROL_CARD|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="01_Source/csmon_lib_support/params_internal|CSMON_LIB/DemoBoard28069_Example|01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD|01_Source/MotorParam/Template|01_Source/hal/asms/usb_rs485/boards/2806x_ISO_CONTROL_CARD|hal/boards/2806x_ISO_CONTROL_CARD|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -152,6 +153,7 @@
 							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerRelease.526020678" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerRelease">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.1786794081" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${CS_PROJECT_SRC}/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x"/>
+									<listOptionValue builtIn="false" value="${CS_PROJECT_SRC}/csmon_lib_support/params_external"/>
 									<listOptionValue builtIn="false" value="${CS_PROJECT_SRC}"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
 									<listOptionValue builtIn="false" value="${CS_LIB_CSMON_LIBRARIES}/Peripheral/01_Source/TMS320F2806x"/>
@@ -231,7 +233,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00|01_Source/MotorParam/Template|hal/boards/cs1277_r00|lnk_F2806x_for_Bootloader.cmd|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="01_Source/csmon_lib_support/params_internal|01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00|01_Source/MotorParam/Template|hal/boards/cs1277_r00|lnk_F2806x_for_Bootloader.cmd|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
