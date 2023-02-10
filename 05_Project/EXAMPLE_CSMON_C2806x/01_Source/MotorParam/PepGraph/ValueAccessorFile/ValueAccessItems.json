@@ -894,7 +894,7 @@
           "IsWriteable": true
         },
         "Index": 22,
-        "ShortName": "Current.PhC",
+        "ShortName": "Currents.PhC",
         "DefaultUnits": "A"
       }
     },
@@ -1952,5 +1952,5 @@
       }
     }
   ],
-  "HashCode": 904295108
+  "HashCode": 863660865
 }

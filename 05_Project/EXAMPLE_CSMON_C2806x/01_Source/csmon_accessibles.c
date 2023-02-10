@@ -94,6 +94,8 @@ int16_t s16DummyIncrementLoopC = 1;
 int16_t s16DummyIncrementLoopV = 1;
 int16_t s16DummyIncrementLoopCDiff;
 
+Currents_t gCurrents = {-1, -1, -1};
+
 
 
 

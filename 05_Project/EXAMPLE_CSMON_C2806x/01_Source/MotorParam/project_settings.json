@@ -236,8 +236,8 @@
         "IsNumberArray": false,
         "StorageType": 0
       },
-      "RealAddrRead": "Currents.PhB",
-      "RealAddrWrite": "Currents.PhB",
+      "RealAddrRead": "gCurrents.PhB",
+      "RealAddrWrite": "gCurrents.PhB",
       "RealAddrType": "Currents_t",
       "ParamValueType": ""
     },
@@ -250,8 +250,8 @@
         "IsNumberArray": false,
         "StorageType": 0
       },
-      "RealAddrRead": "Current.PhC",
-      "RealAddrWrite": "Current.PhC",
+      "RealAddrRead": "gCurrents.PhC",
+      "RealAddrWrite": "gCurrents.PhC",
       "RealAddrType": "Currents_t",
       "ParamValueType": ""
     },
