@@ -3,18 +3,22 @@
 #include "MotorParam/Generated/csmon_config.h"
 
 #include "csmon_lib_support/csmon_lib_support.h"
+#include "csmon_lib_support/param_id_array_2d.h"
 
 
-#define PARAM_ID_STARUNNINGMODE     0
-#define PARAM_ID_VOLTAGE_DCLINK     8
-#define PARAM_ID_CURRENT_PHASEA     9
-#define PARAM_ID_CURRENT_PHASEB     10
-#define PARAM_ID_CURRENT_PHASEC     11
+typedef enum eRecorder0ParamId_t_
+{
+    RECORDER0_PARAM_ID_STARUNNINGMODE     = 0,
+    RECORDER0_PARAM_ID_CURRENT_PHASEA     = 9,
+    RECORDER0_PARAM_ID_CURRENT_PHASEB     = 10,
+    RECORDER0_PARAM_ID_CURRENT_PHASEC     = 11,
 
-#define PARAM_ID_VOLTAGE_DCLINK_32  28
-#define PARAM_ID_CURRENT_PHASEA_32  29
-#define PARAM_ID_CURRENT_PHASEB_32  30
-#define PARAM_ID_CURRENT_PHASEC_32  31
+    RECORDER0_PARAM_ID_VOLTAGE_DCLINK_32  = 28,
+    RECORDER0_PARAM_ID_CURRENT_PHASEA_32  = 29,
+    RECORDER0_PARAM_ID_CURRENT_PHASEB_32  = 30,
+    RECORDER0_PARAM_ID_CURRENT_PHASEC_32  = 31,
+} eRecorder0ParamId_t;
+
 
 #define RECORDER0_ONLY_TEST                             1
 
@@ -114,68 +118,34 @@ char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 
  **************************************************************************** */
 extern void CsMonRecordersInitialization(void)
 {
-    uint16_t u16ValidParameters = 0;
-
-    /* Recorder 0 */
-    u16ValidParameters = CSMON_POSITION_IN_RECORDER_0;
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_STARUNNINGMODE, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    static const uint16_t recorder0ParamIds[] =
     {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
+        RECORDER0_PARAM_ID_STARUNNINGMODE,
+        RECORDER0_PARAM_ID_CURRENT_PHASEA,
+        RECORDER0_PARAM_ID_CURRENT_PHASEB,
+        RECORDER0_PARAM_ID_CURRENT_PHASEC,
 
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA_32, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB_32, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC_32, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_VOLTAGE_DCLINK_32, u16ValidParameters);
-
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterCountInRecorder (
-            CSMON_RECORDER_0, u16ValidParameters);
+        RECORDER0_PARAM_ID_VOLTAGE_DCLINK_32,
+        RECORDER0_PARAM_ID_CURRENT_PHASEA_32,
+        RECORDER0_PARAM_ID_CURRENT_PHASEB_32,
+        RECORDER0_PARAM_ID_CURRENT_PHASEC_32
+    };
 
 
+    const sCParam_id_array_t sParam_id_array =
+    {
+     .pParamIds = recorder0ParamIds,
+     .paramsCount = sizeof(recorder0ParamIds) / sizeof(recorder0ParamIds[0])
+    };
+
+    const sCParam_id_array_2d_t sParam_id_array_2d =
+    {
+     .pParamIdsArrays = &sParam_id_array,
+     .arraysCount = 1
+    };
+
+
+    csMonResponses.eSetRecorder = CSMON_LIB_SUPPORT_eSetParametersInAllRecorders(&sParam_id_array_2d);
 
     /* Recorder 0 Configuration */
     csMonResponses.eSetRecorder = CSMON_eSetRecorderConfigurationSkipSamples (
@@ -192,7 +162,7 @@ extern void CsMonRecordersInitialization(void)
     /* Trigger Recorder 0 */
     csMonResponses.eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
             CSMON_RECORDER_0,
-            PARAM_ID_STARUNNINGMODE,
+            RECORDER0_PARAM_ID_STARUNNINGMODE,
             (uint32_t)true,
             (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
 }

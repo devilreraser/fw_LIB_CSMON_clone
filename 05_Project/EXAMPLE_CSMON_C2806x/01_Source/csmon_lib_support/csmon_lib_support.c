@@ -157,3 +157,88 @@ extern void CSMON_LIB_SUPPORT_eSetParameterListCommon(
     /* 0.0 - Default HEX Visualization; Any other -> Default Decimal Visualization */
     CSMON_eSetParameterListValueFormat((float *)&pParameterList[0].Norm, sizeof(asParameterList[0]));
 }
+
+
+extern CSMON_eResponseCode_t CSMON_LIB_SUPPORT_eSetParametersInOneRecorder(
+        const sCParam_id_array_t* const pParam_id_array,
+        const uint16_t recorderindex
+        )
+{
+    CSMON_eResponseCode_t result = CSMON_RESPONSE_CODE_OK;
+
+    uint16_t paramIndex = 0;
+
+    uint16_t paramsCount = pParam_id_array->paramsCount;
+    if(CSMON_POSITION_IN_RECORDER_COUNT < paramsCount)
+    {
+        paramsCount = CSMON_POSITION_IN_RECORDER_COUNT;
+    }
+
+    uint16_t u16ValidParameters = CSMON_POSITION_IN_RECORDER_0;
+
+    for(; paramsCount > paramIndex; ++paramIndex)
+    {
+        const uint16_t param_id = pParam_id_array->pParamIds[paramIndex];
+
+        const CSMON_eResponseCode_t eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
+                recorderindex, param_id, u16ValidParameters);
+
+        if (eSetRecorder == CSMON_RESPONSE_CODE_OK)
+        {
+            u16ValidParameters++;
+        }
+        else
+        {
+            if(CSMON_RESPONSE_CODE_OK == result)
+            {
+                result = eSetRecorder;
+            }
+        }
+    }
+
+    {
+        const CSMON_eResponseCode_t eSetRecorder = CSMON_eSetParameterCountInRecorder(recorderindex, u16ValidParameters);
+
+        if (eSetRecorder != CSMON_RESPONSE_CODE_OK)
+        {
+            if(CSMON_RESPONSE_CODE_OK == result)
+            {
+                result = eSetRecorder;
+            }
+        }
+    }
+
+    return result;
+}
+
+
+extern CSMON_eResponseCode_t CSMON_LIB_SUPPORT_eSetParametersInAllRecorders(
+        const sCParam_id_array_2d_t* const pParam_id_array_2d)
+{
+    CSMON_eResponseCode_t result = CSMON_RESPONSE_CODE_OK;
+
+    uint16_t recorderindex = 0;
+
+    uint16_t recorderindexEnd = pParam_id_array_2d->arraysCount;
+    if(CSMON_RECORDER_COUNT_MAX < recorderindexEnd)
+    {
+        recorderindexEnd = CSMON_RECORDER_COUNT_MAX;
+    }
+
+    for(; recorderindexEnd > recorderindex; ++recorderindex)
+    {
+        const PtrCParam_id_array_t pArrCurr = pParam_id_array_2d->pParamIdsArrays + recorderindex;
+
+        const CSMON_eResponseCode_t eSetRecorder = CSMON_LIB_SUPPORT_eSetParametersInOneRecorder(pArrCurr, recorderindex);
+
+        if (eSetRecorder != CSMON_RESPONSE_CODE_OK)
+        {
+            if(CSMON_RESPONSE_CODE_OK == result)
+            {
+                result = eSetRecorder;
+            }
+        }
+    }
+
+    return result;
+}
