@@ -51,9 +51,6 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.827712838" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${INHERITED_SYMBOLS}"/>
-									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
-									<listOptionValue builtIn="false" value="_FLASH"/>
-									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_REAL_ADDRESS_16BIT=1"/>
 								</option>
@@ -164,11 +161,6 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.451913670" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${INHERITED_SYMBOLS}"/>
-									<listOptionValue builtIn="false" value="_2806x_ISO_CONTROL_CARD"/>
-									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
-									<listOptionValue builtIn="false" value="_FLASH"/>
-									<listOptionValue builtIn="false" value="_CS_1291"/>
-									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_REAL_ADDRESS_16BIT=1"/>
 								</option>
