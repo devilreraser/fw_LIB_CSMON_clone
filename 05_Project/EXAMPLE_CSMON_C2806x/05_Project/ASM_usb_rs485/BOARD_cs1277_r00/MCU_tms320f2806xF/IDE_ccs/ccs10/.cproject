@@ -103,7 +103,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="01_Source/csmon_lib_support/params_internal|CSMON_LIB/DemoBoard28069_Example|01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD|01_Source/MotorParam/Template|01_Source/hal/asms/usb_rs485/boards/2806x_ISO_CONTROL_CARD|hal/boards/2806x_ISO_CONTROL_CARD|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD|01_Source/MotorParam/Template|01_Source/csmon_lib_support/params_internal|CSMON_LIB/DemoBoard28069_Example|01_Source/hal/asms/usb_rs485/boards/2806x_ISO_CONTROL_CARD|hal/boards/2806x_ISO_CONTROL_CARD|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -213,7 +213,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="01_Source/csmon_lib_support/params_internal|01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00|01_Source/MotorParam/Template|hal/boards/cs1277_r00|lnk_F2806x_for_Bootloader.cmd|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="01_Source/MotorParam/Template|01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00|01_Source/csmon_lib_support/params_internal|hal/boards/cs1277_r00|lnk_F2806x_for_Bootloader.cmd|MotorParam/Template/template_csmon_config.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/driverlib/Debug|C2806x_LIB/common/targetConfigs|C2806x_LIB/common/cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
