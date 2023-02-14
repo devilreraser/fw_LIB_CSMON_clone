@@ -20,38 +20,9 @@ typedef enum eRecorder0ParamId_t_
 } eRecorder0ParamId_t;
 
 
-#define RECORDER0_ONLY_TEST                             1
-
-
-#if RECORDER0_ONLY_TEST
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   56
 #define RECORDER0_TOTAL_SAMPLE_COUNT        64
-
-#define RECORDER_COUNT                      1
-#else
-#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   5900
-#define RECORDER0_TOTAL_SAMPLE_COUNT        6000
-
-#define RECORDER1_PRETRIGGER_SAMPLE_COUNT   5900
-#define RECORDER1_TOTAL_SAMPLE_COUNT        6000
-
-#define RECORDER2_PRETRIGGER_SAMPLE_COUNT   5900
-#define RECORDER2_TOTAL_SAMPLE_COUNT        6000
-
-#define RECORDER_COUNT                      CSMON_RECORDER_COUNT_MAX
-#endif
-
-#define RECORDER_SAMPLE_TIME_FIX_1MS        0       /* If 1kHz sample frequency in CSMON PC Application 1ms equals 1sample */
-
-#if RECORDER_SAMPLE_TIME_FIX_1MS
-#define RECORDER0_SAMPLE_FREQUENCY_HZ       1000.0
-#define RECORDER1_SAMPLE_FREQUENCY_HZ       1000.0
-#define RECORDER2_SAMPLE_FREQUENCY_HZ       1000.0
-#else
-#define RECORDER0_SAMPLE_FREQUENCY_HZ      20000.0
-#define RECORDER1_SAMPLE_FREQUENCY_HZ      20000.0
-#define RECORDER2_SAMPLE_FREQUENCY_HZ      20000.0
-#endif
+#define RECORDER0_SAMPLE_FREQUENCY_HZ      (20000.0 / 3.0)
 
 
 
@@ -152,7 +123,7 @@ extern void CsMonRecordersInitialization(void)
             CSMON_RECORDER_0,
             RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            RECORDER0_SAMPLE_FREQUENCY_HZ / 3.0); /* Sample Frequency in Hz */
+            (float) RECORDER0_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
 
 
 
