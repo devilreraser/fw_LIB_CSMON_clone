@@ -21,11 +21,12 @@
 #include "main.h"
 #include "device.h"
 
-
+#if _CSMON_USE_EXTERNAL_PARAMETER_LIST
+    #include "csmon_config.h"
+#endif
 
 #if defined(__TMS320F2806x__)
     #include "boardcfg.h"
-    #include "csmon_config.h"
     #include "sci_driver.h"
     #include "uart_driver.h"
 #else
