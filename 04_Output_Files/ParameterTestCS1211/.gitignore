@@ -1,8 +1,6 @@
-/EXAMPLE_CSMON_C2806x.map
-/TEST_CSMON_C28xx.txt
-/TEST_CSMON_C28xx.var
 /csmon.h
 /CSMON_C28xx.lib
 /TEST_CSMON_C28xx.adr
 /TEST_CSMON_C28xx.map
 /TEST_CSMON_C28xx.out
+/TEST_CSMON_C28xx.var
