@@ -1077,4 +1077,34 @@
 			<locationURI>PARENT-6-PROJECT_LOC/01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x/hal.h</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>CS_LIB_CSMON</name>
+			<value>$%7BPARENT-2-CS_PROJECT_ROOT%7D</value>
+		</variable>
+		<variable>
+			<name>CS_LIB_CSMON_LIBRARIES</name>
+			<value>$%7BCS_LIB_CSMON%7D/02_Libraries</value>
+		</variable>
+		<variable>
+			<name>CS_LIB_CSMON_OUTPUT</name>
+			<value>$%7BCS_LIB_CSMON%7D/04_Output_Files</value>
+		</variable>
+		<variable>
+			<name>CS_LIB_CSMON_UTILITIES</name>
+			<value>$%7BCS_LIB_CSMON%7D/08_Utilities</value>
+		</variable>
+		<variable>
+			<name>CS_PROJECT_OUTPUT</name>
+			<value>$%7BCS_PROJECT_ROOT%7D/04_Output_Files</value>
+		</variable>
+		<variable>
+			<name>CS_PROJECT_ROOT</name>
+			<value>$%7BPARENT-6-CCS_PROJECT_DIR%7D</value>
+		</variable>
+		<variable>
+			<name>CS_PROJECT_SRC</name>
+			<value>$%7BCS_PROJECT_ROOT%7D/01_Source</value>
+		</variable>
+	</variableList>
 </projectDescription>
