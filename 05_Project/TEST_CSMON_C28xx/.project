@@ -168,6 +168,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>CSMON_LIB/ParameterTestCS1211</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/Release</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -203,6 +208,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/ModbusAddress/01_Source/parameter.h</locationURI>
 		</link>
 		<link>
+			<name>DemoBoard28069/TEST_CSMON_C28xx.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
 			<name>Motor28062/TEST_CSMON_C28xx.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
@@ -211,6 +221,11 @@
 			<name>PERIPHERAL_LIB/Release</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>ParameterTestCS1211/TEST_CSMON_C28xx.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
 			<name>Release/TEST_CSMON_C28xx.out</name>
@@ -741,6 +756,31 @@
 			<name>CSMON_LIB/Motor28062/csmon.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/csmon.h</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ParameterTestCS1211/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ParameterTestCS1211/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ParameterTestCS1211/TEST_CSMON_C28xx.adr</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ParameterTestCS1211/TEST_CSMON_C28xx.adr</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ParameterTestCS1211/TEST_CSMON_C28xx.map</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ParameterTestCS1211/TEST_CSMON_C28xx.map</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ParameterTestCS1211/TEST_CSMON_C28xx.var</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ParameterTestCS1211/TEST_CSMON_C28xx.var</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ParameterTestCS1211/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ParameterTestCS1211/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Release/CSMON_C28xx.lib</name>
