@@ -8,11 +8,13 @@ extern "C"
 #ifndef _CSMON_LIB_SUPPORT_H_
 #define _CSMON_LIB_SUPPORT_H_
 
+#include "csmon_lib_support_parameter_list.h"
+
 #include "csmon_lib_support_conditionals.h"
 #include "csmon_lib_support_sDateTime_t.h"
 #include "csmon_lib_support_responses.h"
 
-#include "csmon_lib_support_parameter_list.h"
+#include "param_id_array_2d.h"
 
 #include <stdbool.h>
 
@@ -33,8 +35,6 @@ extern bool CSMON_LIB_SUPPORT_bDateTimeSet;
 
 extern CSMON_LIB_SUPPORT_sDateTime_t CSMON_LIB_SUPPORT_sDateTimeGet;
 
-extern CSMON_LIB_SUPPORT_sDateTime_t CSMON_LIB_SUPPORT_sDateTimeSet;
-
 
 /* *****************************************************************************
  * Prototypes of functions definitions
@@ -53,6 +53,14 @@ extern void CSMON_LIB_SUPPORT_eSetParameterListCommon(
         const size_t maxParameterCount
         );
 
+
+extern CSMON_eResponseCode_t CSMON_LIB_SUPPORT_eSetParametersInOneRecorder(
+        const sCParam_id_array_t* pParam_id_array,
+        uint16_t recorderindex
+        );
+
+extern CSMON_eResponseCode_t CSMON_LIB_SUPPORT_eSetParametersInAllRecorders(
+        const sCParam_id_array_2d_t* pParam_id_array_2d);
 
 /* *****************************************************************************
  * Functions definitions

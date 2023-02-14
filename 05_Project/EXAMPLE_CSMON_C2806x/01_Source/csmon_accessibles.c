@@ -3,51 +3,26 @@
 #include "MotorParam/Generated/csmon_config.h"
 
 #include "csmon_lib_support/csmon_lib_support.h"
+#include "csmon_lib_support/param_id_array_2d.h"
 
 
-#define PARAM_ID_STARUNNINGMODE     0
-#define PARAM_ID_VOLTAGE_DCLINK     8
-#define PARAM_ID_CURRENT_PHASEA     9
-#define PARAM_ID_CURRENT_PHASEB     10
-#define PARAM_ID_CURRENT_PHASEC     11
+typedef enum eRecorder0ParamId_t_
+{
+    RECORDER0_PARAM_ID_STARUNNINGMODE     = 0,
+    RECORDER0_PARAM_ID_CURRENT_PHASEA     = 9,
+    RECORDER0_PARAM_ID_CURRENT_PHASEB     = 10,
+    RECORDER0_PARAM_ID_CURRENT_PHASEC     = 11,
 
-#define PARAM_ID_VOLTAGE_DCLINK_32  28
-#define PARAM_ID_CURRENT_PHASEA_32  29
-#define PARAM_ID_CURRENT_PHASEB_32  30
-#define PARAM_ID_CURRENT_PHASEC_32  31
+    RECORDER0_PARAM_ID_VOLTAGE_DCLINK_32  = 28,
+    RECORDER0_PARAM_ID_CURRENT_PHASEA_32  = 29,
+    RECORDER0_PARAM_ID_CURRENT_PHASEB_32  = 30,
+    RECORDER0_PARAM_ID_CURRENT_PHASEC_32  = 31,
+} eRecorder0ParamId_t;
 
-#define RECORDER0_ONLY_TEST                             1
 
-
-#if RECORDER0_ONLY_TEST
 #define RECORDER0_PRETRIGGER_SAMPLE_COUNT   56
 #define RECORDER0_TOTAL_SAMPLE_COUNT        64
-
-#define RECORDER_COUNT                      1
-#else
-#define RECORDER0_PRETRIGGER_SAMPLE_COUNT   5900
-#define RECORDER0_TOTAL_SAMPLE_COUNT        6000
-
-#define RECORDER1_PRETRIGGER_SAMPLE_COUNT   5900
-#define RECORDER1_TOTAL_SAMPLE_COUNT        6000
-
-#define RECORDER2_PRETRIGGER_SAMPLE_COUNT   5900
-#define RECORDER2_TOTAL_SAMPLE_COUNT        6000
-
-#define RECORDER_COUNT                      CSMON_RECORDER_COUNT_MAX
-#endif
-
-#define RECORDER_SAMPLE_TIME_FIX_1MS        0       /* If 1kHz sample frequency in CSMON PC Application 1ms equals 1sample */
-
-#if RECORDER_SAMPLE_TIME_FIX_1MS
-#define RECORDER0_SAMPLE_FREQUENCY_HZ       1000.0
-#define RECORDER1_SAMPLE_FREQUENCY_HZ       1000.0
-#define RECORDER2_SAMPLE_FREQUENCY_HZ       1000.0
-#else
-#define RECORDER0_SAMPLE_FREQUENCY_HZ      20000.0
-#define RECORDER1_SAMPLE_FREQUENCY_HZ      20000.0
-#define RECORDER2_SAMPLE_FREQUENCY_HZ      20000.0
-#endif
+#define RECORDER0_SAMPLE_FREQUENCY_HZ      (20000.0 / 3.0)
 
 
 
@@ -114,75 +89,41 @@ char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 
  **************************************************************************** */
 extern void CsMonRecordersInitialization(void)
 {
-    uint16_t u16ValidParameters = 0;
-
-    /* Recorder 0 */
-    u16ValidParameters = CSMON_POSITION_IN_RECORDER_0;
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_STARUNNINGMODE, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
+    static const uint16_t recorder0ParamIds[] =
     {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
+        RECORDER0_PARAM_ID_STARUNNINGMODE,
+        RECORDER0_PARAM_ID_CURRENT_PHASEA,
+        RECORDER0_PARAM_ID_CURRENT_PHASEB,
+        RECORDER0_PARAM_ID_CURRENT_PHASEC,
 
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEA_32, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEB_32, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_CURRENT_PHASEC_32, u16ValidParameters);
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterInRecorderAtPosition (
-            CSMON_RECORDER_0, PARAM_ID_VOLTAGE_DCLINK_32, u16ValidParameters);
-
-    if (csMonResponses.eSetRecorder == CSMON_RESPONSE_CODE_OK)
-    {
-        u16ValidParameters++;
-    }
-    csMonResponses.eSetRecorder = CSMON_eSetParameterCountInRecorder (
-            CSMON_RECORDER_0, u16ValidParameters);
+        RECORDER0_PARAM_ID_VOLTAGE_DCLINK_32,
+        RECORDER0_PARAM_ID_CURRENT_PHASEA_32,
+        RECORDER0_PARAM_ID_CURRENT_PHASEB_32,
+        RECORDER0_PARAM_ID_CURRENT_PHASEC_32
+    };
 
 
+    const sCParam_id_array_t sParam_id_array =
+    {
+     .pParamIds = recorder0ParamIds,
+     .paramsCount = sizeof(recorder0ParamIds) / sizeof(recorder0ParamIds[0])
+    };
+
+    const sCParam_id_array_2d_t sParam_id_array_2d =
+    {
+     .pParamIdsArrays = &sParam_id_array,
+     .arraysCount = 1
+    };
+
+
+    csMonResponses.eSetRecorder = CSMON_LIB_SUPPORT_eSetParametersInAllRecorders(&sParam_id_array_2d);
 
     /* Recorder 0 Configuration */
     csMonResponses.eSetRecorder = CSMON_eSetRecorderConfigurationSkipSamples (
             CSMON_RECORDER_0,
             RECORDER0_PRETRIGGER_SAMPLE_COUNT,   /* PreTriggerSampleCount */
             RECORDER0_TOTAL_SAMPLE_COUNT,   /* TotalSampleCount */
-            RECORDER0_SAMPLE_FREQUENCY_HZ / 3.0); /* Sample Frequency in Hz */
+            (float) RECORDER0_SAMPLE_FREQUENCY_HZ); /* Sample Frequency in Hz */
 
 
 
@@ -192,7 +133,7 @@ extern void CsMonRecordersInitialization(void)
     /* Trigger Recorder 0 */
     csMonResponses.eSetRecorder = CSMON_eSetRecorderTriggerAtPosition (
             CSMON_RECORDER_0,
-            PARAM_ID_STARUNNINGMODE,
+            RECORDER0_PARAM_ID_STARUNNINGMODE,
             (uint32_t)true,
             (uint16_t)CSMON_TRIGGER_MODE_FALLING_EDGE);
 }
