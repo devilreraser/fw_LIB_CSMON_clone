@@ -538,7 +538,6 @@
 									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FORCE_CONTROL_SUITE_LIB"/>
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
@@ -1131,7 +1130,6 @@
 									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FORCE_CONTROL_SUITE_LIB"/>
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
@@ -1233,7 +1231,6 @@
 									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FORCE_CONTROL_SUITE_LIB"/>
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="NO_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
@@ -1335,7 +1332,6 @@
 									<listOptionValue builtIn="false" value="__TMS320F2806x__"/>
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FORCE_CONTROL_SUITE_LIB"/>
 									<listOptionValue builtIn="false" value="NO_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
 									<listOptionValue builtIn="false" value="NO_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
