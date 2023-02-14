@@ -5,6 +5,8 @@
 #include "csmon_lib_support/csmon_lib_support.h"
 #include "csmon_lib_support/param_id_array_2d.h"
 
+#include "app_settings/manifest.h"
+
 
 typedef enum eRecorder0ParamId_t_
 {
@@ -89,6 +91,24 @@ char UserUnicodeString[16] = {'u', '1', '6', 'A', 'l', 'a', 'b', 'a', 'l', 'a', 
  **************************************************************************** */
 extern void CsMonRecordersInitialization(void)
 {
+    {
+        const sCDeviceID_t sDeviceID =
+        {
+            .pVendorName           = EXAMPLE_CSMON_C2806x_VENDOR_NAME         ,
+            .pProductCode          = EXAMPLE_CSMON_C2806x_PRODUCT_CODE        ,
+            .pMajorMinorRevision   = EXAMPLE_CSMON_C2806x_MAJOR_MINOR_REVISION,
+            .pVendorUrl            = EXAMPLE_CSMON_C2806x_VENDOR_URL          ,
+            .pProductName          = EXAMPLE_CSMON_C2806x_PRODUCT_NAME        ,
+            .pModelName            = EXAMPLE_CSMON_C2806x_MODEL_NAME          ,
+            .pUserApplicationName  = EXAMPLE_CSMON_C2806x_USERAPPLICATION_NAME,
+            .pUserReserve0         = EXAMPLE_CSMON_C2806x_USERRESERVE0_NAME   ,
+            .pUserReserve1         = EXAMPLE_CSMON_C2806x_USERRESERVE1_NAME   ,
+            .pUserReserve2         = EXAMPLE_CSMON_C2806x_USERRESERVE2_NAME
+        };
+
+        CSMON_vDeviceID_set(&sDeviceID);
+    }
+
     static const uint16_t recorder0ParamIds[] =
     {
         RECORDER0_PARAM_ID_STARUNNINGMODE,
