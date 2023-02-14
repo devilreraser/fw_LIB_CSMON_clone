@@ -154,7 +154,6 @@
 									<listOptionValue builtIn="false" value="_USE_CONTROL"/>
 									<listOptionValue builtIn="false" value="NO_HMDRV_USE_UART_INIT"/>
 									<listOptionValue builtIn="false" value="_CSMON_RTC_INTERFACE_THROUGH_FPGA_SCI"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
 									<listOptionValue builtIn="false" value="_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_EVEN_PARITY=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_SCIA_ON_USB_CONNECTOR=1"/>
@@ -341,7 +340,6 @@
 									<listOptionValue builtIn="false" value="CPU1"/>
 									<listOptionValue builtIn="false" value="_HMDRV_USE_UART_INIT"/>
 									<listOptionValue builtIn="false" value="_CSMON_RTC_INTERFACE_THROUGH_FPGA_SCI"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
 									<listOptionValue builtIn="false" value="_PARAM_LIST_READ_ONLY"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_EVEN_PARITY=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_SCIA_ON_USB_CONNECTOR=1"/>
@@ -1222,7 +1220,6 @@
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
 									<listOptionValue builtIn="false" value="NO_PARAMETER_COUNT_MAX=256"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=0"/>
@@ -1322,7 +1319,6 @@
 									<listOptionValue builtIn="false" value="_CS_1291"/>
 									<listOptionValue builtIn="false" value="UART_DRV_USES_HMLIB"/>
 									<listOptionValue builtIn="false" value="_CSMON_IN_INTERNAL_RAM=1"/>
-									<listOptionValue builtIn="false" value="NO_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
 									<listOptionValue builtIn="false" value="NO_PARAMETER_COUNT_MAX=256"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_EXTERNAL_PARAMETER_LIST=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=0"/>
