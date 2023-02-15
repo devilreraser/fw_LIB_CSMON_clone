@@ -1100,7 +1100,7 @@
 		</variable>
 		<variable>
 			<name>CS_PROJECT_ROOT</name>
-			<value>$%7BPARENT-6-CCS_PROJECT_DIR%7D</value>
+			<value>$%7BPARENT-6-PROJECT_LOC%7D</value>
 		</variable>
 		<variable>
 			<name>CS_PROJECT_SRC</name>
