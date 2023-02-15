@@ -7,6 +7,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -16,6 +17,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -44,6 +46,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -53,6 +56,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -81,6 +85,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -90,6 +95,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -118,6 +124,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -127,6 +134,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -155,6 +163,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -164,6 +173,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -192,6 +202,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -201,6 +212,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -229,6 +241,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -238,6 +251,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -266,6 +280,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -275,6 +290,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -303,6 +319,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -312,6 +329,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -340,6 +358,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -349,6 +368,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -377,6 +397,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -386,6 +407,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -414,6 +436,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -423,6 +446,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -451,6 +475,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -460,6 +485,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -488,6 +514,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -497,6 +524,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -525,6 +553,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -534,6 +563,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -562,6 +592,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -571,6 +602,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -599,6 +631,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -608,6 +641,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -636,6 +670,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -645,6 +680,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -673,6 +709,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -682,6 +719,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -710,6 +748,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -719,6 +758,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -747,6 +787,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -756,6 +797,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -784,6 +826,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -793,6 +836,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -821,6 +865,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -830,6 +875,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -858,6 +904,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -867,6 +914,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -895,6 +943,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -904,6 +953,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -932,6 +982,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -941,6 +992,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -969,6 +1021,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -978,6 +1031,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1006,6 +1060,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1015,6 +1070,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1043,6 +1099,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1052,6 +1109,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1080,6 +1138,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1089,6 +1148,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1117,6 +1177,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1126,6 +1187,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1154,6 +1216,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1163,6 +1226,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1191,6 +1255,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1200,6 +1265,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1228,6 +1294,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1237,6 +1304,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1265,6 +1333,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1274,6 +1343,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1302,6 +1372,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1311,6 +1382,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1339,6 +1411,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1348,6 +1421,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1376,6 +1450,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1385,6 +1460,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1413,6 +1489,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1422,6 +1499,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1450,6 +1528,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1459,6 +1538,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1487,6 +1567,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1496,6 +1577,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1524,6 +1606,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1533,6 +1616,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1561,6 +1645,7 @@
         "StartBitIndexOrElementCount": 0,
         "IsBitField": false,
         "IsArray": false,
+        "IsNumberArray": false,
         "StorageType": 0
       },
       "Value": {
@@ -1570,6 +1655,7 @@
             "StartBitIndexOrElementCount": 0,
             "IsBitField": false,
             "IsArray": false,
+            "IsNumberArray": false,
             "StorageType": 0
           },
           "ReadAccessLevelMin": 1,
@@ -1594,20 +1680,61 @@
     },
     {
       "Key": {
-        "StorageId": 412,
-        "StartBitIndexOrElementCount": 0,
+        "StorageId": 1000,
+        "StartBitIndexOrElementCount": 10,
         "IsBitField": false,
-        "IsArray": false,
-        "StorageType": 0
+        "IsArray": true,
+        "IsNumberArray": true,
+        "StorageType": 32
       },
       "Value": {
         "AccessDescriptor": {
           "ValueAccessKey": {
-            "StorageId": 412,
-            "StartBitIndexOrElementCount": 0,
+            "StorageId": 1000,
+            "StartBitIndexOrElementCount": 10,
             "IsBitField": false,
-            "IsArray": false,
-            "StorageType": 0
+            "IsArray": true,
+            "IsNumberArray": true,
+            "StorageType": 32
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 8,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 1,
+          "BytesCountCeil": 10,
+          "RegisterCountCeil": 5,
+          "ElementRegisterCountCeil": 1,
+          "ModbusAddress": 1000,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 43,
+        "ShortName": "au8NumberArray",
+        "DefaultUnits": "Default"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 1001,
+        "StartBitIndexOrElementCount": 10,
+        "IsBitField": false,
+        "IsArray": true,
+        "IsNumberArray": true,
+        "StorageType": 32
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 1001,
+            "StartBitIndexOrElementCount": 10,
+            "IsBitField": false,
+            "IsArray": true,
+            "IsNumberArray": true,
+            "StorageType": 32
           },
           "ReadAccessLevelMin": 1,
           "WriteAccessLevelMin": 4,
@@ -1615,20 +1742,59 @@
           "BitsCount": 16,
           "CheckSum": 0,
           "ElementBytesCountCeil": 2,
-          "BytesCountCeil": 2,
-          "RegisterCountCeil": 1,
+          "BytesCountCeil": 20,
+          "RegisterCountCeil": 10,
           "ElementRegisterCountCeil": 1,
-          "ModbusAddress": 412,
+          "ModbusAddress": 1001,
           "DefaultReadFunctionCode": 3,
           "DefaultWriteFunctionCode": 16,
           "IsReadable": true,
           "IsWriteable": true
         },
-        "Index": 43,
-        "ShortName": "IncLoopTestCDiff",
-        "DefaultUnits": "A"
+        "Index": 44,
+        "ShortName": "au16NumberArray",
+        "DefaultUnits": "Default"
+      }
+    },
+    {
+      "Key": {
+        "StorageId": 1002,
+        "StartBitIndexOrElementCount": 10,
+        "IsBitField": false,
+        "IsArray": true,
+        "IsNumberArray": true,
+        "StorageType": 32
+      },
+      "Value": {
+        "AccessDescriptor": {
+          "ValueAccessKey": {
+            "StorageId": 1002,
+            "StartBitIndexOrElementCount": 10,
+            "IsBitField": false,
+            "IsArray": true,
+            "IsNumberArray": true,
+            "StorageType": 32
+          },
+          "ReadAccessLevelMin": 1,
+          "WriteAccessLevelMin": 4,
+          "IsStorable": true,
+          "BitsCount": 32,
+          "CheckSum": 0,
+          "ElementBytesCountCeil": 4,
+          "BytesCountCeil": 40,
+          "RegisterCountCeil": 20,
+          "ElementRegisterCountCeil": 2,
+          "ModbusAddress": 1002,
+          "DefaultReadFunctionCode": 3,
+          "DefaultWriteFunctionCode": 16,
+          "IsReadable": true,
+          "IsWriteable": true
+        },
+        "Index": 45,
+        "ShortName": "au32NumberArray",
+        "DefaultUnits": "Default"
       }
     }
   ],
-  "HashCode": 898019575
+  "HashCode": 844039015
 }
