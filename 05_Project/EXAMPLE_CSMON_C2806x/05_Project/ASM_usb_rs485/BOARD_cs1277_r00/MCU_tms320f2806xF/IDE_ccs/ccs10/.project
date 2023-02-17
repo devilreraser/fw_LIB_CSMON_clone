@@ -47,9 +47,14 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>lnk_F2806x.cmd</name>
+			<name>F28062.cmd</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/cmd/lnk_F2806x.cmd</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/cmd/F28062.cmd</locationURI>
+		</link>
+		<link>
+			<name>F28069.cmd</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/cmd/F28069.cmd</locationURI>
 		</link>
 		<link>
 			<name>01_Source/MotorParam</name>

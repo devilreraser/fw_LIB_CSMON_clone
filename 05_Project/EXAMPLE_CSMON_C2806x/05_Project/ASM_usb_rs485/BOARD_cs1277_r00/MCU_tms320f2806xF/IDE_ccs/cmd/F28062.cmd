@@ -1,46 +1,15 @@
 /*
 // TI File $Revision: /main/3 $
-// Checkin $Date: March 3, 2011   13:45:53 $
+// Checkin $Date: March 3, 2011   13:45:44 $
 //###########################################################################
 //
-// FILE:    F28069.cmd
+// FILE:    F28062.cmd
 //
-// TITLE:   Linker Command File For F28069 Device
+// TITLE:   Linker Command File For F28062 Device
 //
 //###########################################################################
-// $TI Release: 2806x C/C++ Header Files V1.10 $ 
-// $Release Date: April 7, 2011 $ 
-// $Copyright:
-// Copyright (C) 2009-2022 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: $ 
+// $Release Date: $ 
 //###########################################################################
 */
 
@@ -53,7 +22,7 @@
 // peripheral structures to the proper locations within
 // the memory map.
 //
-// The header linker files are found in <base>\headers\cmd
+// The header linker files are found in <base>\F2806x_headers\cmd
 //
 // For BIOS applications add:      F2806x_Headers_BIOS.cmd
 // For nonBIOS applications add:   F2806x_Headers_nonBIOS.cmd
@@ -73,7 +42,7 @@
 /* Uncomment this line to include file only for BIOS applications */
 /* -l F2806x_Headers_BIOS.cmd */
 
-/* 2) In your project add the path to <base>\headers\cmd to the
+/* 2) In your project add the path to <base>\F2806x_headers\cmd to the
    library search path under project->build options, linker tab,
    library search path (-i).
 /*========================================================= */
@@ -83,7 +52,7 @@
    PAGE 1 will be used to organize data sections
 
    Notes:
-         Memory blocks on F28069 are uniform (ie same
+         Memory blocks on F28062 are uniform (ie same
          physical memory) in both PAGE 0 and PAGE 1.
          That is the same memory region should not be
          defined for both PAGE 0 and PAGE 1.
@@ -102,37 +71,18 @@ PAGE 0 :   /* Program Memory */
    RAML1       : origin = 0x008800, length = 0x000400     /* on-chip RAM block L1 */
    OTP         : origin = 0x3D7800, length = 0x000400     /* on-chip OTP */
 
-/* on-chip FLASH for 28069 */
-   //FLASHH      : origin = 0x3D8000, length = 0x004000     /* on-chip FLASH */
-   //FLASHG      : origin = 0x3DC000, length = 0x004000     /* on-chip FLASH */
-   //FLASHF      : origin = 0x3E0000, length = 0x004000     /* on-chip FLASH */
-   //FLASHE      : origin = 0x3E4000, length = 0x004000     /* on-chip FLASH */
-   //FLASHD      : origin = 0x3E8000, length = 0x004000     /* on-chip FLASH */
-   //FLASHC      : origin = 0x3EC000, length = 0x004000     /* on-chip FLASH */
-   //FLASHB      : origin = 0x3F0000, length = 0x004000     /* on-chip FLASH */
-   //FLASHA      : origin = 0x3F4000, length = 0x004000     /* on-chip FLASH for bootloader */
-
-/* on-chip FLASH for 28062 */
-//   FLASHH      : origin = 0x3E8000, length = 0x002000     /* on-chip FLASH */
-//   FLASHG      : origin = 0x3EA000, length = 0x002000     /* on-chip FLASH */
-//   FLASHF      : origin = 0x3EC000, length = 0x002000     /* on-chip FLASH */
-//   FLASHE      : origin = 0x3EE000, length = 0x002000     /* on-chip FLASH */
-//   FLASHD      : origin = 0x3F0000, length = 0x002000     /* on-chip FLASH */
-//   FLASHC      : origin = 0x3F2000, length = 0x002000     /* on-chip FLASH */
-//   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH for bootloader with 16kW */
-//   FLASHA      : origin = 0x3F6000, length = 0x002000     /* on-chip FLASH for bootloader */
-
-   FLASH_APP      : origin = 0x3E8000, length = 0x00DFF0     /* on-chip FLASH for app if used bootloader with 8kW */
-   //FLASH_APP      : origin = 0x3E8000, length = 0x00BFF0     /* on-chip FLASH for app if used bootloader with 16kW */
-
+   FLASHH      : origin = 0x3E8000, length = 0x002000     /* on-chip FLASH */
+   FLASHG      : origin = 0x3EA000, length = 0x002000     /* on-chip FLASH */
+   FLASHF      : origin = 0x3EC000, length = 0x002000     /* on-chip FLASH */
+   FLASHE      : origin = 0x3EE000, length = 0x002000     /* on-chip FLASH */
+   FLASHD      : origin = 0x3F0000, length = 0x002000     /* on-chip FLASH */
+   FLASHC      : origin = 0x3F2000, length = 0x002000     /* on-chip FLASH */
+   FLASHA      : origin = 0x3F6000, length = 0x001F80     /* on-chip FLASH */
    CSM_RSVD    : origin = 0x3F7F80, length = 0x000076     /* Part of FLASHA.  Program with all 0x0000 when CSM is in use. */
-   //for Standalone Usage
    BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA.  Used for "boot to Flash" bootloader mode. */
-   //for Bootloader Usage
-   //BEGIN       : origin = 0x3F3FF6, length = 0x000002     /* Part of FLASHB(28069)/FLASHC(28062).  Used from bootloader. */
    CSM_PWL_P0  : origin = 0x3F7FF8, length = 0x000008     /* Part of FLASHA.  CSM password locations in FLASHA */
 
-   FPUTABLES   : origin = 0x3FD590, length = 0x0006A0	  /* FPU Tables in Boot ROM */
+   FPUTABLES   : origin = 0x3FD860, length = 0x0006A0	  /* FPU Tables in Boot ROM */
    IQTABLES    : origin = 0x3FDF00, length = 0x000B50     /* IQ Math Tables in Boot ROM */
    IQTABLES2   : origin = 0x3FEA50, length = 0x00008C     /* IQ Math Tables in Boot ROM */
    IQTABLES3   : origin = 0x3FEADC, length = 0x0000AA	  /* IQ Math Tables in Boot ROM */
@@ -148,21 +98,12 @@ PAGE 1 :   /* Data Memory */
    BOOT_RSVD   : origin = 0x000000, length = 0x000050     /* Part of M0, BOOT rom will use this for stack */
    RAMM0       : origin = 0x000050, length = 0x0003B0     /* on-chip RAM block M0 */
    RAMM1       : origin = 0x000400, length = 0x000400     /* on-chip RAM block M1 */
-   //RAML2       : origin = 0x008C00, length = 0x00B400     /* on-chip RAM block L2 */
    RAML2       : origin = 0x008C00, length = 0x000400     /* on-chip RAM block L2 */
-   //RAML3456       : origin = 0x009000, length = 0x007000	  /* on-chip RAM block L3 */
-   //RAML345       : origin = 0x009000, length = 0x005000	  /* on-chip RAM block L3 */
-   RAML34       : origin = 0x009000, length = 0x003000	  /* on-chip RAM block L3 */
-   //RAML3       : origin = 0x009000, length = 0x001000	  /* on-chip RAM block L3 */
-   //RAML456       : origin = 0x00A000, length = 0x006000     /* on-chip RAM block L4 */
-   //RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
+   RAML3       : origin = 0x009000, length = 0x001000	  /* on-chip RAM block L3 */
+   RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
    RAML5       : origin = 0x00C000, length = 0x002000     /* on-chip RAM block L5 */
-   RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
-   //RAML78       : origin = 0x010000, length = 0x004000     /* on-chip RAM block L7 */
-   RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
-   RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
-   USB_RAM     : origin = 0x040000, length = 0x000800     /* USB RAM		  */   
-
+   USB_RAM     : origin = 0x040000, length = 0x000800     /* USB RAM		  */
+   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH */   
 }
 
 /* Allocate sections to memory blocks.
@@ -177,43 +118,53 @@ SECTIONS
 {
 
    /* Allocate program areas: */
-   .cinit              : > FLASH_APP,     PAGE = 0
-   .pinit              : > FLASH_APP,     PAGE = 0
-   .text               : > FLASH_APP,     PAGE = 0
+   .cinit              : > FLASHA,     PAGE = 0
+   .pinit              : > FLASHA,     PAGE = 0
+   .text               : >> FLASHA | FLASHC | FLASHD | FLASHE,     PAGE = 0
    codestart           : > BEGIN,      PAGE = 0
-   ramfuncs            : LOAD = FLASH_APP,
+                         
+#ifdef __TI_COMPILER_VERSION__
+   #if __TI_COMPILER_VERSION__ >= 15009000
+/*    .TI.ramfunc : {} LOAD = FLASHD, */
+   ramfuncs            : LOAD = FLASHD,
                          RUN = RAML0,
                          LOAD_START(_RamfuncsLoadStart),
                          LOAD_END(_RamfuncsLoadEnd),
                          RUN_START(_RamfuncsRunStart),
 						 LOAD_SIZE(_RamfuncsLoadSize),
                          PAGE = 0
+   #else
+   ramfuncs            : LOAD = FLASHD,
+                         RUN = RAML0,
+                         LOAD_START(_RamfuncsLoadStart),
+                         LOAD_END(_RamfuncsLoadEnd),
+                         RUN_START(_RamfuncsRunStart),
+						 LOAD_SIZE(_RamfuncsLoadSize),
+                         PAGE = 0   
+   #endif
+#endif
 
    csmpasswds          : > CSM_PWL_P0, PAGE = 0
    csm_rsvd            : > CSM_RSVD,   PAGE = 0
 
-   /* Allocate uninitialized data sections: */
+   /* Allocate uninitalized data sections: */
    .stack              : > RAMM0,      PAGE = 1
-   .ebss               : >> RAML2 | RAML34 | RAML5 | RAML6 | RAML7 | RAML8 | RAMM1,      PAGE = 1
+   .ebss               : >> RAML2 | RAML3 | RAML4,      PAGE = 1
    .esysmem            : > RAML2,      PAGE = 1
-   .cio                : > RAML2,      PAGE = 1
 
-   /* Initialized sections to go in Flash */
+   /* Initalized sections to go in Flash */
    /* For SDFlash to program these, they must be allocated to page 0 */
-   .econst             : > FLASH_APP,     PAGE = 0
-   .switch             : > FLASH_APP,     PAGE = 0
+   .econst             : > FLASHA,     PAGE = 0
+   .switch             : > FLASHA,     PAGE = 0
 
    /* Allocate IQ math areas: */
-   IQmath              : > FLASH_APP,     PAGE = 0            /* Math Code */
+   IQmath              : > FLASHA,     PAGE = 0            /* Math Code */
    IQmathTables        : > IQTABLES,   PAGE = 0, TYPE = NOLOAD
    
    /* Allocate FPU math areas: */
    FPUmathTables       : > FPUTABLES,  PAGE = 0, TYPE = NOLOAD
    
-   //DMARAML5	           : > RAML5,      PAGE = 1
-   //DMARAML6	           : > RAML6,      PAGE = 1
-   //DMARAML7	           : > RAML7,      PAGE = 1
-   //DMARAML8	           : > RAML8,      PAGE = 1
+   DMARAML5	           : > RAML5,      PAGE = 1
 
   /* Uncomment the section below if calling the IQNexp() or IQexp()
       functions from the IQMath.lib library in order to utilize the
