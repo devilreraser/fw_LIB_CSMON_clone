@@ -65,11 +65,17 @@ typedef union
 
          uint32_t regU32;
           int32_t regS32;
+         uint32_t regNAU32;
+          int32_t regNAS32;
          uint16_t regU16;
          uint16_t regAU16;
+         uint16_t regNAU16;
+          int16_t regNAS16;
           int16_t regS16;
     uint_least8_t regU8;
     uint_least8_t regAU8;
+    uint_least8_t regNAU8;
+    uint_least8_t regNAS8;
              char regCHAR;
      int_least8_t regS8;
 } uAnyType32_t;
