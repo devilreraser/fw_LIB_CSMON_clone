@@ -866,21 +866,5 @@
 			<name>CS_PROJECT_SRC</name>
 			<value>$%7BCS_PROJECT_ROOT%7D/01_Source</value>
 		</variable>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>$%7BCS_PROJECT_ROOT%7D/repos/github_cs/fw_LIB_CSMON/05_Project/EXAMPLE_CSMON_C2806x</value>
-		</variable>
-		<variable>
-			<name>copy_PARENT1</name>
-			<value>$%7BCS_PROJECT_ROOT%7D/repos/github_cs/fw_LIB_CSMON</value>
-		</variable>
-		<variable>
-			<name>copy_PARENT12</name>
-			<value>$%7Bcopy_PARENT%7D/05_Project/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f28062F/IDE_ccs</value>
-		</variable>
-		<variable>
-			<name>copy_PARENT123</name>
-			<value>$%7Bcopy_PARENT12%7D</value>
-		</variable>
 	</variableList>
 </projectDescription>
