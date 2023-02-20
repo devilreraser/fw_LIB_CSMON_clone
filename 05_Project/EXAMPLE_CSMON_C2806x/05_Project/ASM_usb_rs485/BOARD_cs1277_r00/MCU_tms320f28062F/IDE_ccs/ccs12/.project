@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>EXAMPLE_CSMON_C2806x</name>
+	<name>ASM_usb_rs485_BOARD_cs1277_r00</name>
 	<comment></comment>
 	<projects>
 		<project>CSMON_C28xx</project>
@@ -50,11 +50,6 @@
 			<name>F28062.cmd</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/cmd/F28062.cmd</locationURI>
-		</link>
-		<link>
-			<name>F28069.cmd</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/cmd/F28069.cmd</locationURI>
 		</link>
 		<link>
 			<name>01_Source/MotorParam</name>
@@ -152,29 +147,19 @@
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/DemoBoard28069_Example</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>CSMON_LIB/Motor28062_Example</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>Motor28062/EXAMPLE_CSMON_C2806x.out</name>
-			<type>1</type>
-			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
-		</link>
-		<link>
-			<name>TestBoard28069/EXAMPLE_CSMON_C2806x.out</name>
+			<name>Flash/ASM_usb_rs485_BOARD_cs1277_r00.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
 			<name>01_Source/MotorParam/.gitignore</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/01_Source/MotorParam/.gitignore</locationURI>
+			<locationURI>copy_PARENT/01_Source/MotorParam/.gitignore</locationURI>
 		</link>
 		<link>
 			<name>01_Source/MotorParam/Generated</name>
@@ -194,7 +179,7 @@
 		<link>
 			<name>01_Source/MotorParam/project_settings.json</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/01_Source/MotorParam/project_settings.json</locationURI>
+			<locationURI>copy_PARENT/01_Source/MotorParam/project_settings.json</locationURI>
 		</link>
 		<link>
 			<name>01_Source/app_settings/manifest.c</name>
@@ -307,11 +292,6 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>C2806x_LIB/common/cmd</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>C2806x_LIB/common/include</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -340,11 +320,6 @@
 			<name>C2806x_LIB/driverlib/.project</name>
 			<type>1</type>
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/.project</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/driverlib/Debug</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/driverlib/debug.h</name>
@@ -417,11 +392,6 @@
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb.h</locationURI>
 		</link>
 		<link>
-			<name>C2806x_LIB/driverlib/usb_hal.c</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb_hal.c</locationURI>
-		</link>
-		<link>
 			<name>C2806x_LIB/driverlib/usb_hal.h</name>
 			<type>1</type>
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/usb_hal.h</locationURI>
@@ -440,16 +410,6 @@
 			<name>C2806x_LIB/headers/source</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/DemoBoard28069_Example/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-8-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/DemoBoard28069_Example/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-8-PROJECT_LOC/04_Output_Files/DemoBoard28069_Example/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062_Example/CSMON_C28xx.lib</name>
@@ -527,164 +487,9 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28062_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28062_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28063_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28063_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28064_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28064_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28065_RAM_CLA_C_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28065_RAM_CLA_C_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28065_RAM_CLA_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28065_RAM_CLA_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28065_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28065_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28066_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28066_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28067_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28067_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28068_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28068_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28069_RAM_CLA_C_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28069_RAM_CLA_C_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28069_RAM_CLA_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28069_RAM_CLA_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28069_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28069_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28PLC83_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28PLC83_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28PLC85_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28PLC85_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28PLC93_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28PLC93_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/28PLC95_RAM_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/28PLC95_RAM_lnk.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28062.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28062.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28063.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28063.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28064.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28064.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28065.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28065.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28066.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28066.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28067.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28067.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28068.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28068.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28069.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28069.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28069M.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28069M.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28PLC83.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28PLC83.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28PLC85.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28PLC85.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28PLC93.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28PLC93.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/F28PLC95.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/F28PLC95.cmd</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/cmd/f28069M_ram_lnk.cmd</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/cmd/f28069M_ram_lnk.cmd</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/common/include/DSP28x_Project.h</name>
@@ -837,16 +642,6 @@
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_PieVect.c</locationURI>
 		</link>
 		<link>
-			<name>C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_SWPrioritizedDefaultIsr.c</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_SWPrioritizedPieVect.c</locationURI>
-		</link>
-		<link>
 			<name>C2806x_LIB/common/source/F2806x_Sci.c</name>
 			<type>1</type>
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/source/F2806x_Sci.c</locationURI>
@@ -875,11 +670,6 @@
 			<name>C2806x_LIB/common/targetConfigs/TMS320F28069.ccxml</name>
 			<type>1</type>
 			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/common/targetConfigs/TMS320F28069.ccxml</locationURI>
-		</link>
-		<link>
-			<name>C2806x_LIB/driverlib/Debug/driverlib.lib</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/driverlib/Debug/driverlib.lib</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd</name>
@@ -1052,34 +842,19 @@
 			<locationURI>PARENT-6-PROJECT_LOC/01_Source/dev/dbg/ctrl/dbg_ctrl.h</locationURI>
 		</link>
 		<link>
-			<name>01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x/hal.c</name>
+			<name>01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x/hal.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x/hal.c</locationURI>
 		</link>
 		<link>
-			<name>01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x/hal.h</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x/hal.h</locationURI>
-		</link>
-		<link>
-			<name>01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x/hal.c</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x/hal.c</locationURI>
-		</link>
-		<link>
 			<name>01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x/hal.h</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/01_Source/hal/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f2806x/hal.h</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/01_Source/hal/ASM_usb_rs485/BOARD_2806x_ISO_CONTROL_CARD/MCU_tms320f2806x/hal.h</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
@@ -1110,6 +885,22 @@
 		<variable>
 			<name>CS_PROJECT_SRC</name>
 			<value>$%7BCS_PROJECT_ROOT%7D/01_Source</value>
+		</variable>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BCS_PROJECT_ROOT%7D/repos/github_cs/fw_LIB_CSMON/05_Project/EXAMPLE_CSMON_C2806x</value>
+		</variable>
+		<variable>
+			<name>copy_PARENT1</name>
+			<value>$%7BCS_PROJECT_ROOT%7D/repos/github_cs/fw_LIB_CSMON</value>
+		</variable>
+		<variable>
+			<name>copy_PARENT12</name>
+			<value>$%7Bcopy_PARENT%7D/05_Project/ASM_usb_rs485/BOARD_cs1277_r00/MCU_tms320f28062F/IDE_ccs</value>
+		</variable>
+		<variable>
+			<name>copy_PARENT123</name>
+			<value>$%7Bcopy_PARENT12%7D</value>
 		</variable>
 	</variableList>
 </projectDescription>
