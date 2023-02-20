@@ -157,11 +157,6 @@
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
-			<name>01_Source/MotorParam/.gitignore</name>
-			<type>1</type>
-			<locationURI>copy_PARENT/01_Source/MotorParam/.gitignore</locationURI>
-		</link>
-		<link>
 			<name>01_Source/MotorParam/Generated</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
