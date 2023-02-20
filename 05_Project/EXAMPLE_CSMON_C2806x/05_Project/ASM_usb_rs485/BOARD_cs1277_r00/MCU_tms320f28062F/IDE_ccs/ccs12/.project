@@ -52,6 +52,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/cmd/F28062.cmd</locationURI>
 		</link>
 		<link>
+			<name>generate_csmon_config.bat</name>
+			<type>1</type>
+			<locationURI>CS_LIB_CSMON/08_Utilities/CsMonUtils/generate_csmon_config.bat</locationURI>
+		</link>
+		<link>
 			<name>01_Source/MotorParam</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
