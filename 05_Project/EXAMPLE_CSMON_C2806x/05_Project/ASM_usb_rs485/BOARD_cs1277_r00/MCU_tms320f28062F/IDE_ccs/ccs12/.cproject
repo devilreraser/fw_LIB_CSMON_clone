@@ -104,7 +104,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|01_Source/MotorParam/Template|01_Source/csmon_lib_support/params_internal|01_Source/hal/asms/usb_rs485/boards/2806x_ISO_CONTROL_CARD|hal/boards/2806x_ISO_CONTROL_CARD|MotorParam/Template/template_csmon_config.c|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="C2806x_LIB/headers/cmd/F2806x_Headers_BIOS.cmd|01_Source/MotorParam/Template|01_Source/hal/asms/usb_rs485/boards/2806x_ISO_CONTROL_CARD|hal/boards/2806x_ISO_CONTROL_CARD|MotorParam/Template/template_csmon_config.c|lnk_F2806x_for_Bootloader.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
