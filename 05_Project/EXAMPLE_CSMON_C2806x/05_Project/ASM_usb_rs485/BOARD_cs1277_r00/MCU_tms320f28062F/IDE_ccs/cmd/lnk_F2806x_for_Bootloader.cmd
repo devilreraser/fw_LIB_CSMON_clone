@@ -119,18 +119,20 @@ PAGE 0 :   /* Program Memory */
 //   FLASHE      : origin = 0x3EE000, length = 0x002000     /* on-chip FLASH */
 //   FLASHD      : origin = 0x3F0000, length = 0x002000     /* on-chip FLASH */
 //   FLASHC      : origin = 0x3F2000, length = 0x002000     /* on-chip FLASH */
-//   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH for bootloader with 16kW */
+//   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH for bootloader */
 //   FLASHA      : origin = 0x3F6000, length = 0x002000     /* on-chip FLASH for bootloader */
 
-   FLASH_APP      : origin = 0x3E8000, length = 0x00DFF0     /* on-chip FLASH for app if used bootloader with 8kW */
-   //FLASH_APP      : origin = 0x3E8000, length = 0x00BFF0     /* on-chip FLASH for app if used bootloader with 16kW */
 
+
+
+   FLASH_APP      : origin = 0x3E8000, length = 0x00BF80     /* on-chip FLASH */
    CSM_RSVD    : origin = 0x3F7F80, length = 0x000076     /* Part of FLASHA.  Program with all 0x0000 when CSM is in use. */
    //for Standalone Usage
-   BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA.  Used for "boot to Flash" bootloader mode. */
+   //BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA.  Used for "boot to Flash" bootloader mode. */
    //for Bootloader Usage
-   //BEGIN       : origin = 0x3F3FF6, length = 0x000002     /* Part of FLASHB(28069)/FLASHC(28062).  Used from bootloader. */
+   BEGIN       : origin = 0x3F3FF6, length = 0x000002     /* Part of FLASHB(28069)/FLASHC(28062).  Used from bootloader. */
    CSM_PWL_P0  : origin = 0x3F7FF8, length = 0x000008     /* Part of FLASHA.  CSM password locations in FLASHA */
+
 
    FPUTABLES   : origin = 0x3FD590, length = 0x0006A0	  /* FPU Tables in Boot ROM */
    IQTABLES    : origin = 0x3FDF00, length = 0x000B50     /* IQ Math Tables in Boot ROM */
@@ -148,21 +150,14 @@ PAGE 1 :   /* Data Memory */
    BOOT_RSVD   : origin = 0x000000, length = 0x000050     /* Part of M0, BOOT rom will use this for stack */
    RAMM0       : origin = 0x000050, length = 0x0003B0     /* on-chip RAM block M0 */
    RAMM1       : origin = 0x000400, length = 0x000400     /* on-chip RAM block M1 */
-   //RAML2       : origin = 0x008C00, length = 0x00B400     /* on-chip RAM block L2 */
    RAML2       : origin = 0x008C00, length = 0x000400     /* on-chip RAM block L2 */
-   //RAML3456       : origin = 0x009000, length = 0x007000	  /* on-chip RAM block L3 */
-   //RAML345       : origin = 0x009000, length = 0x005000	  /* on-chip RAM block L3 */
-   RAML34       : origin = 0x009000, length = 0x003000	  /* on-chip RAM block L3 */
-   //RAML3       : origin = 0x009000, length = 0x001000	  /* on-chip RAM block L3 */
-   //RAML456       : origin = 0x00A000, length = 0x006000     /* on-chip RAM block L4 */
-   //RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
+   RAML3       : origin = 0x009000, length = 0x001000	  /* on-chip RAM block L3 */
+   RAML4       : origin = 0x00A000, length = 0x002000     /* on-chip RAM block L4 */
    RAML5       : origin = 0x00C000, length = 0x002000     /* on-chip RAM block L5 */
    RAML6       : origin = 0x00E000, length = 0x002000     /* on-chip RAM block L6 */
-   //RAML78       : origin = 0x010000, length = 0x004000     /* on-chip RAM block L7 */
    RAML7       : origin = 0x010000, length = 0x002000     /* on-chip RAM block L7 */
    RAML8       : origin = 0x012000, length = 0x002000     /* on-chip RAM block L8 */
    USB_RAM     : origin = 0x040000, length = 0x000800     /* USB RAM		  */   
-
 }
 
 /* Allocate sections to memory blocks.
@@ -194,9 +189,9 @@ SECTIONS
 
    /* Allocate uninitialized data sections: */
    .stack              : > RAMM0,      PAGE = 1
-   .ebss               : >> RAML2 | RAML34 | RAML5 | RAML6 | RAML7 | RAML8 | RAMM1,      PAGE = 1
+   .ebss               : > RAML4,      PAGE = 1
    .esysmem            : > RAML2,      PAGE = 1
-   .cio                : > RAML2,      PAGE = 1
+   .cio                : > RAML5,      PAGE = 1
 
    /* Initialized sections to go in Flash */
    /* For SDFlash to program these, they must be allocated to page 0 */
@@ -210,10 +205,10 @@ SECTIONS
    /* Allocate FPU math areas: */
    FPUmathTables       : > FPUTABLES,  PAGE = 0, TYPE = NOLOAD
    
-   //DMARAML5	           : > RAML5,      PAGE = 1
-   //DMARAML6	           : > RAML6,      PAGE = 1
-   //DMARAML7	           : > RAML7,      PAGE = 1
-   //DMARAML8	           : > RAML8,      PAGE = 1
+   DMARAML5	           : > RAML5,      PAGE = 1
+   DMARAML6	           : > RAML6,      PAGE = 1
+   DMARAML7	           : > RAML7,      PAGE = 1
+   DMARAML8	           : > RAML8,      PAGE = 1   
 
   /* Uncomment the section below if calling the IQNexp() or IQexp()
       functions from the IQMath.lib library in order to utilize the
