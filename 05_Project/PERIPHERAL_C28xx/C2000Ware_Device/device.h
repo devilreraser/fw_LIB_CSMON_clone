@@ -196,7 +196,7 @@ extern void Device_initGPIO(void);
 extern void Device_enableUnbondedGPIOPullupsFor176Pin(void);
 extern void Device_enableUnbondedGPIOPullupsFor100Pin(void);
 extern void Device_enableUnbondedGPIOPullups(void);
-extern void __error__(char *filename, uint32_t line);
+extern void __error__(const char *filename, uint32_t line); //const needed for TEST_CSMON ReleaseTestCS1107
 extern void Example_setResultPass(void);
 extern void Example_setResultFail(void);
 extern void Example_done(void);

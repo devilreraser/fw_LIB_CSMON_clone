@@ -122,14 +122,22 @@ PAGE 0 :   /* Program Memory */
 //   FLASHB      : origin = 0x3F4000, length = 0x002000     /* on-chip FLASH for bootloader with 16kW */
 //   FLASHA      : origin = 0x3F6000, length = 0x002000     /* on-chip FLASH for bootloader */
 
-   FLASH_APP      : origin = 0x3E8000, length = 0x00DFF0     /* on-chip FLASH for app if used bootloader with 8kW */
-   //FLASH_APP      : origin = 0x3E8000, length = 0x00BFF0     /* on-chip FLASH for app if used bootloader with 16kW */
-
    CSM_RSVD    : origin = 0x3F7F80, length = 0x000076     /* Part of FLASHA.  Program with all 0x0000 when CSM is in use. */
-   //for Standalone Usage
-   BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA.  Used for "boot to Flash" bootloader mode. */
+
+#if defined(_BOOTLOADER_16kW)
    //for Bootloader Usage
-   //BEGIN       : origin = 0x3F3FF6, length = 0x000002     /* Part of FLASHB(28069)/FLASHC(28062).  Used from bootloader. */
+   BEGIN       : origin = 0x3F3FF6, length = 0x000002     /* Part of FLASHB(28069)/FLASHC(28062).  Used from bootloader. */
+   FLASH_APP   : origin = 0x3E8000, length = 0x00BFF0     /* on-chip FLASH */
+#elif defined(_BOOTLOADER_8kW)
+   //for Bootloader Usage
+   BEGIN       : origin = 0x3F5FF6, length = 0x000002     /* Part of FLASHB(28062).  Used from bootloader . */
+   FLASH_APP   : origin = 0x3E8000, length = 0x00DFF0     /* on-chip FLASH */
+#else
+   //for Standalone Usage
+   BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA. Used for boot from Flash in standalone mode */
+   FLASH_APP   : origin = 0x3E8000, length = 0x00FF80     /* on-chip FLASH */
+#endif
+
    CSM_PWL_P0  : origin = 0x3F7FF8, length = 0x000008     /* Part of FLASHA.  CSM password locations in FLASHA */
 
    FPUTABLES   : origin = 0x3FD590, length = 0x0006A0	  /* FPU Tables in Boot ROM */

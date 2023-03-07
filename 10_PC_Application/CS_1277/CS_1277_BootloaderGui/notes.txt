@@ -1,0 +1,53 @@
+private enum PropertyIndex
+{
+	FrameStartSequence = 0,	/* 0x5655 */
+	CommProtocolVersion = 2,/* 0x0001 */
+	Counter = 4,			/* 0-65535 */
+	Command = 6,			/* eCommand */
+	DataLength = 8,
+	Data = 10,
+
+	// Frame ends with Crc16. Data can be 0 bytes.
+}
+
+
+
+public const UInt16 StartSequenceFixedValueU16 = 0x5655;
+public const UInt16 CommProtocolFixedValue = 0x0001;
+
+
+public const int HeaderSize = 10;
+public const int MinSize = 12;
+
+
+
+eCommand:
+        EnterBootloaderMode = 0x01,
+        LoadBlock = 0x02,
+        ACK = 0x03,
+        NAK = 0x04,
+		ExitBootloaderMode = 0x05,
+        Unknown = UInt16.MaxValue,
+
+
+
+internal enum FwEncryptType : UInt16
+    {
+        None = 0,
+
+        Bin_Aes256 = 1,
+
+
+        Bin_AesRfc2898 = UInt16.MaxValue,
+    }
+	
+Data Encoded:
+		2 bytes encoding type
+		Real Encoded data
+		
+Data Decoded:
+		2 bytes size address
+		Address Values
+		2 bytes size data
+		Data Values
+		
