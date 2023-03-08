@@ -199,12 +199,17 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/ISO28069Boot8kW</name>
+			<name>CSMON_LIB/ISO28069Boot16kW</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/Motor28062_Boot8kW</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -249,12 +254,17 @@
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
-			<name>ISO28069Boot8kW/TEST_CSMON_C28xx.out</name>
+			<name>ISO28069Boot16kW/TEST_CSMON_C28xx.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
 		<link>
 			<name>Motor28062/TEST_CSMON_C28xx.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
+			<name>Motor28062Boot8kW/TEST_CSMON_C28xx.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
@@ -814,19 +824,14 @@
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/csmon.h</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/ISO28069Boot8kW/CSMON_C28xx.lib</name>
+			<name>CSMON_LIB/ISO28069Boot16kW/CSMON_C28xx.lib</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot8kW/CSMON_C28xx.lib</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot16kW/CSMON_C28xx.lib</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/ISO28069Boot8kW/TEST_CSMON_C28xx.map</name>
+			<name>CSMON_LIB/ISO28069Boot16kW/csmon.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot8kW/TEST_CSMON_C28xx.map</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ISO28069Boot8kW/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot8kW/csmon.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot16kW/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062/CSMON_C28xx.lib</name>
@@ -837,6 +842,16 @@
 			<name>CSMON_LIB/Motor28062/csmon.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062/csmon.h</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/Motor28062_Boot8kW/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062_Boot8kW/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/Motor28062_Boot8kW/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Motor28062_Boot8kW/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/ParameterTestCS1211/CSMON_C28xx.lib</name>

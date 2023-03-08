@@ -134,6 +134,7 @@
 
 /* Some Pinout */
 #ifdef _CS_1211
+
 //    #define LED1_PIN     16
 //    #define LED2_PIN     17
 //    #define LED3_PIN     18
@@ -150,10 +151,12 @@
     #define STAT_LED_EQEP1B_PIN 21
     #define STAT_LED_EQEP1A_PIN 20
 
-    #elif defined(_LAUNCHXL_F28379D)
+#elif defined(_LAUNCHXL_F28379D)
+
     #define STAT_LED_G_PIN      28      /* N/A */
     #define STAT_LED_A_B_PIN    31      /* D10 Blue */
     #define STAT_LED_R_PIN      34      /* D9 */
+
 #else
     //1038
     #define STAT_LED_G_PIN      28      /* Green LED (closest to the MCU Led) */

@@ -1,9 +1,9 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.0                     
 ******************************************************************************
->> Linked Wed Mar  8 02:28:59 2023
+>> Linked Thu Mar  9 00:04:06 2023
 
-OUTPUT FILE NAME:   <../../../04_Output_Files/ISO28069Boot8kW/TEST_CSMON_C28xx.out>
+OUTPUT FILE NAME:   <../../../04_Output_Files/ISO28069Boot16kW/TEST_CSMON_C28xx.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 003ecca2
 
 
@@ -15,11 +15,10 @@ PAGE 0:
   RAML0                 00008000   00000800  00000021  000007df  RWIX
   RAML1                 00008800   00000400  00000000  00000400  RWIX
   OTP                   003d7800   00000400  00000000  00000400  RWIX
-  FLASH_APP             003e8000   0000dff0  00007bd4  0000641c  RWIX
-  BEGIN                 003f5ff6   00000002  00000002  00000000  RWIX
-  BOOT_APP              003f6000   00001f80  00000000  00001f80  RWIX
-  CSM_RSVD              003f7f80   00000076  00000076  00000000  RWIX
-  CSM_PWL_P0            003f7ff8   00000008  00000008  00000000  RWIX
+  FLASH_APP             003e8000   0000bf80  00007bd4  000043ac  RWIX
+  CSM_RSVD              003f3f80   00000076  00000076  00000000  RWIX
+  BEGIN                 003f3ff6   00000002  00000002  00000000  RWIX
+  CSM_PWL_P0            003f3ff8   00000008  00000008  00000000  RWIX
   FPUTABLES             003fd590   000006a0  00000000  000006a0  RWIX
   IQTABLES              003fdf00   00000b50  00000000  00000b50  RWIX
   IQTABLES2             003fea50   0000008c  00000000  0000008c  RWIX
@@ -99,10 +98,6 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-ramfuncs   0    003ee843    00000021     RUN ADDR = 00008000
-                  003ee843    0000001d     F2806x_SysCtrl.obj (ramfuncs:_InitFlash)
-                  003ee860    00000004     F2806x_usDelay.obj (ramfuncs)
-
 .cinit     0    003ef350    00000884     
                   003ef350    00000220     CSMON_C28xx.lib : hmmodbus.obj (.cinit)
                   003ef570    0000017b     main.obj (.cinit)
@@ -714,16 +709,20 @@ ramfuncs   0    003ee843    00000021     RUN ADDR = 00008000
                   003ee841    00000001     uart_driver.obj (.text:_UART_DRV_TXInterrupt)
                   003ee842    00000001     rts2800_ml.lib : startup.c.obj (.text)
 
-codestart 
-*          0    003f5ff6    00000002     
-                  003f5ff6    00000002     F2806x_CodeStartBranch.obj (codestart)
+ramfuncs   0    003ee843    00000021     RUN ADDR = 00008000
+                  003ee843    0000001d     F2806x_SysCtrl.obj (ramfuncs:_InitFlash)
+                  003ee860    00000004     F2806x_usDelay.obj (ramfuncs)
 
-csm_rsvd   0    003f7f80    00000076     
-                  003f7f80    00000076     F2806x_CSMPasswords.obj (csm_rsvd)
+csm_rsvd   0    003f3f80    00000076     
+                  003f3f80    00000076     F2806x_CSMPasswords.obj (csm_rsvd)
+
+codestart 
+*          0    003f3ff6    00000002     
+                  003f3ff6    00000002     F2806x_CodeStartBranch.obj (codestart)
 
 csmpasswds 
-*          0    003f7ff8    00000008     
-                  003f7ff8    00000008     F2806x_CSMPasswords.obj (csmpasswds)
+*          0    003f3ff8    00000008     
+                  003f3ff8    00000008     F2806x_CSMPasswords.obj (csmpasswds)
 
 .stack     1    00000050    00000380     UNINITIALIZED
                   00000050    00000380     --HOLE--
@@ -1167,7 +1166,7 @@ MODULE SUMMARY
     +--+--------------------------------+-------+------------------+--------------------+
        Total:                           0       1504               0                 
                                                                                      
-    C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/ISO28069Boot8kW/CSMON_C28xx.lib
+    C:/repo_github/fw_BasicAFE/02_Libraries/LIB_CSMON/04_Output_Files/ISO28069Boot16kW/CSMON_C28xx.lib
        hmmodbus.obj                     8895    1060               1589              
        csmon.obj                        3149    702                1008              
        modbusreg.obj                    2348    306                1418              
@@ -3893,7 +3892,7 @@ abs   ffffffff  ___pinit__
 0     003ee027  _vSetWatchdogPrescalerTimeDiv                                                                    
 abs   ffffffff  binit                                                                                            
 0     003ef350  cinit                                                                                            
-0     003f5ff6  code_start                                                                                       
+0     003f3ff6  code_start                                                                                       
 0     003ee843  etext                                                                                            
 abs   ffffffff  pinit                                                                                            
 
@@ -4455,7 +4454,7 @@ page  address   name
 0     003ef346  _CSMON_au8FileParameterListElementsCountInPartTable                                              
 0     003ef350  ___cinit__                                                                                       
 0     003ef350  cinit                                                                                            
-0     003f5ff6  code_start                                                                                       
+0     003f3ff6  code_start                                                                                       
 1     00000050  __stack                                                                                          
 1     000003d0  __STACK_END                                                                                      
 1     00000880  _DevEmuRegs                                                                                      
@@ -5500,8 +5499,8 @@ Value     Binding   Name (Section)
 00000000  local     .bss (.bss)
 00000000  local     .data (.data)
 00000000  local     .text (.text)
-003f7f80  local     csm_rsvd (csm_rsvd)
-003f7ff8  local     csmpasswds (csmpasswds)
+003f3f80  local     csm_rsvd (csm_rsvd)
+003f3ff8  local     csmpasswds (csmpasswds)
 
 
 ================================================================================
@@ -5514,8 +5513,8 @@ Value     Binding   Name (Section)
 00000000  local     .bss (.bss)
 00000000  local     .data (.data)
 003ee37b  local     .text (.text)
-003f5ff6  global    code_start (codestart)
-003f5ff6  local     codestart (codestart)
+003f3ff6  global    code_start (codestart)
+003f3ff6  local     codestart (codestart)
 003ee37b  local     wd_disable (.text)
 
 

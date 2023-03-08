@@ -1,0 +1,1 @@
+START CS_1277_BootloaderGui.exe --debug --timeoutbootmode 100
