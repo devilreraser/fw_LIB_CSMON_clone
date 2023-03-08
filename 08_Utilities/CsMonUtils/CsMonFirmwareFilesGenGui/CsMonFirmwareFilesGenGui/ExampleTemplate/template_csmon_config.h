@@ -78,6 +78,10 @@ typedef union
     uint_least8_t regNAS8;
              char regCHAR;
      int_least8_t regS8;
+
+         double_t regF64;
+          float_t regF32;
+       /* regF16; */
 } uAnyType32_t;
 
 
