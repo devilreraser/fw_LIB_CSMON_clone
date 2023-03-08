@@ -132,6 +132,7 @@ PAGE 0 :   /* Program Memory */
    //for Bootloader Usage
    BEGIN       : origin = 0x3F5FF6, length = 0x000002     /* Part of FLASHB(28062).  Used from bootloader . */
    FLASH_APP   : origin = 0x3E8000, length = 0x00DFF0     /* on-chip FLASH */
+   BOOT_APP	   : origin = 0x3F6000, length = 0x001F80     /* on-chip FLASH */
 #else
    //for Standalone Usage
    BEGIN       : origin = 0x3F7FF6, length = 0x000002     /* Part of FLASHA. Used for boot from Flash in standalone mode */
@@ -183,6 +184,16 @@ PAGE 1 :   /* Data Memory */
 
 SECTIONS
 {
+
+    .bootloader :
+    {
+        bootloader_f28x_cpu1.out (.text)
+    } > BOOT_APP
+
+//    .text :
+//    {
+//        *(.text)
+//    } > APP_CODE
 
    /* Allocate program areas: */
    .cinit              : > FLASH_APP,     PAGE = 0

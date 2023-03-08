@@ -33,7 +33,7 @@
 		<link>
 			<name>C2000Ware_Device</name>
 			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2000Ware_Device</locationURI>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB</name>
@@ -74,6 +74,21 @@
 			<name>01_Source/projectcfg.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/01_Source/projectcfg.h</locationURI>
+		</link>
+		<link>
+			<name>C2000Ware_Device/device.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2000Ware_Device/device.c</locationURI>
+		</link>
+		<link>
+			<name>C2000Ware_Device/device.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2000Ware_Device/device.h</locationURI>
+		</link>
+		<link>
+			<name>C2000Ware_Device/driverlib.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2000Ware_Device/driverlib.h</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib</name>

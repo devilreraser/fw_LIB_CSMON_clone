@@ -5,6 +5,7 @@
 	<projects>
 		<project>CSMON_C28xx</project>
 		<project>PERIPHERAL_C28xx</project>
+		<project>bootloader_f28x_cpu1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -29,6 +30,11 @@
 	<linkedResources>
 		<link>
 			<name>01_Source_Test</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Bootloader</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>

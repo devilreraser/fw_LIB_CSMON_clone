@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.0                     
 ******************************************************************************
->> Linked Wed Mar  8 00:50:22 2023
+>> Linked Wed Mar  8 02:28:59 2023
 
 OUTPUT FILE NAME:   <../../../04_Output_Files/ISO28069Boot8kW/TEST_CSMON_C28xx.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 003ecca2
@@ -17,6 +17,7 @@ PAGE 0:
   OTP                   003d7800   00000400  00000000  00000400  RWIX
   FLASH_APP             003e8000   0000dff0  00007bd4  0000641c  RWIX
   BEGIN                 003f5ff6   00000002  00000002  00000000  RWIX
+  BOOT_APP              003f6000   00001f80  00000000  00001f80  RWIX
   CSM_RSVD              003f7f80   00000076  00000076  00000000  RWIX
   CSM_PWL_P0            003f7ff8   00000008  00000008  00000000  RWIX
   FPUTABLES             003fd590   000006a0  00000000  000006a0  RWIX
@@ -98,6 +99,10 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
+ramfuncs   0    003ee843    00000021     RUN ADDR = 00008000
+                  003ee843    0000001d     F2806x_SysCtrl.obj (ramfuncs:_InitFlash)
+                  003ee860    00000004     F2806x_usDelay.obj (ramfuncs)
+
 .cinit     0    003ef350    00000884     
                   003ef350    00000220     CSMON_C28xx.lib : hmmodbus.obj (.cinit)
                   003ef570    0000017b     main.obj (.cinit)
@@ -708,10 +713,6 @@ section   page    origin      length       input sections
                   003ee840    00000001     CSMON_C28xx.lib : hmprotocol.obj (.text:_HMPROTOCOL_vInit)
                   003ee841    00000001     uart_driver.obj (.text:_UART_DRV_TXInterrupt)
                   003ee842    00000001     rts2800_ml.lib : startup.c.obj (.text)
-
-ramfuncs   0    003ee843    00000021     RUN ADDR = 00008000
-                  003ee843    0000001d     F2806x_SysCtrl.obj (ramfuncs:_InitFlash)
-                  003ee860    00000004     F2806x_usDelay.obj (ramfuncs)
 
 codestart 
 *          0    003f5ff6    00000002     
