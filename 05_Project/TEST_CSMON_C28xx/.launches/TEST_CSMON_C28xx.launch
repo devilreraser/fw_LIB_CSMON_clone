@@ -2,12 +2,12 @@
 <launchConfiguration type="com.ti.ccstudio.debug.launchType.device.debugging">
     <mapAttribute key="ccs.memoryview.format">
         <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1@#$0" value="16-Bit Hex - TI Style"/>
-        <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1@#$1" value="16-Bit Hex - TI Style"/>
+        <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1@#$1" value="32-Bit Hex - C Style"/>
         <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe_0/C28xx_CPU1@#$1" value="16-Bit Hex - TI Style"/>
         <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v3 USB Debug Probe_0/C28xx_CPU1@#$1" value="16-Bit Hex - TI Style"/>
     </mapAttribute>
     <mapAttribute key="ccs.memoryview.pageexpr">
-        <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="Data@@0xEF2F"/>
+        <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe/C28xx_CPU1" value="Data@@0x9ce6"/>
         <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v2 USB Debug Probe_0/C28xx_CPU1" value="Data@@0x100000"/>
         <mapEntry key="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser@#$Texas Instruments XDS100v3 USB Debug Probe_0/C28xx_CPU1" value="Data@@0x00100000"/>
     </mapAttribute>

@@ -11,9 +11,7 @@
  * Description: ...
  * 
  **************************************************************************** */
-#ifdef _WIN32
-#pragma once
-#endif /* _WIN32 */
+
 
 /* *****************************************************************************
  * Header Includes
@@ -108,6 +106,7 @@
     .uParameterFlags.sFlags.u8BitOffset = (u8Elements > 1) * u8Elements + (u8Elements == 1) * u8Offs, \
     .uParameterFlags.sFlags.bBitField = bitField, \
     .uParameterFlags.sFlags.bArray = (u8Elements > 1),         /* Array Type Register */ \
+    .uParameterFlags.sFlags.bNumberArray = ((CSMON_DATA_TYPE(DataTypeAttribute) & CSMON_DATA_TYPE_NUMBER_ARRAY_FLAG) > 1),         /* Number Array Type Register */ \
     .uParameterFlags.sFlags.bReadOnly = 1^(paramAccess >> 1), \
     .uParameterFlags.sFlags.bWriteOnly = 1^(paramAccess & 1), \
     .uParameterFlags.sFlags.bReadDenySkipCSMON = bNR, \
@@ -125,8 +124,6 @@
 /* *****************************************************************************
  * Variables Definitions
  **************************************************************************** */
-
-$extern_real_addrs_definitions$
 
 #pragma diag_push
 #pragma diag_suppress 70

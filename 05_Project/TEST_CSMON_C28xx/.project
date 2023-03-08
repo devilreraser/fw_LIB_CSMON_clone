@@ -5,6 +5,7 @@
 	<projects>
 		<project>CSMON_C28xx</project>
 		<project>PERIPHERAL_C28xx</project>
+		<project>bootloader_f28x_cpu1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -33,6 +34,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Bootloader</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>C2000Ware_Device</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -45,7 +51,7 @@
 		<link>
 			<name>C2806x_Device</name>
 			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device</locationURI>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>C2806x_LIB</name>
@@ -138,6 +144,36 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>C2806x_Device/Example_Flash2806x_CsmKeys.asm</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/Example_Flash2806x_CsmKeys.asm</locationURI>
+		</link>
+		<link>
+			<name>C2806x_Device/F2806x_Examples_Local.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/F2806x_Examples_Local.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_Device/Flash2806x_API_Library.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/Flash2806x_API_Library.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_Device/device.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/device.c</locationURI>
+		</link>
+		<link>
+			<name>C2806x_Device/device.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/device.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_Device/driverlib.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/02_Libraries/C2806x_Device/driverlib.h</locationURI>
+		</link>
+		<link>
 			<name>C2806x_LIB/common</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -155,10 +191,15 @@
 		<link>
 			<name>C2806x_LIB/inc</name>
 			<type>2</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc</locationURI>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/DemoBoard28069</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ISO28069Boot8kW</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -174,11 +215,6 @@
 		</link>
 		<link>
 			<name>CSMON_LIB/Release</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseCS1107</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -209,6 +245,11 @@
 		</link>
 		<link>
 			<name>DemoBoard28069/TEST_CSMON_C28xx.out</name>
+			<type>1</type>
+			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
+		</link>
+		<link>
+			<name>ISO28069Boot8kW/TEST_CSMON_C28xx.out</name>
 			<type>1</type>
 			<locationURI>EXTERNAL_BUILD_ARTIFACT</locationURI>
 		</link>
@@ -738,6 +779,31 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>C2806x_LIB/inc/hw_ints.h</name>
+			<type>1</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_ints.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/inc/hw_memmap.h</name>
+			<type>1</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_memmap.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/inc/hw_types.h</name>
+			<type>1</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_types.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/inc/hw_uart.h</name>
+			<type>1</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_uart.h</locationURI>
+		</link>
+		<link>
+			<name>C2806x_LIB/inc/hw_usb.h</name>
+			<type>1</type>
+			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/device_support/f2806x/MWare/inc/hw_usb.h</locationURI>
+		</link>
+		<link>
 			<name>CSMON_LIB/DemoBoard28069/CSMON_C28xx.lib</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/CSMON_C28xx.lib</locationURI>
@@ -746,6 +812,21 @@
 			<name>CSMON_LIB/DemoBoard28069/csmon.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/DemoBoard28069/csmon.h</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ISO28069Boot8kW/CSMON_C28xx.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot8kW/CSMON_C28xx.lib</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ISO28069Boot8kW/TEST_CSMON_C28xx.map</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot8kW/TEST_CSMON_C28xx.map</locationURI>
+		</link>
+		<link>
+			<name>CSMON_LIB/ISO28069Boot8kW/csmon.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ISO28069Boot8kW/csmon.h</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/Motor28062/CSMON_C28xx.lib</name>
@@ -793,16 +874,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/csmon.h</locationURI>
 		</link>
 		<link>
-			<name>CSMON_LIB/ReleaseCS1107/CSMON_C28xx.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseCS1107/CSMON_C28xx.lib</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseCS1107/csmon.h</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseCS1107/csmon.h</locationURI>
-		</link>
-		<link>
 			<name>CSMON_LIB/ReleaseCS1211/CSMON_C28xx.lib</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseCS1211/CSMON_C28xx.lib</locationURI>
@@ -821,11 +892,6 @@
 			<name>CSMON_LIB/ReleaseRecorders/csmon.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseRecorders/csmon.h</locationURI>
-		</link>
-		<link>
-			<name>CSMON_LIB/ReleaseTestCS1107/.gitignore</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/ReleaseTestCS1107/.gitignore</locationURI>
 		</link>
 		<link>
 			<name>CSMON_LIB/ReleaseTestCS1107/CSMON_C28xx.lib</name>
@@ -856,21 +922,6 @@
 			<name>PERIPHERAL_LIB/Release/peripheral.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/04_Output_Files/Release/peripheral.h</locationURI>
-		</link>
-		<link>
-			<name>C2000Ware_LIB/driverlib/ccs/.ccsproject</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/ccs/.ccsproject</locationURI>
-		</link>
-		<link>
-			<name>C2000Ware_LIB/driverlib/ccs/.cproject</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/ccs/.cproject</locationURI>
-		</link>
-		<link>
-			<name>C2000Ware_LIB/driverlib/ccs/.project</name>
-			<type>1</type>
-			<locationURI>COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR/driverlib/f2837xd/driverlib/ccs/.project</locationURI>
 		</link>
 		<link>
 			<name>C2000Ware_LIB/driverlib/ccs/Debug</name>

@@ -696,6 +696,10 @@ MAIN_sExternalRecorderHandle_t sExternalRecoderHandle[RECORDER_COUNT] =
  int16_t s16DummyDataTst = 100;
  int16_t s16ScaleDataTst = 100;
 
+ uint32_t au32NumberArray[10];
+ uint16_t au16NumberArray[10];
+ uint_least8_t au8NumberArray[10];
+
 
 
 typedef uint16_t PARS_START[__LINE__];
