@@ -126,6 +126,7 @@ PAGE 0 :   /* Program Memory */
    //for Bootloader Usage
    BEGIN       : origin = 0x3F3FF6, length = 0x000002     /* Part of FLASHB(28069)/FLASHC(28062).  Used from bootloader. */
    FLASH_APP   : origin = 0x3E8000, length = 0x00BF80     /* on-chip FLASH */
+   BOOT_APP	   : origin = 0x3F4000, length = 0x003F80     /* on-chip FLASH */
 
    CSM_PWL_P0  : origin = 0x3F3FF8, length = 0x000008     /* Part of FLASHA.  CSM password locations in FLASHA */
    CSM_RSVD    : origin = 0x3F3F80, length = 0x000076     /* Part of FLASHA.  Program with all 0x0000 when CSM is in use. */
@@ -189,22 +190,25 @@ PAGE 1 :   /* Data Memory */
 
 SECTIONS
 {
-/*
-    .bootloader :
+
+   //.text               : > FLASH_APP,     PAGE = 0
+	.text :
     {
-        bootloader_f28x_cpu1.out (.text)
+        *(.text)
+    } > FLASH_APP
+
+/*
+	.bootloader :
+    {
+        bootloader_start = .;
+        ..\bootloader_f28x_cpu1.out(.text)
+        bootloader_end = .;
     } > BOOT_APP
  */
-
-//    .text :
-//    {
-//        *(.text)
-//    } > APP_CODE
 
    /* Allocate program areas: */
    .cinit              : > FLASH_APP,     PAGE = 0
    .pinit              : > FLASH_APP,     PAGE = 0
-   .text               : > FLASH_APP,     PAGE = 0
    codestart           : > BEGIN,      PAGE = 0
    ramfuncs            : LOAD = FLASH_APP,
                          RUN = RAML0,
