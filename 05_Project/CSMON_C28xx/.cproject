@@ -1223,7 +1223,6 @@
 									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=0"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_REAL_ADDRESS_16BIT=1"/>
-									<listOptionValue builtIn="false" value="_CSMON_HMDRV_USE_UART_ERROR_PROCESS_FAST_LOOP=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_HMDRV_USE_ISR=0"/>
 									<listOptionValue builtIn="false" value="NO_FREEMASTER"/>
 									<listOptionValue builtIn="false" value="_CSMON_FORCE_ONLY_ONE_UART=1"/>
