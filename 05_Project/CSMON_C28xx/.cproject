@@ -89,7 +89,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -180,7 +180,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -276,7 +276,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -366,7 +366,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -463,7 +463,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -501,7 +501,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.1085841148" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.333459873" name="Option deprecated, set by default (--large_memory_model, -ml)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.1442174051" name="Unified memory (--unified_memory, -mt)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.2042308676" name="Speed vs. size trade-offs (--opt_for_speed, -mf)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.0" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.2042308676" name="Speed vs. size trade-offs (--opt_for_speed, -mf)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED._none" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.747800594" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INCLUDE_PATH}"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/MWare/inc"/>
@@ -561,8 +561,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|Peripheral|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="TI" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Peripheral/01_Source"/>
+						<entry excluding="Peripheral/01_Source/TI|C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -660,7 +659,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -755,7 +754,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -776,7 +775,7 @@
 				<configuration artifactExtension="lib" artifactName="../../../04_Output_Files/${ConfigName}/${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="EABI Build for ReleaseCS1107" id="com.ti.ccstudio.buildDefinitions.C2000.Release.256598538.322292092.512876728.491542590.1755099977" name="ReleaseCS1107_eabi" parent="com.ti.ccstudio.buildDefinitions.C2000.Release" postbuildStep="..\..\copy_header.bat ${ConfigName}">
 					<folderInfo id="com.ti.ccstudio.buildDefinitions.C2000.Release.256598538.322292092.512876728.491542590.1755099977." name="/" resourcePath="">
 						<toolChain id="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.ReleaseToolchain.318575444" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.librarianRelease.1697017710">
-							<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.21839636" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+							<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.21839636" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" useByScannerDiscovery="false" valueType="stringList">
 								<listOptionValue builtIn="false" value="DEVICE_CONFIGURATION_ID=com.ti.ccstudio.deviceModel.C2000.CustomC2000Device"/>
 								<listOptionValue builtIn="false" value="DEVICE_CORE_ID="/>
 								<listOptionValue builtIn="false" value="DEVICE_ENDIANNESS=little"/>
@@ -786,14 +785,14 @@
 								<listOptionValue builtIn="false" value="PRODUCT_MACRO_IMPORTS={&quot;c2000ware_software_package&quot;:[&quot;${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INCLUDE_PATH}&quot;,&quot;${COM_TI_C2000WARE_SOFTWARE_PACKAGE_LIBRARY_PATH}&quot;,&quot;${COM_TI_C2000WARE_SOFTWARE_PACKAGE_LIBRARIES}&quot;,&quot;${COM_TI_C2000WARE_SOFTWARE_PACKAGE_SYMBOLS}&quot;,&quot;${COM_TI_C2000WARE_SOFTWARE_PACKAGE_SYSCONFIG_MANIFEST}&quot;]}"/>
 								<listOptionValue builtIn="false" value="OUTPUT_TYPE=staticLibrary"/>
 							</option>
-							<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1592343740" name="Compiler version" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="22.6.0.LTS" valueType="string"/>
+							<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1592343740" name="Compiler version" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" useByScannerDiscovery="false" value="22.6.0.LTS" valueType="string"/>
 							<targetPlatform id="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.targetPlatformRelease.1353352519" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.targetPlatformRelease"/>
 							<builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.builderRelease.1364490879" keepEnvironmentInBuildfile="false" name="GNU Make" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.builderRelease"/>
 							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.compilerRelease.627212925" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.compilerRelease">
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.393199845" name="Specify floating point support (--float_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.1244932346" name="Speed vs. size trade-offs (--opt_for_speed, -mf)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.4" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.1901247405" name="Floating Point mode (--fp_mode)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.relaxed" valueType="enumerated"/>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.1533579835" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.393199845" name="Specify floating point support (--float_support)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.1244932346" name="Speed vs. size trade-offs (--opt_for_speed, -mf)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.4" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.1901247405" name="Floating Point mode (--fp_mode)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FP_MODE.relaxed" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.1533579835" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INCLUDE_PATH}"/>
 									<listOptionValue builtIn="false" value="${CG_TOOL_ROOT}/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../../02_Libraries/C2000Ware_Device"/>
@@ -810,8 +809,8 @@
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../../02_Libraries/Peripheral/01_Source/TI"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../../02_Libraries/TestControl/01_Source"/>
 								</option>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE.117321429" name="Provide advice on optimization techniques (--advice:performance)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE" value="--advice:performance=none" valueType="string"/>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.720190539" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE.117321429" name="Provide advice on optimization techniques (--advice:performance)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE" useByScannerDiscovery="false" value="--advice:performance=none" valueType="string"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.720190539" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_SYMBOLS}"/>
 									<listOptionValue builtIn="false" value="_FLASH"/>
 									<listOptionValue builtIn="false" value="CPU1"/>
@@ -828,29 +827,30 @@
 									<listOptionValue builtIn="false" value="_CSMON_USE_STRING_TABLE=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_AUXILIARY_TABLE=1"/>
 									<listOptionValue builtIn="false" value="_CSMON_USE_RESERVED_TABLE=1"/>
+									<listOptionValue builtIn="false" value="_C2000WARE_VERSION_LESS_THAN_4_3"/>
 								</option>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.266258912" name="C Dialect" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.C11" valueType="enumerated"/>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.485736378" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" valueType="stringList">
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.266258912" name="C Dialect" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.C11" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.485736378" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
 								</option>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.1193405053" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.1825829297" name="Emit diagnostic identifier numbers (--display_error_number, -pden)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.84388701" name="Place each function in a separate subsection (--gen_func_subsections, -mo)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS.297056517" name="Place structs and arrays in separate subsections (--gen_data_subsections)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS.on" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1428280635" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.eabi" valueType="enumerated"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.806093228" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.1193405053" name="Wrap diagnostic messages (--diag_wrap)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.1825829297" name="Emit diagnostic identifier numbers (--display_error_number, -pden)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.84388701" name="Place each function in a separate subsection (--gen_func_subsections, -mo)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS.297056517" name="Place structs and arrays in separate subsections (--gen_data_subsections)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_DATA_SUBSECTIONS.on" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1428280635" name="Application binary interface [See 'General' page to edit] (--abi)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.eabi" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.806093228" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS.1151619080" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS.1838279730" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS.828568893" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM2_SRCS.1474820421" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compiler.inputType__ASM2_SRCS"/>
 							</tool>
 							<tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.librarianRelease.1697017710" name="C2000 Archiver" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.library.librarianRelease">
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.archiverID.OUTPUT_FILE.2009132842" name="Output file" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.archiverID.OUTPUT_FILE" value="../../../04_Output_Files/${ConfigName}/${ProjName}.lib" valueType="string"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.archiverID.OUTPUT_FILE.2009132842" name="Output file" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.archiverID.OUTPUT_FILE" useByScannerDiscovery="false" value="../../../04_Output_Files/${ConfigName}/${ProjName}.lib" valueType="string"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|C2000Ware_LIB/driverlib/i2c.c|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TMS320F2806x|C2000Ware_LIB/driverlib/i2c.c|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -949,7 +949,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1048,7 +1048,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1146,8 +1146,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|Peripheral|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="TI" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Peripheral/01_Source"/>
+						<entry excluding="Peripheral/01_Source/TI|C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1185,7 +1184,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.1757626248" name="Processor version (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.920423375" name="Option deprecated, set by default (--large_memory_model, -ml)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.1605141966" name="Unified memory (--unified_memory, -mt)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.150443140" name="Speed vs. size trade-offs (--opt_for_speed, -mf)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.0" valueType="enumerated"/>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED.150443140" name="Speed vs. size trade-offs (--opt_for_speed, -mf)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_FOR_SPEED._none" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.1470609756" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INCLUDE_PATH}"/>
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR}/device_support/f2806x/MWare/inc"/>
@@ -1247,8 +1246,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|Peripheral|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="TI" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Peripheral/01_Source"/>
+						<entry excluding="Peripheral/01_Source/TI|C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1345,8 +1343,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|Peripheral|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="TI" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Peripheral/01_Source"/>
+						<entry excluding="Peripheral/01_Source/TI|C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1446,7 +1443,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Peripheral/01_Source/TMS320F2806x|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Peripheral/01_Source/TI/memcpy_fast_far.asm|Peripheral/01_Source/TI/f2837xd_pinmux.c|Peripheral/01_Source/TI/emif_sdram_16bit.c|Peripheral/01_Source/TI/ds3231m.c|Peripheral/01_Source/TI/pinmux_CS1211.c|Peripheral/01_Source/TI/pinmux_Core_Rev1.c|Peripheral/01_Source/TI/pinmux_Core_Rev0.c|Peripheral/01_Source/TI/MCP79410.c|Peripheral/01_Source/TI/MB85RS4MT.c|Peripheral/01_Source/TI/emif_sdram_pin_setup.c|Peripheral/01_Source/TI/emif_drv.c|Peripheral/01_Source/TI/emif_asram_pin_setup.c|Peripheral/01_Source/TI/emif_asram_32bit.c|Peripheral/01_Source/TMS320F2806x|C2806x_Device|C2806x_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1544,8 +1541,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|Peripheral|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="TI" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Peripheral/01_Source"/>
+						<entry excluding="Peripheral/01_Source/TI|C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -1643,8 +1639,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|Peripheral|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="TI" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Peripheral/01_Source"/>
+						<entry excluding="Peripheral/01_Source/TI|C2000Ware_Device|C2806x_LIB/headers/cmd/F2806x_Headers_nonBIOS.cmd|C2806x_LIB/driverlib/usb_hal.c|C2806x_LIB/common/source/F2806x_SWPrioritizedPieVect.c|C2806x_LIB/common/source/F2806x_SWPrioritizedDefaultIsr.c|Debug/TMS320F2806x|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Debug/driverlib_coff.lib|C2000Ware_LIB|C2000Ware_LIB/driverlib/ccs/Debug/driverlib.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_eabi.lib|C2000Ware_LIB/driverlib/ccs/Release/driverlib_coff.lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
