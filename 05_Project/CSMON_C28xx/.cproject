@@ -1232,6 +1232,7 @@
 									<listOptionValue builtIn="false" value="HMDRV_SUPPORT_ONLY_32_BIT_VARIABLES_FOR_PARAM_RECORDERS=1"/>
 									<listOptionValue builtIn="false" value="HMDRV_RECORDER_BUFINT_SAME_AS_PARAM_BUFFER=1"/>
 									<listOptionValue builtIn="false" value="HMDRV_USE_ONLY_ONE_RECORDER_AT_A_TIME=1"/>
+									<listOptionValue builtIn="false" value="_CSMON_FREE_RUN_TIMER_EXTERNAL"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.1582182667" name="C Dialect" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.C_DIALECT.C11" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1377959206" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" useByScannerDiscovery="false" valueType="stringList">
