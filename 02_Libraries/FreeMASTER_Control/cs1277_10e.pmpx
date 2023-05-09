@@ -2408,13 +2408,21 @@
 			<member name="enum_items" type="CObList">ObjId0651</member>
 		</object>
 		<object name="ObjId0651" type="CObList">
-			<member name="item0" type="CObject_ptr">ObjId0652</member>
-			<member name="item1" type="CObject_ptr">ObjId0653</member>
-			<member name="item2" type="CObject_ptr">ObjId0654</member>
-			<member name="item3" type="CObject_ptr">ObjId0655</member>
-			<member name="item4" type="CObject_ptr">ObjId0656</member>
+			<member name="item0" type="CObject_ptr">ObjId0997</member>
+			<member name="item1" type="CObject_ptr">ObjId0998</member>
+			<member name="item2" type="CObject_ptr">ObjId0999</member>
+			<member name="item3" type="CObject_ptr">ObjId1000</member>
+			<member name="item4" type="CObject_ptr">ObjId1001</member>
 		</object>
-		<object name="ObjId0652" type="CEnumDoubleToStringItem">
+		<object name="ObjId0997" type="CEnumDoubleToStringItem">
+			<member name="min" type="string">-1</member>
+			<member name="max" type="string"/>
+			<member name="min_incl" type="sint32">1</member>
+			<member name="max_incl" type="sint32">1</member>
+			<member name="show_num" type="sint32">0</member>
+			<member name="text" type="string">FLASH_STATUS_SAVE_FAILURE</member>
+		</object>
+		<object name="ObjId0998" type="CEnumDoubleToStringItem">
 			<member name="min" type="string">0</member>
 			<member name="max" type="string"/>
 			<member name="min_incl" type="sint32">1</member>
@@ -2422,32 +2430,24 @@
 			<member name="show_num" type="sint32">0</member>
 			<member name="text" type="string">FLASH_STATUS_SAVE_SUCCESS</member>
 		</object>
-		<object name="ObjId0653" type="CEnumDoubleToStringItem">
+		<object name="ObjId0999" type="CEnumDoubleToStringItem">
 			<member name="min" type="string">1</member>
-			<member name="max" type="string"/>
-			<member name="min_incl" type="sint32">1</member>
-			<member name="max_incl" type="sint32">1</member>
-			<member name="show_num" type="sint32">0</member>
-			<member name="text" type="string">FLASH_STATUS_SAVE_FAILURE</member>
-		</object>
-		<object name="ObjId0654" type="CEnumDoubleToStringItem">
-			<member name="min" type="string">2</member>
 			<member name="max" type="string"/>
 			<member name="min_incl" type="sint32">1</member>
 			<member name="max_incl" type="sint32">1</member>
 			<member name="show_num" type="sint32">0</member>
 			<member name="text" type="string">FLASH_STATUS_NOT_STARTED</member>
 		</object>
-		<object name="ObjId0655" type="CEnumDoubleToStringItem">
-			<member name="min" type="string">3</member>
+		<object name="ObjId1000" type="CEnumDoubleToStringItem">
+			<member name="min" type="string">2</member>
 			<member name="max" type="string"/>
 			<member name="min_incl" type="sint32">1</member>
 			<member name="max_incl" type="sint32">1</member>
 			<member name="show_num" type="sint32">0</member>
 			<member name="text" type="string">FLASH_STATUS_MOTOR_RUNNING</member>
 		</object>
-		<object name="ObjId0656" type="CEnumDoubleToStringItem">
-			<member name="min" type="string">4</member>
+		<object name="ObjId1001" type="CEnumDoubleToStringItem">
+			<member name="min" type="string">3</member>
 			<member name="max" type="string"/>
 			<member name="min_incl" type="sint32">1</member>
 			<member name="max_incl" type="sint32">1</member>
