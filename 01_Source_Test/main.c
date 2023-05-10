@@ -64,6 +64,17 @@
 /* *****************************************************************************
  * Configuration Definitions
  **************************************************************************** */
+
+#ifndef _C2000WARE_VERSION_LESS_THAN_4_3
+
+#ifndef GPIO_setMasterCore
+#define GPIO_setMasterCore GPIO_setControllerCore
+#endif
+
+#endif
+
+
+
 #define CSMON_AUTOMATIC_SERVICE_WATCHDOG_IN_MAIN_LOOP   1
 
 

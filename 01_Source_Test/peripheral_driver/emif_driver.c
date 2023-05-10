@@ -29,6 +29,19 @@
 
 
 
+#ifndef _C2000WARE_VERSION_LESS_THAN_4_3
+
+#ifndef EMIF_MASTER_CPU1_G
+#define EMIF_MASTER_CPU1_G EMIF_CONTROLLER_CPU1_G
+#endif
+#ifndef EMIF_selectMaster
+#define EMIF_selectMaster EMIF_selectController
+#endif
+
+#endif
+
+
+
 #ifdef _CS_1107_SCC_R01
     #define BOARDCFG_BOARD          BOARDCFG_BOARD_CS_1107_SCC_R01
 #elif defined _CS_1107_SCC
